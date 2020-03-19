@@ -24,13 +24,7 @@ a {
 }
 a:hover {
   opacity: 0.525;
-}
-a.button {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    color: initial;
+  text-decoration: none;
 }
 
 blockquote {
@@ -41,18 +35,4 @@ blockquote {
   padding-left: 1em;
   margin-left: 5px;
   line-height: 1.5em;
-}
-
-button {
-  border-radius: 3px;
-  background-color: rgba(0, 17, 68, .6);
-  color: white;
-  font-family: "Courier Prime", mono;
-  border: none;
-  padding: 15px 32px;
-  text-align: center;
-}
-
-button:hover {
-  background-color: rgba(0, 17, 68, .525);
 }
