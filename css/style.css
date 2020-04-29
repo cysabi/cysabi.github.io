@@ -11,7 +11,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    background-image: url("../img/banner.png");
+    background-image: url("../assets/img/banner.png");
     background-position: 80%;
     padding: 18px;
     border-radius: 3px;
