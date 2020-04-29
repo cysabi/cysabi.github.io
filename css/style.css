@@ -36,3 +36,11 @@ blockquote {
   margin-left: 5px;
   line-height: 1.5em;
 }
+
+.contact {
+    height: 1em;
+    padding-right: 5px;
+    object-position: bottom;
+    font-family: 'Nanum Gothic', sans-serif;
+    color: black;
+}
