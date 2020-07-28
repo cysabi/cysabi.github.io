@@ -6,7 +6,7 @@ const Index = () => (
   <Layout pageTitle="Hey, I'm LeptoFlare">
     <div class="hero hero-image is-light">
       <div class="hero-body has-text-centered">
-        <h1 class="title is-1 ">Hey, I'm LeptoFlare</h1>
+        <h1 class="title is-1">Hey, I'm LeptoFlare</h1>
         <p
           class="subtitle has-text-grey-dark"
           style={{ fontWeight: 300, fontStyle: "italic" }}
@@ -16,7 +16,7 @@ const Index = () => (
       </div>
       <div class="hero-foot mb-1 columns has-text-centered">
         <div class="column is-3">
-          <h4 class="title is-4">Pages</h4>
+          <h4>Pages</h4>
           <div class="field is-grouped is-grouped-centered has-addons">
             <a href="/blog" class="button is-medium is-text">
               <span class="icon">
@@ -24,10 +24,7 @@ const Index = () => (
               </span>
               <span>Blog</span>
             </a>
-            <a
-              href="https://leptoflare.github.io"
-              class="button is-medium is-text"
-            >
+            <a href="/github/pages" class="button is-medium is-text">
               <span class="icon">
                 <i class="fab fa-github-square"></i>
               </span>
@@ -36,7 +33,7 @@ const Index = () => (
           </div>
         </div>
         <div class="column">
-          <h4 class="title is-4">Contact</h4>
+          <h4>Contact</h4>
           <div class="field is-grouped is-grouped-centered has-addons">
             <a href="/discord" class="button is-medium is-text">
               <span class="icon">
@@ -68,7 +65,7 @@ const Index = () => (
           </div>
         </div>
         <div class="column is-3">
-          <h4 class="title is-4">Support me!</h4>
+          <h4>Support me!</h4>
           <div class="field is-grouped is-grouped-centered has-addons">
             <a
               class="button is-medium is-text px-0 mx-1"
