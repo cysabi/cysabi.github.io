@@ -18,7 +18,7 @@ const Index = () => (
       <div class="hero-foot mb-1 columns is-centered has-text-centered">
         <div class="column">
           <h4>Links</h4>
-          <div class="field is-grouped is-grouped-centered has-addons">
+          <div class="field is-grouped is-grouped-centered">
             <HeaderButton href="/blog" fa="fas fa-blog">
               Blog
             </HeaderButton>
@@ -29,7 +29,7 @@ const Index = () => (
         </div>
         <div class="column is-narrow">
           <h4>Contact</h4>
-          <div class="field is-grouped is-grouped-centered has-addons">
+          <div class="field is-grouped is-grouped-centered">
             <HeaderButton href="/discord" fa="fab fa-discord">
               Discord
             </HeaderButton>
@@ -46,7 +46,7 @@ const Index = () => (
         </div>
         <div class="column">
           <h4>Support me!</h4>
-          <div class="field is-grouped is-grouped-centered has-addons">
+          <div class="field is-grouped is-grouped-centered">
             <SupportKofi />
             <SupportPatreon />
           </div>
