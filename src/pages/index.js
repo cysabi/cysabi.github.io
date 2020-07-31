@@ -69,7 +69,7 @@ const Index = () => (
           <div class="field is-grouped is-grouped-centered has-addons">
             <a
               class="button is-medium is-text px-0 mx-1"
-              href="https://www.patreon.com/bePatron?u=22063151"
+              href="https://www.patreon.com/join/leptoflare"
               target="_blank"
               rel="noreferrer"
             >
@@ -88,7 +88,7 @@ const Index = () => (
             </a>
             <a
               class="button is-medium is-text px-0 mx-1"
-              href="https://ko-fi.com/R5R21YKM1"
+              href="https://ko-fi.com/leptoflare"
               target="_blank"
               rel="noreferrer"
             >
