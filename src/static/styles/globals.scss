@@ -1,4 +1,5 @@
 @charset "utf-8";
+@import "./classes.scss";
 
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap');
@@ -24,14 +25,16 @@ $blue: #0868AC;
 $purple: #4B3F72;
 $red: #B10F2E;
 
-// Fonts
+// Typography
 $family-sans-serif: "Nunito Sans", sans-serif;
 $family-secondary: "Spartan", sans-serif;
 $family-monospace: "Courier Prime", monospace;
 
+$code: hsl(0, 0%, 29%);
+$code-padding: 2px;
+
 // Misc
 $gap: 128px;
-$section-padding: 0 1.5rem;
 
 /* Redirect Derived Variables */
 $primary: $cyan;
@@ -41,8 +44,13 @@ $link: $grey;
 $link-hover: $grey-light;
 
 /* Change Element Styles */
+// Blockquote
+$content-blockquote-background-color: none;
+$content-blockquote-padding: 0 1em;
+$content-blockquote-border-left: 2px solid $primary;
+
 // Button
-$button-text-hover-background-color: hsla(0, 0, 0, 0);
+$button-text-hover-background-color: transparent;
 $button-text-decoration: none;
 $button-focus-box-shadow-color: transparent;
 
@@ -61,18 +69,10 @@ img.emoji {
   vertical-align: -0.1em;
 }
 
-.hero-image {
-  background-image: url("https://cdn.statically.io/gist/LeptoFlare/cd471d7b29902b5d36eb48e64e62d8d1/raw/banner.png?dev=1");
-  background-size: cover;
-  background-position: 0 50%;
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-family: $family-secondary;
 }
 
-blockquote {
-  padding: 4px 0em 4px 1em;
-  border-left: 4px solid;
-  margin-left: 4px;
+code {
+  border-radius: 2px;
 }
