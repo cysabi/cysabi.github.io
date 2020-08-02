@@ -5,55 +5,90 @@ import HeaderButton from "src/components/HeaderButton"
 
 const Index = () => (
   <Layout pageTitle="Hey, I'm LeptoFlare">
-    <div class="hero hero-image is-light">
-      <div class="hero-body has-text-centered">
-        <h1 class="title is-2">Hey, I'm LeptoFlare</h1>
-        <p
-          class="subtitle has-text-grey-dark"
-          style={{ fontWeight: 300, fontStyle: "italic" }}
-        >
-          Preemptively compensating for inadequacy.
-        </p>
+    <Hero />
+    <section class="section">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <h3 class="has-text-centered">You may know me as a...</h3>
+            <div class="is-size-5 has-text-weight-light">
+              TO & Developer for <a href="https://otd.ink">Off the Dial</a>.
+              <br />
+              Junior open source software developer.
+              <br />
+              Backstage player for the competitive Splatoon community.
+              <br />
+              Competitive SSBU player, Inkling main.
+              <br />
+              Dedicated dualies main in Splatoon 2, with specialty in the
+              Tetras.
+              <br />
+              Really bad pixel artist.
+              <br />
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="hero-foot mb-1 columns is-centered has-text-centered">
-        <div class="column">
-          <h4>Links</h4>
-          <div class="field is-grouped is-grouped-centered">
-            <HeaderButton href="/blog" fa="fas fa-blog">
-              Blog
-            </HeaderButton>
-            <HeaderButton href="/github/pages" fa="fab fa-github-square">
-              Github Pages
-            </HeaderButton>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <h3 class="has-text-centered">Who am I?</h3>
+            <div class="is-size-5 has-text-weight-light"></div>
           </div>
         </div>
-        <div class="column is-narrow">
-          <h4>Contact</h4>
-          <div class="field is-grouped is-grouped-centered">
-            <HeaderButton href="/discord" fa="fab fa-discord">
-              Discord
-            </HeaderButton>
-            <HeaderButton href="/github" fa="fab fa-github">
-              Github
-            </HeaderButton>
-            <HeaderButton href="/twitch" fa="fab fa-twitch">
-              Twitch
-            </HeaderButton>
-            <HeaderButton href="/email" fa="fas fa-envelope">
-              Email
-            </HeaderButton>
-          </div>
+      </div>
+    </section>
+  </Layout>
+)
+
+const Hero = () => (
+  <div class="hero hero-image is-light">
+    <div class="hero-body has-text-centered">
+      <h1 class="title is-2">Hey, I'm LeptoFlare</h1>
+      <p class="subtitle has-text-grey-dark has-text-weight-light is-italic">
+        Preemptively compensating for inadequacy.
+      </p>
+    </div>
+    <div class="hero-foot mb-2 columns is-centered has-text-centered">
+      <div class="column">
+        <h4>Links</h4>
+        <div class="field is-grouped is-grouped-centered">
+          <HeaderButton href="/blog" fa="fas fa-blog">
+            Blog
+          </HeaderButton>
+          <HeaderButton href="/github/pages" fa="fab fa-github-square">
+            Github Pages
+          </HeaderButton>
         </div>
-        <div class="column">
-          <h4>Support me!</h4>
-          <div class="field is-grouped is-grouped-centered">
-            <SupportKofi />
-            <SupportPatreon />
-          </div>
+      </div>
+      <div class="column is-narrow">
+        <h4>Contact</h4>
+        <div class="field is-grouped is-grouped-centered">
+          <HeaderButton href="/discord" fa="fab fa-discord">
+            Discord
+          </HeaderButton>
+          <HeaderButton href="/github" fa="fab fa-github">
+            Github
+          </HeaderButton>
+          <HeaderButton href="/twitch" fa="fab fa-twitch">
+            Twitch
+          </HeaderButton>
+          <HeaderButton href="/email" fa="fas fa-envelope">
+            Email
+          </HeaderButton>
+        </div>
+      </div>
+      <div class="column">
+        <h4>Support me!</h4>
+        <div class="field is-grouped is-grouped-centered">
+          <SupportKofi />
+          <SupportPatreon />
         </div>
       </div>
     </div>
-  </Layout>
+  </div>
 )
 
 const SupportPatreon = () => (
