@@ -30,9 +30,13 @@ const Index = () => (
     </div>
     <div class="section">
       <div class="container">
-        <h2 class="has-text-centered" id="projects">
+        <h2 class="has-text-centered mb-0" id="projects">
           Some things I've worked on...
         </h2>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
         <h4 class="title">For...</h4>
         <div class="subtitle mb-1">
           <h3 class="mb-1">Off the Dial</h3>
