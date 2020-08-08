@@ -2,44 +2,112 @@ import React from "react"
 
 import Layout from "src/components/Layout"
 import HeaderButton from "src/components/HeaderButton"
+import icon from "src/static/images/icon.png"
 
 const Index = () => (
-  <Layout pageTitle="Hey, I'm LeptoFlare">
+  <Layout>
     <Hero />
-    <section class="section">
+    <div class="section">
       <div class="container">
-        <div class="columns is-centered">
-          <div class="column is-8">
-            <h3 class="has-text-centered">You may know me as a...</h3>
-            <div class="is-size-5 has-text-weight-light">
-              TO & Developer for <a href="https://otd.ink">Off the Dial</a>.
-              <br />
-              Junior open source software developer.
-              <br />
-              Backstage player for the competitive Splatoon community.
-              <br />
-              Competitive SSBU player, Inkling main.
-              <br />
-              Dedicated dualies main in Splatoon 2, with specialty in the
-              Tetras.
-              <br />
-              Really bad pixel artist.
-              <br />
-            </div>
+        <div class="columns is-centered is-vcentered">
+          <div class="column is-narrow mr-4">
+            <img
+              style={{ borderRadius: "50%", maxWidth: "none", height: "10em" }}
+              src={icon}
+            />
+          </div>
+          <div class="column is-6">
+            <h2>I'm a...</h2>
+            <p class="is-size-5">
+              Junior open source software developer / Backstage player for the
+              competitive Splatoon community. / Competitive SSBU player, Inkling
+              main. / Dedicated dualies main in Splatoon 2, with specialty in
+              the Tetras. / Really bad pixel artist.
+            </p>
           </div>
         </div>
       </div>
-    </section>
-    <section class="section">
+    </div>
+    <h2 class="has-text-centered" id="projects">
+      Some things I've worked on...
+    </h2>
+    <div class="section">
       <div class="container">
-        <div class="columns is-centered">
-          <div class="column is-8">
-            <h3 class="has-text-centered">Who am I?</h3>
-            <div class="is-size-5 has-text-weight-light"></div>
+        <h4 class="title">For...</h4>
+        <div class="subtitle mb-1">
+          <h3 class="mb-1">Off the Dial</h3>
+        </div>
+        <p class="mb-5">
+          Off the Dial is a unique tournament organisation for Splatoon 2,
+          dedicated to providing fresh tournament opportunities for free agents
+          and teams alike.
+        </p>
+        <div class="columns is-vcentered">
+          <div class="column">
+            <Project
+              title="Off the Dial Bot"
+              link="https://otd.ink/bot"
+              github="https://github.com/offthedial/bot"
+            >
+              This bot was created to help organize Off The Dial's tournaments
+              easier and faster. It includes many commands that automate
+              previously manual tasks.
+            </Project>
+          </div>
+          <div class="column">
+            <Project
+              title="Off the Dial Website"
+              link="https://otd.ink"
+              github="https://github.com/offthedial/site"
+            >
+              A website to serve as a centralized place to find everything Off
+              the Dial. This websites is currently in beta, more features are to
+              come. Stay tuned!
+            </Project>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+    <h3 class="has-text-centered">Other stuff...</h3>
+    <div class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-3">
+            <OtherProject
+              title="nautilus-chambers"
+              github="https://github.com/LeptoFlare/nautilus-chambers"
+            >
+              🐚 A service/API for storing and synchronizing Splatoon 2 user
+              profiles across multiple discord bots.
+            </OtherProject>
+          </div>
+          <div class="column is-3">
+            <OtherProject
+              title="LeptoBot"
+              github="https://github.com/LeptoFlare/LeptoBot"
+            >
+              A simple bot for the LeptoServer
+            </OtherProject>
+          </div>
+          <div class="column is-3">
+            <OtherProject
+              title="lepto.tech"
+              github="https://github.com/LeptoFlare/lepto.tech"
+            >
+              The static pages to my personal website.
+            </OtherProject>
+          </div>
+          <div class="column is-3">
+            <OtherProject
+              title="boo-yah.ink"
+              github="https://github.com/LeptoFlare/boo-yah.ink"
+            >
+              Hosting the image files for the Inklingcord's Boo-Yah Doc!
+            </OtherProject>
+          </div>
+        </div>
+      </div>
+    </div>
   </Layout>
 )
 
@@ -58,8 +126,8 @@ const Hero = () => (
           <HeaderButton href="/blog" fa="fas fa-blog">
             Blog
           </HeaderButton>
-          <HeaderButton href="/github/pages" fa="fab fa-github-square">
-            Github Pages
+          <HeaderButton href="#projects" fa="fab fa-github-square">
+            Projects
           </HeaderButton>
         </div>
       </div>
@@ -88,6 +156,41 @@ const Hero = () => (
         </div>
       </div>
     </div>
+  </div>
+)
+
+const Project = ({ title, link, github, children }) => (
+  <div class="card">
+    <header class="card-header">
+      <h4 class="card-header-title my-1">{title}</h4>
+    </header>
+    <div class="card-content">
+      <blockquote>{children}</blockquote>
+    </div>
+    <footer class="card-footer">
+      <a href={link} class="card-footer-item">
+        <i class="fas fa-external-link-alt" />
+      </a>
+      <a href={github} class="card-footer-item">
+        <i class="fab fa-github" />
+      </a>
+    </footer>
+  </div>
+)
+
+const OtherProject = ({ title, github, children }) => (
+  <div class="card">
+    <header class="card-header">
+      <h5 class="card-header-title my-1">{title}</h5>
+    </header>
+    <div class="card-content">
+      <blockquote>{children}</blockquote>
+    </div>
+    <footer class="card-footer">
+      <a href={github} class="card-footer-item">
+        <i class="fab fa-github" />
+      </a>
+    </footer>
   </div>
 )
 
