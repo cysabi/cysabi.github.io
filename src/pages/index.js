@@ -28,11 +28,11 @@ const Index = () => (
         </div>
       </div>
     </div>
-    <h2 class="has-text-centered" id="projects">
-      Some things I've worked on...
-    </h2>
     <div class="section">
       <div class="container">
+        <h2 class="has-text-centered" id="projects">
+          Some things I've worked on...
+        </h2>
         <h4 class="title">For...</h4>
         <div class="subtitle mb-1">
           <h3 class="mb-1">Off the Dial</h3>
