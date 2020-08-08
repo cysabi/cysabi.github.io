@@ -127,10 +127,10 @@ const Hero = () => (
       <div class="column">
         <h4>Links</h4>
         <div class="field is-grouped is-grouped-centered">
-          <HeaderButton href="/blog" fa="fas fa-blog">
-            Blog
+          <HeaderButton href="/github/pages" fa="fab fa-github-square">
+            Github Pages
           </HeaderButton>
-          <HeaderButton href="#projects" fa="fab fa-github-square">
+          <HeaderButton href="/#projects" fa="fas fa-code">
             Projects
           </HeaderButton>
         </div>

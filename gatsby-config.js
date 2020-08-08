@@ -12,14 +12,6 @@ module.exports = {
       options: {
         name: `pages`,
         path: `${__dirname}/src/pages`,
-        ignore: `../**/blog/**`, // Except blog
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `blog`,
-        path: `${__dirname}/src/pages/blog`,
       },
     },
 
