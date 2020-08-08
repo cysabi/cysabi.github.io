@@ -14,6 +14,7 @@ const Index = () => (
             <img
               style={{ borderRadius: "50%", maxWidth: "none", height: "10em" }}
               src={icon}
+              alt=""
             />
           </div>
           <div class="column is-6">
