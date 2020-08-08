@@ -1,9 +1,9 @@
 @charset "utf-8";
 @import "./classes.scss";
 
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@300;400;500;600;700;800&display=swap");
 
 /* Overwrite Initial Variables */
 // Colors
@@ -17,13 +17,13 @@ $grey-lighter: hsl(201, 21%, 86%);
 $white-ter: hsl(201, 21%, 96%);
 $white-bis: hsl(201, 21%, 98%);
 
-$orange: #FA7921;
-$yellow: #FFC857;
-$green: #A8DDB5;
-$cyan: #4EB3D3;
-$blue: #0868AC;
-$purple: #4B3F72;
-$red: #B10F2E;
+$orange: #fa7921;
+$yellow: #ffc857;
+$green: #a8ddb5;
+$cyan: #4eb3d3;
+$blue: #0868ac;
+$purple: #4b3f72;
+$red: #b10f2e;
 
 // Typography
 $family-sans-serif: "Nunito Sans", sans-serif;
@@ -65,11 +65,16 @@ $input-shadow: none;
 img.emoji {
   height: 1em;
   width: 1em;
-  margin: 0 .05em 0 .1em;
+  margin: 0 0.05em 0 0.1em;
   vertical-align: -0.1em;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: $family-secondary;
 }
 
