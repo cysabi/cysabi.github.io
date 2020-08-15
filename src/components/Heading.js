@@ -1,10 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 
-import banner from "src/static/images/banner.png"
-
 const StyledHeading = styled.h1`
-  background-image: url(${banner});
+  background-image: url("https://assets.lepto.tech/LeptoFlare/banner.png");
   background-size: cover;
   background-position: 0 80%;
   padding: 18px;

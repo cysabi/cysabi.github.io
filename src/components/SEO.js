@@ -50,7 +50,7 @@ function SEO({ description, lang, meta, title }) {
           rel: "icon",
           type: "image/png",
           sizes: "64x64",
-          href: `https://cdn.statically.io/gist/LeptoFlare/cd471d7b29902b5d36eb48e64e62d8d1/raw/favicon.png`,
+          href: `https://assets.lepto.tech/LeptoTech/icon-squircle.png`,
         },
       ]}
     >

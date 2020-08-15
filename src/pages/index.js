@@ -2,7 +2,6 @@ import React from "react"
 
 import Layout from "src/components/Layout"
 import HeaderButton from "src/components/HeaderButton"
-import icon from "src/static/images/icon.png"
 
 const Index = () => (
   <Layout>
@@ -13,7 +12,7 @@ const Index = () => (
           <div class="column is-narrow mr-4">
             <img
               style={{ borderRadius: "50%", maxWidth: "none", height: "10em" }}
-              src={icon}
+              src={"https://assets.lepto.tech/LeptoFlare/icon.png"}
               alt=""
             />
           </div>
@@ -47,7 +46,7 @@ const Index = () => (
           dedicated to providing fresh tournament opportunities for free agents
           and teams alike.
         </p>
-        <div class="columns is-vcentered">
+        <div class="columns">
           <div class="column">
             <Project
               title="Off the Dial Bot"
@@ -68,6 +67,31 @@ const Index = () => (
               A website to serve as a centralized place to find everything Off
               the Dial. This websites is currently in beta, more features are to
               come. Stay tuned!
+            </Project>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="has-text-right">
+          <h4 class="title">For...</h4>
+          <div class="subtitle mb-1">
+            <h3 class="mb-1">Low Ink</h3>
+          </div>
+        </div>
+        <p class="mb-5"></p>
+        <div class="tile is-ancestor">
+          <div class="tile">
+            <Project title="Radia" github="https://github.com/ipl-splat/">
+              Radia is a discord bot for Low Ink that recreates your. Radia is a
+              discord bot for Low Ink that recreates your. Radia is a discord
+              bot for Low Ink that recreates your.
+            </Project>
+          </div>
+          <div class="tile">
+            <Project title="Big dum" github="https://github.com/LeptoFlare">
+              Radia is a discord bot for Low Ink that recreates your.
             </Project>
           </div>
         </div>
