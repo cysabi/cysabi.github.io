@@ -72,31 +72,6 @@ const Index = () => (
         </div>
       </div>
     </div>
-    <div class="section">
-      <div class="container">
-        <div class="has-text-right">
-          <h4 class="title">For...</h4>
-          <div class="subtitle mb-1">
-            <h3 class="mb-1">Low Ink</h3>
-          </div>
-        </div>
-        <p class="mb-5"></p>
-        <div class="tile is-ancestor">
-          <div class="tile">
-            <Project title="Radia" github="https://github.com/ipl-splat/">
-              Radia is a discord bot for Low Ink that recreates your. Radia is a
-              discord bot for Low Ink that recreates your. Radia is a discord
-              bot for Low Ink that recreates your.
-            </Project>
-          </div>
-          <div class="tile">
-            <Project title="Big dum" github="https://github.com/LeptoFlare">
-              Radia is a discord bot for Low Ink that recreates your.
-            </Project>
-          </div>
-        </div>
-      </div>
-    </div>
     <h3 class="has-text-centered">Other stuff...</h3>
     <div class="section">
       <div class="container">
