@@ -12,7 +12,7 @@ const Index = () => (
           <div class="column is-narrow mr-4">
             <img
               style={{ borderRadius: "50%", maxWidth: "none", height: "10em" }}
-              src={"https://assets.lepto.tech/LeptoFlare/icon.png"}
+              src="https://assets.lepto.tech/LeptoFlare/icon.png"
               alt=""
             />
           </div>
@@ -42,9 +42,8 @@ const Index = () => (
           <h3 class="mb-1">Off the Dial</h3>
         </div>
         <p class="mb-5">
-          Off the Dial is a unique tournament organisation for Splatoon 2,
-          dedicated to providing fresh tournament opportunities for free agents
-          and teams alike.
+          I'm a head TO for Off the Dial. I staffed many tournaments, and built
+          many tools that Off the Dial now depends on to run.
         </p>
         <div class="columns">
           <div class="column">
@@ -53,9 +52,10 @@ const Index = () => (
               link="https://otd.ink/bot"
               github="https://github.com/offthedial/bot"
             >
-              This bot was created to help organize Off The Dial's tournaments
-              easier and faster. It includes many commands that automate
-              previously manual tasks.
+              I built the entirety of this bot, powered by discord.py, and a bit
+              of both sendou.ink and smash.gg's graphql apis. I put a lot of
+              care into designing the interface used to send the message embeds,
+              such as an Alert and UI class.
             </Project>
           </div>
           <div class="column">
@@ -64,9 +64,9 @@ const Index = () => (
               link="https://otd.ink"
               github="https://github.com/offthedial/site"
             >
-              A website to serve as a centralized place to find everything Off
-              the Dial. This websites is currently in beta, more features are to
-              come. Stay tuned!
+              I built the entirety of this site, it uses Gatsby and Bulma. It
+              can parse markdown files as posts and pages. I put a lot of care
+              into making sure the site easy to manage and modify.
             </Project>
           </div>
         </div>
@@ -76,37 +76,33 @@ const Index = () => (
     <div class="section">
       <div class="container">
         <div class="columns">
-          <div class="column is-3">
+          <div class="column">
             <OtherProject
-              title="nautilus-chambers"
+              title="Nautilus Chambers"
               github="https://github.com/LeptoFlare/nautilus-chambers"
             >
-              🐚 A service/API for storing and synchronizing Splatoon 2 user
-              profiles across multiple discord bots.
+              This is an api I built to learn about GraphQL API's, and web
+              hosting. It's implemented using Ariadne, Flask, MongoDB, and
+              Pydantic.
             </OtherProject>
           </div>
-          <div class="column is-3">
+          <div class="column">
             <OtherProject
-              title="LeptoBot"
-              github="https://github.com/LeptoFlare/LeptoBot"
+              title="Radia"
+              github="https://github.com/IPL-Splat/radia"
             >
-              A simple bot for the LeptoServer
+              The discord bot for IPL. I've rewritten the entire bot, and worked
+              on many commands all the other times. It uses discord.py,
+              sqlalchemy, and gspread.
             </OtherProject>
           </div>
-          <div class="column is-3">
+          <div class="column">
             <OtherProject
               title="lepto.tech"
               github="https://github.com/LeptoFlare/lepto.tech"
             >
-              The static pages to my personal website.
-            </OtherProject>
-          </div>
-          <div class="column is-3">
-            <OtherProject
-              title="boo-yah.ink"
-              github="https://github.com/LeptoFlare/boo-yah.ink"
-            >
-              Hosting the image files for the Inklingcord's Boo-Yah Doc!
+              The website you are currently looking at! Built with Gatsby and
+              Bulma. There isn't much to say here, see it for yourself.
             </OtherProject>
           </div>
         </div>
