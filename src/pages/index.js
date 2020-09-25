@@ -66,7 +66,7 @@ const Index = () => (
             >
               I built the entirety of this site, it uses Gatsby and Bulma. It
               can parse markdown files as posts and pages. I put a lot of care
-              into making sure the site easy to manage and modify.
+              into making sure the site is easy to manage and modify.
             </Project>
           </div>
         </div>
