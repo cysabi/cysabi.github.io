@@ -8,7 +8,7 @@ const Index = () => (
     <Hero />
     <div class="section">
       <div class="container">
-        <div class="columns is-centered is-vcentered">
+        <div class="columns is-centered">
           <div class="column is-narrow mr-4">
             <img
               style={{ borderRadius: "50%", maxWidth: "none", height: "10em" }}
@@ -24,6 +24,12 @@ const Index = () => (
               main. / Dedicated dualies main in Splatoon 2, with specialty in
               the Tetras. / Really bad pixel artist.
             </p>
+            <h3>Things I do...</h3>
+            <p class="is-size-5">
+              Organization Head for <a href="https://otd.ink">Off the Dial</a>.
+              <br />
+              Technical Staff for <a href="https://iplabs.ink">Inkling Performance Labs</a>.
+            </p>
           </div>
         </div>
       </div>
@@ -31,7 +37,7 @@ const Index = () => (
     <div class="section">
       <div class="container">
         <h2 class="has-text-centered mb-0" id="projects">
-          Some things I've worked on...
+          Some things that I've built...
         </h2>
       </div>
     </div>
@@ -72,7 +78,7 @@ const Index = () => (
         </div>
       </div>
     </div>
-    <h3 class="has-text-centered">Other stuff...</h3>
+    <h3 class="has-text-centered">A few more...</h3>
     <div class="section">
       <div class="container">
         <div class="columns">
