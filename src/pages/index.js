@@ -28,7 +28,8 @@ const Index = () => (
             <p class="is-size-5">
               Organization Head for <a href="https://otd.ink">Off the Dial</a>.
               <br />
-              Technical Staff for <a href="https://iplabs.ink">Inkling Performance Labs</a>.
+              Technical Staff for{" "}
+              <a href="https://iplabs.ink">Inkling Performance Labs</a>.
             </p>
           </div>
         </div>
@@ -129,7 +130,10 @@ const Hero = () => (
       <div class="column">
         <h4>Links</h4>
         <div class="field is-grouped is-grouped-centered">
-          <HeaderButton href="/github/pages" fa="fab fa-github-square">
+          <HeaderButton
+            href="https://leptoflare.github.io"
+            fa="fab fa-github-square"
+          >
             Github Pages
           </HeaderButton>
           <HeaderButton href="/#projects" fa="fas fa-code">
@@ -143,10 +147,10 @@ const Hero = () => (
           <HeaderButton href="/discord" fa="fab fa-discord">
             Discord
           </HeaderButton>
-          <HeaderButton href="/github" fa="fab fa-github">
+          <HeaderButton href="https://github.com/LeptoFlare" fa="fab fa-github">
             Github
           </HeaderButton>
-          <HeaderButton href="/twitch" fa="fab fa-twitch">
+          <HeaderButton href="https://twitch.tv/leptoflare" fa="fab fa-twitch">
             Twitch
           </HeaderButton>
           <HeaderButton href="/email" fa="fas fa-envelope">
@@ -205,7 +209,7 @@ const SupportPatreon = () => (
     <div class="is-hidden-touch">
       <a
         class="button is-medium is-text px-0 mx-1"
-        href="https://www.patreon.com/join/leptoflare"
+        href="https://www.patreon.com/leptoflare"
         target="_blank"
         rel="noreferrer"
       >
