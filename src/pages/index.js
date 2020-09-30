@@ -17,7 +17,7 @@ const Index = () => (
             />
           </div>
           <div class="column is-6">
-            <h2>Things I am...</h2>
+            <h2 id="bio">About me...</h2>
             <p class="is-size-5">
               Junior open source software developer.
               <br />
