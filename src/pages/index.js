@@ -17,12 +17,15 @@ const Index = () => (
             />
           </div>
           <div class="column is-6">
-            <h2>I'm a...</h2>
+            <h2>Things I am...</h2>
             <p class="is-size-5">
-              Junior open source software developer / Backstage player for the
-              competitive Splatoon community. / Competitive SSBU player, Inkling
-              main. / Dedicated dualies main in Splatoon 2, with specialty in
-              the Tetras. / Really bad pixel artist.
+              Junior open source software developer.
+              <br />
+              I play Gloogas and Tetras in Splatoon sometimes.
+              <br />
+              I help behind the (splatoon) scenes most other times.
+              <br />
+              Really bad pixel artist.
             </p>
             <h3>Things I do...</h3>
             <p class="is-size-5">
