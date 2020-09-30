@@ -3,8 +3,8 @@ import React from "react"
 import Layout from "src/components/Layout"
 import Heading from "src/components/Heading"
 
-const Index = () => (
-  <Layout pageTitle="Hey, I'm LeptoFlare">
+const Stream = () => (
+  <Layout pageTitle="Stream Information">
     <div class="section pt-0">
       <div class="container">
         <Heading>faq</Heading>
@@ -22,4 +22,4 @@ const Index = () => (
   </Layout>
 )
 
-export default Index
+export default Stream
