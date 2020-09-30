@@ -153,7 +153,7 @@ const Hero = () => (
           <HeaderButton href="https://twitch.tv/leptoflare" fa="fab fa-twitch">
             Twitch
           </HeaderButton>
-          <HeaderButton href="/email" fa="fas fa-envelope">
+          <HeaderButton href="mailto:leptoflare@lepto.tech" fa="fas fa-envelope">
             Email
           </HeaderButton>
         </div>
