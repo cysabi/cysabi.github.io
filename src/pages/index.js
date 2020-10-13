@@ -70,7 +70,7 @@ const Index = () => (
           </div>
           <div class="column">
             <Project
-              title="Off the Dial Website"
+              title="Off the Dial Site"
               link="https://otd.ink"
               github="https://github.com/offthedial/site"
             >
