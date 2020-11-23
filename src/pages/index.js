@@ -29,7 +29,7 @@ const Index = () => (
             </p>
             <h3>Things I do...</h3>
             <p class="is-size-5">
-              Organization Head for <a href="https://otd.ink">Off the Dial</a>.
+              Head Organizer for <a href="https://otd.ink">Off the Dial</a>.
               <br />
               Technical Staff for{" "}
               <a href="https://iplabs.ink">Inkling Performance Labs</a>.
