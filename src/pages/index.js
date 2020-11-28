@@ -52,7 +52,7 @@ const Index = () => (
           <h3 class="mb-1">Off the Dial</h3>
         </div>
         <p class="mb-5">
-          I'm a head TO for Off the Dial. I staffed many tournaments, and built
+          I'm a Head Organizer for Off the Dial. I staffed many tournaments, and built
           many tools that Off the Dial now depends on to run.
         </p>
         <div class="columns">
