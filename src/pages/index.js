@@ -1,274 +1,184 @@
-import React from "react"
+import * as React from "react"
 
-import Layout from "src/components/Layout"
-import HeaderButton from "src/components/HeaderButton"
+// styles
+const pageStyles = {
+  color: "#232129",
+  padding: 96,
+  fontFamily: "-apple-system, Roboto, sans-serif, serif",
+}
+const headingStyles = {
+  marginTop: 0,
+  marginBottom: 64,
+  maxWidth: 320,
+}
+const headingAccentStyles = {
+  color: "#663399",
+}
+const paragraphStyles = {
+  marginBottom: 48,
+}
+const codeStyles = {
+  color: "#8A6534",
+  padding: 4,
+  backgroundColor: "#FFF4DB",
+  fontSize: "1.25rem",
+  borderRadius: 4,
+}
+const listStyles = {
+  marginBottom: 96,
+  paddingLeft: 0,
+}
+const listItemStyles = {
+  fontWeight: 300,
+  fontSize: 24,
+  maxWidth: 560,
+  marginBottom: 30,
+}
 
-const Index = () => (
-  <Layout>
-    <Hero />
-    <div class="section">
-      <div class="container">
-        <div class="columns is-centered">
-          <div class="column is-narrow mr-4">
-            <img
-              style={{ borderRadius: "50%", maxWidth: "none", height: "10em" }}
-              src="https://assets.lepto.tech/LeptoFlare/icon.png"
-              alt=""
-            />
-          </div>
-          <div class="column is-6">
-            <h2 id="bio">About me...</h2>
-            <p class="is-size-5">
-              Junior open source software developer.
-              <br />
-              I play Gloogas and Tetras in Splatoon sometimes.
-              <br />
-              I help behind the (splatoon) scenes most other times.
-              <br />
-              Really bad pixel artist.
-            </p>
-            <h3>Things I do...</h3>
-            <p class="is-size-5">
-              Head Organizer for <a href="https://otd.ink">Off the Dial</a>.
-              <br />
-              Technical Staff for{" "}
-              <a href="https://iplabs.ink">Inkling Performance Labs</a>.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <h2 class="has-text-centered mb-0" id="projects">
-          Some things that I've built...
-        </h2>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <h4 class="title">For...</h4>
-        <div class="subtitle mb-1">
-          <h3 class="mb-1">Off the Dial</h3>
-        </div>
-        <p class="mb-5">
-          I'm a Head Organizer for Off the Dial. I staffed many tournaments, and built
-          many tools that Off the Dial now depends on to run.
-        </p>
-        <div class="columns">
-          <div class="column">
-            <Project
-              title="Off the Dial Bot"
-              link="https://otd.ink/bot"
-              github="https://github.com/offthedial/bot"
-            >
-              I built the entirety of this bot, powered by discord.py, and a bit
-              of both sendou.ink and smash.gg's graphql apis. I put a lot of
-              care into designing the interface used to send the message embeds,
-              such as an Alert and UI class.
-            </Project>
-          </div>
-          <div class="column">
-            <Project
-              title="Off the Dial Site"
-              link="https://otd.ink"
-              github="https://github.com/offthedial/site"
-            >
-              I built the entirety of this site, it uses Gatsby and Bulma. It
-              can parse markdown files as posts and pages. I put a lot of care
-              into making sure the site is easy to manage and modify.
-            </Project>
-          </div>
-        </div>
-      </div>
-    </div>
-    <h3 class="has-text-centered">A few more...</h3>
-    <div class="section">
-      <div class="container">
-        <div class="columns">
-          <div class="column">
-            <OtherProject
-              title="Nautilus Chambers"
-              github="https://github.com/LeptoFlare/nautilus-chambers"
-            >
-              This is an api I built to learn about GraphQL API's, and web
-              hosting. It's implemented using Ariadne, Flask, MongoDB, and
-              Pydantic.
-            </OtherProject>
-          </div>
-          <div class="column">
-            <OtherProject
-              title="Radia"
-              github="https://github.com/IPL-Splat/radia"
-            >
-              The discord bot for IPL. I've rewritten the entire bot, and worked
-              on many commands all the other times. It uses discord.py,
-              sqlalchemy, and gspread.
-            </OtherProject>
-          </div>
-          <div class="column">
-            <OtherProject
-              title="lepto.tech"
-              github="https://github.com/LeptoFlare/lepto.tech"
-            >
-              The website you are currently looking at! Built with Gatsby and
-              Bulma. There isn't much to say here, see it for yourself.
-            </OtherProject>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Layout>
-)
+const linkStyle = {
+  color: "#8954A8",
+  fontWeight: "bold",
+  fontSize: 16,
+  verticalAlign: "5%",
+}
 
-const Hero = () => (
-  <div class="hero hero-image is-light">
-    <div class="hero-body has-text-centered">
-      <h1 class="title is-2">Hey, I'm LeptoFlare</h1>
-      <p class="subtitle has-text-grey-dark has-text-weight-light is-italic">
-        Preemptively compensating for inadequacy.
+const docLinkStyle = {
+  ...linkStyle,
+  listStyleType: "none",
+  marginBottom: 24,
+}
+
+const descriptionStyle = {
+  color: "#232129",
+  fontSize: 14,
+  marginTop: 10,
+  marginBottom: 0,
+  lineHeight: 1.25,
+}
+
+const docLink = {
+  text: "Documentation",
+  url: "https://www.gatsbyjs.com/docs/",
+  color: "#8954A8",
+}
+
+const badgeStyle = {
+  color: "#fff",
+  backgroundColor: "#088413",
+  border: "1px solid #088413",
+  fontSize: 11,
+  fontWeight: "bold",
+  letterSpacing: 1,
+  borderRadius: 4,
+  padding: "4px 6px",
+  display: "inline-block",
+  position: "relative",
+  top: -2,
+  marginLeft: 10,
+  lineHeight: 1,
+}
+
+// data
+const links = [
+  {
+    text: "Tutorial",
+    url: "https://www.gatsbyjs.com/docs/tutorial/",
+    description:
+      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
+    color: "#E95800",
+  },
+  {
+    text: "How to Guides",
+    url: "https://www.gatsbyjs.com/docs/how-to/",
+    description:
+      "Practical step-by-step guides to help you achieve a specific goal. Most useful when you're trying to get something done.",
+    color: "#1099A8",
+  },
+  {
+    text: "Reference Guides",
+    url: "https://www.gatsbyjs.com/docs/reference/",
+    description:
+      "Nitty-gritty technical descriptions of how Gatsby works. Most useful when you need detailed information about Gatsby's APIs.",
+    color: "#BC027F",
+  },
+  {
+    text: "Conceptual Guides",
+    url: "https://www.gatsbyjs.com/docs/conceptual/",
+    description:
+      "Big-picture explanations of higher-level Gatsby concepts. Most useful for building understanding of a particular topic.",
+    color: "#0D96F2",
+  },
+  {
+    text: "Plugin Library",
+    url: "https://www.gatsbyjs.com/plugins",
+    description:
+      "Add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
+    color: "#8EB814",
+  },
+  {
+    text: "Build and Host",
+    url: "https://www.gatsbyjs.com/cloud",
+    badge: true,
+    description:
+      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Gatsby Cloud. Get started for free!",
+    color: "#663399",
+  },
+]
+
+// markup
+const IndexPage = () => {
+  return (
+    <main style={pageStyles}>
+      <title>Home Page</title>
+      <h1 style={headingStyles}>
+        Congratulations
+        <br />
+        <span style={headingAccentStyles}>— you just made a Gatsby site! </span>
+        <span role="img" aria-label="Party popper emojis">
+          🎉🎉🎉
+        </span>
+      </h1>
+      <p style={paragraphStyles}>
+        Edit <code style={codeStyles}>src/pages/index.js</code> to see this page
+        update in real-time.{" "}
+        <span role="img" aria-label="Sunglasses smiley emoji">
+          😎
+        </span>
       </p>
-    </div>
-    <div class="hero-foot mb-2 columns is-centered has-text-centered">
-      <div class="column">
-        <h4>Links</h4>
-        <div class="field is-grouped is-grouped-centered">
-          <HeaderButton
-            href="https://leptoflare.github.io"
-            fa="fab fa-github-square"
+      <ul style={listStyles}>
+        <li style={docLinkStyle}>
+          <a
+            style={linkStyle}
+            href={`${docLink.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
           >
-            Github Pages
-          </HeaderButton>
-          <HeaderButton href="/#projects" fa="fas fa-code">
-            Projects
-          </HeaderButton>
-        </div>
-      </div>
-      <div class="column is-narrow">
-        <h4>Contact</h4>
-        <div class="field is-grouped is-grouped-centered">
-          <HeaderButton href="/discord" fa="fab fa-discord">
-            Discord
-          </HeaderButton>
-          <HeaderButton href="https://github.com/LeptoFlare" fa="fab fa-github">
-            Github
-          </HeaderButton>
-          <HeaderButton href="https://twitch.tv/leptoflare" fa="fab fa-twitch">
-            Twitch
-          </HeaderButton>
-          <HeaderButton href="mailto:leptoflare@lepto.tech" fa="fas fa-envelope">
-            Email
-          </HeaderButton>
-        </div>
-      </div>
-      <div class="column">
-        <h4>Support me!</h4>
-        <div class="field is-grouped is-grouped-centered">
-          <SupportKofi />
-          <SupportPatreon />
-        </div>
-      </div>
-    </div>
-  </div>
-)
+            {docLink.text}
+          </a>
+        </li>
+        {links.map(link => (
+          <li key={link.url} style={{ ...listItemStyles, color: link.color }}>
+            <span>
+              <a
+                style={linkStyle}
+                href={`${link.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
+              >
+                {link.text}
+              </a>
+              {link.badge && (
+                <span style={badgeStyle} aria-label="New Badge">
+                  NEW!
+                </span>
+              )}
+              <p style={descriptionStyle}>{link.description}</p>
+            </span>
+          </li>
+        ))}
+      </ul>
+      <img
+        alt="Gatsby G Logo"
+        src="data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2a10 10 0 110 20 10 10 0 010-20zm0 2c-3.73 0-6.86 2.55-7.75 6L14 19.75c3.45-.89 6-4.02 6-7.75h-5.25v1.5h3.45a6.37 6.37 0 01-3.89 4.44L6.06 9.69C7 7.31 9.3 5.63 12 5.63c2.13 0 4 1.04 5.18 2.65l1.23-1.06A7.959 7.959 0 0012 4zm-8 8a8 8 0 008 8c.04 0 .09 0-8-8z' fill='%23639'/%3E%3C/svg%3E"
+      />
+    </main>
+  )
+}
 
-const Project = ({ title, link, github, children }) => (
-  <div class="card">
-    <header class="card-header">
-      <h4 class="card-header-title my-1">{title}</h4>
-    </header>
-    <div class="card-content">
-      <blockquote>{children}</blockquote>
-    </div>
-    <footer class="card-footer">
-      <a href={link} class="card-footer-item">
-        <i class="fas fa-external-link-alt" />
-      </a>
-      <a href={github} class="card-footer-item">
-        <i class="fab fa-github" />
-      </a>
-    </footer>
-  </div>
-)
-
-const OtherProject = ({ title, github, children }) => (
-  <div class="card">
-    <header class="card-header">
-      <h5 class="card-header-title my-1">{title}</h5>
-    </header>
-    <div class="card-content">
-      <blockquote>{children}</blockquote>
-    </div>
-    <footer class="card-footer">
-      <a href={github} class="card-footer-item">
-        <i class="fab fa-github" />
-      </a>
-    </footer>
-  </div>
-)
-
-const SupportPatreon = () => (
-  <>
-    <div class="is-hidden-touch">
-      <a
-        class="button is-medium is-text px-0 mx-1"
-        href="https://www.patreon.com/leptoflare"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <img
-          height="36"
-          style={{
-            borderRadius: "8px",
-            border: "0px",
-            height: "36px",
-            maxWidth: "none",
-          }}
-          src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png"
-          border="0"
-          alt="Become a Patron at patreon.com"
-        />
-      </a>
-    </div>
-    <div class="is-hidden-desktop">
-      <a
-        class="button is-medium is-text"
-        href="https://www.patreon.com/join/leptoflare"
-      >
-        <span class="icon">
-          <i class="fab fa-patreon" />
-        </span>
-      </a>
-    </div>
-  </>
-)
-
-const SupportKofi = () => (
-  <>
-    <div class="is-hidden-touch">
-      <a
-        class="button is-medium is-text px-0 mx-1"
-        href="https://ko-fi.com/leptoflare"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <img
-          height="36"
-          style={{ border: "0px", height: "36px", maxWidth: "none" }}
-          src="https://cdn.ko-fi.com/cdn/kofi3.png?v=2"
-          border="0"
-          alt="Buy Me a Coffee at ko-fi.com"
-        />
-      </a>
-    </div>
-    <div class="is-hidden-desktop">
-      <a class="button is-medium is-text" href="https://ko-fi.com/leptoflare">
-        <span class="icon">
-          <i class="fas fa-coffee" />
-        </span>
-      </a>
-    </div>
-  </>
-)
-
-export default Index
+export default IndexPage
