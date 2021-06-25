@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  main {
+    @apply text-gray-800 dark:text-white md:text-lg;
+  }
+  .link {
+    @apply text-blue-700 dark:text-blue-200 hover:underline;
+  }
+  code {
+    @apply rounded-sm bg-gray-100 dark:bg-gray-900 font-mono px-1 py-0.5 -my-0.5;
+  }
+
+  @font-face {
+    font-family: Circular;
+    font-weight: 400;
+    src: url(./circular.ttf);
+  }
+  @font-face {
+    font-family: Circular;
+    font-weight: 300;
+    src: url(./circular-light.ttf);
+  }
+}
