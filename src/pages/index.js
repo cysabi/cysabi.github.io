@@ -11,7 +11,7 @@ import kofiLight from "~/src/static/kofi-light.svg"
 
 import { useDarkMode } from "../components/DarkMode"
 
-const data = {
+const content = {
   me: "LeptoFlare",
   subtext: "preemptively compensating for inadequacy",
   bio: [
@@ -108,15 +108,15 @@ const Card = () => (
           </div>
           <div className="flex flex-col gap-2">
             <div className="text-5xl lg:text-7xl font-display font-light">
-              {data.me}
+              {content.me}
             </div>
             <div className="text-gray-500 dark:text-gray-300 lg:text-xl font-mono font-light italic">
-              {data.subtext}
+              {content.subtext}
             </div>
           </div>
         </div>
         <div className="flex gap-3 items-stretch justify-start">
-          {data.orgs.map((org, index) => (
+          {content.orgs.map((org, index) => (
             <div key={index} className="h-10 w-10 md:h-12 md:w-12">
               <img
                 alt={`${org.name} icon`}
@@ -127,7 +127,7 @@ const Card = () => (
           ))}
         </div>
       </div>
-      {data.bio.map((bioSection, index) => (
+      {content.bio.map((bioSection, index) => (
         <div key={index}>{bioSection}</div>
       ))}
     </div>
@@ -138,7 +138,7 @@ const Content = ({ footer }) => (
   <div className="bg-white dark:bg-gray-800 px-8">
     <div className="py-16">
       <div className="flex flex-col md:flex-row gap-8 items-center md:items-stretch justify-evenly">
-        {data.links.map((link, index) => (
+        {content.links.map((link, index) => (
           <Link
             key={index}
             iconLight={link.icon[0]}
@@ -159,7 +159,7 @@ const Footer = () => {
   const darkMode = useDarkMode()
   return (
     <div className="p-4 text-sm text-gray-400 dark:text-gray-500 text-center">
-      {data.footer(darkMode)}
+      {content.footer(darkMode)}
     </div>
   )
 }
