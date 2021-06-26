@@ -150,9 +150,32 @@ const Content = ({ footer }) => (
 
 const Footer = () => {
   const darkMode = useDarkMode()
+  const linkStyles = "link text-gray-500 dark:text-gray-400"
+
   return (
     <div className="p-4 text-sm text-gray-400 dark:text-gray-500 text-center">
-      {content.footer(darkMode)}
+      {"i built this website with "}
+      <a className={linkStyles} href="https://www.gatsbyjs.com/">
+        gatsby
+      </a>
+      {" and "}
+      <a className={linkStyles} href="https://tailwindcss.com">
+        tailwind
+      </a>
+      {", it's "}
+      <a
+        className={linkStyles}
+        href="https://github.com/LeptoFlare/LeptoFlare.github.io"
+      >
+        open sourced
+      </a>
+      {" on github! there's also a "}
+      <button
+        className="link text-gray-500 dark:text-gray-400"
+        onClick={() => darkMode.toggle()}
+      >
+        {darkMode.enabled ? "light mode" : "dark mode"}
+      </button>
     </div>
   )
 }
@@ -180,11 +203,5 @@ const Org = ({ org }) => (
     </a>
   )
 }
-
-const FooterLink = ({ href, children }) => (
-  <a className="link text-gray-500 dark:text-gray-400" href={href}>
-    {children}
-  </a>
-)
 
 export default Index
