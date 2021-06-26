@@ -12,15 +12,18 @@ export const useDarkMode = () => {
 
 export const DarkModeProvider = ({ children }) => {
   const [enabled, setEnabled] = React.useState(
-    localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
+    localStorage.darkModeEnabled === "true" ||
+      (!("darkModeEnabled" in localStorage) &&
         window.matchMedia("(prefers-color-scheme: dark)").matches)
   )
 
+  const toggle = () => {
+    localStorage.darkModeEnabled = (!enabled).toString()
+    setEnabled(!enabled)
+  }
+
   return (
-    <DarkModeContext.Provider
-      value={{ enabled, toggle: () => setEnabled(!enabled) }}
-    >
+    <DarkModeContext.Provider value={{ enabled, toggle }}>
       {children}
     </DarkModeContext.Provider>
   )
