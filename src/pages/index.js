@@ -20,17 +20,19 @@ const content = {
       organizer, boba addict, chiptune fanatic, and a kglues one-trick in
       splatoon
     </>,
+    <>i do a lot of technical and production work</>,
     <>
-      don't be afraid to reach out! the best way to contact me is to send me a
-      dm on{" "}
-      <GatsbyLink className="link" to="/discord">
+      don't be afraid to chat with me! the best way to contact me is to send me
+      a dm on{" "}
+      <Link className="link" to="/discord">
         discord at <code>LeptoFlare#4548</code>
-      </GatsbyLink>
+      </Link>
     </>,
   ],
   orgs: [
     {
       name: "Off the Dial",
+      link: "https://otd.ink",
       icon: "https://assets.otd.ink/logo.svg",
       text: (
         <>
@@ -41,9 +43,26 @@ const content = {
       ),
     },
     {
+      name: "Checkpoint 1",
+      link: "https://twitter.com/Checkpoint1SPL",
+      icon: null,
+      text: (
+        <>
+          i'm one of the main baristas! alongside star, i manage the server
+          structurally, i also play a big role organizing the in-house tourneys
+        </>
+      ),
+    },
+    {
       name: "Inkling Performance Labs",
-      icon: githubDark,
-      text: <>I'm technical staff for IPL</>,
+      link: "https://iplabs.ink",
+      icon: "https://iplabs.ink/images/logo.png",
+      text: (
+        <>
+          i'm part of technical staff. i mainly work on radia and am
+          occasionally allowed to help on other stuff with vincent
+        </>
+      ),
     },
   ],
   links: [
@@ -52,8 +71,8 @@ const content = {
       href: "https://github.com/LeptoFlare",
       text: (
         <>
-          i program open source stuff a lot, check out my github to see what
-          i've built!
+          i make open source stuff a lot, check out my github to see what i've
+          built
         </>
       ),
     },
@@ -62,31 +81,11 @@ const content = {
       href: "https://ko-fi.com/leptoflare",
       text: (
         <>
-          i do code commissions! if you're interested in learning more, check
-          out my ko-fi
+          i do code commissions! if you want to learn more, check out my ko-fi
         </>
       ),
     },
   ],
-  footer: darkMode => (
-    <>
-      {"i built this website with "}
-      <FooterLink href="https://www.gatsbyjs.com/">gatsby</FooterLink>
-      {" and "}
-      <FooterLink href="https://tailwindcss.com">tailwind</FooterLink>
-      {", it's "}
-      <FooterLink href="https://github.com/LeptoFlare/LeptoFlare.github.io">
-        open sourced
-      </FooterLink>
-      {" on github! there's also a "}
-      <button
-        className="link text-gray-500 dark:text-gray-400"
-        onClick={() => darkMode.toggle()}
-      >
-        {darkMode.enabled ? "light mode" : "dark mode"}
-      </button>
-    </>
-  ),
 }
 
 const Index = () => (
