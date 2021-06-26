@@ -17,10 +17,9 @@ const content = {
   bio: [
     <>
       heyo, i'm lepto! im a junior software developer, splatoon tournament
-      organizer, boba addict, chiptune fanatic, and a kglues one-trick in
-      splatoon
+      organizer and production person, boba addict, chiptune fanatic, and a
+      kglues one-trick in splatoon
     </>,
-    <>i do a lot of technical and production work</>,
     <>
       don't be afraid to chat with me! the best way to contact me is to send me
       a dm on{" "}
