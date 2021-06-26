@@ -14,7 +14,10 @@ module.exports = {
     extend: {
       colors: {
         blue: colors.cyan,
-        gray: colors.blueGray,
+        gray: {
+          ...colors.blueGray,
+          900: colors.coolGray[900],
+        },
       },
       backgroundImage: theme => ({
         banner: "url('./banner.svg')",
