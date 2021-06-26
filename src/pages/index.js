@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Link as GatsbyLink } from "gatsby"
+import { Link } from "gatsby"
 
 import Layout from "../components/Layout"
 import icon from "~/src/static/icon.svg"
@@ -99,8 +99,8 @@ const Index = () => (
 
 const Card = () => (
   <div className="bg-white dark:bg-gray-800 max-w-4xl my-auto mx-auto rounded-lg p-8 md:p-16">
-    <div className="flex flex-col gap-6 md:gap-9">
-      <div className="flex flex-col gap-3 md:gap-6 items-start">
+    <div className="flex flex-col gap-6 md:gap-8">
+      <div className="flex flex-col gap-3 items-start">
         <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6 justify-start md:h-32">
           <div className="flex self-stretch items-center h-28 md:h-32">
             <img alt="" src={icon} className="rounded-full max-h-full" />
@@ -132,14 +132,14 @@ const Content = ({ footer }) => (
     <div className="py-16">
       <div className="flex flex-col md:flex-row gap-8 items-center md:items-stretch justify-evenly">
         {content.links.map((link, index) => (
-          <Link
+          <Social
             key={index}
             iconLight={link.icon[0]}
             iconDark={link.icon[1]}
             href={link.href}
           >
             {link.text}
-          </Link>
+          </Social>
         ))}
       </div>
     </div>
@@ -186,6 +186,8 @@ const Org = ({ org }) => (
     style={{ backgroundImage: `url(${org.icon})` }}
   />
 )
+
+const Social = ({ iconDark, iconLight, href, children }) => {
   const darkMode = useDarkMode()
 
   return (
