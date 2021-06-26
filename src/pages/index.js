@@ -116,13 +116,7 @@ const Card = () => (
         </div>
         <div className="flex gap-3 items-stretch justify-start">
           {content.orgs.map((org, index) => (
-            <div key={index} className="h-10 w-10 md:h-12 md:w-12">
-              <img
-                alt={`${org.name} icon`}
-                src={org.icon}
-                className="max-h-full"
-              />
-            </div>
+            <Org key={index} org={org} />
           ))}
         </div>
       </div>
@@ -163,7 +157,12 @@ const Footer = () => {
   )
 }
 
-const Link = ({ iconDark, iconLight, href, children }) => {
+const Org = ({ org }) => (
+  <div
+    className="h-10 w-10 md:h-12 md:w-12 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-contain bg-gray-200 dark:bg-gray-700"
+    style={{ backgroundImage: `url(${org.icon})` }}
+  />
+)
   const darkMode = useDarkMode()
 
   return (
