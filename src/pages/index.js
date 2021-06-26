@@ -98,32 +98,30 @@ const Index = () => (
 )
 
 const Card = () => (
-  <div className="bg-white dark:bg-gray-800 max-w-4xl my-auto mx-auto rounded-lg p-8 md:p-16">
-    <div className="flex flex-col gap-6 md:gap-8">
-      <div className="flex flex-col gap-3 md:gap-4 items-start">
-        <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6 justify-start md:h-32">
-          <div className="flex self-stretch items-center h-28 md:h-32">
-            <img alt="" src={icon} className="rounded-full max-h-full" />
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="text-5xl lg:text-7xl font-display font-light">
-              {content.me}
-            </div>
-            <div className="text-gray-500 dark:text-gray-300 lg:text-xl font-mono font-light italic">
-              {content.subtext}
-            </div>
-          </div>
+  <div className="bg-white dark:bg-gray-800 max-w-4xl flex flex-col gap-6 md:gap-8 my-auto mx-auto rounded-lg p-8 md:p-16">
+    <div className="flex flex-col gap-3 md:gap-4 items-start">
+      <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6 justify-start md:h-32">
+        <div className="flex self-stretch items-center h-28 md:h-32">
+          <img alt="" src={icon} className="rounded-full max-h-full" />
         </div>
-        <div className="flex gap-3 md:gap-4 items-stretch justify-start">
-          {content.orgs.map((org, index) => (
-            <Org key={index} org={org} />
-          ))}
+        <div className="flex flex-col gap-2">
+          <div className="text-5xl lg:text-7xl font-display font-light">
+            {content.me}
+          </div>
+          <div className="text-gray-500 dark:text-gray-300 lg:text-xl font-mono font-light italic">
+            {content.subtext}
+          </div>
         </div>
       </div>
-      {content.bio.map((bioSection, index) => (
-        <div key={index}>{bioSection}</div>
-      ))}
+      <div className="flex gap-3 md:gap-4 items-stretch justify-start">
+        {content.orgs.map((org, index) => (
+          <Org key={index} org={org} />
+        ))}
+      </div>
     </div>
+    {content.bio.map((bioSection, index) => (
+      <div key={index}>{bioSection}</div>
+    ))}
   </div>
 )
 
@@ -143,7 +141,6 @@ const Content = ({ footer }) => (
         ))}
       </div>
     </div>
-    <div className="border-gray-200 dark:border-gray-700 border-t-2 rounded-full" />
     {footer}
   </div>
 )
@@ -153,30 +150,33 @@ const Footer = () => {
   const linkStyles = "link text-gray-500 dark:text-gray-400"
 
   return (
-    <div className="p-4 text-sm text-gray-400 dark:text-gray-500 text-center">
-      {"i built this website with "}
-      <a className={linkStyles} href="https://www.gatsbyjs.com/">
-        gatsby
-      </a>
-      {" and "}
-      <a className={linkStyles} href="https://tailwindcss.com">
-        tailwind
-      </a>
-      {", it's "}
-      <a
-        className={linkStyles}
-        href="https://github.com/LeptoFlare/LeptoFlare.github.io"
-      >
-        open sourced
-      </a>
-      {" on github! there's also a "}
-      <button
-        className="link text-gray-500 dark:text-gray-400"
-        onClick={() => darkMode.toggle()}
-      >
-        {darkMode.enabled ? "light mode" : "dark mode"}
-      </button>
-    </div>
+    <>
+      <div className="border-gray-200 dark:border-gray-700 border-t-2 rounded-full" />
+      <div className="p-4 text-sm text-gray-400 dark:text-gray-500 text-center">
+        {"i built this website with "}
+        <a className={linkStyles} href="https://www.gatsbyjs.com/">
+          gatsby
+        </a>
+        {" and "}
+        <a className={linkStyles} href="https://tailwindcss.com">
+          tailwind
+        </a>
+        {", it's "}
+        <a
+          className={linkStyles}
+          href="https://github.com/LeptoFlare/LeptoFlare.github.io"
+        >
+          open sourced
+        </a>
+        {" on github! there's also a "}
+        <button
+          className="link text-gray-500 dark:text-gray-400"
+          onClick={() => darkMode.toggle()}
+        >
+          {darkMode.enabled ? "light mode" : "dark mode"}
+        </button>
+      </div>
+    </>
   )
 }
 
