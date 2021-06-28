@@ -196,7 +196,7 @@ const Org = ({ org }) => {
       targets: animateRef.current,
       scale: open ? 1 : 0.9,
       opacity: open ? 1 : 0,
-      easing: "spring(1, 100, 100, 20)",
+      easing: "spring(.75, 100, 100, 20)",
       complete: () => {
         animateRef.current.classList.remove("invisible")
       },
