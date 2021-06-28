@@ -1,6 +1,7 @@
 import React from "react"
 import { usePopper } from "react-popper"
 import { Link } from "gatsby"
+import anime from "animejs"
 
 import Layout from "../components/Layout"
 import icon from "~/src/static/icon.svg"
@@ -183,22 +184,40 @@ const Org = ({ org }) => {
   const [open, setOpen] = React.useState(false)
   const elementRef = React.useRef()
   const popperRef = React.useRef()
+  const animateRef = React.useRef()
   const { styles, attributes } = usePopper(
     elementRef.current,
     popperRef.current,
     { placement: "bottom" }
   )
 
+  React.useEffect(() => {
+    anime({
+      targets: animateRef.current,
+      scale: open ? 1 : 0.9,
+      opacity: open ? 1 : 0,
+      easing: "spring(1, 100, 100, 20)",
+      complete: () => {
+        animateRef.current.classList.remove("invisible")
+      },
+    })
+  }, [open])
+
   return (
-    <div onMouseLeave={() => setOpen(false)} className={open && "z-10"}>
-      <div
+    <div
+      onBlur={() => setOpen(false)}
+      onMouseLeave={() => setOpen(false)}
+      className={open && "z-10"}
+    >
+      <button
+        onFocus={() => setOpen(true)}
         onMouseOver={() => setOpen(true)}
         ref={elementRef}
         className="h-10 w-10 md:h-12 md:w-12 object-center rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-contain bg-gray-200 dark:bg-gray-700"
         style={{ backgroundImage: `url(${org.icon})` }}
       />
       <div ref={popperRef} style={styles.popper} {...attributes.popper}>
-        <div className={`p-2 ${!open && "invisible"}`}>
+        <div ref={animateRef} className="p-2 invisible">
           <div className="bg-gray-100 dark:bg-gray-900 max-w-lg rounded-lg shadow-xl p-3 md:p-6">
             <div className="flex flex-col gap-2">
               <span>
