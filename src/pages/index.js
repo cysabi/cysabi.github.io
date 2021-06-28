@@ -1,5 +1,5 @@
 import React from "react"
-
+import { usePopper } from "react-popper"
 import { Link } from "gatsby"
 
 import Layout from "../components/Layout"
@@ -32,7 +32,7 @@ const content = {
     {
       name: "Off the Dial",
       link: "https://otd.ink",
-      icon: "https://assets.otd.ink/logo.svg",
+      icon: "https://assets.otd.ink/icon.svg",
       text: (
         <>
           i'm one of the head to's! in addition to organizing the tournament,
@@ -44,7 +44,7 @@ const content = {
     {
       name: "Checkpoint 1",
       link: "https://twitter.com/Checkpoint1SPL",
-      icon: null,
+      icon: "https://cdn.discordapp.com/icons/732634570285121576/6cdba9ae7dcba4c95a4cfb9cb83b66f8.webp",
       text: (
         <>
           i'm one of the main baristas! alongside star, i manage the server
@@ -179,12 +179,44 @@ const Footer = () => {
   )
 }
 
-const Org = ({ org }) => (
-  <div
-    className="h-10 w-10 md:h-12 md:w-12 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-contain bg-gray-200 dark:bg-gray-700"
-    style={{ backgroundImage: `url(${org.icon})` }}
-  />
-)
+const Org = ({ org }) => {
+  const [open, setOpen] = React.useState(false)
+  const elementRef = React.useRef()
+  const popperRef = React.useRef()
+  const { styles, attributes } = usePopper(
+    elementRef.current,
+    popperRef.current,
+    { placement: "bottom" }
+  )
+
+  return (
+    <div onMouseLeave={() => setOpen(false)} className={open && "z-10"}>
+      <div
+        onMouseOver={() => setOpen(true)}
+        ref={elementRef}
+        className="h-10 w-10 md:h-12 md:w-12 object-center rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-contain bg-gray-200 dark:bg-gray-700"
+        style={{ backgroundImage: `url(${org.icon})` }}
+      />
+      <div ref={popperRef} style={styles.popper} {...attributes.popper}>
+        <div className={`p-2 ${!open && "invisible"}`}>
+          <div className="bg-gray-100 dark:bg-gray-900 max-w-lg rounded-lg shadow-xl p-3 md:p-6">
+            <div className="flex flex-col gap-2">
+              <span>
+                <a
+                  href={org.link}
+                  className="font-bold hover:underline text-gray-600 dark:text-gray-300"
+                >
+                  {org.name}
+                </a>
+              </span>
+              <div>{org.text}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const Social = ({ iconDark, iconLight, href, children }) => {
   const darkMode = useDarkMode()
