@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { usePopper } from "react-popper"
 import { Link } from "gatsby"
 import anime from "animejs"
@@ -181,17 +181,17 @@ const Footer = () => {
 }
 
 const Org = ({ org }) => {
-  const [open, setOpen] = React.useState(false)
-  const elementRef = React.useRef()
-  const popperRef = React.useRef()
-  const animateRef = React.useRef()
+  const [open, setOpen] = useState(false)
+  const elementRef = useRef()
+  const popperRef = useRef()
+  const animateRef = useRef()
   const { styles, attributes } = usePopper(
     elementRef.current,
     popperRef.current,
     { placement: "bottom" }
   )
 
-  React.useEffect(() => {
+  useEffect(() => {
     anime({
       targets: animateRef.current,
       scale: open ? 1 : 0.9,
@@ -230,6 +230,7 @@ const Org = ({ org }) => {
             <div className="flex flex-col gap-2">
               <span>
                 <a
+                  onFocus={() => setOpen(true)}
                   href={org.link}
                   className="font-bold hover:underline text-gray-600 dark:text-gray-300"
                 >
