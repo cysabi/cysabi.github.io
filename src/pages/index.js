@@ -197,8 +197,11 @@ const Org = ({ org }) => {
       scale: open ? 1 : 0.9,
       opacity: open ? 1 : 0,
       easing: "spring(.5, 100, 100, 25)",
-      complete: () => {
-        animateRef.current.classList.remove("invisible")
+      change: anime => {
+        anime.animations.find(elem => elem.property === "opacity")
+          .currentValue <= 0
+          ? popperRef.current.classList.add("invisible")
+          : popperRef.current.classList.remove("invisible")
       },
     })
   }, [open])
@@ -216,8 +219,13 @@ const Org = ({ org }) => {
         className="h-10 w-10 md:h-12 md:w-12 object-center rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-contain bg-gray-200 dark:bg-gray-700"
         style={{ backgroundImage: `url(${org.icon})` }}
       />
-      <div ref={popperRef} style={styles.popper} {...attributes.popper}>
-        <div ref={animateRef} className="p-2 invisible">
+      <div
+        ref={popperRef}
+        style={styles.popper}
+        {...attributes.popper}
+        className="invisible"
+      >
+        <div ref={animateRef} className="p-2">
           <div className="bg-gray-100 dark:bg-gray-900 max-w-lg rounded-lg shadow-xl p-3 md:p-6">
             <div className="flex flex-col gap-2">
               <span>
