@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useRef } from "react"
-import { usePopper } from "react-popper"
+import React, { useEffect, useRef, useState } from "react"
 import { Link } from "gatsby"
+import { usePopper } from "react-popper"
 import anime from "animejs"
 
-import Layout from "../components/Layout"
 import icon from "~/src/static/icon.svg"
-import githubDark from "~/src/static/github.svg"
 import githubLight from "~/src/static/github-light.svg"
-import kofiDark from "~/src/static/kofi.svg"
+import githubDark from "~/src/static/github.svg"
 import kofiLight from "~/src/static/kofi-light.svg"
+import kofiDark from "~/src/static/kofi.svg"
 
+import Layout from "../components/Layout"
 import { useDarkMode } from "../components/DarkMode"
 
 const content = {
