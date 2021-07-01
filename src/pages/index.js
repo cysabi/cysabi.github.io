@@ -17,13 +17,13 @@ const content = {
   subtext: "preemptively compensating for inadequacy",
   bio: [
     <>
-      heyo, i'm lepto! im a junior software developer, splatoon tournament
-      organizer and production person, boba addict, chiptune fanatic, and a
-      kglues one-trick in splatoon
+      heyo, i'm lepto! im a junior software developer, graphic designer,
+      tournament organizer, boba addict, chiptune fanatic, and a kglues
+      one-trick in competitive splatoon
     </>,
     <>
-      don't be afraid to chat with me! the best way to contact me is to send me
-      a dm on{" "}
+      don't be afraid to reach out, i'm always open to new opportunities! the
+      best way to contact me is to send me a dm on{" "}
       <Link className="link" to="/discord">
         discord at <code>LeptoFlare#4548</code>
       </Link>
@@ -36,9 +36,8 @@ const content = {
       icon: "https://assets.otd.ink/icon.svg",
       text: (
         <>
-          i'm one of the head to's! in addition to organizing the tournament,
-          i'm also the one who built the bot, the site, and the stream overlays!
-          all from scratch
+          i'm one of the 2 head to's! in addition to tourney organizing, i built
+          the bot, the site, and the stream overlays all from scratch
         </>
       ),
     },
@@ -48,8 +47,8 @@ const content = {
       icon: "https://cdn.discordapp.com/icons/732634570285121576/6cdba9ae7dcba4c95a4cfb9cb83b66f8.webp",
       text: (
         <>
-          i'm one of the main baristas! alongside star, i manage the server
-          structurally, i also play a big role organizing the in-house tourneys
+          im one of the main baristas, and lead the server restructure. i'm more
+          focused on the server's competitive side, such as in-house tourneys
         </>
       ),
     },
@@ -59,8 +58,8 @@ const content = {
       icon: "https://iplabs.ink/images/logo.png",
       text: (
         <>
-          i'm part of technical staff. i mainly work on radia and am
-          occasionally allowed to help on other stuff with vincent
+          i used to be part of technical staff. i did a complete rewrite radia,
+          their discord bot for tourney management
         </>
       ),
     },
@@ -71,8 +70,8 @@ const content = {
       href: "https://github.com/LeptoFlare",
       text: (
         <>
-          i make open source stuff a lot, check out my github to see what i've
-          built
+          i develop open source stuff a lot. see my github profile readme for a
+          portfolio of what i've built
         </>
       ),
     },
@@ -81,7 +80,8 @@ const content = {
       href: "https://ko-fi.com/leptoflare",
       text: (
         <>
-          i do code commissions! if you want to learn more, check out my ko-fi
+          i've opened code commissions! if you'd like to learn more, my options,
+          terms, and pricing are on ko-fi
         </>
       ),
     },
