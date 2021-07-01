@@ -100,8 +100,8 @@ const Index = () => (
 const Card = () => (
   <div className="bg-white dark:bg-gray-800 max-w-4xl flex flex-col gap-6 md:gap-8 my-auto mx-auto rounded-lg p-8 md:p-16">
     <div className="flex flex-col gap-3 md:gap-4 items-start">
-      <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6 justify-start md:h-32">
-        <div className="flex self-stretch items-center h-28 md:h-32">
+      <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6 justify-start">
+        <div className="flex self-stretch items-center h-28 lg:h-32">
           <img alt="" src={icon} className="rounded-full max-h-full" />
         </div>
         <div className="flex flex-col gap-2">
