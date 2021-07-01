@@ -22,7 +22,7 @@ const content = {
       one-trick in competitive splatoon
     </>,
     <>
-      don't be afraid to reach out, i'm always open to new opportunities! the
+      don't be afraid to reach out, i'm always open to new opportunities. the
       best way to contact me is to send me a dm on{" "}
       <Link className="link" to="/discord">
         discord at <code>LeptoFlare#4548</code>
