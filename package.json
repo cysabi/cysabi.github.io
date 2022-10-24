@@ -1,34 +1,24 @@
 {
-  "name": "lepto.tech",
-  "version": "1.0.0",
-  "private": true,
-  "description": "lepto.tech",
-  "author": "LeptoFlare",
+  "name": "vite-template-solid",
+  "version": "0.0.0",
+  "description": "",
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "build": "gatsby build",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.7",
+    "autoprefixer": "^10.4.12",
+    "postcss": "^8.4.18",
+    "vite": "^3.0.9",
+    "vite-plugin-solid": "^2.3.0"
   },
   "dependencies": {
-    "@fontsource/trispace": "^4.4.5",
-    "@fontsource/work-sans": "^4.4.5",
-    "@popperjs/core": "^2.9.2",
+    "@popperjs/core": "^2.11.6",
     "animejs": "^3.2.1",
-    "babel-preset-gatsby": "^1.8.0",
-    "gatsby": "^3.8.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-helmet": "^6.1.0",
-    "react-popper": "^2.2.5"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.2.6",
-    "babel-plugin-root-import": "^6.6.0",
-    "gatsby-plugin-postcss": "^4.8.0",
-    "postcss": "^8.3.5",
-    "prettier": "^2.3.2",
-    "tailwindcss": "^2.2.4"
+    "solid-js": "^1.5.1"
   }
 }
