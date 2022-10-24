@@ -1,2 +1,0 @@
-(self.webpackChunklepto_tech=self.webpackChunklepto_tech||[]).push([[4],{7370:function(e,t,n){"use strict";n.r(t),n.d(t,{default:function(){return o}});var r=n(7294),c=function(e){var t=e.to;return"undefined"!=typeof window&&window.location.replace(t),r.createElement(r.Fragment,null)},o=function(){return r.createElement(c,{to:"https://discord.gg/faUNrfP"})}}}]);
-//# sourceMappingURL=component---src-pages-discord-js-84c10166ba5dfaddee0f.js.map
