@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 @layer base {
-  /* @font-face {
+  @font-face {
     font-family: "Kantumruy Pro";
-    src: url("/src/static/KantumruyPro-VariableFont_wght.ttf") format("ttf-variations"),
-         url("/src/static/KantumruyPro-Italic-VariableFont_wght.ttf") format("ttf-variations");
+    src: url("/src/static/KantumruyPro-VariableFont_wght.ttf") format("truetype-variations"),
+         url("/src/static/KantumruyPro-Italic-VariableFont_wght.ttf") format("truetype-variations");
     font-weight: 100 700;
     font-style: normal, italic;
   }
 
   @font-face {
     font-family: "Fragment Mono";
-    src: url("src/static/FragmentMono-Regular.ttf") format("ttf"),
-         url("src/static/FragmentMono-Italic.ttf") format("ttf");
+    src: url("src/static/FragmentMono-Regular.ttf") format("truetype"),
+         url("src/static/FragmentMono-Italic.ttf") format("truetype");
     font-weight: 400, 400;
     font-style: normal, italic;
-  } */
+  }
 }
