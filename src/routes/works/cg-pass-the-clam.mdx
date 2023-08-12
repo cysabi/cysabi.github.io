@@ -1,0 +1,147 @@
+export const data = {
+  layer: 3,
+  coords: [7, 5],
+  name: "cg-pass-the-clam",
+  desc: "a self-induced nightmare just to upscale a clam",
+  tags: ["broadcast graphics"],
+  previews: ["/src/static/cg-pass-the-clam_1.png"],
+}
+
+![](/src/static/cg-pass-the-clam_1.png)
+
+> want to see the graphics in action? [see the show!](https://www.youtube.com/watch?v=9OkTnI6d6Ss)
+
+> also disclaimer, this is basically a word-vomit rant about my struggles with adobe illustrator, if you're here for a case study i am sorry
+
+see that clam that the host camera is cropped in?
+
+making that thing turned out to be a trip to hell and back
+
+all because they wanted a frame of a clam
+
+to put a camera inside for a game show
+
+![](https://media.discordapp.net/attachments/1029264206081572905/1103539203733733396/image.png)
+
+first i had to get a very legal copy of adobe illustrator EXCLUSIVELY to make this clam
+
+then open up the original .ai file that included the clam image used on the map screen
+
+it's like 120 px
+
+my source material was a 120 px
+
+you might think i could just raster export it with higher def
+
+but that illustrator loses all semblance of capability as soon as you put a pattern in that shadow.
+
+so i have to scale it up
+
+scaling it up breaks everything because u remember the pattern in the shadow?
+
+yeah illustrator doesn't even scale that up
+
+i never used illustrator before
+
+so i had to dig thru every single context menue
+
+(there are a lot of context menus)
+
+to try to find out how to increase the scale of the fill pattern
+
+which i somehow FOUND
+
+and it wasn't just a number
+
+it was it's own canvas i had to change the size of manually
+
+to scale the pattern, you also had to manually drag out those rectangles
+
+so i had to manually eye-pick play around with it to try to get the same sorta scale
+
+THEN I REALIZE THE DOTS ARE THEIR OWN EFFECT
+
+so i had to scale up the radius of those dots too
+
+dug thru a bunch more to find that
+
+then i tried to export it and adobe decides to export the svgs as images???
+
+so i can't mask individual things anymore
+
+so i fill it in with green cuz why not
+
+then i realize that there's a dot effect on the green fill
+
+so i have to remove that reexport
+
+all of a sudden the layout of everything just goes to shit
+
+like all i did was remove an effect and the whole layout shifts ??
+
+when i export
+
+so i literally open up the svg in VSCODE
+
+TO COPY PASTE THE PROPERTIES THAT DIDNT MAKE IT OVER
+
+INTO THE RIGHT LINES
+
+![](https://cdn.discordapp.com/attachments/1029264206081572905/1103540288208764979/image.png)
+
+THIS
+
+LIKE WHAT THE FUCK
+
+anyway while im doing it i realize "wait a minute"
+
+turns out the reason the whole layout shifted is because the effect is the reason illustrator cant export as an svg
+
+SO THE 2nd IMAGE ACTUALLY BECOMES AN SVG WHEN I REMOVE THE EFFECT
+
+AND SO THE LAYOUT SHIFTS CUZ ILLUSTRATOR IS A BUGGY AF MESS
+
+anyway so then i realize
+
+since it's actually an svg path now i can get rid of the green screen and actually mask
+
+so then i take the svg
+
+and throw it into lunacy
+
+and then spent 30 minutes playing with masks and stuff to try to get it to hide the inside shadow
+
+![](https://media.discordapp.net/attachments/1029264206081572905/1103540844126023742/image.png)
+
+turns out that's a lot harder than i thought and the end result is insane
+
+ok anyway i export the svg from lunacy
+
+that means that i exported an svg from illustrator then put that in lunacy and then exported it again from lunacy
+
+i plop it in my code and it works and im happy
+
+and then i spent the next 4 hours nit picking it
+
+like changing the stroke width and stuff
+
+u see that image that i sent at the very top
+
+that's every file i exported today
+
+or had to open
+
+OH yeah another thing i don't remember how I fixed this but sometimes when i tried to export from illustrator the image would just
+decide to not scale
+
+here's an example
+
+![](https://media.discordapp.net/attachments/1029264206081572905/1103541598412869732/image.png)
+
+of the shit i'm working with
+
+anyway
+
+you want to know the cherry on top
+
+![](https://media.discordapp.net/attachments/1029264206081572905/1103542487445934080/image.png)

@@ -1,0 +1,92 @@
+export const data = {
+  layer: 4,
+  coords: [4, 1],
+  name: "cg-fabl",
+  desc: "stream overlays for a free-agent major",
+  tags: ["broadcast graphics"],
+  previews: ["/src/static/cg-fabl_1.png"],
+}
+
+<figure>
+  <video controls>
+    <source src="/src/static/cg-fabl_2.mp4" type="video/mp4" />
+  </video>
+  <figcaption>
+    Here's the reel! Showcasing just about everything this graphics bundle can
+    do.
+  </figcaption>
+</figure>
+
+### the circumstance
+
+This was the the first time that I was working with a designer to make the set of
+broadcast graphics! I had a very short timeframe to implement the designs, with about
+5 days before the first event, so it was important to work asynchronously.
+
+For the first 3 days, I was essentially coding up the designs in real time as they were being made. I wasn't afraid about having to undo my work because tailwind makes it really easy to build designs fast.
+
+Here's an example of some of the early designs:
+
+![](/src/static/cg-fabl_3.png)
+
+Just kidding, that's a lie. These weren't the early designs, these were the all of the finished designs that the designer left me with.
+
+### navigating crunch time
+
+With just 48 hours remaining, I was now tasked with..
+
+- Completing the markup for the designs.
+- Polishing the design myself so that it's professional enough to be shown on stream.
+- Designing my own animations and layout transitions, and then implementing them.
+- Rigging the graphics up to the dashboard so it can be controlled.
+
+I also had to do all of this while making enough time to attend my sister's volleyball tournament!
+
+Under these conditions, it was crucial prioritize what are 100% required tasks to be done, and what are the "nice-to-haves" left over.
+
+#### priority 1: rigging
+
+Rigging was top priority, no matter how unpolished the designs may be, if they can't be controlled, we don't have an event to show. So that was the first thing that I worked on implementing.
+
+Although animations were not being worked on, I made sure to replace my own div with the `<motion.div` component anyway wherever I knew I would need it. There were no actual animations in the div, but that way when it came time to actually work on them, I would have saved myself a lot of time by bookmarking where those components are!
+
+#### priority 2: polish
+
+Once rigging was completed, and all of the bugs were ironed out, I knew next priority was polishing the designs, it made no sense to set up all of the layout transitions if the designs were to be restructured anyway! And to be honest, I couldn't let myself allow these graphics to remain untouched.
+
+This step was the one that took much longer than expected, as I ran into a lot of design issues and it was difficult to try to keep as much faithful to the original vision, while ensuring that it was feasible.
+
+One of the biggest challenges in this step was implementing all of the parts that were not part of the original design specification. For example the leaderboard, or how the maplist should show completed games.
+
+<figure>
+  <img src="/src/static/cg-fabl_6.gif" />
+  <figcaption>
+    Here's a before/after of the roster screen! This gif was probably the most
+    complex thing I've made with ffmpeg.
+  </figcaption>
+</figure>
+
+#### priority 3: layout transitions
+
+I think the design bit that I'm most proud of in this graphics bundle has to be the heading component!
+
+It adapts to the content height by shifting up and down to ensure that the content below is evenly spaced, while the text inside the component fades to showcase whatever is relevant for the active page.
+
+![](/src/static/cg-fabl_4.gif)
+
+#### priority 4: animations + treats!
+
+At this point, I probably had about 6 hours left before the tournament started, so I had to pick what animations were important enough to show, the ones that were most common to be noticed by the viewer. Everything else would be delegated to the next season (this event ran over the course of 6 weeks).
+
+The text fades on the heading component was among the first to implement, as well as the scoreboard and commentators panel on the game screen.
+
+The icons on the scoreboard were actually not part of the original design specification, or the first week! I just thought it would be really cool while finishing up all the rest of the animations! I think I made the right call.
+
+![](/src/static/cg-fabl_5.gif)
+
+### the conclusion
+
+I ended up still working on all of the animations and stuff even as the event was going on, it must have been funny for spectators to watch the graphics get progressively better as the tournament went on.
+
+Hope you enjoyed reading!
+[Want to see the graphics in the real world?](https://youtu.be/Kz5w3a8Z_tM)
