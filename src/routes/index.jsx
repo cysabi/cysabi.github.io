@@ -16,6 +16,8 @@ const Index = () => (
 const LandingScreen = () => {
   const location = useLocation()
 
+  const [hoverSlurk, setHoverSlurk] = createSignal(false)
+
   return (
     <div class="flex flex-col justify-between max-w-7xl h-screen mx-auto p-[min(10vw,128px)]">
       <div class="flex-1">
@@ -40,39 +42,51 @@ const LandingScreen = () => {
               </A>
             </div>
           </div>
-          <img src={slurk} class="h-28 md:h-32 lg:h-48" />
+          <A href={location.hash === "#about" ? "/" : "#about"}>
+            <Motion.img
+              onmouseenter={e => setHoverSlurk(true)}
+              onmouseleave={e => setHoverSlurk(false)}
+              animate={{
+                scale: hoverSlurk() ? 1.1 : 1,
+                rotate: hoverSlurk() ? 2 : 0,
+              }}
+              transition={{ easing: spring({ mass: 0.5, stiffness: 300 }) }}
+              src={slurk}
+              class="h-28 md:h-32 lg:h-48"
+            />
+          </A>
         </div>
         <Motion.div
-          initial={{
-            opacity: 0,
-            y: 16,
-          }}
+          initial={false}
           animate={{
             opacity: location.hash === "#about" ? 1 : 0,
-            y: location.hash === "#about" ? 0 : 16,
+            scale: location.hash === "#about" ? 1 : 0.95,
           }}
           transition={{
             easing: spring({ mass: 0.1 }),
           }}
-          class="pt-12"
+          class="pt-12 origin-top-right"
         >
-          <div class="flex flex-col gap-10 rounded-2xl p-10 text-xl relative before:absolute before:-top-4 before:right-10 before:lg:right-16 before:h-8 before:w-8 before:bg-gray-700 bg-gray-700 before:rotate-45 before:hidden before:md:block">
+          <div
+            style={location.hash === "#about" ? "" : "pointer-events: none"}
+            class="flex flex-col gap-10 rounded-2xl p-10 text-xl relative bg-gray-800/50 border-4 border-gray-700/25 backdrop-blur-3xl"
+          >
             <div>
               hi, thanks for stopping by! you can call me{" "}
               <span class="font-medium">sabi</span>; i love thinking about
               people thinking.
             </div>
             <div>
-              this is a portfolio of the works i've done. i don't tend to stick
-              to one thing, so the collection is a bit random. to help, i've
-              given you some tags to filter by, just hit the{" "}
+              this is a portfolio of different works i've done! i don't tend to
+              stick to one thing, so the collection is a bit random. to help, if
+              you hit the{" "}
               <A
                 href="/works"
-                class="font-medium underline decoration-2 decoration-slate-400 hover:decoration-transparent transition-colors"
+                class="underline decoration-2 decoration-slate-400 hover:decoration-transparent transition-colors"
               >
                 works
               </A>{" "}
-              link!
+              link, i've given you some tags to filter by.
             </div>
             <div>
               i'm always open to new opportunities, no matter the medium! so if

@@ -3,7 +3,7 @@ export const data = {
   coords: [6, 3],
   name: "off-the-dial-site",
   desc: "a tournament management website to host signups for Off the Dial",
-  tags: ["website", "ux design", "develop"],
+  tags: ["website", "ux design"],
   previews: ["/off-the-dial-site_1.png"],
 }
 
@@ -11,8 +11,59 @@ export const data = {
 
 Over a period of 5 years, I've rewritten this site 5 times, once each year.
 
-This is the conclusive version! I've finally set the project down to focus on other stuff.
+This is the penultimate version! The project has been set down, as I focus on other stuff.
 
 Each time that I've rewritten this site, I've learned so much about design, development, and especially, the users.
 
 This is a collection of some of the highlights that came from developing this version!
+
+## profile page
+
+One of the biggest improvements I made to the design was the profile page. The old profile page simply displayed your signal strength, but as the year went on, I realized there were some design problems that users wanted solved.
+
+One of these was being able to have a good idea on the timing of the tournament.
+
+Because it's an international tournament that caters to multiple timezones, it can be difficult to know when it actually runs. In the earlier design, I had a schedule table on the /idtga page, but that was it.
+
+For the rewrite, I removed the schedule table and designed a timeline that would be visible on the profile page. The timeline would be dynamic, timezone-specific, season-specific, and profile-specific.
+
+![](/off-the-dial-site_5.png)
+
+Anyone who navigates to their profile will be able to essentially see a dashboard letting them know if there's a tournament going on, the timing on when everything happens, and what they should be doing right now!
+
+I also placed a non-timezone specific schedule in the rules page, that way all of the "official" information about the tournament is coming from one source of truth, not inside the idtga page.
+
+## idtga page
+
+Even though the rules page would be the single source of truth about the tournament as a whole, I wanted all season information in it's own source of truth as well, and that came in the form of a card!
+
+![](/off-the-dial-site_6.png)
+
+I wanted this card to be what users can refer to whenever they need information about the current season.
+The focal point of this card directly shares with the user the status of the tournament _as it relates to them!_
+
+The card also displays the season title, and all important dates for the season. It shows any information about the season that tournament organizers want to share, such as updates to the rules. And of course, the card also has the rules and signup button!
+
+Something else special about this page in specific is the dynamic size of the skateboarding octo!
+
+<video controls>
+  <source src="/off-the-dial-site_3.mp4" type="video/mp4" />
+</video>
+
+I can't just apply a max-width to it (like the one below) because the right side needs to be aligned to the right of the viewport, and the left needs to be inline with the padding of all the other elements on the page.
+
+So I used the `calc()` function from css!
+
+> `max-width: calc(36rem + 50vw)`
+
+## weapons selector
+
+![](/off-the-dial-site_4.png)
+
+One of the new additions for this rewrite was a working weapon selector. No fancy tricks were really used here, but I'm really proud of the finished design.
+
+This was when I first discovered [`match-sorter`](https://github.com/kentcdodds/match-sorter), a really cool library! Learning how to implement that into [`headlessui`](https://headlessui.com)'s combobox was just really satsifying.
+
+---
+
+Hope you found some of this stuff cool! I sure did.

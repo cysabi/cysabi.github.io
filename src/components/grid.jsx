@@ -78,12 +78,12 @@ const Blob = props => {
   return (
     <Motion.div
       animate={{ ...blob() }}
-      transition={{ easing: spring({ mass: 150, damping: 150 }) }}
+      transition={{ easing: spring({ mass: 170, damping: 170 }) }}
       class="absolute h-[500px] rounded-full aspect-square"
     >
       <Motion.div
         animate={{ backgroundColor: props.color }}
-        transition={{ easing: spring({ mass: 2, damping: 75 }) }}
+        transition={{ duration: 0.7 }}
         class="h-full w-full rounded-full aspect-square"
       />
     </Motion.div>
