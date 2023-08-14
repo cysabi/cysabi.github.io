@@ -106,32 +106,25 @@ const LandingScreen = () => {
 }
 
 const SelectedWorksScreen = () => (
-  <div class="flex max-w-7xl mx-auto h-screen px-[min(calc(10vw,128px)]">
-    <div class="w-full h-full grid grid-cols-12 grid-rows-6">
+  <div class="flex h-screen">
+    <div class="w-full h-full grid grid-cols-12 grid-rows-[repeat(12,minmax(0,1fr))]">
       <ProjectOrb
         wip={true}
         layer="2"
         coords={[2, 1]}
         name="off-the-dial-bot"
       />
-      <ProjectOrb wip={true} layer="2" coords={[10, 3]} name="blurple.py" />
-      <ProjectOrb wip={true} layer="2" coords={[5, 5]} name="radia" />
-      <ProjectOrb wip={true} layer="3" coords={[4, 3]} name="cg-offthedial" />
+      <ProjectOrb wip={true} layer="2" coords={[11, 6]} name="blurple.py" />
+      <ProjectOrb wip={true} layer="2" coords={[4, 10]} name="radia" />
+      <ProjectOrb wip={true} layer="3" coords={[5, 4]} name="cg-offthedial" />
       <ProjectOrb
         wip={true}
         layer="3"
-        coords={[8, 2]}
+        coords={[9, 3]}
         name="social-scheduler"
       />
-      <ProjectOrb wip={true} layer="3" coords={[2, 4]} name="fabl-website" />
-      <ProjectOrb
-        wip={true}
-        layer="3"
-        coords={[7, 5]}
-        name="cg-pass-the-clam"
-      />
-      <ProjectOrb wip={true} layer="4" coords={[4, 1]} name="cg-fabl" />
-      <ProjectOrb wip={true} layer="4" coords={[9, 4]} name="cq-overlays" />
+      <ProjectOrb wip={true} layer="3" coords={[3, 7]} name="fabl-website" />
+      <ProjectOrb wip={true} layer="4" coords={[9, 8]} name="cq-overlays" />
       {works
         .filter(work => work.data.layer)
         .map(work => (
@@ -176,7 +169,8 @@ const ProjectOrb = props => {
     >
       <Motion.div
         ref={ref}
-        animate={{ y: y() }}
+        animate={{ y: y(), x: "-50%" }}
+        class="ml-[50%]"
         style={`height: ${props.layer * 64}px; width: ${props.layer * 64}px;`}
         transition={{ duration: 0 }}
       >

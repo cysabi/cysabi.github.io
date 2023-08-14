@@ -12,7 +12,7 @@ const Layout = () => {
     <>
       <main
         onMouseMove={e => setPos({ x: e.clientX, y: e.clientY })}
-        class="relative min-h-screen overflow-hidden"
+        class="relative min-h-screen overflow-hidden flex flex-col"
       >
         {location.pathname === "/" || (
           <div class="flex items-center font-medium p-8 gap-12">
@@ -38,8 +38,10 @@ const Layout = () => {
             </div>
           </div>
         )}
-        <Outlet />
-        <div class="bg-gray-800/50 border-t-4 border-gray-700/25 backdrop-blur-3xl flex flex-col gap-8 p-12">
+        <div class="flex-1">
+          <Outlet />
+        </div>
+        <div class="bg-gray-800/50 border-t-4 border-gray-700/25 backdrop-blur-3xl flex flex-col gap-8 mt-[min(10vw,128px)] p-12">
           <div class="flex items-center gap-4 w-full">
             <div class="text-slate-500 text-center">
               built with{" "}
