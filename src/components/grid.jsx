@@ -74,7 +74,7 @@ const CursorBlob = props => {
 
 const Blob = props => {
   // given a color, return a div that randomly changes opacity, position, and size slightly
-  const [blob, setBlob] = createSignal({ x: 0, y: 0, opacity: 0 })
+  const [blob, setBlob] = createSignal({ x: 0, y: 0, opacity: 0.5 })
   onMount(() => {
     const interval = setInterval(() => {
       setBlob({

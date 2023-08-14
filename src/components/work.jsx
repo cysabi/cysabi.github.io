@@ -5,7 +5,7 @@ import { useGrid } from "./grid"
 const WorkTemplate = props => {
   const { setColor } = useGrid()
   onMount(() => {
-    setColor("#8eb6b7")
+    setColor("#59786b")
   })
   return (
     <div class="mx-auto gap-8 max-w-7xl px-[min(10vw,128px)]">

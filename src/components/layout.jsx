@@ -3,8 +3,8 @@ import { A, Outlet, useLocation } from "@solidjs/router"
 import Grid, { useGrid } from "./grid"
 
 const Layout = () => {
-  const { setPos, setColor } = useGrid()
   const location = useLocation()
+  const { setPos, setColor } = useGrid()
   onMount(() => {
     setColor(false)
   })

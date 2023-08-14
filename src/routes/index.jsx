@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js"
+import { createSignal, onMount } from "solid-js"
 import { Motion } from "@motionone/solid"
 import { spring } from "motion"
 import { useGrid } from "../components/grid"
@@ -6,12 +6,18 @@ import { works } from "./works/index"
 import slurk from "../static/slurk.png"
 import { A, useLocation } from "@solidjs/router"
 
-const Index = () => (
-  <>
-    <LandingScreen />
-    <SelectedWorksScreen />
-  </>
-)
+const Index = () => {
+  const { setColor } = useGrid()
+  onMount(() => {
+    setColor(false)
+  })
+  return (
+    <>
+      <LandingScreen />
+      <SelectedWorksScreen />
+    </>
+  )
+}
 
 const LandingScreen = () => {
   const location = useLocation()
