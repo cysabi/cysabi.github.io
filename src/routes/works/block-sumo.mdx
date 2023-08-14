@@ -10,14 +10,7 @@ I wanted to make a game that fit that vision, the kind of game that you can open
 
 One day, while watching gameplay of a minecraft content creator (fruitberries) creatively place blocks on the edges of the map to escape his opponent, I realized just how expressive Minecraft's movement can be. Placing blocks affords you endless movement possibility, by allowing you to bend your environment to your will, in a way that's not that different to Fortnite's build mode.
 
-<figure>
-  <video autoplay muted loop>
-    <source src="/block-sumo_1.webm" type="video/webm" />
-  </video>
-  <figcaption>
-    Youtube video by [fruitberries](https://www.youtube.com/watch?v=ovJrTqYD4e8)
-  </figcaption>
-</figure>
+![Youtube video by [fruitberries](https://www.youtube.com/watch?v=ovJrTqYD4e8)](/block-sumo_1.webm)
 
 That was the point I decided on building a minecraft minigame.
 
@@ -34,10 +27,7 @@ These design goals lead to a concept of a game where players spawns on a floatin
 
 To accentuate the skill expression of block placement, I made each player have infinite blocks in their offhand, and I ensured that the map also provided opportunities for such expression as well, through the use of platform skips and pillars that can be wall-climbed using blocks.
 
-<figure>
-  <img src="/block-sumo_3.png" />
-  <figcaption>Example of one of the first beta maps</figcaption>
-</figure>
+![Example of one of the first beta maps](/block-sumo_3.png)
 
 When introducing items, I wanted them to solve specific design challenges that I had in mind, specifically I wanted the role of items to be to encourage the right kinds of play, and introduce a healthy amount chaos and partylike atmosphere to the game, without taking away from the skill of block placement. Here are the challenges I set out to solve.
 
@@ -52,6 +42,14 @@ When introducing items, I wanted them to solve specific design challenges that I
 
 ![](/block-sumo_2.png)
 
-### balancing snowballs
+### balance case study #1: snowballs
 
 one of the problems was that snowballs were too easy to spam if you were winning
+because last place doesn't have ranged options
+but i can't just reduce the quantity because that would also make it harder for people who arent exactly winning to succeed
+so my solution
+
+- split snowballs into 2 distinct items, 4 count and 8 count ones.
+- make the 4 count ones for 1st place
+- this allowed me to give snowballs to last place without feeling like they are getting a throwaway item because they are getting 8 snowballs
+- also add trident, smoke bomb, molotov, obliterator

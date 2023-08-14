@@ -6,6 +6,7 @@ import Works, { works } from "./routes/works/index"
 import WorkTemplate from "./routes/works/_template"
 import "./root.css"
 import { onMount } from "solid-js"
+import Img from "./components/img"
 
 const Root = props => {
   const { setPos, setColor } = useGrid()
@@ -102,7 +103,7 @@ render(
                 path={"/works/" + Work.data.name}
                 element={
                   <WorkTemplate {...Work.data}>
-                    <Work.default />
+                    <Work.default components={{ img: Img }} />
                   </WorkTemplate>
                 }
               />
