@@ -4,6 +4,54 @@ export const data = {
   tags: ["game design"],
 }
 
-I've always had this really specific place in my heart for pvp games with lots of play variety, that are accessible and easy to pick up, but without sacrificing high skill expression. Games like Friends vs Friends, Knockout City, and of course Smash come to mind!
+I've always had a specific place in my heart for arena style pick-up-and-play pvp games, that don't sacrifice high skill expression. Games like Knockout City, Friends vs Friends, and of course Super Smash really resonate with me!
 
-this might not be game design related, but you can check out [/works/off-the-dial-site](/works/off-the-dial-site)
+I wanted to make a game that fit that vision, the kind of game that you can open when you're bored with your friends and you don't know what to play, but you'll know you'll have a great time.
+
+One day, while watching gameplay of a minecraft content creator (fruitberries) creatively place blocks on the edges of the map to escape his opponent, I realized just how expressive Minecraft's movement can be. Placing blocks affords you endless movement possibility, by allowing you to bend your environment to your will, in a way that's not that different to Fortnite's build mode.
+
+<figure>
+  <video autoplay muted loop>
+    <source src="/block-sumo_1.webm" type="video/webm" />
+  </video>
+  <figcaption>
+    Youtube video by [fruitberries](https://www.youtube.com/watch?v=ovJrTqYD4e8)
+  </figcaption>
+</figure>
+
+That was the point I decided on building a minecraft minigame.
+
+### the idea
+
+There were a couple design goals I had with the minigame.
+
+- The minigame should highlight that part of the game and let players access a near infinite level of skill expression through creative block placement.
+- At the same time, anyone regardless of experience should be able to pick up the game and find it instantly enjoyable and fun.
+- The fundamental mechanics of the game should have lots of game mode flexibility, it should be easy to support free-for-all, 1v1s, team battles, and asymmetric modes.
+  - That way, no matter who you're hanging out with, you can always find a gamemode to play together.
+
+These design goals lead to a concept of a game where players spawns on a floating platform, and their goal is to knock other players off to score points. I felt the concept was just simple enough for anyone to intuitive grasp the objective. It also had a lot of flexibility what game modes can be set. You can easily turn a 6-person free-for-all into 2 teams of 3, or 3 teams of 2.
+
+To accentuate the skill expression of block placement, I made each player have infinite blocks in their offhand, and I ensured that the map also provided opportunities for such expression as well, through the use of platform skips and pillars that can be wall-climbed using blocks.
+
+<figure>
+  <img src="/block-sumo_3.png" />
+  <figcaption>Example of one of the first beta maps</figcaption>
+</figure>
+
+When introducing items, I wanted them to solve specific design challenges that I had in mind, specifically I wanted the role of items to be to encourage the right kinds of play, and introduce a healthy amount chaos and partylike atmosphere to the game, without taking away from the skill of block placement. Here are the challenges I set out to solve.
+
+1. #### Encourage more vertical play
+
+   Without items, it would be common to build high without engaging, and the game would seperate into 2 layers, one at ground level and one at build height. I wanted items to make it easier to approach people at higher elevations, or reach higher elevations yourself.
+
+2. #### Increase accessibility through fair rubber-banding.
+
+   I took inspiration from Mario Kart with this one! Accessibility is important and does not need to come at the sacrifice of player expression, and I wanted items to assist the lesser players to still enjoy having an impact through powerful items that still have counterplay.
+   I had to item balance was making it so that the further you are behind, the more powerful items you recieve.
+
+![](/block-sumo_2.png)
+
+### balancing snowballs
+
+one of the problems was that snowballs were too easy to spam if you were winning
