@@ -13,15 +13,8 @@ render(
     <GridProvider>
       <Router>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Layout main={true}>
-                <Index />
-              </Layout>
-            }
-          />
           <Route path="/" component={Layout}>
+            <Route path="/" component={Index} />
             <Route path="/works" component={Works} />
             {works.map(Work => (
               <Route

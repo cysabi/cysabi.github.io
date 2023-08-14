@@ -1,44 +1,44 @@
 import { onMount } from "solid-js"
-import { A, Outlet } from "@solidjs/router"
+import { A, Outlet, useLocation } from "@solidjs/router"
 import Grid, { useGrid } from "./grid"
 
-const Layout = props => {
+const Layout = () => {
   const { setPos, setColor } = useGrid()
+  const location = useLocation()
   onMount(() => {
     setColor(false)
   })
   return (
     <>
-      {props.main === true || (
-        <div class="flex items-center font-medium p-8 gap-12">
-          <A
-            href="/"
-            class="text-2xl underline decoration-2 decoration-transparent hover:decoration-slate-400 transition-colors"
-          >
-            cerusabi
-          </A>
-          <div class="text-xl flex items-center gap-8">
-            <A
-              href="/#about"
-              class="underline decoration-2 decoration-transparent hover:decoration-slate-400 transition-colors"
-            >
-              about
-            </A>
-            <A
-              href="/works"
-              class="underline decoration-2 decoration-transparent hover:decoration-slate-400 transition-colors"
-            >
-              works
-            </A>
-          </div>
-        </div>
-      )}
       <main
         onMouseMove={e => setPos({ x: e.clientX, y: e.clientY })}
         class="relative min-h-screen overflow-hidden"
       >
+        {location.pathname === "/" || (
+          <div class="flex items-center font-medium p-8 gap-12">
+            <A
+              href="/"
+              class="text-2xl underline decoration-2 decoration-transparent hover:decoration-slate-400 transition-colors"
+            >
+              cerusabi
+            </A>
+            <div class="text-xl flex items-center gap-8">
+              <A
+                href="/#about"
+                class="underline decoration-2 decoration-transparent hover:decoration-slate-400 transition-colors"
+              >
+                about
+              </A>
+              <A
+                href="/works"
+                class="underline decoration-2 decoration-transparent hover:decoration-slate-400 transition-colors"
+              >
+                works
+              </A>
+            </div>
+          </div>
+        )}
         <Outlet />
-        {props.children}
         <div class="bg-gray-800/50 border-t-4 border-gray-700/25 backdrop-blur-3xl flex flex-col gap-8 p-12">
           <div class="flex items-center gap-4 w-full">
             <div class="text-slate-500 text-center">
