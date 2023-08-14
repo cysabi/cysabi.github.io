@@ -1,6 +1,6 @@
-import { A } from "@solidjs/router"
-import { useGrid } from "../../components/grid"
 import { onMount } from "solid-js"
+import { A } from "@solidjs/router"
+import { useGrid } from "./grid"
 
 const WorkTemplate = props => {
   const { setColor } = useGrid()
