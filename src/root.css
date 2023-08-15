@@ -20,4 +20,26 @@
     font-weight: 400, 400;
     font-style: normal, italic;
   }
+
+  a {
+    @apply underline decoration-2 decoration-transparent hover:decoration-slate-400 transition-colors;
+  }
+
+  [type="text"],
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="week"],
+  [multiple],
+  textarea,
+  select {
+    @apply transition focus:!border-slate-600 focus:shadow-slate-600/10 focus:shadow-lg placeholder:text-slate-500 placeholder:focus:!text-slate-400 focus:ring-transparent p-4 rounded-2xl text-xl bg-gray-800/50 border-4 border-gray-700/25 backdrop-blur-3xl;
+  }
 }

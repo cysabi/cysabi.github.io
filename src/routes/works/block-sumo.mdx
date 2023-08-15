@@ -1,4 +1,6 @@
 export const data = {
+  layer: 6,
+  coords: [8, 5],
   name: "block-sumo",
   desc: "stories from a minecraft minigame I made",
   tags: ["game design"],
@@ -8,7 +10,7 @@ I've always had a specific place in my heart for arena style pick-up-and-play pv
 
 I wanted to make a game that fit that vision, the kind of game that you can open when you're bored with your friends and you don't know what to play, but you'll know you'll have a great time.
 
-One day, while watching gameplay of a minecraft content creator (fruitberries) creatively place blocks on the edges of the map to escape his opponent, I realized just how expressive Minecraft's movement can be. Placing blocks affords you endless movement possibility, by allowing you to bend your environment to your will, in a way that's not that different to Fortnite's build mode.
+One day, while watching gameplay of a minecraft content creator (fruitberries) creatively place blocks on the edges of the map to escape his opponent, I realized just how expressive Minecraft's movement can be. Placing blocks can provide you with infinite possibilities for movement, by allowing you to bend your environment to your will, in a way that's not that different to Fortnite's build mode.
 
 [![Youtube video by fruitberries](/block-sumo_1.webm)](https://www.youtube.com/watch?v=ovJrTqYD4e8)
 
@@ -26,36 +28,89 @@ There were a couple design goals that I had in mind when creating this game.
 
 From these design goals, creating the concept of the game took some time, but I landed on a core concept where players spawns on a floating platform, and their goal is to knock other players off to score points. I felt the concept was just simple enough for anyone to intuitive grasp the objective. It also had a lot of flexibility what game modes can be set. You can easily turn a 6-person free-for-all into 2 teams of 3, or 3 teams of 2.
 
+![Example of one of the first beta maps](/block-sumo_3.png)
+
 To accentuate the skill expression of block placement, I made each player have infinite blocks in their offhand, and I also ensured that the map provided opportunities for such expression through the deliberate placement of platform skips and wall-climbable pillars (both of which use blocks).
 
-![Example of one of the first beta maps](/block-sumo_3.png)
+![Gameplay of gene navigating the map skillfully]()
 
 ## introducing items
 
-When introducing items, I wanted their role to be to encourage the right kinds of play, and introduce a healthy amount chaos and partylike atmosphere to the game, all without taking away from the skill of block placement. Here are the direct design challenges that I laid out to solve.
+When introducing items, I wanted their role to be to encourage the right kinds of play and make the game's atmosphere more engaging and fun! Here were the exact design challenges that I laid out to solve.
 
-1. #### Encourage more emergent vertical play
+1. #### introduce a healthy amount of chaotic and party-like energy.
 
-   Without items, i predicted it would be common to build high without engaging, and the game would evolve and seperate into 2 layers, one at ground level and one at build height.
+   This needed to be handled with care, although I wanted the game to be easy to pick up and play with friends, I didn't want to take away from the skill expression of block placement.
 
-   With items, I hoped to make it easier to approach people at higher elevations, or reach higher elevations yourself.
+   I wanted items make the game feel more party-like in a controllable way that feels both strategic and chaotic in equal proportions.
 
-2. #### Increase accessibility through fair rubber-banding.
+2. #### encourage more emergent vertical play
 
-   I took inspiration from Mario Kart with this one! _Accessibility is important and does not need to come at the sacrifice of player expression_. So I decided on a system where the further behind the player is, the more powerful items they recieve.
+   Without items, i predicted it would be common to build high without engaging, and the game would devolve and seperate into 2 layers, one at ground level and one at build height.
 
-   I wanted items to assist players with less direct mechanical skill to be able to find success through highly strategic use of items, all while still providing enough counterplay for.
+   With items, I hoped to make it easier to approach people at higher elevations, or reach higher elevations yourself, making bridging that vertical gap seamless and fluid.
 
-![](/block-sumo_2.png)
+3. #### increase accessibility through fair rubber-banding.
 
-## balance case study #1: snowballs
+   _Accessibility is important and does not need to come at the sacrifice of player expression_.
 
-one of the problems was that snowballs were too easy to spam if you were winning
-because last place doesn't have ranged options
-but i can't just reduce the quantity because that would also make it harder for people who arent exactly winning to succeed
-so my solution
+   I wanted items to assist players with less direct mechanical skill to be able to find success through the strategic use of items, all while still providing enough counterplay for players on the recieving end.
 
-- split snowballs into 2 distinct items, 4 count and 8 count ones.
-- make the 4 count ones for 1st place
-- this allowed me to give snowballs to last place without feeling like they are getting a throwaway item because they are getting 8 snowballs
-- also add trident, smoke bomb, molotov, obliterator
+All of this lead to a system where the power level of items that a player recieves is proportional to how far they are behind first place.
+
+![An early draft of item spawn rates](/block-sumo_2.png)
+
+This made it easy to control exactly how chaotic i wanted the game to be, by allowing me to fine-tune exactly what I wanted the frequency of each item to be at every level! Vertical play was easily tuneable by modifying the spawn rate of vertical mobility items.
+
+![Showcase of vertical mobility items & clips of them being used in ways I like]()
+
+Since being behind grants you more powerful items, playing from behind is an enjoyable experience as the dynamic item drops mean you always feel like you're able to utilize items strategically and have an impact on the game.
+
+![Showcase of high power items & clips of them being used in ways I like]()
+
+Being in first place, while not recieving immediately powerful items, still has access to defensive items. So a lot of fun comes from using your better mechanics while being resourceful with the defensive items you have to find the right counterplay to everything coming your way.
+
+![Showcase of defensive items & clips of gene using them in ways I like]()
+
+## case study #1: balancing snowballs
+
+One of the issues that I ran into when fine-tuning the balance of items was the difficulty of range.
+
+Most of the high-power items required close range combat for them to get value. This was an intentional decision, because I didn't want those behind to find an easy strategy of staying on the outskirts with high-power ranged weapons to catch up.
+
+However, because of the abundance of snowballs that are given to first place (as the "coin" / "green shell" of this game) it became an effective strategy for whoever was in 1st place to retreat constantly while kiting opponents away with an infinite supply of snowballs.
+
+- I couldn't simply lower the quantity of snowballs, as that would also affect those that were not in first place.
+- I didn't want to give too many powerful ranged options to those behind, as that would introduce camping
+
+### the solution
+
+My solution required many different adjustments, all working together:
+
+1. #### Snowballs were seperated into 2 distinct items, one was 4-count, and one was 8-count.
+
+   I liked this change because it remained consistent within the systems of the game, without introducing confusing new rules. And it gave me the flexibility I needed to balance the item(s).
+
+2. #### Players in the lead mostly recieve 4-count snowballs, instead of the previous 8.
+
+   This change removed the spamming power for first place, so players have to be more careful about when they decide to use them, but keeps it's purpose as a "useful when used right" defensive tool.
+
+3. #### Players that are behind recieve the 8-count snowballs item, instead of snowballs being exclusive to those in the lead.
+
+   This change gave players behind the same access to range that players in the lead have, without feeling like snowballs just wasted one of their item drops, but also without being too powerful to encourage camping.
+
+4. #### Introduce a new item, a short-ranged debuff bomb that blinds and slows victims.
+
+   This item had enough range to impactfully increase the average threat-range of players that are behind. But it's short range and effect still required engagement from it's user to get value, which made it a really healthy addition to the game.
+
+   ![Showcase of bomb from both perspecitves & gameplay of using bomb effectively]()
+
+5. #### Introduce a new item, a powerful, but rare, long-ranged projectile (that works better the longer the range).
+
+   Even with the debuff bomb and access to snowballs, players behind still don't have enough ways to make an impact when the player in 1st plays to constantly retreat to create as much distance as possible.
+
+   Because this item is more effective at longer ranges, it's a direct counter to long distance kiting. The longer and further you retreat, the larger the threat grows that someone has gotten the projectile.
+
+   I was especially careful when introducing this item because of the afformentioned camping, but in an ironic way, an item like this actually discourages camping by forcing those in the lead to respect it's threat and think more strategically about the range they play at. Instead of just trying to create as much distance as possible all the time, the item's existence sort-of introduces a "shot clock" to kiting and retreating.
+
+   ![Showcase of obliterator & gameplay of using obliterator to snipe retreating opponent]()

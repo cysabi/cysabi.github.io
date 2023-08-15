@@ -43,5 +43,5 @@ module.exports = {
       mono: ['"Fragment Mono"', ...defaultTheme.fontFamily.mono],
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
 }

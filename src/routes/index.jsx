@@ -34,24 +34,17 @@ const LandingScreen = () => {
               born to design, forced to develop
             </div>
             <div class="flex pt-12 gap-8 text-2xl flex-wrap">
-              <A
-                href={location.hash === "#about" ? "/" : "#about"}
-                class="underline decoration-2 decoration-transparent hover:decoration-slate-400 transition-colors"
-              >
+              <A href={location.hash === "#about" ? "/" : "#about"} noScroll>
                 about
               </A>
-              <A
-                href="/works"
-                class="underline decoration-2 decoration-transparent hover:decoration-slate-400 transition-colors"
-              >
-                works
-              </A>
+              {/* <A href="#works">works</A> */}
+              <A href="/contact">contact</A>
             </div>
           </div>
-          <A href={location.hash === "#about" ? "/" : "#about"}>
+          <A href={location.hash === "#about" ? "/" : "#about"} noScroll>
             <Motion.img
-              onmouseenter={e => setHoverSlurk(true)}
-              onmouseleave={e => setHoverSlurk(false)}
+              onmouseenter={() => setHoverSlurk(true)}
+              onmouseleave={() => setHoverSlurk(false)}
               animate={{
                 scale: hoverSlurk() ? 1.1 : 1,
                 rotate: hoverSlurk() ? 2 : 0,
@@ -71,40 +64,33 @@ const LandingScreen = () => {
           transition={{
             easing: spring({ mass: 0.1 }),
           }}
-          class="pt-12 origin-top-right"
+          class="py-6 md:py-12 origin-top-right"
         >
           <div
             style={location.hash === "#about" ? "" : "pointer-events: none"}
-            class="flex flex-col gap-10 rounded-2xl p-10 text-xl relative bg-gray-800/50 border-4 border-gray-700/25 backdrop-blur-3xl"
+            class="flex flex-col gap-10 rounded-2xl p-4 md:p-8 text-lg md:text-xl relative bg-gray-800/50 border-4 border-gray-700/25 backdrop-blur-3xl"
           >
             <div>
               hi, thanks for stopping by! you can call me{" "}
-              <span class="font-medium">sabi</span>; i love thinking about
+              <span class="font-semibold">sabi</span>; i love thinking about
               people thinking.
             </div>
             <div>
               this is a portfolio of different works i've done! i don't tend to
-              stick to one thing, so the collection is a bit random. to help, if
-              you hit the{" "}
-              <A
-                href="/works"
-                class="underline decoration-2 decoration-slate-400 hover:decoration-transparent transition-colors"
-              >
-                works
-              </A>{" "}
-              link, i've given you some tags to filter by.
+              stick to one thing, so the collection is a bit random. eventually,
+              i'll have some tags to filter by.
             </div>
             <div>
               i'm always open to new opportunities, no matter the medium! so if
-              you like what you see and want to work with me, don't hesitate to
-              reach out!
+              you like what you see and want to work with me, don't hesitate to{" "}
+              <A href="/contact">reach out!</A>
             </div>
           </div>
         </Motion.div>
       </div>
       <div class="flex items-center gap-4">
         <div class="flex-1 h-0.5 bg-slate-50 rounded-full" />
-        <div class="font-medium">selected works below</div>
+        <div class="font-medium text-xl">selected works below</div>
         <div class="flex-1 h-0.5 bg-slate-50 rounded-full" />
       </div>
     </div>

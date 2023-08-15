@@ -25,10 +25,10 @@ const WorkTemplate = props => {
       </article>
       <div class="flex w-full justify-center pt-16">
         <A
-          href="/works"
+          href="/"
           class="border-2 rounded-xl no-underline hover:bg-slate-800 hover:border-slate-800 transition-all hover:shadow-sm border-slate-600 px-6 py-3 text-lg font-medium"
         >
-          back to works
+          back to home
         </A>
       </div>
     </div>
