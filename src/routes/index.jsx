@@ -100,22 +100,14 @@ const LandingScreen = () => {
 const SelectedWorksScreen = () => (
   <div class="flex h-screen">
     <div class="w-full h-full grid grid-cols-12 grid-rows-[repeat(12,minmax(0,1fr))]">
-      <ProjectOrb
-        wip={true}
-        layer="2"
-        coords={[2, 1]}
-        name="off-the-dial-bot"
-      />
-      <ProjectOrb wip={true} layer="2" coords={[11, 6]} name="blurple.py" />
-      <ProjectOrb wip={true} layer="2" coords={[4, 10]} name="radia" />
-      <ProjectOrb wip={true} layer="3" coords={[5, 4]} name="cg-offthedial" />
+      <ProjectOrb wip={true} layer="2" coords={[11, 6]} name="cg-offthedial" />
       <ProjectOrb
         wip={true}
         layer="3"
         coords={[9, 3]}
         name="social-scheduler"
       />
-      <ProjectOrb wip={true} layer="3" coords={[3, 7]} name="fabl-website" />
+      <ProjectOrb wip={true} layer="3" coords={[2, 8]} name="fabl-website" />
       <ProjectOrb wip={true} layer="4" coords={[9, 8]} name="cq-overlays" />
       {works
         .filter(work => work.data.layer)
@@ -156,8 +148,9 @@ const ProjectOrb = props => {
 
   return (
     <div
-      class={`${hov() ? "z-20" : ""}`}
-      style={`grid-column-start: ${props.coords[0]}; grid-row-start: ${props.coords[1]};`}
+      style={`z-index: ${hov() ? "20" : props.layer}; grid-column-start: ${
+        props.coords[0]
+      }; grid-row-start: ${props.coords[1]};`}
     >
       <Motion.div
         ref={ref}
@@ -233,7 +226,7 @@ const ProjectOrb = props => {
                 class="flex flex-col items-center text-center p-3 origin-top"
               >
                 <div
-                  class="text-[#acc9eb] font-semibold"
+                  class="text-[#8dadff] font-semibold"
                   style={`font-size: calc(1.2rem / 5 * ${props.layer})`}
                 >
                   {props.tags?.[0]}
