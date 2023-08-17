@@ -57,6 +57,7 @@ export const Img = props => {
       </Match>
       <Match when={props.src.endsWith(".webm")}>
         <video
+          src={props.src}
           class={props.class}
           controls={props.title === "controls"}
           muted={props.title !== "controls"}

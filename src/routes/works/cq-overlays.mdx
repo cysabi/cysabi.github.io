@@ -1,16 +1,25 @@
 export const data = {
-  layer: 4,
-  coords: [9, 7],
-  name: "cq-overlays",
-  desc: "dashboard to control splatoon tournament overlays",
+  layer: 3,
+  coords: [3, 8],
+  name: "cq-dashboard",
+  desc: "standardized controls for my splatoon tournament overlays",
   tags: ["broadcast", "dashboard"],
   links: {
-    github: "https://github.com/cq-overlays",
+    link: "https://github.com/cq-overlays",
+    github: "https://github.com/cq-overlays/dashboard",
   },
   previews: ["/cq-overlays_1.png"],
 }
 
-{/* TODO: */}
-![](/cq-overlays_1.png)
-
-<CaseDivider />
+<Collage
+  items={{
+    "/cq-overlays_1.png":
+      "The dashboard! Used for all the splatoon tournament broadcast graphics I make",
+    "/cq-overlays_2.webm":
+      "Map winners are intelligently tracked, even if you undo the score",
+    "/cq-overlays_3.webm":
+      "The dropdown shows you exactly what the colors look like, so you don't need to guess",
+    "/cq-overlays_4.webm":
+      "Support for uploading a json file with all of the tournament data you need",
+  }}
+/>
