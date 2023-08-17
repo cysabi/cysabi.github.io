@@ -81,7 +81,7 @@ export const Collage = props => {
 
   return (
     <figure>
-      <div class="not-prose flex flex-col gap-1 bg-slate-600/50 border-4 overflow-hidden border-transparent rounded-2xl backdrop-blur-3xl backdrop-brightness-125">
+      <div class="not-prose flex flex-col gap-1 bg-slate-600/50 border-4 overflow-hidden border-transparent rounded-2xl backdrop-blur-xl backdrop-brightness-125">
         <Img
           title="controls"
           class="rounded-md w-full aspect-video object-cover object-top"

@@ -70,7 +70,7 @@ const LandingScreen = () => {
         >
           <div
             style={location.hash === "#about" ? "" : "pointer-events: none"}
-            class="flex flex-col gap-10 rounded-2xl p-4 md:p-8 text-lg md:text-xl relative bg-gray-800/50 border-4 border-gray-700/25 backdrop-blur-3xl"
+            class="flex flex-col gap-10 rounded-2xl p-4 md:p-8 text-lg md:text-xl relative bg-gray-800/50 border-4 border-gray-700/25 backdrop-blur-xl"
           >
             <div>
               hi, thanks for stopping by! you can call me{" "}
@@ -213,7 +213,7 @@ const ProjectOrb = props => {
           transition={{
             easing: spring({ stiffness: 500, damping: 50 }),
           }}
-          class="rounded-full h-full w-full flex items-center justify-center border-4 border-slate-500 backdrop-blur-3xl"
+          class="rounded-full h-full w-full flex items-center justify-center border-4 border-slate-500 backdrop-blur-xl"
         >
           <Link>
             <div class="absolute inset-0 rounded-full flex items-center justify-center">

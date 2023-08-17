@@ -40,6 +40,6 @@
   [multiple],
   textarea,
   select {
-    @apply transition focus:!border-slate-600 focus:shadow-slate-600/10 focus:shadow-lg placeholder:text-slate-500 placeholder:focus:!text-slate-400 focus:ring-transparent p-4 rounded-2xl text-xl bg-gray-800/50 border-4 border-gray-700/25 backdrop-blur-3xl;
+    @apply transition focus:!border-slate-600 focus:shadow-slate-600/10 focus:shadow-lg placeholder:text-slate-500 placeholder:focus:!text-slate-400 focus:ring-transparent p-4 rounded-2xl text-xl bg-gray-800/50 border-4 border-gray-700/25 backdrop-blur-xl;
   }
 }
