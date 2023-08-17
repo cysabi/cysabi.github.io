@@ -12,21 +12,25 @@ const WorkTemplate = props => {
       <div class="flex flex-col gap-4 w-full items-center text-center py-16">
         <div class="text-4xl font-semibold font-mono">{props.name}</div>
         <div class="text-xl">{props.desc}</div>
-        <div class="flex gap-2 items-center">
-          {props.tags.map(tag => (
-            <div class="py-0.5 px-3 bg-primary/30 font-medium rounded-full text-primary backdrop-brightness-125">
-              {tag}
-            </div>
-          ))}
+        <div class="flex gap-4 items-center">
+          <div class="flex gap-2 items-center">
+            {props.tags.map(tag => (
+              <div class="py-0.5 px-3 bg-primary/30 font-medium rounded-full text-primary backdrop-brightness-125">
+                {tag}
+              </div>
+            ))}
+          </div>
           {props.links && (
-            <div class="flex items-center gap-3">
-              <div class="rounded-full h-1 w-1 mx-2 bg-slate-400"></div>
-              {Object.entries(props.links).map(([name, href]) => (
-                <a href={href} class="font-medium">
-                  {name}
-                </a>
-              ))}
-            </div>
+            <>
+              <div class="rounded-full h-1 w-1 bg-slate-400"></div>
+              <div class="flex items-center gap-3">
+                {Object.entries(props.links).map(([name, href]) => (
+                  <a href={href} class="font-medium">
+                    {name}
+                  </a>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>

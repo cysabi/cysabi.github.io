@@ -113,12 +113,14 @@ const SelectedWorksScreen = () => (
 
 const ProjectOrb = props => {
   let ref
+  let wait = false
+
   const { setColor } = useGrid()
   const [y, setY] = createSignal(0)
   const [pos, setPos] = createSignal([0, 0])
   const [lean, setLean] = createSignal([0, 0])
   addEventListener("scroll", () => {
-    let translate =
+    const translate =
       ref.getBoundingClientRect().top - window.innerHeight / 2 - y()
     setY((translate / 1.75) * props.layer - translate)
   })
@@ -136,7 +138,6 @@ const ProjectOrb = props => {
     ) : (
       <A href={"/works/" + props.name}>{p.children}</A>
     )
-  let wait = false
 
   return (
     <div
@@ -151,7 +152,7 @@ const ProjectOrb = props => {
           props.layer * 64
         }px; width: ${props.layer * 64}px;`}
       >
-        <div class="z-10 absolute pointer-events-none">
+        <div class="z-10 absolute h-full flex items-center justify-center pointer-events-none">
           <Motion.div
             initial={{
               opacity: 0,
