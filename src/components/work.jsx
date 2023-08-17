@@ -15,7 +15,7 @@ const WorkTemplate = props => {
         <div class="flex gap-4 items-center">
           <div class="flex gap-2 items-center">
             {props.tags.map(tag => (
-              <div class="py-0.5 px-3 bg-primary/30 font-medium rounded-full text-primary backdrop-brightness-125">
+              <div class="py-0.5 px-3 bg-primary/10 font-medium rounded-full text-primary backdrop-brightness-125 backdrop-blur-xl">
                 {tag}
               </div>
             ))}
