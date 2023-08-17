@@ -102,7 +102,6 @@ const LandingScreen = () => {
 const SelectedWorksScreen = () => (
   <div class="flex h-screen">
     <div class="w-full h-full grid grid-cols-12 grid-rows-[repeat(12,minmax(0,1fr))]">
-      <ProjectOrb wip={true} layer="4" coords={[9, 7]} name="cq-overlays" />
       {works
         .filter(work => work.data.layer)
         .map(work => (

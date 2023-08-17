@@ -4,9 +4,11 @@ import * as work3 from "./cg-fabl.mdx"
 import * as work4 from "./block-sumo.mdx"
 import * as work5 from "./blurple-py.mdx"
 import * as work6 from "./social-scheduler.mdx"
+import * as work7 from "./cq-overlays.mdx"
 
 const Works = () => (
   <div class="prose prose-invert prose-xl mx-auto">
+    {/* https://read.cv/cysabi */}
     {/* <ProjectOrb
         wip={true}
         layer="2"
@@ -19,5 +21,5 @@ const Works = () => (
   </div>
 )
 
-export const works = [work1, work2, work3, work4, work5, work6]
+export const works = [work1, work2, work3, work4, work5, work6, work7]
 export default Works
