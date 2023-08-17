@@ -102,12 +102,6 @@ const LandingScreen = () => {
 const SelectedWorksScreen = () => (
   <div class="flex h-screen">
     <div class="w-full h-full grid grid-cols-12 grid-rows-[repeat(12,minmax(0,1fr))]">
-      <ProjectOrb
-        wip={true}
-        layer="2"
-        coords={[5, 4]}
-        name="social-scheduler"
-      />
       <ProjectOrb wip={true} layer="4" coords={[9, 7]} name="cq-overlays" />
       {works
         .filter(work => work.data.layer)
@@ -143,6 +137,7 @@ const ProjectOrb = props => {
     ) : (
       <A href={"/works/" + props.name}>{p.children}</A>
     )
+  let wait = false
 
   return (
     <div
@@ -184,17 +179,23 @@ const ProjectOrb = props => {
             setColor("#a0cebe")
           }}
           onmousemove={e => {
-            const rect = ref.getBoundingClientRect()
-            let [x, y] = [
-              e.clientX - (rect.x + rect.width / 2),
-              e.clientY - (rect.y + rect.height / 2),
-            ]
-            setPos([x, y])
-            ;[x, y] = [
-              Math.sqrt(Math.abs(x)) * Math.sign(x) * 3,
-              Math.sqrt(Math.abs(y)) * Math.sign(y) * 3,
-            ]
-            setLean([x, y])
+            if (!wait) {
+              wait = true
+              setTimeout(() => {
+                wait = false
+              }, 50)
+              const rect = ref.getBoundingClientRect()
+              let [x, y] = [
+                e.clientX - (rect.x + rect.width / 2),
+                e.clientY - (rect.y + rect.height / 2),
+              ]
+              setPos([x, y])
+              ;[x, y] = [
+                Math.sqrt(Math.abs(x)) * Math.sign(x) * 3,
+                Math.sqrt(Math.abs(y)) * Math.sign(y) * 3,
+              ]
+              setLean([x, y])
+            }
           }}
           onmouseleave={() => {
             setHov(false)
@@ -224,10 +225,17 @@ const ProjectOrb = props => {
                 class="flex flex-col items-center text-center p-3 origin-top"
               >
                 <div
-                  class="text-primary font-semibold"
-                  style={`font-size: calc(1.2rem / 5 * ${props.layer})`}
+                  class="flex items-center justify-center"
+                  style={`font-size: calc(1.2rem / 5 * ${props.layer}); gap: calc(0.4rem / 5 * ${props.layer})`}
                 >
-                  {props.tags?.[0]}
+                  {props.tags?.slice(0, 2)?.map(tag => (
+                    <div
+                      style={`padding: 0 calc(0.5rem / 5 * ${props.layer}) 0 calc(0.5rem / 5 * ${props.layer})`}
+                      class="px-2 bg-primary/10 font-medium rounded-full text-primary backdrop-brightness-125 backdrop-blur-xl"
+                    >
+                      {tag}
+                    </div>
+                  ))}
                 </div>
                 <div class="font-mono leading-tight">{props.name}</div>
               </Motion.div>

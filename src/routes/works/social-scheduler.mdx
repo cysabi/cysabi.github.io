@@ -1,0 +1,44 @@
+export const data = {
+  layer: 2,
+  coords: [5, 4],
+  name: "social-scheduler",
+  desc: "a commissioned web-app for a busy person to schedule social events",
+  tags: ["web", "app", "ux", "design"],
+  previews: ["/social-scheduler_1.png"],
+}
+
+<Collage
+  items={{
+    "/social-scheduler_4.webm": "An example user flow through the app",
+    "/social-scheduler_1.png": "Landing page",
+    "/social-scheduler_2.png":
+      "Clicking on a block opens up an event booking modal",
+    "/social-scheduler_3.png":
+      "Once an event has been booked, the modal turns into a confirmation window",
+  }}
+/>
+
+<CaseDivider />
+
+### developing time selector
+
+The most techncially cool thing that I made was the time selector, there's a preview text that goes away as soon as you click inside the input, all of this without needing to pull any React state!
+
+![](/social-scheduler_6.webm)
+
+I did this using css after-elements, and the focus state selector, all the magic happens through this single tailwind class: `focus-within:after:hidden`. Everything else is for positioning!
+
+```
+flex items-center flex-row-reverse text-slate-500 relative after:absolute focus-within:after:hidden after:inset-0 after:bg-slate-700 after:pointer-events-none after:my-2.5 after:ml-12 after:mr-3 after:content-[attr(data-content)]
+```
+
+Here's what it looks like when I put a transparent red background on the after element:
+
+![](/social-scheduler_7.webm)
+
+### designing the modal event preview
+
+Since the modal has a preview that shows the event details in a mock "event" block,
+I thought that the preview should persist after the event has been booked, but change state from being a preview of an event, to a successfully booked event.
+
+![](/social-scheduler_5.webm)

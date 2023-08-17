@@ -3,6 +3,7 @@ import * as work2 from "./cg-pass-the-clam.mdx"
 import * as work3 from "./cg-fabl.mdx"
 import * as work4 from "./block-sumo.mdx"
 import * as work5 from "./blurple-py.mdx"
+import * as work6 from "./social-scheduler.mdx"
 
 const Works = () => (
   <div class="prose prose-invert prose-xl mx-auto">
@@ -18,5 +19,5 @@ const Works = () => (
   </div>
 )
 
-export const works = [work1, work2, work3, work4, work5]
+export const works = [work1, work2, work3, work4, work5, work6]
 export default Works
