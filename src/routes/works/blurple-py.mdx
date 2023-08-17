@@ -36,7 +36,7 @@ I needed a system that could be designed in a way that made it easy for develope
 
 Because the `Reply` object is decoupled from starting the interaction with `await reply.result()`, it gives us lot of flexibility to modify the behavior of Replies to do exactly what we want!
 
-For example, I built a function called [`result_between()`](https://github.com/cerusabi/blurple.py/blob/main/blurple/io/reply.py#L152) that allows you to await multiple results at the same time, and then gets whichever one completes first, before cancelling the rest. This is only possible because of the afformentioned decoupling, as the function works by taking a list of `Reply` objects as it's arguments, before independently managing asyncio tasks on how each of the `.result()` methods are called!
+For example, I built a function called [`result_between()`](https://github.com/cysabi/blurple.py/blob/main/blurple/io/reply.py#L152) that allows you to await multiple results at the same time, and then gets whichever one completes first, before cancelling the rest. This is only possible because of the afformentioned decoupling, as the function works by taking a list of `Reply` objects as it's arguments, before independently managing asyncio tasks on how each of the `.result()` methods are called!
 
 ![](/blurple-py_6.webm)
 
@@ -48,7 +48,7 @@ Luckily, the systems I built were flexible enough to make implementing toasts a 
 
 ![](/blurple-py_4.webm)
 
-In fact, the total line count for [toast.py](https://github.com/cerusabi/blurple.py/blob/main/blurple/ui/toast.py) is just **_60 lines of code!_**, including all documentation and whitespace! That's the difference designing a well thought out API makes.
+In fact, the total line count for [toast.py](https://github.com/cysabi/blurple.py/blob/main/blurple/ui/toast.py) is just **_60 lines of code!_**, including all documentation and whitespace! That's the difference designing a well thought out API makes.
 
 #### Here's how it works:
 
@@ -67,7 +67,7 @@ I never really liked the way discord.ext made you define commands. It forced you
 
 I had an idea to create a custom command router that allowed you to specify the command as a route, similar to web frameworks. And that's what I did! The way the router class works is by recursively searching for the relevant command group, or creating the nessecary command group(s) if they don't already exist.
 
-I'm really happy with how clean the user-facing API is, and how concise the router code is (less than [60 lines](https://github.com/cerusabi/blurple.py/blob/main/blurple/ext/router.py))!
+I'm really happy with how clean the user-facing API is, and how concise the router code is (less than [60 lines](https://github.com/cysabi/blurple.py/blob/main/blurple/ext/router.py))!
 
 ```
 @router.route(["reply", "message"])

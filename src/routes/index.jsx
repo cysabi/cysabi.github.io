@@ -29,7 +29,7 @@ const LandingScreen = () => {
       <div class="flex-1">
         <div class="flex flex-col-reverse items-start gap-4 md:gap-0 md:flex-row md:justify-between md:items-center">
           <div>
-            <div class="text-4xl lg:text-5xl">hey, i'm cerusabi</div>
+            <div class="text-4xl lg:text-5xl">hey, i'm sabi</div>
             <div class="text-3xl lg:text-4xl">
               born to design, forced to develop
             </div>

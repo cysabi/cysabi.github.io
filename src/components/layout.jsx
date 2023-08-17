@@ -17,7 +17,7 @@ const Layout = () => {
         {location.pathname === "/" || (
           <div class="flex items-center font-medium p-8 gap-12">
             <A href="/" class="text-2xl">
-              cerusabi
+              cysabi
             </A>
             <div class="text-xl flex items-center gap-8">
               <A href="/#about">about</A>
