@@ -1,6 +1,6 @@
 export const data = {
-  layer: 2,
-  coords: [5, 4],
+  layer: 3,
+  coords: [3, 8],
   name: "blurple-py",
   desc: "a python library for building user interfaces in discord",
   tags: ["library", "software design"],
@@ -9,11 +9,15 @@ export const data = {
 
 ![The documentation page for blurple.py](/blurple-py_1.png)
 
+![Different style options for alerts!](/blurple-py_3.png)
+
+<CaseDivider />
+
 While making my Off the Dial bot, there was a lot of complex features that I implemented. I realized that a lot of the code could be useful to others if it was extracted, generalized, refactored, and published as a library, so that's exactly what I did.
 
 ## designing an extensible system for developers of multi-step commands
 
-![A couple examples of the reply system in action](/blurple-py_5.webm)
+![The reply system in action](/blurple-py_5.webm)
 
 One of the main features of this library is the multi-step reply functions, these make it really easy for developers to create back-and-forth interactions. I also needed it to support message validation as well!
 
@@ -56,16 +60,6 @@ In fact, the total line count for [toast.py](https://github.com/cerusabi/blurple
   - Specialize the `send()` method to create an asyncio task of `ToastInteraction(...).result()`, passing in the message, and a 5-second timeout duration (by default)
 
   And that's it! That's all the code needed to build a toast component with blurple.py
-
-## designing a clean user interface for components
-
-When it comes to designing visual elements of discord bots, you don't really have a lot of flexibility, as you only have whatever options the embed has. But that doesn't mean you can't make embeds look fancy!
-
-Most of the the design components for discord bots usually fall into the category of "feedback". For example, stuff like `Alert`s and `Toast`s!
-
-I took inspiration from the semantic styling of alerts in Bootstrap, and that was what I based my `ui.Style` options from.
-
-![Different style options for alerts!](/blurple-py_3.png)
 
 ## a recursive router
 

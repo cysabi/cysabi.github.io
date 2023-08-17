@@ -5,7 +5,7 @@ import * as work4 from "./block-sumo.mdx"
 import * as work5 from "./blurple-py.mdx"
 
 const Works = () => (
-  <div>
+  <div class="prose prose-invert prose-xl mx-auto">
     {/* <ProjectOrb
         wip={true}
         layer="2"
@@ -13,6 +13,8 @@ const Works = () => (
         name="off-the-dial-bot"
       /> */}
     {/* <ProjectOrb wip={true} layer="2" coords={[4, 10]} name="radia" /> */}
+    {/* <ProjectOrb wip={true} layer="2" coords={[5, 4]} name="fabl-website" /> */}
+    {/* <ProjectOrb wip={true} layer="2" coords={[5, 4]} name="cg-offthedial" /> */}
   </div>
 )
 

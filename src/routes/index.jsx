@@ -100,15 +100,13 @@ const LandingScreen = () => {
 const SelectedWorksScreen = () => (
   <div class="flex h-screen">
     <div class="w-full h-full grid grid-cols-12 grid-rows-[repeat(12,minmax(0,1fr))]">
-      <ProjectOrb wip={true} layer="2" coords={[11, 6]} name="cg-offthedial" />
       <ProjectOrb
         wip={true}
-        layer="3"
-        coords={[9, 3]}
+        layer="2"
+        coords={[5, 4]}
         name="social-scheduler"
       />
-      <ProjectOrb wip={true} layer="3" coords={[2, 8]} name="fabl-website" />
-      <ProjectOrb wip={true} layer="4" coords={[9, 8]} name="cq-overlays" />
+      <ProjectOrb wip={true} layer="4" coords={[9, 7]} name="cq-overlays" />
       {works
         .filter(work => work.data.layer)
         .map(work => (
@@ -226,7 +224,7 @@ const ProjectOrb = props => {
                 class="flex flex-col items-center text-center p-3 origin-top"
               >
                 <div
-                  class="text-[#8dadff] font-semibold"
+                  class="text-primary font-semibold"
                   style={`font-size: calc(1.2rem / 5 * ${props.layer})`}
                 >
                   {props.tags?.[0]}

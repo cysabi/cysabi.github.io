@@ -5,6 +5,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: "#8dadff",
+        grid: {
+          purple: "#7a73b8",
+          yellow: "#a0cebe",
+          green: "#59786b",
+          teal: "#4e918d",
+        },
         gray: {
           50: "#FAFAFB",
           100: "#F4F4F6",
