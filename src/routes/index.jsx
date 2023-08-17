@@ -29,11 +29,13 @@ const LandingScreen = () => {
       <div class="flex-1">
         <div class="flex flex-col-reverse items-start gap-4 md:gap-0 md:flex-row md:justify-between md:items-center">
           <div>
-            <div class="text-4xl lg:text-5xl">hey, i'm sabi</div>
-            <div class="text-3xl lg:text-4xl">
+            <div class="text-4xl lg:text-5xl">
+              hey, i'm <span class="text-slate-400">cy</span>sabi
+            </div>
+            <div class="text-slate-300 text-3xl lg:text-4xl">
               born to design, forced to develop
             </div>
-            <div class="flex pt-12 gap-8 text-2xl flex-wrap">
+            <div class="text-slate-300 flex pt-12 gap-8 text-2xl flex-wrap">
               <A href={location.hash === "#about" ? "/" : "#about"} noScroll>
                 about
               </A>
@@ -124,9 +126,7 @@ const ProjectOrb = props => {
   const [lean, setLean] = createSignal([0, 0])
   addEventListener("scroll", () => {
     let translate =
-      ref.getBoundingClientRect().top -
-      window.innerHeight / 2 -
-      getComputedStyle(ref).getPropertyValue("--motion-translateY").slice(0, -2)
+      ref.getBoundingClientRect().top - window.innerHeight / 2 - y()
     setY((translate / 1.75) * props.layer - translate)
   })
   const [hov, setHov] = createSignal(false)
@@ -150,12 +150,12 @@ const ProjectOrb = props => {
         props.coords[0]
       }; grid-row-start: ${props.coords[1]};`}
     >
-      <Motion.div
+      <div
         ref={ref}
-        animate={{ y: y(), x: "-50%" }}
         class="ml-[50%]"
-        style={`height: ${props.layer * 64}px; width: ${props.layer * 64}px;`}
-        transition={{ duration: 0 }}
+        style={`transform: translate(-50%, ${y()}px); height: ${
+          props.layer * 64
+        }px; width: ${props.layer * 64}px;`}
       >
         <div class="z-10 absolute pointer-events-none">
           <Motion.div
@@ -271,7 +271,7 @@ const ProjectOrb = props => {
             </div>
           </Link>
         </Motion.div>
-      </Motion.div>
+      </div>
     </div>
   )
 }
