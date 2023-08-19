@@ -14,9 +14,17 @@ const Works = () => (
         layer="2"
         coords={[2, 1]}
         name="off-the-dial-bot"
+this is the origin story or blurple
+the team name generator was really cool :D
+talk about the CommandUI component
+and the file-routing discord.py
       /> */}
-    {/* <ProjectOrb wip={true} layer="2" coords={[4, 10]} name="radia" /> */}
-    {/* <ProjectOrb wip={true} layer="2" coords={[5, 4]} name="fabl-website" /> */}
+    {/* <ProjectOrb wip={true} layer="2" coords={[4, 10]} name="radia" />
+queries from google calendar
+    */}
+    {/* <ProjectOrb wip={true} layer="2" coords={[5, 4]} name="fabl-website" />
+gets api stuff from standings page
+    */}
     {/* <ProjectOrb wip={true} layer="2" coords={[5, 4]} name="cg-offthedial" /> */}
   </div>
 )

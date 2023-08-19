@@ -1,4 +1,4 @@
-import { createSignal, onMount } from "solid-js"
+import { createEffect, createSignal, onMount } from "solid-js"
 import { Motion } from "@motionone/solid"
 import { spring } from "motion"
 import { useGrid } from "../components/grid"
@@ -99,31 +99,43 @@ const LandingScreen = () => {
   )
 }
 
-const SelectedWorksScreen = () => (
-  <div class="flex h-screen">
-    <div class="w-full h-full grid grid-cols-12 grid-rows-[repeat(12,minmax(0,1fr))]">
-      {works
-        .filter(work => work.data.layer)
-        .map(work => (
-          <ProjectOrb {...work.data} />
-        ))}
+const SelectedWorksScreen = () => {
+  const [scrollY, setScrollY] = createSignal(0)
+  addEventListener("scroll", () => {
+    setScrollY(window.scrollY)
+  })
+
+  return (
+    <div class="flex h-screen">
+      <div class="w-full h-full grid grid-cols-12 grid-rows-[repeat(12,minmax(0,1fr))]">
+        {works
+          .filter(work => work.data.layer)
+          .map(work => (
+            <ProjectOrb {...work.data} scrollY={scrollY} />
+          ))}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 const ProjectOrb = props => {
-  let ref
+  let ref, top
   let wait = false
 
   const { setColor } = useGrid()
   const [y, setY] = createSignal(0)
   const [pos, setPos] = createSignal([0, 0])
   const [lean, setLean] = createSignal([0, 0])
-  addEventListener("scroll", () => {
-    const translate =
-      ref.getBoundingClientRect().top - window.innerHeight / 2 - y()
-    setY((translate / 1.75) * props.layer - translate)
+
+  onMount(() => {
+    top = ref.getBoundingClientRect().top + window.scrollY
   })
+
+  createEffect(() => {
+    const translate = top / 2 - props.scrollY()
+    setY((translate / 1.5) * props.layer - translate)
+  })
+
   const [hov, setHov] = createSignal(false)
 
   const angle = Math.random() * Math.PI * 2
