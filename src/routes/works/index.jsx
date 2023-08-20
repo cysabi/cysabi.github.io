@@ -21,6 +21,7 @@ and the file-routing discord.py
       /> */}
     {/* <ProjectOrb wip={true} layer="2" coords={[4, 10]} name="radia" />
 queries from google calendar
+the purpose of this was because the legacy tool didn't support multiple tournaments
     */}
     {/* <ProjectOrb wip={true} layer="2" coords={[5, 4]} name="fabl-website" />
 gets api stuff from standings page

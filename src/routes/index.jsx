@@ -1,4 +1,4 @@
-import { createEffect, createSignal, onMount } from "solid-js"
+import { createMemo, createSignal, onMount } from "solid-js"
 import { Motion } from "@motionone/solid"
 import { spring } from "motion"
 import { useGrid } from "../components/grid"
@@ -29,13 +29,11 @@ const LandingScreen = () => {
       <div class="flex-1">
         <div class="flex flex-col-reverse items-start gap-4 md:gap-0 md:flex-row md:justify-between md:items-center">
           <div>
-            <div class="text-4xl lg:text-5xl">
-              hey, i'm <span class="text-slate-400">cy</span>sabi
-            </div>
+            <div class="text-4xl lg:text-5xl">hey, i'm cysabi~</div>
             <div class="text-slate-300 text-3xl lg:text-4xl">
               born to design, forced to develop
             </div>
-            <div class="text-slate-300 flex pt-12 gap-8 text-2xl flex-wrap">
+            <div class="flex pt-12 gap-8 text-2xl flex-wrap">
               <A href={location.hash === "#about" ? "/" : "#about"} noScroll>
                 about
               </A>
@@ -120,22 +118,18 @@ const SelectedWorksScreen = () => {
 
 const ProjectOrb = props => {
   let ref, top
-  let wait = false
-
   const { setColor } = useGrid()
-  const [y, setY] = createSignal(0)
-  const [pos, setPos] = createSignal([0, 0])
-  const [lean, setLean] = createSignal([0, 0])
 
   onMount(() => {
     top = ref.getBoundingClientRect().top + window.scrollY
   })
-
-  createEffect(() => {
+  const y = createMemo(() => {
     const translate = top / 2 - props.scrollY()
-    setY((translate / 1.5) * props.layer - translate)
+    return (translate / 1.5) * props.layer - translate
   })
 
+  const [pos, setPos] = createSignal([0, 0])
+  const [lean, setLean] = createSignal([0, 0])
   const [hov, setHov] = createSignal(false)
 
   const angle = Math.random() * Math.PI * 2
@@ -191,23 +185,16 @@ const ProjectOrb = props => {
             setColor("#a0cebe")
           }}
           onmousemove={e => {
-            if (!wait) {
-              wait = true
-              setTimeout(() => {
-                wait = false
-              }, 50)
-              const rect = ref.getBoundingClientRect()
-              let [x, y] = [
-                e.clientX - (rect.x + rect.width / 2),
-                e.clientY - (rect.y + rect.height / 2),
-              ]
-              setPos([x, y])
-              ;[x, y] = [
-                Math.sqrt(Math.abs(x)) * Math.sign(x) * 3,
-                Math.sqrt(Math.abs(y)) * Math.sign(y) * 3,
-              ]
-              setLean([x, y])
-            }
+            const rect = ref.getBoundingClientRect()
+            let [x, y] = [
+              e.clientX - (rect.x + rect.width / 2),
+              e.clientY - (rect.y + rect.height / 2),
+            ]
+            setPos([x, y])
+            setLean([
+              Math.sqrt(Math.abs(x)) * Math.sign(x) * 3,
+              Math.sqrt(Math.abs(y)) * Math.sign(y) * 3,
+            ])
           }}
           onmouseleave={() => {
             setHov(false)
@@ -219,13 +206,16 @@ const ProjectOrb = props => {
           animate={{
             x: lean()[0] / 2,
             y: lean()[1] / 2,
-            scale: hov() ? 1.15 : 1,
-            backgroundColor: hov() ? "rgb(100 116 139 / 0.25)" : "transparent",
+            scale: hov() ? 1.2 : 1,
+            backgroundColor: hov()
+              ? "rgb(71 85 105 / 0.5)"
+              : "rgb(35 40 49 / 0.33)",
+            borderColor: hov() ? "rgb(100 116 139)" : "rgb(71 85 105)",
           }}
           transition={{
             easing: spring({ stiffness: 500, damping: 50 }),
           }}
-          class="rounded-full h-full w-full flex items-center justify-center border-4 border-slate-500 backdrop-blur-xl"
+          class="rounded-full h-full w-full flex items-center justify-center border-4 backdrop-blur-xl"
         >
           <Link>
             <div class="absolute inset-0 rounded-full flex items-center justify-center">
