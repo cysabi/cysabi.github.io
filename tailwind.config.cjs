@@ -12,7 +12,7 @@ module.exports = {
           green: "#59786b",
           teal: "#4e918d",
         },
-        gray: {
+        slate: {
           50: "#FAFAFB",
           100: "#F4F4F6",
           200: "#E5E6E9",
@@ -29,7 +29,7 @@ module.exports = {
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
-            "--tw-prose-invert-body": theme("colors.slate[200]"),
+            "--tw-prose-invert-body": theme("colors.slate[300]"),
             "--tw-prose-invert-headings": theme("colors.slate[50]"),
             "--tw-prose-invert-lead": theme("colors.slate[400]"),
             "--tw-prose-invert-links": theme("colors.slate[50]"),
@@ -40,8 +40,8 @@ module.exports = {
             "--tw-prose-invert-quotes": theme("colors.slate[100]"),
             "--tw-prose-invert-quote-borders": theme("colors.slate[700]"),
             "--tw-prose-invert-captions": theme("colors.slate[400]"),
-            "--tw-prose-invert-code": theme("colors.slate[200]"),
-            "--tw-prose-invert-pre-code": theme("colors.slate[200]"),
+            "--tw-prose-invert-code": theme("colors.slate[300]"),
+            "--tw-prose-invert-pre-code": theme("colors.slate[300]"),
             "--tw-prose-invert-pre-bg": "rgb(0 0 0 / 50%)",
             "--tw-prose-invert-th-borders": theme("colors.slate[600]"),
             "--tw-prose-invert-td-borders": theme("colors.slate[700]"),
@@ -61,8 +61,9 @@ module.exports = {
       }),
     },
     fontFamily: {
-      sans: ['"Kantumruy Pro"', ...defaultTheme.fontFamily.sans],
+      sans: ['"Karla"', ...defaultTheme.fontFamily.sans],
       mono: ['"Fragment Mono"', ...defaultTheme.fontFamily.mono],
+      display: ['"Sriracha"', ...defaultTheme.fontFamily.sans],
     },
   },
   plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],

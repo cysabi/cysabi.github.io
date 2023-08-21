@@ -30,44 +30,14 @@ const Grid = () => {
   const { pos, color } = useGrid()
   return (
     <>
-      <div class="fixed blur-3xl inset-0 -z-10 overflow-hidden">
-        <CursorBlob pos={pos} color={color} />
+      <div class="fixed inset-0 blur-[96px] -z-10 overflow-hidden flex">
+        <Blob pos={pos} color={color() || "#7A73B8"} />
+        <Blob pos={pos} color="#3b6ea2" main />
       </div>
       <div
-        class="absolute opacity-[0.015] inset-0 -z-10 bg-repeat bg-center min-h-[600px]"
+        class="absolute opacity-[0.015] inset-0 -z-10 bg-repeat bg-center"
         style={`background-image: url('${grid}')`}
       />
-    </>
-  )
-}
-
-const CursorBlob = props => {
-  return (
-    <>
-      <Motion.div
-        class="relative opacity-0"
-        animate={{
-          x: props.pos().x - 250,
-          y: props.pos().y - 250,
-          opacity: 1 / 3,
-        }}
-        transition={{
-          easing: spring({ mass: 2, damping: 100, stiffness: 70 }),
-        }}
-      >
-        <Blob color={props.color() || "#7A73B8"} />
-      </Motion.div>
-      <Motion.div
-        class="relative opacity-0"
-        animate={{
-          x: props.pos().x - 250,
-          y: props.pos().y - 250,
-          opacity: 1 / 3,
-        }}
-        transition={{ easing: spring({ mass: 2, damping: 100 }) }}
-      >
-        <Blob color="#3b6ea2" main />
-      </Motion.div>
     </>
   )
 }
@@ -78,24 +48,44 @@ const Blob = props => {
   onMount(() => {
     const interval = setInterval(() => {
       setBlob({
-        x: Math.random() * 200 - 100,
-        y: Math.random() * 200 - 100,
-        opacity: Math.random() / 2 + 0.5,
+        x: Math.random() * 150 - 75,
+        y: Math.random() * 150 - 75,
+        opacity: props.main
+          ? Math.random() / (4 / 3) + 0.25
+          : Math.random() / 2 + 0.5,
       })
     }, 750)
     onCleanup(() => clearInterval(interval))
   })
   return (
     <Motion.div
-      animate={{ ...blob() }}
-      transition={{ easing: spring({ mass: 200, damping: 200 }) }}
-      class="absolute h-[500px] rounded-full aspect-square"
+      class="absolute opacity-0"
+      animate={{
+        x: props.pos().x,
+        y: props.pos().y,
+        opacity: 1 / 3,
+      }}
+      transition={{
+        easing: spring({
+          mass: 2,
+          damping: 100,
+          stiffness: props.main ? 120 : 60,
+        }),
+      }}
     >
-      <Motion.div
-        animate={{ backgroundColor: props.color }}
-        transition={{ duration: 0.7 }}
-        class="h-full w-full rounded-full aspect-square"
-      />
+      <div class="left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
+        <Motion.div
+          animate={{ ...blob() }}
+          transition={{ easing: spring({ mass: 10, stiffness: 10 }) }}
+          class="h-[640px] rounded-full aspect-square"
+        >
+          <Motion.div
+            animate={{ backgroundColor: props.color }}
+            transition={{ duration: 0.7 }}
+            class="h-full w-full rounded-full aspect-square"
+          />
+        </Motion.div>
+      </div>
     </Motion.div>
   )
 }

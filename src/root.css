@@ -4,13 +4,17 @@
 
 @layer base {
   @font-face {
-    font-family: "Kantumruy Pro";
-    src: url("/KantumruyPro-VariableFont_wght.ttf")
-        format("truetype-variations"),
-      url("/KantumruyPro-Italic-VariableFont_wght.ttf")
-        format("truetype-variations");
+    font-family: "Karla";
+    src: url("/Karla-VariableFont_wght.ttf") format("truetype-variations"),
+      url("/Karla-Italic-VariableFont_wght.ttf") format("truetype-variations");
     font-weight: 100 700;
     font-style: normal, italic;
+  }
+
+  @font-face {
+    font-family: "Sriracha";
+    src: url("/Sriracha-Regular.ttf") format("truetype");
+    font-weight: 400;
   }
 
   @font-face {
@@ -21,8 +25,12 @@
     font-style: normal, italic;
   }
 
+  .link {
+    @apply underline decoration-2 decoration-slate-500 hover:decoration-primary focus-visible:decoration-primary transition-colors;
+  }
+
   a {
-    @apply underline decoration-2 decoration-transparent hover:decoration-slate-400 transition-colors;
+    @apply link;
   }
 
   [type="text"],
@@ -40,6 +48,6 @@
   [multiple],
   textarea,
   select {
-    @apply transition focus:!border-slate-600 focus:shadow-slate-600/10 focus:shadow-lg placeholder:text-slate-500 placeholder:focus:!text-slate-400 focus:ring-transparent p-4 rounded-2xl text-xl bg-gray-800/50 border-4 border-gray-700/25 backdrop-blur-xl;
+    @apply transition focus:border-primary/75 focus:shadow-slate-600/10 focus:shadow-lg placeholder:text-slate-500 placeholder:focus:!text-slate-400 focus:ring-transparent p-2.5 rounded-lg text-xl bg-slate-900/50 border-2 border-slate-700 backdrop-blur-xl;
   }
 }

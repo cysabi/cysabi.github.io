@@ -7,7 +7,7 @@ import * as work6 from "./social-scheduler.mdx"
 import * as work7 from "./cq-overlays.mdx"
 
 const Works = () => (
-  <div class="prose prose-invert prose-xl mx-auto">
+  <div>
     {/* https://read.cv/cysabi */}
     {/* <ProjectOrb
         wip={true}

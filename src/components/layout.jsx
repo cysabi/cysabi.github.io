@@ -31,18 +31,18 @@ const Layout = () => {
             <div class="text-xl flex items-center gap-8">
               <A href="/#about">about</A>
               {/* <A href="/#works">works</A> */}
-              <A href="/contact">contact</A>
+              <A href="/#contact">contact</A>
             </div>
           </div>
         )}
         <div class="flex-1">
           <Outlet />
         </div>
-        <div class="bg-gray-800/50 border-t-4 border-gray-700/25 backdrop-blur-xl flex flex-col gap-8 mt-[min(10vw,128px)] p-12">
+        <div class="bg-slate-900/50 border-t-4 border-slate-700/25 backdrop-blur-xl flex flex-col gap-8 mt-[min(10vw,128px)] p-12">
           <div class="flex items-center justify-between gap-4 w-full">
             <div class="text-slate-500 text-center">
               like what you see?{" "}
-              <A href="/contact" class="text-slate-400">
+              <A href="/#contact" class="text-slate-400">
                 contact me!
               </A>
             </div>

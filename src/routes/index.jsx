@@ -1,5 +1,5 @@
 import { createMemo, createSignal, onMount } from "solid-js"
-import { Motion } from "@motionone/solid"
+import { Motion, Presence } from "@motionone/solid"
 import { spring } from "motion"
 import { useGrid } from "../components/grid"
 import { works } from "./works/index"
@@ -26,7 +26,7 @@ const LandingScreen = () => {
 
   return (
     <div class="flex flex-col justify-between max-w-7xl h-screen mx-auto p-[min(10vw,128px)]">
-      <div class="flex-1">
+      <div class="flex flex-col flex-1">
         <div class="flex flex-col-reverse items-start gap-4 md:gap-0 md:flex-row md:justify-between md:items-center">
           <div>
             <div class="text-4xl lg:text-5xl">hey, i'm cysabi~</div>
@@ -37,11 +37,16 @@ const LandingScreen = () => {
               <A href={location.hash === "#about" ? "/" : "#about"} noScroll>
                 about
               </A>
+              <A
+                href={location.hash === "#contact" ? "/" : "#contact"}
+                noScroll
+              >
+                contact
+              </A>
               {/* <A href="#works">works</A> */}
-              <A href="/contact">contact</A>
             </div>
           </div>
-          <A href={location.hash === "#about" ? "/" : "#about"} noScroll>
+          <A href="#about" noScroll>
             <Motion.img
               onmouseenter={() => setHoverSlurk(true)}
               onmouseleave={() => setHoverSlurk(false)}
@@ -55,38 +60,18 @@ const LandingScreen = () => {
             />
           </A>
         </div>
-        <Motion.div
-          initial={false}
-          animate={{
-            opacity: location.hash === "#about" ? 1 : 0,
-            scale: location.hash === "#about" ? 1 : 0.95,
-          }}
-          transition={{
-            easing: spring({ mass: 0.1 }),
-          }}
-          class="py-6 md:py-12 origin-top-right"
-        >
-          <div
-            style={location.hash === "#about" ? "" : "pointer-events: none"}
-            class="flex flex-col gap-10 rounded-2xl p-4 md:p-8 text-lg md:text-xl relative bg-gray-800/50 border-4 border-gray-700/25 backdrop-blur-xl"
-          >
-            <div>
-              hi, thanks for stopping by! you can call me{" "}
-              <span class="font-semibold">sabi</span>; i love thinking about
-              people thinking.
-            </div>
-            <div>
-              this is a portfolio of different works i've done! i don't tend to
-              stick to one thing, so the collection is a bit random. eventually,
-              i'll have some tags to filter by.
-            </div>
-            <div>
-              i'm always open to new opportunities, no matter the medium! so if
-              you like what you see and want to work with me, don't hesitate to{" "}
-              <A href="/contact">reach out!</A>
-            </div>
-          </div>
-        </Motion.div>
+        <div class="relative my-6 md:my-14 flex-1 max-h-full">
+          <Presence>
+            <Switch>
+              <Match when={location.hash === "#about"}>
+                <About />
+              </Match>
+              <Match when={location.hash === "#contact"}>
+                <Contact />
+              </Match>
+            </Switch>
+          </Presence>
+        </div>
       </div>
       <div class="flex items-center gap-4">
         <div class="flex-1 h-0.5 bg-slate-50 rounded-full" />
@@ -97,6 +82,113 @@ const LandingScreen = () => {
   )
 }
 
+const About = () => (
+  <Motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{
+      easing: spring({ mass: 0.1 }),
+    }}
+    class="absolute flex flex-col gap-10 rounded-2xl p-4 md:p-8 text-lg md:text-xl bg-slate-900/50 border-4 border-slate-700/25 backdrop-blur-xl"
+  >
+    <div>
+      hi, thanks for stopping by! you can call me{" "}
+      <span class="font-semibold">sabi</span>; i love thinking about people
+      thinking.
+    </div>
+    <div>
+      this is a portfolio of different works i've done! i don't tend to stick to
+      one thing, so the collection is a bit random. eventually, i'll have some
+      tags to filter by.
+    </div>
+    <div>
+      i'm always open to new opportunities, no matter the medium! so if you like
+      what you see and want to work with me, don't hesitate to{" "}
+      <A href="/#contact" class="font-semibold">
+        reach out!
+      </A>
+    </div>
+  </Motion.div>
+)
+
+const Contact = () => {
+  let formRef
+  const [talk, setTalk] = createSignal("")
+  const [done, setDone] = createSignal(false)
+  return (
+    <Motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        easing: spring({ mass: 0.1 }),
+      }}
+      class="absolute h-full w-full flex flex-col"
+    >
+      <form
+        ref={formRef}
+        class="flex flex-col gap-4 h-full text-slate-300"
+        target="dummyframe"
+        method="POST"
+        action="https://formsubmit.io/send/leptoflare@gmail.com"
+        onsubmit={() => setDone(true)}
+      >
+        <div class="text-2xl">
+          like what you see? got a project in mind? let's talk!
+        </div>
+        <div class="flex gap-4">
+          <input
+            onchange={e => setTalk(e.currentTarget.value)}
+            placeholder="what do you prefer to go by?"
+            name="name"
+            type="text"
+            autocomplete="off"
+            required
+            class="flex-1"
+          />
+          <input
+            placeholder="what's your email?"
+            name="email"
+            type="email"
+            autocomplete="off"
+            required
+            class="flex-1"
+          />
+        </div>
+        <textarea
+          class="resize-none flex-1"
+          placeholder={`hey ${talk() || "there"}! what would you like to say?`}
+          name="comment"
+          required
+        ></textarea>
+        <div class="flex justify-start">
+          {done() ? (
+            <div class="text-xl font-medium">
+              thanks for sharing! i'll get back to you as soon i can
+            </div>
+          ) : (
+            <button
+              class="text-xl font-medium link"
+              value="submit"
+              type="submit"
+            >
+              send message
+            </button>
+          )}
+        </div>
+        <input
+          name="_formsubmit_id"
+          type="text"
+          style="display:none"
+          autocomplete="off"
+        />
+      </form>
+      <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+    </Motion.div>
+  )
+}
+
 const SelectedWorksScreen = () => {
   const [scrollY, setScrollY] = createSignal(0)
   addEventListener("scroll", () => {
@@ -104,7 +196,7 @@ const SelectedWorksScreen = () => {
   })
 
   return (
-    <div class="flex h-screen">
+    <div class="flex h-[calc(100vh-8rem)] -mb-32">
       <div class="w-full h-full grid grid-cols-12 grid-rows-[repeat(12,minmax(0,1fr))]">
         {works
           .filter(work => work.data.layer)

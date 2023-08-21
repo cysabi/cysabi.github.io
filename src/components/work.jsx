@@ -34,13 +34,13 @@ const WorkTemplate = props => {
           )}
         </div>
       </div>
-      <article class="prose prose-invert prose-xl mx-auto">
+      <article class="prose prose-invert prose-xl prose-a:link mx-auto max-w-none">
         {props.children}
       </article>
       <div class="flex w-full justify-center pt-16">
         <A
           href="/"
-          class="border-2 rounded-xl no-underline bg-gray-800/30 backdrop-blur-xl hover:bg-slate-800 hover:border-slate-800 transition-all hover:shadow-sm border-slate-600 px-6 py-3 text-lg font-medium"
+          class="border-2 rounded-xl no-underline bg-slate-900/30 backdrop-blur-xl hover:bg-slate-800 hover:border-slate-800 transition-all hover:shadow-sm border-slate-600 px-6 py-3 text-lg font-medium"
         >
           back to home
         </A>
