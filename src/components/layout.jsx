@@ -8,19 +8,10 @@ const Layout = () => {
   onMount(() => {
     setColor(false)
   })
-  let wait = false
   return (
     <>
       <main
-        onmousemove={e => {
-          if (!wait) {
-            wait = true
-            setTimeout(() => {
-              wait = false
-            }, 100)
-            setPos({ x: e.clientX, y: e.clientY })
-          }
-        }}
+        onmousemove={e => setPos({ x: e.clientX, y: e.clientY })}
         class="relative min-h-screen overflow-hidden flex flex-col"
       >
         {location.pathname === "/" || (

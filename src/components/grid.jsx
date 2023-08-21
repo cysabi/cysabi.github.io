@@ -30,6 +30,25 @@ const Grid = () => {
   const { pos, color } = useGrid()
   return (
     <>
+      <div class="fixed inset-0 pointer-events-none flex items-start justify-start z-50">
+        <Motion.div
+          animate={{
+            x: pos().x - 12,
+            y: pos().y - 12,
+            backgroundColor: color() || "#7A73B8",
+          }}
+          transition={{ easing: spring({ mass: 0.3 }) }}
+          class="absolute opacity-50 row-start-1 col-start-1 rounded-full py-3 px-3"
+        />
+        <Motion.div
+          animate={{
+            x: pos().x - 12,
+            y: pos().y - 12,
+          }}
+          transition={{ easing: spring({ mass: 0.15 }) }}
+          class="absolute opacity-50 row-start-1 col-start-1 rounded-full py-3 px-3 bg-primary"
+        />
+      </div>
       <div class="fixed inset-0 blur-[96px] -z-10 overflow-hidden flex">
         <Blob pos={pos} color={color() || "#7A73B8"} />
         <Blob pos={pos} color="#3b6ea2" main />

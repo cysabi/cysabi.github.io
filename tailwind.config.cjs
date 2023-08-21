@@ -63,7 +63,6 @@ module.exports = {
     fontFamily: {
       sans: ['"Karla"', ...defaultTheme.fontFamily.sans],
       mono: ['"Fragment Mono"', ...defaultTheme.fontFamily.mono],
-      display: ['"Sriracha"', ...defaultTheme.fontFamily.sans],
     },
   },
   plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],

@@ -11,7 +11,7 @@ const WorkTemplate = props => {
     <div class="mx-auto gap-8 max-w-7xl px-[min(10vw,128px)]">
       <div class="flex flex-col gap-4 w-full items-center text-center py-16">
         <div class="text-4xl font-semibold font-mono">{props.name}</div>
-        <div class="text-xl">{props.desc}</div>
+        <div class="text-2xl">{props.desc}</div>
         <div class="flex gap-4 items-center">
           <div class="flex gap-2 items-center">
             {props.tags.map(tag => (
@@ -83,7 +83,7 @@ export const Img = props => {
 export const CaseDivider = () => (
   <h1 class="flex items-center gap-4">
     <div class="flex-1 h-1 bg-slate-500 rounded-full" />
-    <div class="font-medium text-2xl text-slate-200">case study</div>
+    <div class="font-medium text-2xl">case study</div>
     <div class="flex-1 h-1 bg-slate-500 rounded-full" />
   </h1>
 )
