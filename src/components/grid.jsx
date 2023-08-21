@@ -33,20 +33,20 @@ const Grid = () => {
       <div class="fixed inset-0 pointer-events-none flex items-start justify-start z-50">
         <Motion.div
           animate={{
-            x: pos().x - 12,
-            y: pos().y - 12,
+            x: pos().x - 16,
+            y: pos().y - 16,
             backgroundColor: color() || "#7A73B8",
           }}
-          transition={{ easing: spring({ mass: 0.15 }) }}
-          class="absolute hidden sm:block opacity-[calc(1/3)] row-start-1 col-start-1 rounded-full py-3 px-3"
+          transition={{ easing: spring({ mass: 0.1 }) }}
+          class="absolute hidden sm:block opacity-[calc(1/3)] row-start-1 col-start-1 rounded-full py-4 px-4"
         />
         <Motion.div
           animate={{
-            x: pos().x - 12,
-            y: pos().y - 12,
+            x: pos().x - 8,
+            y: pos().y - 8,
           }}
-          transition={{ easing: spring({ mass: 0.05 }) }}
-          class="absolute hidden sm:block opacity-[calc(1/3)] row-start-1 col-start-1 rounded-full py-3 px-3 bg-primary"
+          transition={{ easing: spring({ mass: 0.025 }) }}
+          class="absolute hidden sm:block opacity-[calc(1/3)] row-start-1 col-start-1 rounded-full py-2 px-2 bg-primary"
         />
       </div>
       <div class="fixed inset-0 blur-[96px] -z-10 overflow-hidden flex">
@@ -86,9 +86,9 @@ const Blob = props => {
       }}
       transition={{
         easing: spring({
-          mass: 2,
+          mass: 1.5,
           damping: 100,
-          stiffness: props.main ? 120 : 60,
+          stiffness: props.main ? 120 : 80,
         }),
       }}
     >

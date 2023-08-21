@@ -5,6 +5,7 @@ import * as work4 from "./block-sumo.mdx"
 import * as work5 from "./blurple-py.mdx"
 import * as work6 from "./social-scheduler.mdx"
 import * as work7 from "./cq-overlays.mdx"
+import * as work8 from "./radia.mdx"
 
 const Works = () => (
   <div>
@@ -19,10 +20,6 @@ the team name generator was really cool :D
 talk about the CommandUI component
 and the file-routing discord.py
       /> */}
-    {/* <ProjectOrb wip={true} layer="2" coords={[4, 10]} name="radia" />
-queries from google calendar
-the purpose of this was because the legacy tool didn't support multiple tournaments
-    */}
     {/* <ProjectOrb wip={true} layer="2" coords={[5, 4]} name="fabl-website" />
 gets api stuff from standings page
     */}
@@ -30,5 +27,5 @@ gets api stuff from standings page
   </div>
 )
 
-export const works = [work1, work2, work3, work4, work5, work6, work7]
+export const works = [work1, work2, work3, work4, work5, work6, work7, work8]
 export default Works
