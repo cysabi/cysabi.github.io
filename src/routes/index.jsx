@@ -60,7 +60,7 @@ const LandingScreen = () => {
             />
           </A>
         </div>
-        <div class="relative my-6 md:my-14 flex-1 max-h-full">
+        <div class="relative my-12 md:my-16 flex-1 max-h-full">
           <Presence>
             <Switch>
               <Match when={location.hash === "#about"}>
@@ -90,7 +90,7 @@ const About = () => (
     transition={{
       easing: spring({ mass: 0.1 }),
     }}
-    class="absolute flex flex-col gap-10 rounded-2xl p-4 md:p-8 text-lg md:text-xl bg-slate-900/50 border-4 border-slate-700/25 backdrop-blur-xl"
+    class="absolute flex flex-col gap-10 rounded-2xl p-4 md:p-8 text-lg md:text-xl bg-slate-900/50 border-4 border-slate-700/25 backdrop-blur"
   >
     <div>
       hi, thanks for stopping by! you can call me{" "}
@@ -137,7 +137,7 @@ const Contact = () => {
         <div class="text-2xl">
           like what you see? got a project in mind? let's talk!
         </div>
-        <div class="flex gap-4">
+        <div class="flex gap-4 flex-col md:flex-row">
           <input
             onchange={e => setTalk(e.currentTarget.value)}
             placeholder="what do you prefer to go by?"
@@ -307,7 +307,7 @@ const ProjectOrb = props => {
           transition={{
             easing: spring({ stiffness: 500, damping: 50 }),
           }}
-          class="rounded-full h-full w-full flex items-center justify-center border-4 backdrop-blur-xl"
+          class="rounded-full h-full w-full flex items-center justify-center border-4 backdrop-blur"
         >
           <Link>
             <div class="absolute inset-0 rounded-full flex items-center justify-center">
@@ -325,7 +325,7 @@ const ProjectOrb = props => {
                   {props.tags?.slice(0, 2)?.map(tag => (
                     <div
                       style={`padding: 0 calc(0.5rem / 5 * ${props.layer}) 0 calc(0.5rem / 5 * ${props.layer})`}
-                      class="px-2 bg-primary/10 font-medium rounded-full text-primary backdrop-brightness-125 backdrop-blur-xl"
+                      class="px-2 bg-primary/10 font-medium rounded-full text-primary backdrop-brightness-125 backdrop-blur"
                     >
                       {tag}
                     </div>

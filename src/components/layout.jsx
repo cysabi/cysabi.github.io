@@ -29,7 +29,7 @@ const Layout = () => {
         <div class="flex-1">
           <Outlet />
         </div>
-        <div class="bg-slate-900/50 border-t-4 border-slate-700/25 backdrop-blur-xl flex flex-col gap-8 mt-[min(10vw,128px)] p-12">
+        <div class="bg-slate-900/50 border-t-4 border-slate-700/25 backdrop-blur flex flex-col gap-8 mt-[min(10vw,128px)] p-12">
           <div class="flex items-center justify-between gap-4 w-full">
             <div class="text-slate-500 text-center">
               like what you see?{" "}

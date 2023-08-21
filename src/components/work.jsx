@@ -15,7 +15,7 @@ const WorkTemplate = props => {
         <div class="flex gap-4 items-center">
           <div class="flex gap-2 items-center">
             {props.tags.map(tag => (
-              <div class="py-0.5 px-3 bg-primary/10 font-medium rounded-full text-primary backdrop-brightness-125 backdrop-blur-xl">
+              <div class="py-0.5 px-3 bg-primary/10 font-medium rounded-full text-primary backdrop-brightness-125 backdrop-blur">
                 {tag}
               </div>
             ))}
@@ -40,7 +40,7 @@ const WorkTemplate = props => {
       <div class="flex w-full justify-center pt-16">
         <A
           href="/"
-          class="border-2 rounded-xl no-underline bg-slate-900/30 backdrop-blur-xl hover:bg-slate-800 hover:border-slate-800 transition-all hover:shadow-sm border-slate-600 px-6 py-3 text-lg font-medium"
+          class="border-2 rounded-xl no-underline bg-slate-900/30 backdrop-blur hover:bg-slate-800 hover:border-slate-800 transition-all hover:shadow-sm border-slate-600 px-6 py-3 text-lg font-medium"
         >
           back to home
         </A>
@@ -96,7 +96,7 @@ export const Collage = props => {
 
   return (
     <figure>
-      <div class="not-prose flex flex-col gap-1 bg-slate-600/50 border-4 overflow-hidden border-transparent rounded-2xl backdrop-blur-xl backdrop-brightness-125">
+      <div class="not-prose flex flex-col gap-1 bg-slate-600/50 border-4 overflow-hidden border-transparent rounded-2xl backdrop-blur backdrop-brightness-125">
         <Img
           title="controls"
           class="rounded-md w-full aspect-video object-cover object-top"

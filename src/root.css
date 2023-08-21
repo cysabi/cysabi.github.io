@@ -42,6 +42,6 @@
   [multiple],
   textarea,
   select {
-    @apply transition focus:border-primary/50 focus:shadow-slate-600/10 focus:shadow-lg placeholder:text-slate-500 placeholder:focus:!text-slate-400 focus:ring-transparent p-2.5 rounded-lg text-xl bg-slate-900/50 border-2 border-slate-700/25 backdrop-blur-xl;
+    @apply transition focus:border-primary/50 focus:shadow-slate-600/10 focus:shadow-lg placeholder:text-slate-500 placeholder:focus:!text-slate-400 focus:ring-transparent p-2.5 rounded-lg text-xl bg-slate-900/50 border-2 border-slate-700/25 backdrop-blur;
   }
 }
