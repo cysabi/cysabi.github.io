@@ -37,16 +37,16 @@ const Grid = () => {
             y: pos().y - 12,
             backgroundColor: color() || "#7A73B8",
           }}
-          transition={{ easing: spring({ mass: 0.4, damping: 20 }) }}
-          class="absolute hidden sm:block opacity-50 row-start-1 col-start-1 rounded-full py-3 px-3"
+          transition={{ easing: spring({ mass: 0.15 }) }}
+          class="absolute hidden sm:block opacity-[calc(1/3)] row-start-1 col-start-1 rounded-full py-3 px-3"
         />
         <Motion.div
           animate={{
             x: pos().x - 12,
             y: pos().y - 12,
           }}
-          transition={{ easing: spring({ mass: 0.2 }) }}
-          class="absolute hidden sm:block opacity-50 row-start-1 col-start-1 rounded-full py-3 px-3 bg-primary"
+          transition={{ easing: spring({ mass: 0.05 }) }}
+          class="absolute hidden sm:block opacity-[calc(1/3)] row-start-1 col-start-1 rounded-full py-3 px-3 bg-primary"
         />
       </div>
       <div class="fixed inset-0 blur-[96px] -z-10 overflow-hidden flex">
