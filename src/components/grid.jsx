@@ -38,7 +38,7 @@ const Grid = () => {
             backgroundColor: color() || "#7A73B8",
           }}
           transition={{ easing: spring({ mass: 0.1 }) }}
-          class="absolute hidden sm:block opacity-[calc(1/3)] row-start-1 col-start-1 rounded-full py-4 px-4"
+          class="absolute hidden sm:block opacity-30 row-start-1 col-start-1 rounded-full py-4 px-4"
         />
         <Motion.div
           animate={{
@@ -46,7 +46,7 @@ const Grid = () => {
             y: pos().y - 8,
           }}
           transition={{ easing: spring({ mass: 0.025 }) }}
-          class="absolute hidden sm:block opacity-[calc(1/3)] row-start-1 col-start-1 rounded-full py-2 px-2 bg-primary"
+          class="absolute hidden sm:block opacity-30 row-start-1 col-start-1 rounded-full py-2 px-2 bg-primary"
         />
       </div>
       <div class="fixed inset-0 blur-[96px] -z-10 overflow-hidden flex">
