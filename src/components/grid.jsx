@@ -94,9 +94,8 @@ const Blob = props => {
       }}
       transition={{
         easing: spring({
-          mass: 1.5,
+          mass: props.main ? 1 : 2,
           damping: 100,
-          stiffness: props.main ? 125 : 75,
         }),
       }}
     >
