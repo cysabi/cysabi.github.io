@@ -41,7 +41,7 @@ const Grid = () => {
             x: pos().x - 16,
             y: pos().y - 16,
             padding: "16px",
-            opacity: 0.33,
+            opacity: a() ? 0.2 : 0.33,
             backgroundColor: color() || "#7A73B8",
           }}
           transition={{ easing: spring({ mass: 0.1 }) }}
@@ -49,10 +49,10 @@ const Grid = () => {
         />
         <Motion.div
           animate={{
-            x: pos().x - (a() ? 22 : 8),
-            y: pos().y - (a() ? 22 : 8),
-            padding: a() ? "22px" : "8px",
-            opacity: 0.33,
+            x: pos().x - (a() ? 16 : 8),
+            y: pos().y - (a() ? 16 : 8),
+            padding: a() ? "16px" : "8px",
+            opacity: a() ? 0.2 : 0.33,
           }}
           transition={{ easing: spring({ mass: 0.025 }) }}
           class="absolute hidden sm:block row-start-1 col-start-1 rounded-full bg-primary"

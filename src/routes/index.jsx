@@ -300,9 +300,9 @@ const ProjectOrb = props => {
             y: lean()[1] / 2,
             scale: hov() ? 1.2 : 1,
             backgroundColor: hov()
-              ? "rgb(71 85 105 / 0.5)"
-              : "rgb(35 40 49 / 0.33)",
-            borderColor: hov() ? "rgb(100 116 139)" : "rgb(71 85 105)",
+              ? "rgb(51 65 85 / 0.5)"
+              : "rgb(15 23 42 / 0.5)",
+            borderColor: hov() ? "rgb(71 85 105 / 0.5)" : "rgb(51 65 85 / 0.5)",
           }}
           transition={{
             easing: spring({ stiffness: 500, damping: 50 }),

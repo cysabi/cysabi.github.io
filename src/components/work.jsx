@@ -35,6 +35,12 @@ const WorkTemplate = props => {
         </div>
       </div>
       <article class="prose prose-invert prose-xl prose-a:link mx-auto max-w-none">
+        {props.collage && <Collage items={props.collage} />}
+        <div class="flex items-center gap-4 py-16">
+          <div class="flex-1 h-1 bg-slate-500 rounded-full" />
+          <div class="font-medium text-2xl">case study</div>
+          <div class="flex-1 h-1 bg-slate-500 rounded-full" />
+        </div>
         {props.children}
       </article>
       <div class="flex w-full justify-center pt-16">
@@ -80,15 +86,7 @@ export const Img = props => {
   )
 }
 
-export const CaseDivider = () => (
-  <h1 class="flex items-center gap-4">
-    <div class="flex-1 h-1 bg-slate-500 rounded-full" />
-    <div class="font-medium text-2xl">case study</div>
-    <div class="flex-1 h-1 bg-slate-500 rounded-full" />
-  </h1>
-)
-
-export const Collage = props => {
+const Collage = props => {
   const [active, setActive] = createSignal(0)
 
   const sources = Object.keys(props.items)

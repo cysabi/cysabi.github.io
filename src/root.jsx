@@ -2,7 +2,7 @@ import { render } from "solid-js/web"
 import { Route, Router, Routes } from "@solidjs/router"
 import Index from "./routes/index"
 import Works, { works } from "./routes/works/index"
-import WorkTemplate, { CaseDivider, Collage, Img } from "./components/work"
+import WorkTemplate, { Img } from "./components/work"
 import { GridProvider } from "./components/grid"
 import Layout from "./components/layout"
 import "./root.css"
@@ -20,9 +20,7 @@ render(
                 path={"/works/" + Work.data.name}
                 element={
                   <WorkTemplate {...Work.data}>
-                    <Work.default
-                      components={{ img: Img, CaseDivider, Collage }}
-                    />
+                    <Work.default components={{ img: Img }} />
                   </WorkTemplate>
                 }
               />

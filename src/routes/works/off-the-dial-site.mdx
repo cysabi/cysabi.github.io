@@ -9,10 +9,7 @@ export const data = {
     github: "https://github.com/offthedial/site",
   },
   previews: ["/off-the-dial-site_1.png"],
-}
-
-<Collage
-  items={{
+  collage: {
     "/off-the-dial-site_11.png": "Welcome to Off the Dial!",
     "/off-the-dial-site_7.png":
       "The tournament page, shows all relevant season information",
@@ -21,10 +18,37 @@ export const data = {
     "/off-the-dial-site_9.png":
       "The posts page, for tournament organizers to share anything they need",
     "/off-the-dial-site_8.png": "A example post",
-  }}
-/>
+  },
+}
 
-<CaseDivider />
+The client for this application approached me because they were looking to create a product that allows drivers
+to quickly connect with mechanics when dealing with car problems.
+They also were loooking to enable hobbyist and mechanics unassociated with any particular shop the opportunity to gig-work and manage their own time.
+
+- Project Brief
+  - While I was running off the dial
+- Role / Responsibilities
+  - Thus I was tasked with designing and developing a full stack
+- Tech used
+
+- introduction
+  - talk about how this is the project that i redid over the course of 5 years
+  - although i don't have access to the earlier versions im showing how i refined my process to solving problems
+- ideation and problem
+  - i needed to collect signup information to make teams, since they don't have teams
+  - at the time it was a discord bot and sign up was cumbersome and complicated
+  - there were also limitations that tournament organisers had to manually fix.
+  - the goal of the site was to
+    - provide an easy link to rules that can be shared and edited without hassle
+    - have live and reliable active season information
+    - let users sign up and input data, doing as much client side form validation so to's don't need to parse bad data
+    - give users a personal dashboard to see their signup status
+    - allow players to know what time it is in the tournament schedule
+- brainstorming
+  - one of the iterations had a schedule on the idtga page
+    - it was moved inside rules for a source of truth
+    - then a timezone specific schedule in on your profil
+- results
 
 Over a period of 5 years, I've rewritten this site 5 times, once each year.
 

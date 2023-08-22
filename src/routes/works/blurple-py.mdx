@@ -3,24 +3,19 @@ export const data = {
   coords: [7, 7],
   name: "blurple-py",
   desc: "a python library for building user interfaces in discord",
-  tags: ["software", "design", "library"],
+  tags: ["software", "design", "library", "engineering"],
   links: {
     link: "https://cysabi.github.io/blurple.py",
     github: "https://github.com/cysabi/blurple.py",
   },
   previews: ["/blurple-py_1.png"],
-}
-
-<Collage
-  items={{
+  collage: {
     "/blurple-py_7.webm":
       "A kitchen-sink showcase of what this library can do!",
     "/blurple-py_1.png": "The documentation page for blurple.py",
     "/blurple-py_3.png": "Different style options for alerts",
-  }}
-/>
-
-<CaseDivider />
+  },
+}
 
 While making my Off the Dial bot, there was a lot of complex features that I implemented. I realized that a lot of the code could be useful to others if it was extracted, generalized, refactored, and published as a library, so that's exactly what I did.
 
