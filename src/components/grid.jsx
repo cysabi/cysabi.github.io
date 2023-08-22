@@ -4,6 +4,7 @@ import {
   useContext,
   onCleanup,
   onMount,
+  createMemo,
 } from "solid-js"
 import { spring } from "motion"
 import { Motion } from "@motionone/solid"
@@ -14,9 +15,12 @@ const GridContext = createContext()
 export const GridProvider = props => {
   const [pos, setPos] = createSignal({ x: 400, y: 400 })
   const [color, setColor] = createSignal("#7A73B8")
+  const [pointer, setPointer] = createSignal("auto")
 
   return (
-    <GridContext.Provider value={{ pos, setPos, color, setColor }}>
+    <GridContext.Provider
+      value={{ pos, setPos, color, setColor, pointer, setPointer }}
+    >
       {props.children}
     </GridContext.Provider>
   )
@@ -27,7 +31,8 @@ export const useGrid = () => {
 }
 
 const Grid = () => {
-  const { pos, color } = useGrid()
+  const { pos, color, pointer } = useGrid()
+  const a = createMemo(() => pointer() === "pointer")
   return (
     <>
       <div class="fixed inset-0 pointer-events-none flex items-start justify-start z-50">
@@ -35,21 +40,25 @@ const Grid = () => {
           animate={{
             x: pos().x - 16,
             y: pos().y - 16,
+            padding: "16px",
+            opacity: 0.33,
             backgroundColor: color() || "#7A73B8",
           }}
           transition={{ easing: spring({ mass: 0.1 }) }}
-          class="absolute hidden sm:block opacity-30 row-start-1 col-start-1 rounded-full py-4 px-4"
+          class="absolute hidden sm:block row-start-1 col-start-1 rounded-full"
         />
         <Motion.div
           animate={{
-            x: pos().x - 8,
-            y: pos().y - 8,
+            x: pos().x - (a() ? 22 : 8),
+            y: pos().y - (a() ? 22 : 8),
+            padding: a() ? "22px" : "8px",
+            opacity: 0.33,
           }}
           transition={{ easing: spring({ mass: 0.025 }) }}
-          class="absolute hidden sm:block opacity-30 row-start-1 col-start-1 rounded-full py-2 px-2 bg-primary"
+          class="absolute hidden sm:block row-start-1 col-start-1 rounded-full bg-primary"
         />
       </div>
-      <div class="fixed inset-0 blur-[96px] -z-10 overflow-hidden flex">
+      <div class="fixed inset-0 blur-[96px] opacity-25 -z-10 overflow-hidden flex">
         <Blob pos={pos} color={color() || "#7A73B8"} />
         <Blob pos={pos} color="#3b6ea2" main />
       </div>
@@ -78,17 +87,16 @@ const Blob = props => {
   })
   return (
     <Motion.div
-      class="absolute opacity-0"
+      class="absolute"
       animate={{
         x: props.pos().x,
         y: props.pos().y,
-        opacity: 1 / 3,
       }}
       transition={{
         easing: spring({
           mass: 1.5,
           damping: 100,
-          stiffness: props.main ? 120 : 80,
+          stiffness: props.main ? 125 : 75,
         }),
       }}
     >

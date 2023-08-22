@@ -4,14 +4,17 @@ import Grid, { useGrid } from "./grid"
 
 const Layout = () => {
   const location = useLocation()
-  const { setPos, setColor } = useGrid()
+  const { setPos, setColor, setPointer } = useGrid()
   onMount(() => {
     setColor(false)
   })
   return (
     <>
       <main
-        onmousemove={e => setPos({ x: e.clientX, y: e.clientY })}
+        onmousemove={e => {
+          setPointer(getComputedStyle(e.target).cursor)
+          setPos({ x: e.clientX, y: e.clientY })
+        }}
         class="relative min-h-screen overflow-hidden flex flex-col"
       >
         {location.pathname === "/" || (
