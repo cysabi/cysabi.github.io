@@ -15,28 +15,17 @@ const WorkTemplate = props => {
         <div class="flex gap-4 items-center">
           <div class="flex gap-2 items-center">
             {props.tags.map(tag => (
-              <div class="py-0.5 px-3 bg-primary/10 font-medium rounded-full text-primary backdrop-brightness-125 backdrop-blur">
+              <div class="py-0.5 px-3 bg-primary/10 font-medium rounded-full text-primary backdrop-blur backdrop-brightness-125">
                 {tag}
               </div>
             ))}
           </div>
-          {props.links && (
-            <>
-              <div class="rounded-full h-1 w-1 bg-slate-400"></div>
-              <div class="flex items-center gap-3">
-                {Object.entries(props.links).map(([name, href]) => (
-                  <a href={href} class="font-medium">
-                    {name}
-                  </a>
-                ))}
-              </div>
-            </>
-          )}
         </div>
       </div>
       <article class="prose prose-invert prose-xl prose-a:link mx-auto max-w-none">
         {props.collage && <Collage items={props.collage} />}
-        <div class="flex items-center gap-4 py-16">
+        {props.overview && <Overview {...props.overview} />}
+        <div class="flex items-center gap-4 my-16">
           <div class="flex-1 h-1 bg-slate-500 rounded-full" />
           <div class="font-medium text-2xl">case study</div>
           <div class="flex-1 h-1 bg-slate-500 rounded-full" />
@@ -50,6 +39,64 @@ const WorkTemplate = props => {
         >
           back to home
         </A>
+      </div>
+    </div>
+  )
+}
+
+const Overview = props => {
+  const Section = props => (
+    <div>
+      <h2 class="text-xl uppercase tracking-wider font-semibold text-primary">
+        {props.title}
+      </h2>
+      <p
+        class={`flex gap-2 flex-wrap ${
+          props.fullWidth ? "" : "md:max-w-min md:whitespace-nowrap"
+        }`}
+      >
+        {props.children}
+      </p>
+    </div>
+  )
+  return (
+    <div class="flex flex-col">
+      <Section fullWidth title={<div class="w-full">Project Summary</div>}>
+        {props.summary}
+      </Section>
+      <div class="flex flex-col md:flex-row justify-between gap-x-6">
+        <Section title="Roles & Responsibilites">
+          {props.roles.map(role => (
+            <div class="leading-none rounded py-1 px-2 uppercase bg-slate-700">
+              {role}
+            </div>
+          ))}
+        </Section>
+        <Section title="Tools & Technologies">
+          {props.tools.map(tool => (
+            <div class="leading-none rounded py-1 px-2 bg-slate-700/50 backdrop-blur backdrop-brightness-125">
+              {typeof tool === "string"
+                ? tool
+                : tool.map((t, i) => (
+                    <>
+                      {i === 0 || (
+                        <span class="text-slate-900 font-bold font-mono mx-1">
+                          /
+                        </span>
+                      )}
+                      {t}
+                    </>
+                  ))}
+            </div>
+          ))}
+        </Section>
+        <Section title="Sources & Links">
+          {Object.entries(props.sources).map(([name, href]) => (
+            <a href={href} class="font-medium">
+              {name}
+            </a>
+          ))}
+        </Section>
       </div>
     </div>
   )

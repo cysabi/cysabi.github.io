@@ -4,10 +4,6 @@ export const data = {
   name: "off-the-dial-site",
   desc: "full-stack website to host tournament signups, user accounts, and an easy-to-write blog",
   tags: ["web", "site", "ux", "design"],
-  links: {
-    link: "https://otd.ink",
-    github: "https://github.com/offthedial/site",
-  },
   previews: ["/off-the-dial-site_1.png"],
   collage: {
     "/off-the-dial-site_11.png": "Welcome to Off the Dial!",
@@ -19,46 +15,69 @@ export const data = {
       "The posts page, for tournament organizers to share anything they need",
     "/off-the-dial-site_8.png": "A example post",
   },
+  overview: {
+    summary: (
+      <>
+        After noticing players having difficulty finding information surrounding
+        tournaments, I set out to build a website that could stand as the single
+        source of truth for everything Off the Dial. This quest would end up
+        going through 5 iterations spanning across 5 years.
+      </>
+    ),
+    roles: ["design", "engineering"],
+    tools: [
+      ["GatsbyJS", "React.js", "JavaScript"],
+      "MDX",
+      "Tailwind",
+      "Firebase",
+      "Figma",
+    ],
+    sources: {
+      website: "https://otd.ink",
+      github: "https://github.com/offthedial/site",
+    },
+  },
 }
 
-The client for this application approached me because they were looking to create a product that allows drivers
-to quickly connect with mechanics when dealing with car problems.
-They also were loooking to enable hobbyist and mechanics unassociated with any particular shop the opportunity to gig-work and manage their own time.
+At the time, there were a couple problems
 
-- Project Brief
-  - While I was running off the dial
-- Role / Responsibilities
-  - Thus I was tasked with designing and developing a full stack
-- Tech used
+- registration was hosted by a discord bot, which was cumbersome and complicated
+- hosting on a discord bot meant limitations that tournament organisers had to fix manually.
+  There were a couple of design goals that I needed to solve
+- provide an easy link to rules that can be shared and edited without hassle
+- have live and reliable active season information
+- let users sign up and input data, doing as much client side form validation so to's don't need to parse bad data
+- give users a personal dashboard to see their signup status
+- allow players to know what time it is in the tournament schedule
 
-- introduction
-  - talk about how this is the project that i redid over the course of 5 years
-  - although i don't have access to the earlier versions im showing how i refined my process to solving problems
-- ideation and problem
-  - i needed to collect signup information to make teams, since they don't have teams
-  - at the time it was a discord bot and sign up was cumbersome and complicated
-  - there were also limitations that tournament organisers had to manually fix.
-  - the goal of the site was to
-    - provide an easy link to rules that can be shared and edited without hassle
-    - have live and reliable active season information
-    - let users sign up and input data, doing as much client side form validation so to's don't need to parse bad data
-    - give users a personal dashboard to see their signup status
-    - allow players to know what time it is in the tournament schedule
-- brainstorming
-  - one of the iterations had a schedule on the idtga page
-    - it was moved inside rules for a source of truth
-    - then a timezone specific schedule in on your profil
-- results
+### design: a source of truth for the idtga page
 
-Over a period of 5 years, I've rewritten this site 5 times, once each year.
+- one of the iterations had a schedule on the idtga page
+  - it was moved inside rules for a source of truth
+  - then a timezone specific schedule in on your profil
 
-This is the penultimate version! The project has been finally set down, as I focus my attention to other stuff.
+Even though the rules page would be the single source of truth about the tournament as a whole, I wanted all season information in it's own source of truth as well, and that came in the form of a card!
 
-Each time that I've rewritten this site, I've learned so much about design, development, and especially, the users.
+![](/off-the-dial-site_6.png)
 
-This is a collection of some of the highlights that came from developing this version!
+I wanted this card to be what users can refer to whenever they need information about the current season.
+The focal point of this card directly shares with the user the status of the tournament _as it relates to them!_
 
-## profile page
+The card also displays the season title, and all important dates for the season. It shows any information about the season that tournament organizers want to share, such as updates to the rules. And of course, the card also has the rules and signup button!
+
+### engineering: max-width is cool
+
+Something else special about this page in specific is the dynamic size of the skateboarding octo!
+
+![](/off-the-dial-site_3.webm "controls")
+
+I can't just apply a max-width to it (like the one below) because the right side needs to be aligned to the right of the viewport, and the left needs to be inline with the padding of all the other elements on the page.
+
+So I used the `calc()` function from css!
+
+> `max-width: calc(36rem + 50vw)`
+
+## design: profile page
 
 One of the biggest improvements I made to the design was the profile page. The old profile page simply displayed your signal strength, but as the year went on, I realized there were some design problems that users wanted solved.
 
@@ -74,28 +93,7 @@ Anyone who navigates to their profile will be able to essentially see a dashboar
 
 I also placed a non-timezone specific schedule in the rules page, that way all of the "official" information about the tournament is coming from one source of truth, not inside the idtga page.
 
-## idtga page
-
-Even though the rules page would be the single source of truth about the tournament as a whole, I wanted all season information in it's own source of truth as well, and that came in the form of a card!
-
-![](/off-the-dial-site_6.png)
-
-I wanted this card to be what users can refer to whenever they need information about the current season.
-The focal point of this card directly shares with the user the status of the tournament _as it relates to them!_
-
-The card also displays the season title, and all important dates for the season. It shows any information about the season that tournament organizers want to share, such as updates to the rules. And of course, the card also has the rules and signup button!
-
-Something else special about this page in specific is the dynamic size of the skateboarding octo!
-
-![](/off-the-dial-site_3.webm "controls")
-
-I can't just apply a max-width to it (like the one below) because the right side needs to be aligned to the right of the viewport, and the left needs to be inline with the padding of all the other elements on the page.
-
-So I used the `calc()` function from css!
-
-> `max-width: calc(36rem + 50vw)`
-
-## weapons selector
+## both: weapons selector
 
 ![](/off-the-dial-site_4.png)
 
