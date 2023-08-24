@@ -44,7 +44,7 @@ const Grid = () => {
             opacity: a() ? 0.2 : 0.33,
             backgroundColor: color() || "#7A73B8",
           }}
-          transition={{ easing: spring({ mass: 0.1 }) }}
+          transition={{ easing: spring({ mass: 0.125 }) }}
           class="absolute hidden sm:block row-start-1 col-start-1 rounded-full"
         />
         <Motion.div

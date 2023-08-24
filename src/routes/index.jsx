@@ -269,7 +269,8 @@ const ProjectOrb = props => {
             />
           </Motion.div>
         </div>
-        <Motion.button
+        <Motion.a
+          href={"works/" + props.name}
           onmouseenter={() => {
             setHov(true)
             setColor("#a0cebe")
@@ -294,7 +295,6 @@ const ProjectOrb = props => {
               },
             })
           }}
-          href={"works/" + props.name}
           animate={{
             x: lean().orb.x,
             y: lean().orb.y,
@@ -307,7 +307,7 @@ const ProjectOrb = props => {
           transition={{
             easing: spring({ stiffness: 500, damping: 50 }),
           }}
-          class="rounded-full h-full w-full flex items-center justify-center border-4 backdrop-blur"
+          class="rounded-full h-full w-full flex items-center justify-center border-4 backdrop-blur transition-none"
         >
           <div class="absolute inset-0 rounded-full flex items-center justify-center">
             <Motion.div
@@ -370,7 +370,7 @@ const ProjectOrb = props => {
               </Motion.div>
             )}
           </div>
-        </Motion.button>
+        </Motion.a>
       </div>
     </div>
   )

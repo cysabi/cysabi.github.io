@@ -18,10 +18,9 @@ export const data = {
   overview: {
     summary: (
       <>
-        After noticing players having difficulty finding information surrounding
-        tournaments, I set out to build a website that could stand as the single
-        source of truth for everything Off the Dial. This quest would end up
-        going through 5 iterations spanning across 5 years.
+        I set out to build a website that could stand as the single source of
+        truth for everything Off the Dial. This quest would end up going through
+        5 iterations spanning across 5 years.
       </>
     ),
     roles: ["design", "engineering"],
@@ -39,22 +38,55 @@ export const data = {
   },
 }
 
+- any heading can be specified as a "topic heading"
+  - which gives it an icon to specify that it's for design, and allows anyone to hide it.
+- ideation
+  - figuring out what the specific problems / goals are
+  - what are the set of requirements to fulfill?
+    - what needs to be show on the website?
+    - what are my design goals for the game?
+  - what are users experiencing?
+    - include metrics
+- iteration
+  - chunks of things i made, show conflict and thought process.
+- results
+  - what was my impact?
+  - how do users feel now?
+    - metrics
+  - what lessons did i learn?
+  - what would i have done differently if i were to do it again?
+
 At the time, there were a couple problems
 
 - registration was hosted by a discord bot, which was cumbersome and complicated
 - hosting on a discord bot meant limitations that tournament organisers had to fix manually.
-  There were a couple of design goals that I needed to solve
+
+There were a couple of design goals that I needed to solve
+
 - provide an easy link to rules that can be shared and edited without hassle
 - have live and reliable active season information
 - let users sign up and input data, doing as much client side form validation so to's don't need to parse bad data
 - give users a personal dashboard to see their signup status
 - allow players to know what time it is in the tournament schedule
 
+(iterative chunks with conflict and thought process)
+
+results
+
+- the website makes it much easier for attendees to find tournament information, as it's the single source of truth for everything
+  - quote attendees on how they feel about the website in general
+  - metric states that most attendees use the website as their go to place to get season information
+    - quote a specific user
+  - metric states that 99% of attendees use the profile page during tournament weekend to see what they need to do
+    - quote a specific user
+  - 99% of attendees are satisifed with navigating the website
+    - quote a specific user
+
 ### design: a source of truth for the idtga page
 
 - one of the iterations had a schedule on the idtga page
   - it was moved inside rules for a source of truth
-  - then a timezone specific schedule in on your profil
+  - then a timezone specific schedule in on your profile
 
 Even though the rules page would be the single source of truth about the tournament as a whole, I wanted all season information in it's own source of truth as well, and that came in the form of a card!
 
