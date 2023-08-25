@@ -90,7 +90,7 @@ const About = () => (
     transition={{
       easing: spring({ mass: 0.1 }),
     }}
-    class="absolute flex flex-col gap-10 rounded-2xl p-4 md:p-8 text-lg md:text-xl bg-slate-900/50 border-4 border-slate-700/25 backdrop-blur"
+    class="absolute flex flex-col gap-6 rounded-2xl text-2xl text-slate-200"
   >
     <div>
       hi, thanks for stopping by! you can call me{" "}
