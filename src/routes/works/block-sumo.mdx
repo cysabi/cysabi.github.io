@@ -5,10 +5,26 @@ export const data = {
   desc: "a highly skill-expressive minecraft minigame without sacrificing player accessibility",
   tags: ["game", "design"],
   previews: ["/block-sumo_3.png"],
+  collage: {
+    "/block-sumo_0.webm": (
+      <>
+        A gameplay trailer(?) for block sumo!{" "}
+        <span class="text-slate-500">
+          i downloaded davinci resolve & pulled an all-nighter to make this
+          video, pls watch.
+        </span>
+      </>
+    ),
+    "/block-sumo_4.png": "The default map, 'Wuhu Island'",
+    "/block-sumo_6.png":
+      "As the game progresses, more and more blocks get placed as a form of emergent gameplay.",
+    "/block-sumo_7.png": "Gameplay of some classic free-for-all fun!",
+    "/block-sumo_9.png": "You can also play team battles!",
+    "/block-sumo_8.png":
+      "As players change the map geometry, gameplay evolves with it.",
+    "/block-sumo_5.png": "Blocks coat the entire map by the end of each game.",
+  },
 }
-
-{/* TODO: */}
-![Collage of the game that showcases everything that makes the game fun]()
 
 I've always had a specific place in my heart for arena style pick-up-and-play pvp games, that don't sacrifice high skill expression. Games like Knockout City, Friends vs Friends, and of course Super Smash really resonate with me!
 
@@ -16,15 +32,15 @@ I wanted to make a game that fit that vision, the kind of game that you can open
 
 One day, while watching gameplay of a minecraft content creator (fruitberries) creatively place blocks on the edges of the map to escape his opponent, I realized just how expressive Minecraft's movement can be. Placing blocks can provide you with infinite possibilities for movement, by allowing you to bend your environment to your will, in a way that's not that different to Fortnite's build mode.
 
-<figure>
-  <video muted autoplay loop class="w-full">
-    <source src="/block-sumo_1.webm" type="video/webm" />
-  </video>
-  <figcaption>
-    Youtube video by{" "}
-    <a href="https://www.youtube.com/watch?v=ovJrTqYD4e8">fruitberries</a>
-  </figcaption>
-</figure>
+<Img
+  src="/block-sumo_1.webm"
+  alt={
+    <>
+      Youtube video by{" "}
+      <a href="https://www.youtube.com/watch?v=ovJrTqYD4e8">fruitberries</a>
+    </>
+  }
+/>
 
 That was the point I decided on building a minecraft minigame.
 
@@ -47,7 +63,7 @@ I landed on a core concept inspired by platform-fighters. Players spawns on a fl
 
 To accentuate the skill expression of block placement, I made each player have infinite blocks in their offhand, and I also ensured that the map provided opportunities for such expression through the deliberate placement of platform skips and wall-climbable pillars (both of which use blocks).
 
-![Gameplay of gene navigating the map skillfully]()
+![](/block-sumo_10.webm)
 
 ## introducing items
 
@@ -77,11 +93,11 @@ All of this lead to a system where the power level of items that a player reciev
 
 This made it easy to control exactly how chaotic i wanted the game to be, by allowing me to fine-tune exactly what I wanted the frequency of each item to be at every level! Vertical play was easily tuneable by modifying the spawn rate of vertical mobility items.
 
-![Showcase of vertical mobility items & clips of them being used in ways I like]()
+![Vertical mobility keeps movement feeling dynamic and expressive](/block-sumo_11.webm)
 
 Since being behind grants you more powerful items, playing from behind is an enjoyable experience as the dynamic item drops mean you always feel like you're able to utilize items strategically and have an impact on the game.
 
-![Showcase of high power items & clips of them being used in ways I like]()
+![High power items ensure that you always have a sense of agency](/block-sumo_13.webm)
 
 Being in first place, while not recieving immediately powerful items, still has access to defensive items. So a lot of fun comes from using your better mechanics while being resourceful with the defensive items you have to find the right counterplay to everything coming your way.
 

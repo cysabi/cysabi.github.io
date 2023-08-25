@@ -20,7 +20,7 @@ render(
                 path={"/works/" + Work.data.name}
                 element={
                   <WorkTemplate {...Work.data}>
-                    <Work.default components={{ img: Img }} />
+                    <Work.default components={{ img: Img, Img }} />
                   </WorkTemplate>
                 }
               />

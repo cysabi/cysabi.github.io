@@ -2,7 +2,7 @@ export const data = {
   layer: 5,
   coords: [4, 10],
   name: "off-the-dial-site",
-  desc: "full-stack website to host tournament signups, user accounts, and an easy-to-write blog",
+  desc: "full-stack website to host tournament signups, player accounts, and an easy-to-write blog",
   tags: ["web", "site", "ux", "design"],
   previews: ["/off-the-dial-site_1.png"],
   collage: {
@@ -19,8 +19,9 @@ export const data = {
     summary: (
       <>
         I set out to build a website that could stand as the single source of
-        truth for everything Off the Dial. This quest would end up going through
-        5 iterations spanning across 5 years.
+        truth for everything Off the Dial. This quest would end up taking 5
+        iterations spanning across 5 years. I've compiled all of the highlights
+        here.
       </>
     ),
     roles: ["design", "engineering"],
@@ -45,44 +46,67 @@ export const data = {
   - what are the set of requirements to fulfill?
     - what needs to be show on the website?
     - what are my design goals for the game?
-  - what are users experiencing?
+  - what are players experiencing?
     - include metrics
 - iteration
   - chunks of things i made, show conflict and thought process.
 - results
   - what was my impact?
-  - how do users feel now?
+  - how do players feel now?
     - metrics
   - what lessons did i learn?
   - what would i have done differently if i were to do it again?
 
-At the time, there were a couple problems
+# ideation
 
-- registration was hosted by a discord bot, which was cumbersome and complicated
-- hosting on a discord bot meant limitations that tournament organisers had to fix manually.
+## problems
 
-There were a couple of design goals that I needed to solve
+Previously, registration was hosted through a discord bot. This caused a couple of issues for players and tournament organisers.
 
-- provide an easy link to rules that can be shared and edited without hassle
-- have live and reliable active season information
-- let users sign up and input data, doing as much client side form validation so to's don't need to parse bad data
-- give users a personal dashboard to see their signup status
-- allow players to know what time it is in the tournament schedule
+- Players would run into a lot of friction when attempting to register for tournaments, as it was cumbersome and unintuitive.
+- Tournament organisers had to manually validate and fix problematic signups due to limitations in the registration process.
+- Information and rules surrounding the tournament was difficult to host and share.
 
-(iterative chunks with conflict and thought process)
+## goals
 
-results
+I was able to solve these design problems by **building a website that provides a single source of truth and action for Off the Dial**.
 
-- the website makes it much easier for attendees to find tournament information, as it's the single source of truth for everything
-  - quote attendees on how they feel about the website in general
-  - metric states that most attendees use the website as their go to place to get season information
-    - quote a specific user
-  - metric states that 99% of attendees use the profile page during tournament weekend to see what they need to do
-    - quote a specific user
-  - 99% of attendees are satisifed with navigating the website
-    - quote a specific user
+- Registration on the website must be a frictionless process for players, and be reliably validated for tournament organisers.
+- Players should be presented with relevant tournament information without needing to search for it.
 
-### design: a source of truth for the idtga page
+## solutions
+
+In order to satisfy the goal of presenting relevant information, **I conceputalized all of Off the Dial's information into 3 main categories**.
+
+- The Constitution
+  - The rules page is a purely static / immutable document detailing the technical rules of the tournament and the general schedule.
+- The Season
+  - The tournament page includes details on the start dates, and registration dates for the current season of the tournament.
+- The Player
+  - The profile page displays a player's signup status for the current season, and encourages them to register for the upcoming season.
+  - During the event, a timeline displays what the player's responsibility is for the currently active phase of the event.
+
+# iteration
+
+## engineering: the process
+
+Because Off the Dial is a grassroots tournament organization, it was imperative that I be as efficient with costs as possible. At the same time, I didn't want to sacrifice being able to build any feature.
+
+After researching differentt web hosting methods, I settled on using a jamstack website with the following technologies.
+
+- GatsbyJS - A free and open source static site generator, that allows me to build the website with React.
+- Github Pages - A free CDN, that hosts the static website that GatsbyJS builds.
+- Google Firebase - A basically-free BaaS, that hosts all dynamic functionalities, including OAuth2 login with Firebase Functions.
+
+I also built automated CI pipelines for deployment, completely free with Github Actions.
+
+## design: a source of truth for the idtga page
+
+Previously, one of the iteration of the IDTGA page included a schedule at the bottom of the page that showed the dates of the season.
+
+![](/off-the-dial-site_13.png)
+
+However, players were oftentimes confused
 
 - one of the iterations had a schedule on the idtga page
   - it was moved inside rules for a source of truth
@@ -92,26 +116,27 @@ Even though the rules page would be the single source of truth about the tournam
 
 ![](/off-the-dial-site_6.png)
 
-I wanted this card to be what users can refer to whenever they need information about the current season.
-The focal point of this card directly shares with the user the status of the tournament _as it relates to them!_
+I wanted this card to be what players can refer to whenever they need information about the current season.
+The focal point of this card directly shares with the player the status of the tournament _as it relates to them!_
 
 The card also displays the season title, and all important dates for the season. It shows any information about the season that tournament organizers want to share, such as updates to the rules. And of course, the card also has the rules and signup button!
 
-### engineering: max-width is cool
+## engineering: a max-width container that extends to one side
 
-Something else special about this page in specific is the dynamic size of the skateboarding octo!
+Something else special about the idtga page is the dynamic size of the skateboarding octo!
+Unlike the max-width container below, the right side needs to extend to edge of the viewport. But the left side needs to remain consistent in padding to all of the other elements on the page.
 
 ![](/off-the-dial-site_3.webm "controls")
 
-I can't just apply a max-width to it (like the one below) because the right side needs to be aligned to the right of the viewport, and the left needs to be inline with the padding of all the other elements on the page.
+How do you do this? You can conceputalize the image into 2 halves, where the left half is simply half of the max-width container, while the right half fills it's entire side of the viewport.
 
-So I used the `calc()` function from css!
+Thus, if you divide the container width by 2 and add `50vw` (half of the viewport), all that's left is to align the container to the right!
 
-> `max-width: calc(36rem + 50vw)`
+I used the `calc()` css function to do this! Here's the final rule: `max-width: calc(36rem + 50vw)`
 
 ## design: profile page
 
-One of the biggest improvements I made to the design was the profile page. The old profile page simply displayed your signal strength, but as the year went on, I realized there were some design problems that users wanted solved.
+One of the biggest improvements I made to the design was the profile page. The old profile page simply displayed your signal strength, but as the year went on, I realized there were some design problems that players wanted solved.
 
 One of these was being able to have a good idea on the timing of the tournament.
 
@@ -122,6 +147,19 @@ For the rewrite, I removed the schedule table and designed a timeline that would
 ![](/off-the-dial-site_5.png)
 
 Anyone who navigates to their profile will be able to essentially see a dashboard letting them know if there's a tournament going on, the timing on when everything happens, and what they should be doing right now!
+
+# impact
+
+- the website makes it much easier for attendees to find tournament information, as it's the single source of truth for everything
+  - quote attendees on how they feel about the website in general
+  - metric states that most attendees use the website as their go to place to get season information
+    - quote a specific player
+  - metric states that 99% of attendees use the profile page during tournament weekend to see what they need to do
+    - quote a specific player
+  - 99% of attendees are satisifed with navigating the website
+    - quote a specific player
+
+---
 
 I also placed a non-timezone specific schedule in the rules page, that way all of the "official" information about the tournament is coming from one source of truth, not inside the idtga page.
 

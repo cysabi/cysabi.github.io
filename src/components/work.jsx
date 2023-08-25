@@ -1,4 +1,4 @@
-import { Match, Switch, createSignal, onMount } from "solid-js"
+import { Match, Switch, createSignal, observable, onMount } from "solid-js"
 import { A } from "@solidjs/router"
 import { useGrid } from "./grid"
 
@@ -103,6 +103,20 @@ const Overview = props => {
 }
 
 export const Img = props => {
+  let ref, observer
+  onMount(() => {
+    if (ref && props.title !== "controls") {
+      ref.muted = true
+      observer = new IntersectionObserver(
+        entries =>
+          entries.forEach(entry =>
+            entry.intersectionRatio < 0.5 ? ref.pause() : ref.play()
+          ),
+        { threshold: 0.5 }
+      )
+      observer.observe(ref)
+    }
+  })
   const content = (
     <Switch>
       <Match when={!props.src.endsWith(".webm")}>
@@ -110,12 +124,14 @@ export const Img = props => {
       </Match>
       <Match when={props.src.endsWith(".webm")}>
         <video
+          ref={ref}
           src={props.src}
-          class={props.class}
+          class={`w-full ${props.class}`}
           controls={props.title === "controls"}
           muted={props.title !== "controls"}
           autoplay={props.title !== "controls"}
           loop={props.title !== "controls"}
+          preload="metadata"
         >
           <source src={props.src} alt={props.alt} type="video/webm" />
         </video>
@@ -144,7 +160,7 @@ const Collage = props => {
       <div class="not-prose flex flex-col gap-1 bg-slate-600/50 border-4 overflow-hidden border-transparent rounded-2xl backdrop-blur backdrop-brightness-125">
         <Img
           title="controls"
-          class="rounded-md w-full aspect-video object-cover object-top"
+          class="rounded-md aspect-video object-cover object-top"
           src={sources[active()]}
         />
         <div class="flex gap-1 max-h-28">
