@@ -1,11 +1,11 @@
-import * as work1 from "./off-the-dial-site.mdx"
-import * as work2 from "./cg-pass-the-clam.mdx"
-import * as work3 from "./cg-fabl.mdx"
 import * as work4 from "./block-sumo.mdx"
 import * as work5 from "./blurple-py.mdx"
-import * as work6 from "./social-scheduler.mdx"
+import * as work3 from "./cg-fabl.mdx"
+import * as work2 from "./cg-pass-the-clam.mdx"
 import * as work7 from "./cq-overlays.mdx"
+import * as work1 from "./off-the-dial-site.mdx"
 import * as work8 from "./radia.mdx"
+import * as work6 from "./social-scheduler.mdx"
 
 const Works = () => (
   <div>

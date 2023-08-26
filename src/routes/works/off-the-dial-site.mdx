@@ -39,27 +39,9 @@ export const data = {
   },
 }
 
-- any heading can be specified as a "topic heading"
-  - which gives it an icon to specify that it's for design, and allows anyone to hide it.
-- ideation
-  - figuring out what the specific problems / goals are
-  - what are the set of requirements to fulfill?
-    - what needs to be show on the website?
-    - what are my design goals for the game?
-  - what are players experiencing?
-    - include metrics
-- iteration
-  - chunks of things i made, show conflict and thought process.
-- results
-  - what was my impact?
-  - how do players feel now?
-    - metrics
-  - what lessons did i learn?
-  - what would i have done differently if i were to do it again?
+## ideation
 
-# ideation
-
-## problems
+### problems
 
 Previously, registration was hosted through a discord bot. This caused a couple of issues for players and tournament organisers.
 
@@ -67,14 +49,14 @@ Previously, registration was hosted through a discord bot. This caused a couple 
 - Tournament organisers had to manually validate and fix problematic signups due to limitations in the registration process.
 - Information and rules surrounding the tournament was difficult to host and share.
 
-## goals
+### goals
 
-I was able to solve these design problems by **building a website that provides a single source of truth and action for Off the Dial**.
+My objective was to solve these design problems by **building a website that provides a single source of truth and action for Off the Dial**.
 
 - Registration on the website must be a frictionless process for players, and be reliably validated for tournament organisers.
 - Players should be presented with relevant tournament information without needing to search for it.
 
-## solutions
+### solutions
 
 In order to satisfy the goal of presenting relevant information, **I conceputalized all of Off the Dial's information into 3 main categories**.
 
@@ -86,13 +68,13 @@ In order to satisfy the goal of presenting relevant information, **I conceputali
   - The profile page displays a player's signup status for the current season, and encourages them to register for the upcoming season.
   - During the event, a timeline displays what the player's responsibility is for the currently active phase of the event.
 
-# iteration
+## iteration
 
-## engineering: the process
+### engineering: the process
 
 Because Off the Dial is a grassroots tournament organization, it was imperative that I be as efficient with costs as possible. At the same time, I didn't want to sacrifice being able to build any feature.
 
-After researching differentt web hosting methods, I settled on using a jamstack website with the following technologies.
+After researching different web hosting methods, I settled on using a jamstack website with the following technologies.
 
 - GatsbyJS - A free and open source static site generator, that allows me to build the website with React.
 - Github Pages - A free CDN, that hosts the static website that GatsbyJS builds.
@@ -100,7 +82,7 @@ After researching differentt web hosting methods, I settled on using a jamstack 
 
 I also built automated CI pipelines for deployment, completely free with Github Actions.
 
-## design: a source of truth for the idtga page
+### design: a source of truth for the idtga page
 
 Previously, one of the iteration of the IDTGA page included a schedule at the bottom of the page that showed the dates of the season.
 
@@ -121,7 +103,7 @@ The focal point of this card directly shares with the player the status of the t
 
 The card also displays the season title, and all important dates for the season. It shows any information about the season that tournament organizers want to share, such as updates to the rules. And of course, the card also has the rules and signup button!
 
-## engineering: a max-width container that extends to one side
+### engineering: a max-width container that extends to one side
 
 Something else special about the idtga page is the dynamic size of the skateboarding octo!
 Unlike the max-width container below, the right side needs to extend to edge of the viewport. But the left side needs to remain consistent in padding to all of the other elements on the page.
@@ -134,7 +116,7 @@ Thus, if you divide the container width by 2 and add `50vw` (half of the viewpor
 
 I used the `calc()` css function to do this! Here's the final rule: `max-width: calc(36rem + 50vw)`
 
-## design: profile page
+### design: profile page
 
 One of the biggest improvements I made to the design was the profile page. The old profile page simply displayed your signal strength, but as the year went on, I realized there were some design problems that players wanted solved.
 
@@ -148,7 +130,7 @@ For the rewrite, I removed the schedule table and designed a timeline that would
 
 Anyone who navigates to their profile will be able to essentially see a dashboard letting them know if there's a tournament going on, the timing on when everything happens, and what they should be doing right now!
 
-# impact
+## impact
 
 - the website makes it much easier for attendees to find tournament information, as it's the single source of truth for everything
   - quote attendees on how they feel about the website in general
@@ -163,7 +145,7 @@ Anyone who navigates to their profile will be able to essentially see a dashboar
 
 I also placed a non-timezone specific schedule in the rules page, that way all of the "official" information about the tournament is coming from one source of truth, not inside the idtga page.
 
-## both: weapons selector
+### both: weapons selector
 
 ![](/off-the-dial-site_4.png)
 

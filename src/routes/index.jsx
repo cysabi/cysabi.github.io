@@ -1,10 +1,10 @@
-import { createMemo, createSignal, onMount } from "solid-js"
 import { Motion, Presence } from "@motionone/solid"
-import { spring } from "motion"
-import { useGrid } from "../components/grid"
-import { works } from "./works/index"
-import slurk from "../static/slurk.png"
 import { A, useLocation } from "@solidjs/router"
+import { spring } from "motion"
+import { createMemo, createSignal, onMount } from "solid-js"
+import { useGrid } from "../components/grid"
+import slurk from "../static/slurk.png"
+import { works } from "./works/index"
 
 const Index = () => {
   const { setColor } = useGrid()
@@ -22,6 +22,14 @@ const Index = () => {
 const LandingScreen = () => {
   const location = useLocation()
 
+  const subtitles = [
+    "born to design, lead to develop",
+    "a software engineer with empathy",
+    "passionately focused on sporadic projects",
+    "comp sci's biggest hater",
+    "🧋",
+  ]
+  const [index, setIndex] = createSignal(0)
   const [hoverSlurk, setHoverSlurk] = createSignal(false)
 
   return (
@@ -29,13 +37,13 @@ const LandingScreen = () => {
       <div class="flex flex-col flex-1">
         <div class="flex flex-col-reverse items-start gap-4 md:gap-0 md:flex-row md:justify-between md:items-center">
           <div>
-            <div class="text-4xl lg:text-5xl">hey, i'm cysabi~</div>
+            <div class="text-4xl lg:text-5xl">hey, i'm cysabi</div>
             <div class="text-slate-300 text-3xl lg:text-4xl">
-              born to design, forced to develop
+              {subtitles[index()]}
             </div>
             <div class="flex pt-12 gap-8 text-2xl flex-wrap">
-              <A href={location.hash === "#about" ? "/" : "#about"} noScroll>
-                about
+              <A href={location.hash === "#works" ? "/" : "#works"} noScroll>
+                works
               </A>
               <A
                 href={location.hash === "#contact" ? "/" : "#contact"}
@@ -46,7 +54,7 @@ const LandingScreen = () => {
               {/* <A href="#works">works</A> */}
             </div>
           </div>
-          <A href="#about" noScroll>
+          <button onClick={() => setIndex((index() + 1) % subtitles.length)}>
             <Motion.img
               onmouseenter={() => setHoverSlurk(true)}
               onmouseleave={() => setHoverSlurk(false)}
@@ -58,14 +66,56 @@ const LandingScreen = () => {
               src={slurk}
               class="h-28 md:h-32 lg:h-48"
             />
-          </A>
+          </button>
         </div>
         <div class="relative my-12 md:my-16 flex-1 max-h-full">
           <Presence>
-            <Switch>
-              <Match when={location.hash === "#about"}>
-                <About />
-              </Match>
+            <Switch
+              fallback={
+                <Motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    easing: spring({ mass: 0.1 }),
+                  }}
+                  class="absolute flex flex-col gap-6 rounded-2xl text-2xl text-slate-300"
+                >
+                  <div>
+                    hi, thanks for stopping by! ~ i have a huge passion for{" "}
+                    <span class="font-medium text-slate-50">
+                      learning the ways people think
+                    </span>
+                    , and using that info to{" "}
+                    <span class="font-medium text-slate-50">
+                      think about how best to serve them
+                    </span>
+                    .
+                  </div>
+                  <div>
+                    i got my start in the competitive Splatoon community, where
+                    i first learned to build everything from discord bots, to
+                    websites, to broadcast graphics.
+                  </div>
+                  <div>
+                    <span class="font-medium text-slate-50">
+                      it's never the role i'm filling, but the people i'm
+                      serving that excites me the most!
+                    </span>{" "}
+                    if you're looking for something specific in my works, i've
+                    given you some tags to filter by for help!
+                  </div>
+                  <div>
+                    i'm always open to new opportunities, no matter the medium!
+                    so if you like what you see and want to work with me, don't
+                    hesitate to{" "}
+                    <A href="/#contact" class="font-medium text-slate-50">
+                      reach out!
+                    </A>
+                  </div>
+                </Motion.div>
+              }
+            >
               <Match when={location.hash === "#contact"}>
                 <Contact />
               </Match>
@@ -75,42 +125,14 @@ const LandingScreen = () => {
       </div>
       <div class="flex items-center gap-4">
         <div class="flex-1 h-0.5 bg-slate-50 rounded-full" />
-        <div class="font-medium text-xl">selected works below</div>
+        <h2 class="font-medium text-xl" id="works">
+          selected works below
+        </h2>
         <div class="flex-1 h-0.5 bg-slate-50 rounded-full" />
       </div>
     </div>
   )
 }
-
-const About = () => (
-  <Motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{
-      easing: spring({ mass: 0.1 }),
-    }}
-    class="absolute flex flex-col gap-6 rounded-2xl text-2xl text-slate-200"
-  >
-    <div>
-      hi, thanks for stopping by! you can call me{" "}
-      <span class="font-semibold">sabi</span>; i love thinking about people
-      thinking.
-    </div>
-    <div>
-      this is a portfolio of different works i've done! i don't tend to stick to
-      one thing, so the collection is a bit random. eventually, i'll have some
-      tags to filter by.
-    </div>
-    <div>
-      i'm always open to new opportunities, no matter the medium! so if you like
-      what you see and want to work with me, don't hesitate to{" "}
-      <A href="/#contact" class="font-semibold">
-        reach out!
-      </A>
-    </div>
-  </Motion.div>
-)
 
 const Contact = () => {
   let formRef
@@ -135,7 +157,7 @@ const Contact = () => {
         onsubmit={() => setDone(true)}
       >
         <div class="text-2xl">
-          like what you see? got a project in mind? let's talk!
+          like what you see? got something in mind? let's talk!
         </div>
         <div class="flex gap-4 flex-col md:flex-row">
           <input
@@ -158,7 +180,9 @@ const Contact = () => {
         </div>
         <textarea
           class="resize-none flex-1"
-          placeholder={`hey ${talk() || "there"}! what would you like to say?`}
+          placeholder={`hey ${
+            talk() || "there"
+          }! what would you like to share with me?`}
           name="comment"
           required
         ></textarea>
@@ -209,7 +233,8 @@ const SelectedWorksScreen = () => {
 }
 
 const ProjectOrb = props => {
-  let ref, top
+  let ref,
+    top = 0
   const { setColor } = useGrid()
 
   onMount(() => {

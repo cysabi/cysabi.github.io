@@ -1,5 +1,5 @@
-import { onMount } from "solid-js"
 import { A, Outlet, useLocation } from "@solidjs/router"
+import { onMount } from "solid-js"
 import Grid, { useGrid } from "./grid"
 
 const Layout = () => {
@@ -15,7 +15,7 @@ const Layout = () => {
           setPointer(getComputedStyle(e.target).cursor)
           setPos({ x: e.clientX, y: e.clientY })
         }}
-        class="relative min-h-screen overflow-hidden flex flex-col"
+        class="relative min-h-screen overflow-clip flex flex-col"
       >
         {location.pathname === "/" || (
           <div class="flex items-center font-medium p-8 gap-12">
@@ -23,8 +23,7 @@ const Layout = () => {
               cysabi
             </A>
             <div class="text-xl flex items-center gap-8">
-              <A href="/#about">about</A>
-              {/* <A href="/#works">works</A> */}
+              <A href="/#works">works</A>
               <A href="/#contact">contact</A>
             </div>
           </div>

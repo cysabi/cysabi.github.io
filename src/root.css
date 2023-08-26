@@ -23,8 +23,16 @@
     @apply underline decoration-2 decoration-slate-500 hover:decoration-primary focus-visible:decoration-primary transition-colors;
   }
 
+  html {
+    @apply scroll-smooth;
+  }
+
   a {
     @apply link;
+  }
+
+  article {
+    @apply prose prose-invert prose-xl prose-a:link;
   }
 
   [type="text"],

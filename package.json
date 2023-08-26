@@ -10,7 +10,9 @@
     "@mdx-js/rollup": "^2.3.0",
     "@motionone/solid": "^10.16.2",
     "@solidjs/router": "^0.8.3",
+    "@stefanprobst/rehype-extract-toc": "^2.2.0",
     "motion": "^10.16.2",
+    "rehype-slug": "^5.1.0",
     "solid-js": "^1.7.11"
   },
   "devDependencies": {

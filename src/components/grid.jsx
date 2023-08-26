@@ -1,13 +1,6 @@
-import {
-  createSignal,
-  createContext,
-  useContext,
-  onCleanup,
-  onMount,
-  createMemo,
-} from "solid-js"
-import { spring } from "motion"
 import { Motion } from "@motionone/solid"
+import { spring } from "motion"
+import { createContext, createMemo, createSignal, useContext } from "solid-js"
 import grid from "../static/grid.svg"
 
 const GridContext = createContext()
@@ -58,7 +51,7 @@ const Grid = () => {
           class="absolute hidden sm:block row-start-1 col-start-1 rounded-full bg-primary"
         />
       </div>
-      <div class="fixed inset-0 blur-[96px] opacity-25 -z-10 overflow-hidden flex">
+      <div class="fixed inset-0 blur-[96px] opacity-25 -z-10 flex overflow-hidden">
         <Blob pos={pos} color={color() || "#7A73B8"} />
         <Blob pos={pos} color="#3b6ea2" main />
       </div>
@@ -73,18 +66,16 @@ const Grid = () => {
 const Blob = props => {
   // given a color, return a div that randomly changes opacity, position, and size slightly
   const [blob, setBlob] = createSignal({ x: 0, y: 0, opacity: 0.5 })
-  onMount(() => {
-    const interval = setInterval(() => {
-      setBlob({
-        x: Math.random() * 150 - 75,
-        y: Math.random() * 150 - 75,
-        opacity: props.main
-          ? Math.random() / (4 / 3) + 0.25
-          : Math.random() / 2 + 0.5,
-      })
-    }, 750)
-    onCleanup(() => clearInterval(interval))
-  })
+  setInterval(() => {
+    setBlob({
+      x: Math.random() * 150 - 75,
+      y: Math.random() * 150 - 75,
+      opacity: props.main
+        ? Math.random() / (4 / 3) + 0.25
+        : Math.random() / 2 + 0.5,
+    })
+  }, 750)
+
   return (
     <Motion.div
       class="absolute"
