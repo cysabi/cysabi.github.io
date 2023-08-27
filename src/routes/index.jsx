@@ -20,14 +20,17 @@ const Index = () => {
 }
 
 const LandingScreen = () => {
+  let worksRef
   const location = useLocation()
 
   const subtitles = [
     "born to design, lead to develop",
-    "a software engineer with empathy",
-    "passionately focused on sporadic projects",
+    "a software engineer that's capable of empathy",
+    "thinking about people thinking",
+    "a perfectionist for serving others",
+    "focused on sporadic projects",
     "comp sci's biggest hater",
-    "🧋",
+    "🧋❤️",
   ]
   const [index, setIndex] = createSignal(0)
   const [hoverSlurk, setHoverSlurk] = createSignal(false)
@@ -42,7 +45,7 @@ const LandingScreen = () => {
               {subtitles[index()]}
             </div>
             <div class="flex pt-12 gap-8 text-2xl flex-wrap">
-              <A href={location.hash === "#works" ? "/" : "#works"} noScroll>
+              <A href="#works" onClick={() => worksRef.scrollIntoView(true)}>
                 works
               </A>
               <A
@@ -125,7 +128,7 @@ const LandingScreen = () => {
       </div>
       <div class="flex items-center gap-4">
         <div class="flex-1 h-0.5 bg-slate-50 rounded-full" />
-        <h2 class="font-medium text-xl" id="works">
+        <h2 class="font-medium text-xl" id="works" ref={worksRef}>
           selected works below
         </h2>
         <div class="flex-1 h-0.5 bg-slate-50 rounded-full" />
@@ -220,10 +223,10 @@ const SelectedWorksScreen = () => {
   })
 
   return (
-    <div class="flex h-[calc(100vh-8rem)] -mb-32">
+    <div class="flex h-[calc(100vh-19rem)] -mb-32">
       <div class="w-full h-full grid grid-cols-12 grid-rows-[repeat(12,minmax(0,1fr))]">
         {works
-          .filter(work => work.data.layer)
+          .filter(work => work.data.layer !== undefined)
           .map(work => (
             <ProjectOrb {...work.data} scrollY={scrollY} />
           ))}
@@ -234,40 +237,44 @@ const SelectedWorksScreen = () => {
 
 const ProjectOrb = props => {
   let ref,
-    top = 0
-  const { setColor } = useGrid()
-
-  onMount(() => {
-    top = ref.getBoundingClientRect().top + window.scrollY
-  })
-  const y = createMemo(() => {
-    const translate = top / 2 - props.scrollY()
-    return (translate / 1.5) * props.layer - translate
-  })
-
+    titleRef,
+    top = 0,
+    size = 384
   const angle = Math.random() * Math.PI * 2
   const imgOffset = {
-    x: Math.cos(angle) * props.layer * 64,
-    y: Math.sin(angle) * props.layer * 64,
+    x: Math.cos(angle) * size,
+    y: Math.sin(angle) * size,
   }
+  const scale = 1 + props.layer * 0.125
 
+  const { setColor } = useGrid()
+  const [titleHeight, setTitleHeight] = createSignal(0)
   const [lean, setLean] = createSignal({ img: imgOffset, orb: { x: 0, y: 0 } })
   const [hov, setHov] = createSignal(false)
 
+  onMount(() => {
+    top = ref.getBoundingClientRect().top + window.scrollY
+    setTitleHeight(titleRef.getBoundingClientRect().height)
+  })
+
+  const y = createMemo(
+    () => (top / 2 - props.scrollY()) * (1.75 + props.layer * 0.5)
+  )
+
   return (
     <div
-      style={`z-index: ${hov() ? "20" : props.layer}; grid-column-start: ${
-        props.coords[0]
-      }; grid-row-start: ${props.coords[1]};`}
+      style={`
+        z-index: ${(20 + (hov() ? 1 : props.layer)) * 2};
+        grid-column-start: ${props.coords[0]};
+        grid-row-start: ${props.coords[1]};`}
     >
       <div
         ref={ref}
         class="ml-[50%]"
         style={`
-          transform: translate(-50%, ${y()}px);
-          height: ${props.layer * 64}px;
-          width: ${props.layer * 64}px;
-          font-size: calc(2rem / 5 * ${props.layer});
+          transform: translate(-50%, ${y()}px) scale(${scale});
+          height: ${size}px;
+          width: ${size}px;
         `}
       >
         <div class="z-10 absolute h-full flex items-center justify-center pointer-events-none">
@@ -332,68 +339,55 @@ const ProjectOrb = props => {
           transition={{
             easing: spring({ stiffness: 500, damping: 50 }),
           }}
-          class="rounded-full h-full w-full flex items-center justify-center border-4 backdrop-blur transition-none"
+          class="rounded-full h-full w-full flex items-center justify-center backdrop-blur transition-none"
+          style={`border-width: ${4 / scale}px`}
         >
-          <div class="absolute inset-0 rounded-full flex items-center justify-center">
+          <div class="absolute inset-0 p-6 rounded-full flex items-center justify-center">
             <Motion.div
+              ref={titleRef}
               animate={{
                 scale: hov() ? 0.75 : 1,
-                y: hov() ? props.layer * 15 * -1 : 0,
+                y: hov() ? (titleHeight() - size / 2) * scale - 12 : 0,
               }}
-              class="flex flex-col items-center text-center p-3 origin-top"
+              class="flex flex-col items-center text-center origin-top"
             >
-              <div
-                class="flex items-center justify-center"
-                style={`font-size: calc(1.2rem / 5 * ${props.layer}); gap: calc(0.4rem / 5 * ${props.layer})`}
-              >
+              <div class="flex items-center justify-center gap-2 text-lg">
                 {props.tags?.slice(0, 2)?.map(tag => (
-                  <div
-                    style={`padding: 0 calc(0.5rem / 5 * ${props.layer}) 0 calc(0.5rem / 5 * ${props.layer})`}
-                    class="px-2 bg-primary/10 font-medium rounded-full text-primary backdrop-blur backdrop-brightness-125"
-                  >
+                  <div class="px-3 py-1 bg-primary/10 font-medium text-3xl rounded-full text-primary backdrop-blur backdrop-brightness-125">
                     {tag}
                   </div>
                 ))}
               </div>
-              <div class="font-mono leading-tight">{props.name}</div>
+              <div class="font-mono leading-tight text-4xl">{props.name}</div>
             </Motion.div>
           </div>
-          <div class="absolute inset-0 rounded-full flex flex-col items-center justify-center">
-            <div style={`height: ${props.layer * 20}px`} />
+          <div class="absolute inset-0 p-6 rounded-full flex flex-col items-center text-center justify-between text-2xl">
+            <div style={{ height: `${titleHeight()}px` }} />
             <Motion.div
-              animate={{
-                opacity: hov() ? 1 : 0,
-              }}
-              class="p-3 opacity-0 mx-auto text-center my-auto"
-              style={`font-size: calc(1.2rem / 5 * ${props.layer})`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: hov() ? 1 : 0 }}
             >
-              {props.desc || (
-                <span class="font-bold text-slate-400">coming soon!</span>
-              )}
+              {props.desc}
             </Motion.div>
-            {props.desc && (
-              <Motion.div
-                animate={{
-                  opacity: hov() ? 1 : 0,
-                }}
-                class="p-3 opacity-0 mx-auto text-center my-auto font-medium flex items-center gap-1"
-                style={`font-size: calc(1rem / 5 * ${props.layer})`}
+            <Motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: hov() ? 1 : 0 }}
+              class="flex items-center gap-1"
+            >
+              view case
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="h-6 w-6"
               >
-                view case
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  style={`height: calc(1.5rem / 5 * ${props.layer})`}
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </Motion.div>
-            )}
+                <path
+                  fillRule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Motion.div>
           </div>
         </Motion.a>
       </div>

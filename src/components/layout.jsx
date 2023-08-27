@@ -32,14 +32,14 @@ const Layout = () => {
           <Outlet />
         </div>
         <div class="bg-slate-900/50 border-t-4 border-slate-700/25 backdrop-blur flex flex-col gap-8 mt-[min(10vw,128px)] p-12">
-          <div class="flex items-center justify-between gap-4 w-full">
+          <div class="flex items-center justify-between flex-wrap gap-12 w-full">
             <div class="text-slate-500 text-center">
               like what you see?{" "}
               <A href="/#contact" class="text-slate-400">
                 contact me!
               </A>
             </div>
-            <div class="text-slate-500 text-center">
+            <div class="text-slate-500">
               built with{" "}
               <a href="https://solidjs.com" class="text-slate-400">
                 solidjs

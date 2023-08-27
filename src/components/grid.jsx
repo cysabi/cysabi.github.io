@@ -1,14 +1,23 @@
 import { Motion } from "@motionone/solid"
 import { spring } from "motion"
-import { createContext, createMemo, createSignal, useContext } from "solid-js"
+import {
+  createContext,
+  createMemo,
+  createSignal,
+  onMount,
+  useContext,
+} from "solid-js"
 import grid from "../static/grid.svg"
 
 const GridContext = createContext()
 
 export const GridProvider = props => {
-  const [pos, setPos] = createSignal({ x: 400, y: 400 })
   const [color, setColor] = createSignal("#7A73B8")
   const [pointer, setPointer] = createSignal("auto")
+  const [pos, setPos] = createSignal({ hide: true })
+  onMount(() =>
+    setPos({ x: window.innerWidth / 2, y: window.innerHeight / 2, hide: true })
+  )
 
   return (
     <GridContext.Provider
@@ -28,7 +37,12 @@ const Grid = () => {
   const a = createMemo(() => pointer() === "pointer")
   return (
     <>
-      <div class="fixed inset-0 pointer-events-none flex items-start justify-start z-50">
+      <Motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: pos().hide ? 0 : 1 }}
+        transition={{ duration: 1 }}
+        class="fixed inset-0 pointer-events-none flex items-start justify-start z-[1000]"
+      >
         <Motion.div
           animate={{
             x: pos().x - 16,
@@ -50,11 +64,16 @@ const Grid = () => {
           transition={{ easing: spring({ mass: 0.025 }) }}
           class="absolute hidden sm:block row-start-1 col-start-1 rounded-full bg-primary"
         />
-      </div>
-      <div class="fixed inset-0 blur-[96px] opacity-25 -z-10 flex overflow-hidden">
+      </Motion.div>
+      <Motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: pos().hide ? 0 : 0.25 }}
+        transition={{ duration: 1 }}
+        class="fixed inset-0 blur-[96px] -z-10 flex overflow-hidden"
+      >
         <Blob pos={pos} color={color() || "#7A73B8"} />
         <Blob pos={pos} color="#3b6ea2" main />
-      </div>
+      </Motion.div>
       <div
         class="absolute opacity-[0.015] inset-0 -z-10 bg-repeat bg-center"
         style={`background-image: url('${grid}')`}
