@@ -31,7 +31,8 @@ export const data = {
             (<span class="text-green-500">+35,265</span>{" "}
             <span class="text-red-500">-22,311</span>)
           </span>
-        </a>!
+        </a>
+        !
       </span>
     ),
     roles: ["design", "engineering"],
@@ -46,8 +47,7 @@ export const data = {
       website: "https://otd.ink",
       github: "https://github.com/offthedial/site",
     },
-
-},
+  },
 }
 
 # ideation
@@ -65,7 +65,7 @@ Before the website, registration was hosted through a discord bot. However, this
 
 <Topic design>
 
-## design: conceputalizing all of the information for Off the Dial
+## design # conceputalizing all of the information for Off the Dial
 
 In order to complete this quest of building a source of truth, I asked myself: **what kind of information are players looking for?**, and **how can I organize this information in airtight concepts?** Here's what I came up with:
 
@@ -87,7 +87,7 @@ In order to complete this quest of building a source of truth, I asked myself: *
 
 <Topic engineering>
 
-## engineering: picking out a tech stack that costs cents per month
+## engineering # picking out a tech stack that costs cents per month
 
 Because Off the Dial is a grassroots tournament organization, it was imperative that I be as efficient with costs as possible. At the same time, **I didn't want to sacrifice being able to build all the features I wanted**.
 
@@ -109,7 +109,7 @@ After researching different web hosting methods, I settled on building a JAMstac
 
 <Topic design>
 
-## design: improving how tournament info is communicated
+## design # improving how tournament info is communicated
 
 Previously, the schedule of the tournament was an adaptive card at the bottom of the tournament page, that showed either the dates of the season, or relative dates such as "3 days before tournament starts".
 
@@ -150,7 +150,7 @@ Now that schedule has been moved out of the tournament page, is there even a pur
 
 <Topic engineering>
 
-## engineering: extending a max-width container on one side
+## engineering # extending a max-width container on one side
 
 Something else special about the idtga page is the dynamic size of the skateboarding octo!
 Unlike the max-width container below, the right side needs to extend to edge of the viewport. But the left side needs to remain consistent in padding to all of the other elements on the page.
@@ -171,7 +171,7 @@ max-width: calc(36rem + 50vw)
 
 <Topic engineering>
 
-## engineering: building an autocomplete component with multi-select
+## engineering # building an autocomplete component with multi-select
 
 ![](/off-the-dial-site_5.webm)
 
@@ -189,7 +189,9 @@ At first, the dropdown filter function was very primitive, but I discovered this
 
 the website makes it much easier for attendees to find tournament information, as it's the single source of truth for everything
 
-## design: what do players think about the website?
+## design # what do players think about the website?
+
+{/* todo: fix this section */}
 
 - quote attendees on how they feel about the website in general
 - metric states that most attendees use the website as their go to place to get season information
@@ -202,7 +204,7 @@ the website makes it much easier for attendees to find tournament information, a
 </Topic>
 <Topic engineering>
 
-## engineering: a brief history of the site, and my progression of what i've learned
+## engineering # a brief history of the site, and my progression of what i've learned
 
 As I mentioned, this website went through 5 total iterations. I rewrote it from scratch each time using new/updated technologies, and redesigning all the pages.
 

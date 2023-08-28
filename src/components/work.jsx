@@ -51,7 +51,7 @@ const WorkTemplate = props => {
                 </h2>
               ),
               h2: props => {
-                const topic = props.children.split(": ")
+                const topic = props.children.split(" # ")
                 return (
                   <h3
                     {...props}
@@ -252,13 +252,13 @@ const Sidebar = props => {
                 ? "text-slate-50 font-medium tracking-[-0.01em]"
                 : "text-slate-400"
             } ${
-              hiddenTopics().includes(h.value.split(": ").at(0))
+              hiddenTopics().includes(h.value.split(" # ").at(0))
                 ? "text-slate-600 pointer-events-none"
                 : "hover:text-slate-300"
             }`}
             style={`padding-left: ${(h.depth - 1) * 16}px`}
           >
-            <span class="line-clamp-2">{h.value.split(": ").at(-1)}</span>
+            <span class="line-clamp-2">{h.value.split(" # ").at(-1)}</span>
           </button>
         ))}
       </Section>
