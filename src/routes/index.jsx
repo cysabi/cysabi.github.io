@@ -20,11 +20,10 @@ const Index = () => {
 }
 
 const LandingScreen = () => {
-  let worksRef
   const location = useLocation()
 
   const subtitles = [
-    "born to design, lead to develop",
+    "born to design, forced to develop",
     "a software engineer that's capable of empathy",
     "thinking about people thinking",
     "a perfectionist for serving others",
@@ -36,7 +35,7 @@ const LandingScreen = () => {
   const [hoverSlurk, setHoverSlurk] = createSignal(false)
 
   return (
-    <div class="flex flex-col justify-between max-w-7xl h-screen mx-auto p-[min(10vw,128px)]">
+    <div class="flex flex-col justify-between max-w-7xl min-h-screen mx-auto p-[min(10vw,128px)]">
       <div class="flex flex-col flex-1">
         <div class="flex flex-col-reverse items-start gap-4 md:gap-0 md:flex-row md:justify-between md:items-center">
           <div>
@@ -45,16 +44,22 @@ const LandingScreen = () => {
               {subtitles[index()]}
             </div>
             <div class="flex pt-12 gap-8 text-2xl flex-wrap">
-              <A href="#works" onClick={() => worksRef.scrollIntoView(true)}>
+              <button
+                class="inline link"
+                onClick={() =>
+                  document
+                    .getElementById("works")
+                    .scrollIntoView({ behavior: "smooth" })
+                }
+              >
                 works
-              </A>
+              </button>
               <A
                 href={location.hash === "#contact" ? "/" : "#contact"}
                 noScroll
               >
-                contact
+                {location.hash === "#contact" ? "about" : "contact"}
               </A>
-              {/* <A href="#works">works</A> */}
             </div>
           </div>
           <button onClick={() => setIndex((index() + 1) % subtitles.length)}>
@@ -67,7 +72,7 @@ const LandingScreen = () => {
               }}
               transition={{ easing: spring({ mass: 0.5, stiffness: 300 }) }}
               src={slurk}
-              class="h-28 md:h-32 lg:h-48"
+              class="h-28 md:h-32 lg:h-48 rounded"
             />
           </button>
         </div>
@@ -82,7 +87,7 @@ const LandingScreen = () => {
                   transition={{
                     easing: spring({ mass: 0.1 }),
                   }}
-                  class="absolute flex flex-col gap-6 rounded-2xl text-2xl text-slate-300"
+                  class="flex flex-col gap-6 rounded-2xl text-2xl text-slate-300"
                 >
                   <div>
                     hi, thanks for stopping by! ~ i have a huge passion for{" "}
@@ -96,17 +101,21 @@ const LandingScreen = () => {
                     .
                   </div>
                   <div>
-                    i got my start in the competitive Splatoon community, where
-                    i first learned to build everything from discord bots, to
-                    websites, to broadcast graphics.
+                    my roots stem from leading tournaments for competitive
+                    Splatoon. one day i thought to myself,{" "}
+                    <span class="font-medium text-slate-50">
+                      "how can i make this experience nicer for players?"
+                    </span>
+                    . that one question has driven me to build everything from
+                    discord bots, to websites, to broadcast graphics!
                   </div>
                   <div>
+                    to this day, i still carry that mantra to every project i
+                    work on.{" "}
                     <span class="font-medium text-slate-50">
                       it's never the role i'm filling, but the people i'm
                       serving that excites me the most!
-                    </span>{" "}
-                    if you're looking for something specific in my works, i've
-                    given you some tags to filter by for help!
+                    </span>
                   </div>
                   <div>
                     i'm always open to new opportunities, no matter the medium!
@@ -128,7 +137,7 @@ const LandingScreen = () => {
       </div>
       <div class="flex items-center gap-4">
         <div class="flex-1 h-0.5 bg-slate-50 rounded-full" />
-        <h2 class="font-medium text-xl" id="works" ref={worksRef}>
+        <h2 class="font-medium text-xl" id="works">
           selected works below
         </h2>
         <div class="flex-1 h-0.5 bg-slate-50 rounded-full" />
@@ -149,7 +158,7 @@ const Contact = () => {
       transition={{
         easing: spring({ mass: 0.1 }),
       }}
-      class="absolute h-full w-full flex flex-col"
+      class="absolute inset-0 flex flex-col"
     >
       <form
         ref={formRef}
@@ -223,7 +232,7 @@ const SelectedWorksScreen = () => {
   })
 
   return (
-    <div class="flex h-[calc(100vh-19rem)] -mb-32">
+    <div class="flex h-[calc(100vh-19rem)] -mb-32 mx-auto max-w-[1728px]">
       <div class="w-full h-full grid grid-cols-12 grid-rows-[repeat(12,minmax(0,1fr))]">
         {works
           .filter(work => work.data.layer !== undefined)
@@ -301,95 +310,101 @@ const ProjectOrb = props => {
             />
           </Motion.div>
         </div>
-        <Motion.a
-          href={"works/" + props.name}
-          onmouseenter={() => {
-            setHov(true)
-            setColor("#a0cebe")
-          }}
-          onmouseleave={() => {
-            setLean({ img: imgOffset, orb: { x: 0, y: 0 } })
-            setHov(false)
-            setColor(false)
-          }}
-          onmousemove={e => {
-            const rect = ref.getBoundingClientRect()
-            const x = e.clientX - (rect.x + rect.width / 2)
-            const y = e.clientY - (rect.y + rect.height / 2)
-            setLean({
-              img: {
-                x: x / 8 + imgOffset.x,
-                y: y / 8 + imgOffset.y,
-              },
-              orb: {
-                x: Math.sqrt(Math.abs(x)) * Math.sign(x) * 2,
-                y: Math.sqrt(Math.abs(y)) * Math.sign(y) * 2,
-              },
-            })
-          }}
-          animate={{
-            x: lean().orb.x,
-            y: lean().orb.y,
-            scale: hov() ? 1.2 : 1,
-            backgroundColor: hov()
-              ? "rgb(51 65 85 / 0.5)"
-              : "rgb(15 23 42 / 0.5)",
-            borderColor: hov() ? "rgb(71 85 105 / 0.5)" : "rgb(51 65 85 / 0.5)",
-          }}
-          transition={{
-            easing: spring({ stiffness: 500, damping: 50 }),
-          }}
-          class="rounded-full h-full w-full flex items-center justify-center backdrop-blur transition-none"
-          style={`border-width: ${4 / scale}px`}
-        >
-          <div class="absolute inset-0 p-6 rounded-full flex items-center justify-center">
-            <Motion.div
-              ref={titleRef}
-              animate={{
-                scale: hov() ? 0.75 : 1,
-                y: hov() ? (titleHeight() - size / 2) * scale - 12 : 0,
-              }}
-              class="flex flex-col items-center text-center origin-top"
-            >
-              <div class="flex items-center justify-center gap-2 text-lg">
-                {props.tags?.slice(0, 2)?.map(tag => (
-                  <div class="px-3 py-1 bg-primary/10 font-medium text-3xl rounded-full text-primary backdrop-blur backdrop-brightness-125">
-                    {tag}
-                  </div>
-                ))}
-              </div>
-              <div class="font-mono leading-tight text-4xl">{props.name}</div>
-            </Motion.div>
-          </div>
-          <div class="absolute inset-0 p-6 rounded-full flex flex-col items-center text-center justify-between text-2xl">
-            <div style={{ height: `${titleHeight()}px` }} />
-            <Motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: hov() ? 1 : 0 }}
-            >
-              {props.desc}
-            </Motion.div>
-            <Motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: hov() ? 1 : 0 }}
-              class="flex items-center gap-1"
-            >
-              view case
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="h-6 w-6"
+        <A href={"works/" + props.name}>
+          <Motion.div
+            onmouseenter={() => {
+              setHov(true)
+              setColor("#a6ffe0")
+            }}
+            onmouseleave={() => {
+              setLean({ img: imgOffset, orb: { x: 0, y: 0 } })
+              setHov(false)
+              setColor(false)
+            }}
+            onmousemove={e => {
+              const rect = ref.getBoundingClientRect()
+              const x = e.clientX - (rect.x + rect.width / 2)
+              const y = e.clientY - (rect.y + rect.height / 2)
+              setLean({
+                img: {
+                  x: x / 8 + imgOffset.x,
+                  y: y / 8 + imgOffset.y,
+                },
+                orb: {
+                  x: Math.sqrt(Math.abs(x)) * Math.sign(x) * 2,
+                  y: Math.sqrt(Math.abs(y)) * Math.sign(y) * 2,
+                },
+              })
+            }}
+            initial={{ borderColor: "rgb(71 85 105 / 0.5)" }}
+            animate={{
+              x: lean().orb.x,
+              y: lean().orb.y,
+              scale: hov() ? 1.2 : 1,
+              backgroundColor: hov()
+                ? "rgb(51 65 85 / 0.5)"
+                : "rgb(15 23 42 / 0.5)",
+              borderColor: hov()
+                ? "rgb(71 85 105 / 0.5)"
+                : "rgb(51 65 85 / 0.5)",
+            }}
+            transition={{
+              easing: spring({ stiffness: 500, damping: 50 }),
+            }}
+            class="rounded-full h-full w-full flex items-center justify-center backdrop-blur transition-none border-transparent"
+            style={`border-width: ${4 / scale}px`}
+          >
+            <div class="absolute inset-0 p-6 rounded-full flex items-center justify-center">
+              <Motion.div
+                ref={titleRef}
+                animate={{
+                  scale: hov() ? 0.75 : 1,
+                  y: hov() ? (titleHeight() - size / 2) * scale - 12 : 0,
+                }}
+                class="flex flex-col items-center text-center origin-top"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </Motion.div>
-          </div>
-        </Motion.a>
+                <div class="flex items-center justify-center gap-2 text-lg">
+                  {props.tags?.slice(0, 2)?.map(tag => (
+                    <div class="px-3 py-1 bg-primary/10 font-medium text-3xl rounded-full text-primary backdrop-blur backdrop-brightness-125">
+                      {tag}
+                    </div>
+                  ))}
+                </div>
+                <div class="font-mono leading-tight text-4xl">{props.name}</div>
+              </Motion.div>
+            </div>
+            <div class="absolute inset-0 p-6 rounded-full flex flex-col items-center text-center justify-between text-2xl">
+              <div style={{ height: `${titleHeight()}px` }} />
+              <Motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: hov() ? 1 : 0 }}
+              >
+                {props.desc}
+              </Motion.div>
+              <Motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: hov() ? 1 : 0 }}
+                class="flex items-center gap-1"
+              >
+                view case
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+                  />
+                </svg>
+              </Motion.div>
+            </div>
+          </Motion.div>
+        </A>
       </div>
     </div>
   )

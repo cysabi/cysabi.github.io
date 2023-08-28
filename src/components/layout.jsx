@@ -4,6 +4,14 @@ import Grid, { useGrid } from "./grid"
 
 const Layout = () => {
   const location = useLocation()
+  ;[
+    "hey there :)",
+    "snooping around are we?",
+    "don't worry, i don't mind",
+    "just remember to leave everything where you found it !",
+  ].map(text => {
+    console.log("%c" + text, "color: #8dadff; font-weight: 600;")
+  })
   const { setPos, setColor, setPointer } = useGrid()
   onMount(() => {
     setColor(false)
@@ -18,7 +26,7 @@ const Layout = () => {
         class="relative min-h-screen overflow-clip flex flex-col"
       >
         {location.pathname === "/" || (
-          <div class="flex items-center font-medium p-8 gap-12">
+          <div class="flex items-center flex-wrap font-medium p-8 gap-12">
             <A href="/" class="text-2xl">
               cysabi
             </A>
@@ -35,27 +43,38 @@ const Layout = () => {
           <div class="flex items-center justify-between flex-wrap gap-12 w-full">
             <div class="text-slate-500 text-center">
               like what you see?{" "}
-              <A href="/#contact" class="text-slate-400">
+              <A href="/#contact" class="text-slate-400 decoration-transparent">
                 contact me!
               </A>
             </div>
             <div class="text-slate-500">
               built with{" "}
-              <a href="https://solidjs.com" class="text-slate-400">
+              <a
+                href="https://solidjs.com"
+                class="text-slate-400 decoration-transparent"
+              >
                 solidjs
               </a>{" "}
               (
-              <a href="https://vitejs.dev" class="text-slate-400">
+              <a
+                href="https://vitejs.dev"
+                class="text-slate-400 decoration-transparent"
+              >
                 vite
               </a>
               ) &{" "}
-              <a href="https://tailwindcss.com" class="text-slate-400">
+              <a
+                href="https://tailwindcss.com"
+                class="text-slate-400 decoration-transparent"
+              >
                 tailwind
               </a>
-              <span class="font-medium text-white px-3">/</span>
+              <span class="px-3 font-mono font-black text-slate-600 -tracking-widest">
+                //
+              </span>
               <a
                 href="https://github.com/LeptoFlare/LeptoFlare.github.io"
-                class="text-slate-400"
+                class="text-slate-400 decoration-transparent"
               >
                 source code
               </a>

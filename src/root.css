@@ -11,20 +11,17 @@
     font-style: normal, italic;
   }
 
-  @font-face {
-    font-family: "Fragment Mono";
-    src: url("/FragmentMono-Regular.ttf") format("truetype"),
-      url("/FragmentMono-Italic.ttf") format("truetype");
-    font-weight: 400, 400;
-    font-style: normal, italic;
-  }
-
   .link {
     @apply underline decoration-2 decoration-slate-500 hover:decoration-primary focus-visible:decoration-primary transition-colors;
   }
 
-  html {
-    @apply scroll-smooth;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply scroll-m-3;
   }
 
   a {
@@ -32,7 +29,7 @@
   }
 
   article {
-    @apply prose prose-invert prose-xl prose-a:link;
+    @apply prose prose-lg sm:prose-xl prose-a:link prose-strong:font-bold;
   }
 
   [type="text"],

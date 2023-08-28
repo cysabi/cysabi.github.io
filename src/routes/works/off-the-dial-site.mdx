@@ -1,28 +1,38 @@
 export const data = {
-  layer: -2,
+  layer: -1.5,
   coords: [5, 8],
   name: "off-the-dial-site",
   desc: "full-stack website that hosts tournament signups, player accounts, and a blog",
   tags: ["web", "site", "ux", "design"],
   previews: ["/off-the-dial-site_1.png"],
   collage: {
-    "/off-the-dial-site_11.png": "Welcome to Off the Dial!",
+    "/off-the-dial-site_14.png": "Welcome to Off the Dial!",
+    "/off-the-dial-site_11.png":
+      "Let's switch to dark mode for the screenshots from here",
     "/off-the-dial-site_7.png":
       "The tournament page, shows all relevant season information",
     "/off-the-dial-site_12.png":
       "Your profile page, a dashboard for your tournament signup",
+    "/off-the-dial-site_10.png":
+      "Staff page, showcases everyone involved in the running of Off the Dial",
     "/off-the-dial-site_9.png":
       "The posts page, for tournament organizers to share anything they need",
-    "/off-the-dial-site_8.png": "A example post",
+    "/off-the-dial-site_8.png": "An example post page",
   },
   overview: {
     summary: (
-      <>
+      <span>
         I set out to build a website that could stand as the single source of
         truth for everything Off the Dial. This quest would end up taking 5
-        iterations spanning across 5 years. I've compiled all of the highlights
-        here.
-      </>
+        iterations spanning across 5 years. Here's last iteration's{" "}
+        <a href="https://github.com/offthedial/site/pull/123">
+          pull request{" "}
+          <span class="text-slate-600">
+            (<span class="text-green-500">+35,265</span>{" "}
+            <span class="text-red-500">-22,311</span>)
+          </span>
+        </a>!
+      </span>
     ),
     roles: ["design", "engineering"],
     tools: [
@@ -36,123 +46,172 @@ export const data = {
       website: "https://otd.ink",
       github: "https://github.com/offthedial/site",
     },
-  },
+
+},
 }
 
-## ideation
+# ideation
 
-### problems
+Before the website, registration was hosted through a discord bot. However, this had a couple of problems for players and tournament organisers.
 
-Previously, registration was hosted through a discord bot. This caused a couple of issues for players and tournament organisers.
+1. Because of the limitations of discord, players would run into a lot of friction when trying to register for tournaments.
+2. Tournament organisers oftentimes had to manually validate and fix problematic signups due to these limitations in the registration process.
+3. Information and rules surrounding the tournament was difficult to host. Discord messages were hard to edit, and google doc links were hard to share.
 
-- Players would run into a lot of friction when attempting to register for tournaments, as it was cumbersome and unintuitive.
-- Tournament organisers had to manually validate and fix problematic signups due to limitations in the registration process.
-- Information and rules surrounding the tournament was difficult to host and share.
+> My objective was to solve these problems by building a website that provides a single source of truth and action for Off the Dial.
 
-### goals
+- Registration on the website should be a frictionless process for players, and user input should be reliably client-side validated.
+- Players should be presented with all relevant tournament information without ever needing to go searching for it.
 
-My objective was to solve these design problems by **building a website that provides a single source of truth and action for Off the Dial**.
+<Topic design>
 
-- Registration on the website must be a frictionless process for players, and be reliably validated for tournament organisers.
-- Players should be presented with relevant tournament information without needing to search for it.
+## design: conceputalizing all of the information for Off the Dial
 
-### solutions
+In order to complete this quest of building a source of truth, I asked myself: **what kind of information are players looking for?**, and **how can I organize this information in airtight concepts?** Here's what I came up with:
 
-In order to satisfy the goal of presenting relevant information, **I conceputalized all of Off the Dial's information into 3 main categories**.
+1. ### The Constitution
 
-- The Constitution
-  - The rules page is a purely static / immutable document detailing the technical rules of the tournament and the general schedule.
-- The Season
-  - The tournament page includes details on the start dates, and registration dates for the current season of the tournament.
-- The Player
-  - The profile page displays a player's signup status for the current season, and encourages them to register for the upcoming season.
-  - During the event, a timeline displays what the player's responsibility is for the currently active phase of the event.
+   The rules page is static document that displays information **relating to the tournament format**. It details the technical rules of the tournament and the general schedule.
 
-## iteration
+2. ### The Season
 
-### engineering: the process
+   The tournament page displays information **specific to the current season of the tournament**. Such as details on the start dates, registration dates, and rules changes.
 
-Because Off the Dial is a grassroots tournament organization, it was imperative that I be as efficient with costs as possible. At the same time, I didn't want to sacrifice being able to build any feature.
+3. ### The Player
 
-After researching different web hosting methods, I settled on using a jamstack website with the following technologies.
+   The profile page displays information **as it relates to the player**. It displays player's registration status for the current season, and encourages them to register for the upcoming season. During the event, a timeline displays what the player's responsibility is for the currently active phase of the event.
 
-- GatsbyJS - A free and open source static site generator, that allows me to build the website with React.
-- Github Pages - A free CDN, that hosts the static website that GatsbyJS builds.
-- Google Firebase - A basically-free BaaS, that hosts all dynamic functionalities, including OAuth2 login with Firebase Functions.
+</Topic>
 
-I also built automated CI pipelines for deployment, completely free with Github Actions.
+# iteration
 
-### design: a source of truth for the idtga page
+<Topic engineering>
 
-Previously, one of the iteration of the IDTGA page included a schedule at the bottom of the page that showed the dates of the season.
+## engineering: picking out a tech stack that costs cents per month
+
+Because Off the Dial is a grassroots tournament organization, it was imperative that I be as efficient with costs as possible. At the same time, **I didn't want to sacrifice being able to build all the features I wanted**.
+
+After researching different web hosting methods, I settled on building a JAMstack website with the following technologies:
+
+- ### GatsbyJS
+
+  A free and open source static site generator, I chose Gatsby so I could use React to build out complex features for the website.
+
+- ### Github Pages
+
+  A free CDN, I'm able to host the static site that GatsbyJS builds for free, it also made it easy to build automated CI pipelines for deployment, also completely free with **Github Actions**.
+
+- ### Google Firebase
+
+  A BaaS with an illegally generous free tier, this let me have my cake and eat it too. I use firebase to support all dynamic functions, such as a custom OAuth2 login endpoint for discord oauth.
+
+</Topic>
+
+<Topic design>
+
+## design: improving how tournament info is communicated
+
+Previously, the schedule of the tournament was an adaptive card at the bottom of the tournament page, that showed either the dates of the season, or relative dates such as "3 days before tournament starts".
 
 ![](/off-the-dial-site_13.png)
 
-However, players were oftentimes confused
+However this often either confused players or got overlooked, because most players refer to the rules document for information regarding the tournament format.
 
-- one of the iterations had a schedule on the idtga page
-  - it was moved inside rules for a source of truth
-  - then a timezone specific schedule in on your profile
+The schedule <i class="text-slate-400">(at least in it's relative date form)</i> fits that description, so it ended up fragmenting the tournament format information across multiple pages, which wasn't ideal.
 
-Even though the rules page would be the single source of truth about the tournament as a whole, I wanted all season information in it's own source of truth as well, and that came in the form of a card!
+> I rethought what the schedule card was really trying to communicate, and decoupled the purpose from the content.
 
-![](/off-the-dial-site_6.png)
+1. I moved the static variant of the schedule into the rules page, so the rules page can stand as the main source of truth for tournament format information.
 
-I wanted this card to be what players can refer to whenever they need information about the current season.
-The focal point of this card directly shares with the player the status of the tournament _as it relates to them!_
+2. As an evolution of the season-specific schedule, **I built out a new timeline component for the player's profile page** to replace the old schedule.
 
-The card also displays the season title, and all important dates for the season. It shows any information about the season that tournament organizers want to share, such as updates to the rules. And of course, the card also has the rules and signup button!
+   In addition to the date of each phase, anyone who navigates to their profile will see a dynamic, season-specific, and profile-specific timeline letting them know if there's a tournament going on, when everything happens, and what they should be doing!
 
-### engineering: a max-width container that extends to one side
+<div class="flex gap-4 -my-12">
+
+![](/off-the-dial-site_6-1.png)
+
+![](/off-the-dial-site_6-2.png)
+
+</div>
+
+Now that schedule has been moved out of the tournament page, is there even a purpose for the tournament page anymore? _Yes!_
+
+**Season-specific information needed to have it's own place**, as the information is constantly changing over time with every season. This came in the form of a dynamic card!
+
+- Displays the season title, and all of the important dates that change with each season.
+- Communicates any season-specific info that tournament organizers want to share, such as updates to the rules.
+- Calls players to a hit that signup button, as well as includes a link to the rules!
+- The focal point of this card is a colorful callout that **shares the current active status of the tournament, as it relates to the player**!
+
+![](/off-the-dial-site_7.png)
+
+</Topic>
+
+<Topic engineering>
+
+## engineering: extending a max-width container on one side
 
 Something else special about the idtga page is the dynamic size of the skateboarding octo!
 Unlike the max-width container below, the right side needs to extend to edge of the viewport. But the left side needs to remain consistent in padding to all of the other elements on the page.
 
 ![](/off-the-dial-site_3.webm "controls")
 
-How do you do this? You can conceputalize the image into 2 halves, where the left half is simply half of the max-width container, while the right half fills it's entire side of the viewport.
+How do you do this? You can conceputalize the image into 2 halves, where the right half fills it's entire side of the viewport, while the left half is simply half of the max-width container.
 
-Thus, if you divide the container width by 2 and add `50vw` (half of the viewport), all that's left is to align the container to the right!
+So if you divide the container width by 2 and add `50vw` (half of the viewport), all that's left is to align the container to the right!
 
-I used the `calc()` css function to do this! Here's the final rule: `max-width: calc(36rem + 50vw)`
+I used the `calc()` css function to do this! Here's the final rule:
 
-### design: profile page
+```
+max-width: calc(36rem + 50vw)
+```
 
-One of the biggest improvements I made to the design was the profile page. The old profile page simply displayed your signal strength, but as the year went on, I realized there were some design problems that players wanted solved.
+</Topic>
 
-One of these was being able to have a good idea on the timing of the tournament.
+<Topic engineering>
 
-Because it's an international tournament that caters to multiple timezones, it can be difficult to know when it actually runs. In the earlier design, I had a schedule table on the /idtga page, but that was it.
+## engineering: building an autocomplete component with multi-select
 
-For the rewrite, I removed the schedule table and designed a timeline that would be visible on the profile page. The timeline would be dynamic, timezone-specific, season-specific, and profile-specific.
+![](/off-the-dial-site_5.webm)
 
-![](/off-the-dial-site_5.png)
+It's best to lean on external libraries when it comes to complex accessible components like this, but always remember to own your own styles. I decided on using [Headless UI](https://headlessui.com), but Radix and Reach UI are awesome alternatives.
 
-Anyone who navigates to their profile will be able to essentially see a dashboard letting them know if there's a tournament going on, the timing on when everything happens, and what they should be doing right now!
+The state of the input, include the query and values are controlled by [`react-hook-form`](https://react-hook-form.com), which are passed on straight into the combobox component.
 
-## impact
+At first, the dropdown filter function was very primitive, but I discovered this awesome library called [`match-sorter`](https://github.com/kentcdodds/match-sorter)! It perfectly fit this use case and provided an awesome fuzzy search experience.
 
-- the website makes it much easier for attendees to find tournament information, as it's the single source of truth for everything
-  - quote attendees on how they feel about the website in general
-  - metric states that most attendees use the website as their go to place to get season information
-    - quote a specific player
-  - metric states that 99% of attendees use the profile page during tournament weekend to see what they need to do
-    - quote a specific player
-  - 99% of attendees are satisifed with navigating the website
-    - quote a specific player
+</Topic>
 
----
+# impact
 
-I also placed a non-timezone specific schedule in the rules page, that way all of the "official" information about the tournament is coming from one source of truth, not inside the idtga page.
+<Topic design>
 
-### both: weapons selector
+the website makes it much easier for attendees to find tournament information, as it's the single source of truth for everything
 
-![](/off-the-dial-site_4.png)
+## design: what do players think about the website?
 
-One of the new additions for this rewrite was a working weapon selector. No fancy tricks were really used here, but I'm really proud of the finished design.
+- quote attendees on how they feel about the website in general
+- metric states that most attendees use the website as their go to place to get season information
+  - quote a specific player
+- metric states that 99% of attendees use the profile page during tournament weekend to see what they need to do
+  - quote a specific player
+- 99% of attendees are satisifed with navigating the website
+  - quote a specific player
 
-This was when I first discovered [`match-sorter`](https://github.com/kentcdodds/match-sorter), a really cool library! Learning how to implement that into [`headlessui`](https://headlessui.com)'s combobox was just really satsifying.
+</Topic>
+<Topic engineering>
 
----
+## engineering: a brief history of the site, and my progression of what i've learned
 
-Here's the [pull request <span class="text-slate-600">(<span class="text-green-500">+35,265</span> <span class="text-red-500">-22,311</span>)</span>](https://github.com/offthedial/site/pull/123)!
+As I mentioned, this website went through 5 total iterations. I rewrote it from scratch each time using new/updated technologies, and redesigning all the pages.
+
+> It was very cool seeing how much I've learned with each iteration, discovering new technologies and building better features. So I wanted to share my progression!
+
+1. The first iteration was actually just a bunch of markdown files in a repo published with github pages. It was just a simple way to host the rules with a shareable link.
+2. The next iteration was static html with `Bootstrap` css. it looked like a baby's first website <i class="text-slate-400">(because it was)</i>, and probably used exclusively bootstrap cards everywhere.
+3. This is when `Gatsby` became a staple of the stack, and with the introduction of `Firebase`, I was finally able to learn how to implement **oauth2 login** and **tournament registration**. I also learned `Bulma` to replace `Bootstrap`!
+4. After getting the hang of Firebase and Gatsby, I was able to make a ton of improvements, such as the profile page with it's **registration status** and **timeline**, redesigning the **signup form**, and learning `Chakra` to replace `Bulma`.
+5. The penultimate version! For the most part, general layout remained the same, but I spent a lot of time rewriting cleaner code, and remaking more polished designs with the help of `Tailwind`. This is also when I implemented the **weapon selector component**.
+
+</Topic>

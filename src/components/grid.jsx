@@ -15,13 +15,26 @@ export const GridProvider = props => {
   const [color, setColor] = createSignal("#7A73B8")
   const [pointer, setPointer] = createSignal("auto")
   const [pos, setPos] = createSignal({ hide: true })
+  const [hiddenTopics, setHiddenTopics] = createSignal([])
   onMount(() =>
     setPos({ x: window.innerWidth / 2, y: window.innerHeight / 2, hide: true })
   )
 
   return (
     <GridContext.Provider
-      value={{ pos, setPos, color, setColor, pointer, setPointer }}
+      value={{
+        pos,
+        setPos,
+        color,
+        setColor,
+        pointer,
+        setPointer,
+        hiddenTopics,
+        toggleTopic: topic =>
+          hiddenTopics().includes(topic)
+            ? setHiddenTopics(hiddenTopics().filter(t => t !== topic))
+            : setHiddenTopics([...hiddenTopics(), topic]),
+      }}
     >
       {props.children}
     </GridContext.Provider>
@@ -41,14 +54,14 @@ const Grid = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: pos().hide ? 0 : 1 }}
         transition={{ duration: 1 }}
-        class="fixed inset-0 pointer-events-none flex items-start justify-start z-[1000]"
+        class="fixed inset-0 pointer-events-none flex items-start justify-start -z-10"
       >
         <Motion.div
           animate={{
             x: pos().x - 16,
             y: pos().y - 16,
             padding: "16px",
-            opacity: a() ? 0.2 : 0.33,
+            opacity: a() ? 0.4 : 0.4,
             backgroundColor: color() || "#7A73B8",
           }}
           transition={{ easing: spring({ mass: 0.125 }) }}
@@ -59,7 +72,7 @@ const Grid = () => {
             x: pos().x - (a() ? 16 : 8),
             y: pos().y - (a() ? 16 : 8),
             padding: a() ? "16px" : "8px",
-            opacity: a() ? 0.2 : 0.33,
+            opacity: a() ? 0.4 : 0.4,
           }}
           transition={{ easing: spring({ mass: 0.025 }) }}
           class="absolute hidden sm:block row-start-1 col-start-1 rounded-full bg-primary"
@@ -113,12 +126,12 @@ const Blob = props => {
         <Motion.div
           animate={{ ...blob() }}
           transition={{ easing: spring({ mass: 10, stiffness: 10 }) }}
-          class="h-[640px] rounded-full aspect-square"
+          class="h-[640px] w-[640px] rounded-full"
         >
           <Motion.div
             animate={{ backgroundColor: props.color }}
             transition={{ duration: 0.7 }}
-            class="h-full w-full rounded-full aspect-square"
+            class="h-full w-full rounded-full"
           />
         </Motion.div>
       </div>
