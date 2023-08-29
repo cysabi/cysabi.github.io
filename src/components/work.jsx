@@ -85,12 +85,6 @@ const WorkTemplate = props => {
                   {...props}
                 />
               ),
-              strong: props => (
-                <strong
-                  {...props}
-                  class="bg-primary-950/50 rounded-sm backdrop-blur backdrop-brightness-[2.25]"
-                />
-              ),
               a: A,
               Img,
               Topic,
@@ -164,20 +158,33 @@ const Overview = props => {
           {props.roles.map(role => (
             <TopicBadge>{role}</TopicBadge>
           ))}
-          <div class="pt-4 text-lg text-slate-400">
-            <span class="font-bold text-base font-mono">TIP:</span> Not
-            interested in a topic? Click the eye to hide it's content!
+          <div class="mt-4 p-2 text-lg w-full rounded-lg backdrop-blur bg-primary-400/[0.05] border-primary-400/20 text-primary-100 border-2">
+            <div class="inline-flex items-center justify-center align-sub translate-y-[1px] mr-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-5 h-5 inline"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <span>Click the eye to hide topics you're not interested in!</span>
           </div>
         </Section>
         <Section title="Tools & Technologies">
           {props.tools.map(tool => (
-            <div class="leading-none md:whitespace-nowrap rounded py-1 px-2 bg-slate-600/50 backdrop-blur backdrop-brightness-125">
+            <div class="leading-none md:whitespace-nowrap rounded py-1 px-2 bg-slate-700/25 backdrop-blur backdrop-brightness-125">
               {typeof tool === "string"
                 ? tool
                 : tool.map((t, i) => (
                     <>
                       {i === 0 || (
-                        <span class="text-slate-800 font-mono font-black mx-1">
+                        <span class="text-slate-600 font-mono font-black mx-1">
                           /
                         </span>
                       )}
@@ -256,7 +263,7 @@ const Sidebar = props => {
   )
 
   return (
-    <div class="not-prose flex flex-col gap-12 pt-12 lg:sticky lg:top-0 lg:max-w-min w-full">
+    <div class="not-prose flex flex-col gap-12 pt-12 lg:sticky lg:top-0 lg:max-w-min w-full text-base">
       <Section title="Table of Contents">
         {toc.map(h => (
           <button
@@ -266,7 +273,7 @@ const Sidebar = props => {
                 .scrollIntoView({ behavior: "smooth" })
             }
             class={`text-left no-underline leading-tight ${
-              (h.depth - 1) * 16 ? "text-base" : "text-lg"
+              (h.depth - 1) * 16 ? "" : ""
             } ${
               activeHeading() === h.id
                 ? "text-slate-50 font-medium tracking-[-0.01em]"
@@ -286,9 +293,8 @@ const Sidebar = props => {
         {props.roles?.map(role => (
           <TopicBadge>{role}</TopicBadge>
         ))}
-        <div class="pt-4 text-lg text-slate-400">
-          <span class="font-bold text-base font-mono">TIP:</span> Not interested
-          in a topic? Click the eye to hide it's content!
+        <div class="pt-4 text-slate-400">
+          Not interested in a topic? Click the eye to hide it's content!
         </div>
       </Section>
       <A
@@ -423,7 +429,7 @@ const TopicBadge = props => {
       <div
         class={`${
           topicData[props.children].class
-        } backdrop-blur backdrop-brightness-125 flex items-center px-2 gap-2 font-semibold capitalize rounded-md`}
+        } backdrop-blur backdrop-brightness-125 flex items-center px-2 py-0.5 gap-2 font-semibold capitalize rounded-md text-lg`}
       >
         {topicData[props.children].icon}
         {props.children}

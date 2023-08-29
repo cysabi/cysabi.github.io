@@ -21,19 +21,22 @@ export const data = {
   },
   overview: {
     summary: (
-      <span>
-        I set out to build a website that could stand as the single source of
-        truth for everything Off the Dial. This quest would end up taking 5
-        iterations spanning across 5 years. Here's last iteration's{" "}
-        <a href="https://github.com/offthedial/site/pull/123">
-          pull request{" "}
-          <span class="text-slate-600">
-            (<span class="text-green-500">+35,265</span>{" "}
-            <span class="text-red-500">-22,311</span>)
-          </span>
-        </a>
-        !
-      </span>
+      <>
+        <span>
+          Building a website for Off the Dial, a tournament organization for
+          Splatoon providing tournament opportunities to players without a team.
+          This quest would end up taking 5 iterations spanning across 5 years.
+          Here's last iteration's{" "}
+          <a href="https://github.com/offthedial/site/pull/123">
+            pull request{" "}
+            <span class="text-slate-600">
+              (<span class="text-green-500">+35,265</span>{" "}
+              <span class="text-red-500">-22,311</span>)
+            </span>
+          </a>
+          !
+        </span>
+      </>
     ),
     roles: ["design", "engineering"],
     tools: [
@@ -54,7 +57,7 @@ export const data = {
 
 Before the website, registration was hosted through a discord bot. However, this had a couple of problems for players and tournament organisers.
 
-1. Because of the limitations of discord, players would run into a lot of friction when trying to register for tournaments.
+1. **Because of the limitations of discord, players would run into a lot of friction when trying to register for tournaments.**
 2. Tournament organisers oftentimes had to manually validate and fix problematic signups due to these limitations in the registration process.
 3. Information and rules surrounding the tournament was difficult to host. Discord messages were hard to edit, and google doc links were hard to share.
 
@@ -65,7 +68,7 @@ Before the website, registration was hosted through a discord bot. However, this
 
 <Topic design>
 
-## design # organizing Off the Dial's information into concepts
+## design # coming up with the information architecture
 
 In order to complete this quest of building a source of truth, I asked myself: **what kind of information are players looking for?** Here's what I came up with:
 
