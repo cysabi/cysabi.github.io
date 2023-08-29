@@ -317,7 +317,7 @@ const Img = props => {
           muted={props.title !== "controls"}
           autoplay={props.title !== "controls"}
           loop={props.title !== "controls"}
-          preload={props.title === "controls" ? "metadata" : "none"}
+          preload="metadata"
         >
           <source src={props.src} alt={props.alt} type="video/webm" />
         </video>
