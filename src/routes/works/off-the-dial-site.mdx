@@ -65,9 +65,9 @@ Before the website, registration was hosted through a discord bot. However, this
 
 <Topic design>
 
-## design # conceputalizing all of the information for Off the Dial
+## design # organizing Off the Dial's information into concepts
 
-In order to complete this quest of building a source of truth, I asked myself: **what kind of information are players looking for?**, and **how can I organize this information in airtight concepts?** Here's what I came up with:
+In order to complete this quest of building a source of truth, I asked myself: **what kind of information are players looking for?** Here's what I came up with:
 
 1. ### The Constitution
 
@@ -87,7 +87,7 @@ In order to complete this quest of building a source of truth, I asked myself: *
 
 <Topic engineering>
 
-## engineering # picking out a tech stack that costs cents per month
+## engineering # picking a tech stack that costs cents per month
 
 Because Off the Dial is a grassroots tournament organization, it was imperative that I be as efficient with costs as possible. At the same time, **I didn't want to sacrifice being able to build all the features I wanted**.
 
@@ -109,7 +109,7 @@ After researching different web hosting methods, I settled on building a JAMstac
 
 <Topic design>
 
-## design # improving how tournament info is communicated
+## design # better communicating tournament information
 
 Previously, the schedule of the tournament was an adaptive card at the bottom of the tournament page, that showed either the dates of the season, or relative dates such as "3 days before tournament starts".
 
@@ -117,7 +117,7 @@ Previously, the schedule of the tournament was an adaptive card at the bottom of
 
 However this often either confused players or got overlooked, because most players refer to the rules document for information regarding the tournament format.
 
-The schedule <i class="text-slate-400">(at least in it's relative date form)</i> fits that description, so it ended up fragmenting the tournament format information across multiple pages, which wasn't ideal.
+The schedule _(at least in it's relative date form)_ fits that _description_, so it ended up fragmenting the tournament format information across multiple pages, which wasn't ideal.
 
 > I rethought what the schedule card was really trying to communicate, and decoupled the purpose from the content.
 
@@ -157,7 +157,7 @@ Unlike the max-width container below, the right side needs to extend to edge of 
 
 ![](/off-the-dial-site_3.webm "controls")
 
-How do you do this? You can conceputalize the image into 2 halves, where the right half fills it's entire side of the viewport, while the left half is simply half of the max-width container.
+How do you do this? You can conceptualize the image into 2 halves, where the right half fills it's entire side of the viewport, while the left half is simply half of the max-width container.
 
 So if you divide the container width by 2 and add `50vw` (half of the viewport), all that's left is to align the container to the right!
 
@@ -171,7 +171,7 @@ max-width: calc(36rem + 50vw)
 
 <Topic engineering>
 
-## engineering # building an autocomplete component with multi-select
+## engineering # building a multi-select autocomplete component
 
 ![](/off-the-dial-site_5.webm)
 
@@ -189,7 +189,7 @@ At first, the dropdown filter function was very primitive, but I discovered this
 
 the website makes it much easier for attendees to find tournament information, as it's the single source of truth for everything
 
-## design # what do players think about the website?
+## design # how do players feel about the website?
 
 {/* todo: fix this section */}
 
@@ -204,14 +204,14 @@ the website makes it much easier for attendees to find tournament information, a
 </Topic>
 <Topic engineering>
 
-## engineering # a brief history of the site, and my progression of what i've learned
+## engineering # a brief history of the site, and what i've learned
 
 As I mentioned, this website went through 5 total iterations. I rewrote it from scratch each time using new/updated technologies, and redesigning all the pages.
 
-> It was very cool seeing how much I've learned with each iteration, discovering new technologies and building better features. So I wanted to share my progression!
+> I'd like to share how the site has progressed as I learned more with each iteration, discovering new technologies and building better features.
 
 1. The first iteration was actually just a bunch of markdown files in a repo published with github pages. It was just a simple way to host the rules with a shareable link.
-2. The next iteration was static html with `Bootstrap` css. it looked like a baby's first website <i class="text-slate-400">(because it was)</i>, and probably used exclusively bootstrap cards everywhere.
+2. The next iteration was static html with `Bootstrap` css. it looked like a baby's first website _(because it was)_, and probably used exclusively bootstrap cards everywhere.
 3. This is when `Gatsby` became a staple of the stack, and with the introduction of `Firebase`, I was finally able to learn how to implement **oauth2 login** and **tournament registration**. I also learned `Bulma` to replace `Bootstrap`!
 4. After getting the hang of Firebase and Gatsby, I was able to make a ton of improvements, such as the profile page with it's **registration status** and **timeline**, redesigning the **signup form**, and learning `Chakra` to replace `Bulma`.
 5. The penultimate version! For the most part, general layout remained the same, but I spent a lot of time rewriting cleaner code, and remaking more polished designs with the help of `Tailwind`. This is also when I implemented the **weapon selector component**.

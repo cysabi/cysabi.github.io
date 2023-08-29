@@ -2,7 +2,7 @@ export const data = {
   layer: 0,
   coords: [8, 4],
   name: "block-sumo",
-  desc: "a highly skill-expressive minecraft minigame without sacrificing player accessibility",
+  desc: "a highly skill-expressive minecraft minigame that doesn't sacrifice player accessibility",
   tags: ["game", "design"],
   previews: ["/block-sumo_17.webp"],
   collage: {
@@ -28,10 +28,10 @@ export const data = {
   overview: {
     summary: (
       <>
-        I collaborated with a designer to build a set of broadcast graphics for
-        a Splatoon Major Tournament! But with an impossibly short timeframe, irl
-        responsibilites, and unforeseen roadblocks, will I be able to finish on
-        time?
+        Inspired by arena-style pick-up-and-play pvp games like Knockout City,
+        Friends vs Friends, and Mario Kart, I wanted to make a game with a near
+        infinite level of skill-expression, without sacrificing player
+        accessibility.
       </>
     ),
     roles: ["design"],
@@ -39,11 +39,11 @@ export const data = {
   },
 }
 
-I've always had a specific place in my heart for arena style pick-up-and-play pvp games, that don't sacrifice high skill expression. Games like Knockout City, Friends vs Friends, and of course Super Smash really resonate with me!
+# ideation
 
-I wanted to make a game that fit that vision, the kind of game that you can open when you're bored with your friends and you don't know what to play, but you'll know you'll have a great time.
+One day, while watching gameplay of a minecraft content creator (fruitberries) creatively place blocks on the edges of the map to escape his opponent, **I realized just how expressive Minecraft's movement can be**.
 
-One day, while watching gameplay of a minecraft content creator (fruitberries) creatively place blocks on the edges of the map to escape his opponent, I realized just how expressive Minecraft's movement can be. Placing blocks can provide you with infinite possibilities for movement, by allowing you to bend your environment to your will, in a way that's not that different to Fortnite's build mode.
+Placing blocks provides you with infinite possibilities for movement, **allowing you to bend your environment to your will**. In fact, it's not that different to Fortnite's build mode.
 
 <Img
   src="/block-sumo_1.webm"
@@ -55,79 +55,86 @@ One day, while watching gameplay of a minecraft content creator (fruitberries) c
   }
 />
 
-That was the point I decided on building a minecraft minigame.
+This is when I decided on making a minecraft minigame, one that lets gameplay like this shine.
+However, I didn't want to follow the same footsteps that Fortnite had with build mode, where the skill floor grew to increasingly unreachable heights.
 
-# ideation
+> I wanted it to be a game that you know you'll enjoy if you're bored with your friends and don't know what to play.
+
+## landing on a core concept for the game
 
 There were a couple design goals that I had in mind when creating this game.
 
-- The game should highlight creative block placement and allow players to access a near-infinite level of skill expression.
-- At the same time, anyone regardless of experience should be able to pick up the game and find it instantly enjoyable and fun.
-- The fundamental mechanics of the game should have lots of game mode flexibility, it should be easy to support free-for-all, 1v1s, team battles, and asymmetric modes.
+1. The game should **highlight creative block placement** and allow players to access a near-infinite level of skill expression.
+2. At the same time, anyone regardless of experience should be able to **pick up the game and find it instantly enjoyable** and fun.
+3. The fundamental mechanics of the game should have lots of **game mode flexibility**, it should be easy to support ffa's, 1v1s, teams, and asymmetric modes. No matter who you're hanging out with, there should always be a fitting gamemode to play together.
 
-  No matter who you're hanging out with, there should always be a fitting gamemode to play together.
+> You spawn on a floating platform, and your goal is to knock other players off to score points. Items randomly spawn for all players, with more powerful items the further you are behind.
+>
+> The catch? **Each player has an infinite number of blocks in their offhand.**.
 
-I landed on a core concept inspired by platform-fighters. Players spawns on a floating platform, and their goal is to knock other players off to score points.
+This concept was just simple enough for anyone to intuitive grasp the objective, so it was easy to pick up. It also had a lot of flexibility what game modes can be set! You can easily turn a 6-person free-for-all into 2 teams of 3, or 3 teams of 2.
 
-- I felt the concept was just simple enough for anyone to intuitive grasp the objective.
-- It also had a lot of flexibility what game modes can be set. You can easily turn a 6-person free-for-all into 2 teams of 3, or 3 teams of 2.
+![Infinite blocks provide a lot of creativity for movement and outplays](/block-sumo_10.webm)
 
-![Example of one of the first beta maps](/block-sumo_3.webp)
+<Topic design>
 
-To accentuate the skill expression of block placement, I made each player have infinite blocks in their offhand, and I also ensured that the map provided opportunities for such expression through the deliberate placement of platform skips and wall-climbable pillars (both of which use blocks).
+# iteration
 
-![](/block-sumo_10.webm)
+## design # introducing items
 
-# introducing items
+While the main role of items is to provide accesibility, they have a lot of utility as a tool that I can use to **add a healthy amount of chaotic, party-like energy to the game's atmosphere**.
 
-When introducing items, I wanted their role to be to encourage the right kinds of play and make the game's atmosphere more engaging and fun! Here were the exact design challenges that I laid out to solve.
+Here were the exact design challenges that I laid out to solve.
 
-1. ### introduce a healthy amount of chaotic and party-like energy.
+1. ### increase accessibility through fair rubber-banding
 
-   This needed to be handled with care, although I wanted the game to be easy to pick up and play with friends, I didn't want to take away from the skill expression of block placement.
+   > **Accessibility is important and does not need to come at the sacrifice of player expression.**
 
-   I wanted items make the game feel more party-like in a controllable way that feels both strategic and chaotic in equal proportions.
+   I wanted items to assist players with less direct mechanical skill to still be able to make an impact through the strategic use of items.
 
-2. ### encourage more emergent vertical play
+   ![The further you are behind, the more powerful items you recieve!](/block-sumo_13.webm)
 
-   Without items, i predicted it would be common to build high without engaging, and the game would devolve and seperate into 2 layers, one at ground level and one at build height.
+   **`Here's How:`** Inspired by Mario Kart, item rubber-banding keeps the game an enjoyable experience for players far behind. There's always a sense of agency from utilizing your items items strategically to make an impact on the game.
 
-   With items, I hoped to make it easier to approach people at higher elevations, or reach higher elevations yourself, making bridging that vertical gap seamless and fluid.
+2. ### ensure item counterplay is always possible for those at the top
 
-3. ### increase accessibility through fair rubber-banding.
+   Although I wanted the game to be easy to pick up and play with friends, I didn't want to take away from the skill expression of block placement.
 
-   _Accessibility is important and does not need to come at the sacrifice of player expression_.
+   Even the most powerful items should have enough counterplay for players at the top to use their better mechanics to outplay them.
 
-   I wanted items to assist players with less direct mechanical skill to be able to find success through the strategic use of items, all while still providing enough counterplay for players on the recieving end.
+   ![No matter what gets thrown your way, there's always room to clutch](/block-sumo_16.webm)
 
-All of this lead to a system where the power level of items that a player recieves is proportional to how far they are behind first place.
+   **`Here's How:`** First place still has access to (less powerful) defensive items. So a lot of fun comes from using better mechanics, while **being resourceful with the defensive items you do have** to find the right counterplay to any situation.
 
-![An early draft of item spawn rates](/block-sumo_2.webp)
+3. ### encourage more emergent vertical play
 
-This made it easy to control exactly how chaotic i wanted the game to be, by allowing me to fine-tune exactly what I wanted the frequency of each item to be at every level! Vertical play was easily tuneable by modifying the spawn rate of vertical mobility items.
+   I wanted vertical movement as a staple of the game, where traversing up and down feels seamless and fluid. The game should play in a 3-dimensional space, not a 2-dimensional plane.
 
-![Vertical mobility keeps movement feeling dynamic and expressive](/block-sumo_11.webm)
+   Items should make it easier to traverse up and down, approach people at higher elevations, and bridge that vertical gap.
 
-Since being behind grants you more powerful items, playing from behind is an enjoyable experience as the dynamic item drops mean you always feel like you're able to utilize items strategically and have an impact on the game.
+   ![Vertical mobility keeps movement feeling dynamic and expressive](/block-sumo_11.webm)
+   {/* TODO: stitch a bridge egg clip to it */}
 
-![High power items ensure that you always have a sense of agency](/block-sumo_13.webm)
+   **`Here's How:`** Through the introduction of many different quick-cast mobility items, and especially an item that automatically builds a bridge, the game was able to fill that fantasy of being a 3d space.
 
-Being in first place, while not recieving immediately powerful items, still has access to defensive items. So a lot of fun comes from using your better mechanics while being resourceful with the defensive items you have to find the right counterplay to everything coming your way.
+4. ### influence the game's atmosphere
 
-![No matter what gets thrown your way, there's always room to clutch](/block-sumo_16.webm)
+   Items should make the game feel more party-like in a controllable way that feels both strategic and chaotic in equal proportions.
 
-## case study #1 - balancing snowballs
+   ![An early draft of item spawn rates depending on points behind](/block-sumo_2.webp)
+
+   **`Here's How:`** This system made allowed me to fine-tune exactly what I wanted the frequency of each item to be at every level! For example, vertical play can easily be increased by modifying the spawn rate of vertical mobility items.
+
+## design # rebalancing snowballs
 
 One of the issues that I ran into when fine-tuning the balance of items was the difficulty of range.
 
-Most of the high-power items required close range combat for them to get value. This was an intentional decision, because I didn't want those behind to find an easy strategy of staying on the outskirts with high-power ranged weapons to catch up.
+Most of the high-power items required close range combat for them to get value. This was an intentional decision, because **I didn't want those behind to find an easy strategy of staying on the outskirts with high-power ranged weapons to catch up**.
 
-However, because of the abundance of snowballs that are given to first place (as the "coin" / "green shell" of this game) it became an effective strategy for whoever was in 1st place to retreat constantly while kiting opponents away with an infinite supply of snowballs.
+However, because of the abundance of snowballs that are given to first place _(as the "coin" / "green shell" of this game)_ it became an effective strategy for whoever was in 1st place to retreat constantly while kiting opponents away with an infinite supply of snowballs.
 
 - I couldn't simply lower the quantity of snowballs, as that would also affect those that were not in first place.
-- I didn't want to give too many powerful ranged options to those behind, as that would introduce camping
-
-### the solution
+- I couldn't give too many powerful ranged options to those behind, as that would introduce camping.
 
 My solution required many different adjustments, all working together:
 
@@ -137,7 +144,7 @@ My solution required many different adjustments, all working together:
 
 2. ### Players in the lead mostly recieve 4-count snowballs, instead of the previous 8.
 
-   This change removed the spamming power for first place, so players have to be more careful about when they decide to use them, but keeps it's purpose as a "useful when used right" defensive tool.
+   This change removed the spamming power for first place, so **players have to be more careful about when they decide to use them**, but it keeps it's purpose as a "useful when used right" defensive tool.
 
 3. ### Players that are behind recieve the 8-count snowballs item, instead of snowballs being exclusive to those in the lead.
 
@@ -145,9 +152,11 @@ My solution required many different adjustments, all working together:
 
 4. ### Introduce a new item, a short-ranged debuff bomb that blinds and slows victims.
 
-   This item had enough range to impactfully increase the average threat-range of players that are behind. But it's short range and effect still required engagement from it's user to get value, which made it a really healthy addition to the game.
+   This item had enough range to impactfully increase the average threat-range of players that are behind. But **it's short range and effect still required engagement from it's user to get value**, which made it a really healthy addition to the game.
 
    ![A "Smoke Bomb", that applies a blind and slow effect. The blind lasts half as long as the slow](/block-sumo_14.webm)
+
+   {/* todo replace with a shorter video */}
 
 5. ### Introduce a new item, a powerful, but rare, long-ranged projectile (that works better the longer the range).
 
@@ -155,8 +164,16 @@ My solution required many different adjustments, all working together:
 
    Because this item is more effective at longer ranges, it's a direct counter to long distance kiting. The longer and further you retreat, the larger the threat grows that someone has gotten the projectile.
 
-   In an ironic way, an item like this actually discourages camping by forcing those in the lead to respect it's threat and think more strategically about the range they play at.
+   > Ironically, an item like this actually discourages camping by forcing those in the lead to respect it's threat and think more strategically about the range they play at.
 
    Players can't constantly try to maximize distance between others all the time, as the item's existence introduces a sort-of "shot clock" to kiting and retreating.
 
    !["The Obliterator", a rocket-launcher that instantly kills anyone caught in it's blast radius](/block-sumo_15.webm)
+
+## design # designing maps
+
+and I also ensured that the map provided opportunities for such expression through the deliberate placement of platform skips and wall-climbable pillars (both of which use blocks).
+
+![Example of one of the first beta maps](/block-sumo_3.webp)
+
+</Topic>

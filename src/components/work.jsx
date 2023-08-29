@@ -66,17 +66,31 @@ const WorkTemplate = props => {
               },
               h3: props => (
                 <h4
-                  {...props}
                   class="text-xl sm:text-2xl font-medium text-slate-300"
+                  {...props}
                 />
               ),
               blockquote: props => (
                 <blockquote
-                  {...props}
                   class="text-xl sm:text-2xl not-italic font-normal text-slate-50"
+                  {...props}
                 />
               ),
               img: Img,
+              em: props => (
+                <em
+                  class={
+                    props.children?.startsWith("(") ? "text-slate-400" : ""
+                  }
+                  {...props}
+                />
+              ),
+              strong: props => (
+                <strong
+                  {...props}
+                  class="bg-primary-950/50 rounded-sm backdrop-blur backdrop-brightness-[2.25]"
+                />
+              ),
               a: A,
               Img,
               Topic,
@@ -173,8 +187,8 @@ const Overview = props => {
             </div>
           ))}
         </Section>
-        {props.sources && (
-          <Section title="Sources & Links">
+        <Section title="Sources & Links">
+          {props.sources ? (
             <div class="flex flex-col gap-4">
               {Object.entries(props.sources).map(([name, href]) => (
                 <a href={href} class="font-medium leading-none">
@@ -182,8 +196,12 @@ const Overview = props => {
                 </a>
               ))}
             </div>
-          </Section>
-        )}
+          ) : (
+            <div class="text-slate-500 text-lg">
+              sorry! there's no links for this project.
+            </div>
+          )}
+        </Section>
       </div>
     </article>
   )
