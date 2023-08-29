@@ -173,15 +173,17 @@ const Overview = props => {
             </div>
           ))}
         </Section>
-        <Section title="Sources & Links">
-          <div class="flex flex-col gap-4">
-            {Object.entries(props.sources).map(([name, href]) => (
-              <a href={href} class="font-medium leading-none">
-                {name}
-              </a>
-            ))}
-          </div>
-        </Section>
+        {props.sources && (
+          <Section title="Sources & Links">
+            <div class="flex flex-col gap-4">
+              {Object.entries(props.sources).map(([name, href]) => (
+                <a href={href} class="font-medium leading-none">
+                  {name}
+                </a>
+              ))}
+            </div>
+          </Section>
+        )}
       </div>
     </article>
   )
@@ -296,15 +298,16 @@ const Img = props => {
     }
   })
   const content = (
-    <Switch>
-      <Match when={!props.src.endsWith(".webm")}>
+    <Switch
+      fallback={
         <img
           class={`w-full rounded-md ${props.class}`}
           src={props.src}
           alt={props.alt}
           loading="lazy"
         />
-      </Match>
+      }
+    >
       <Match when={props.src.endsWith(".webm")}>
         <video
           ref={ref}
