@@ -65,10 +65,7 @@ const WorkTemplate = props => {
                 )
               },
               h3: props => (
-                <h4
-                  class="text-xl sm:text-2xl font-medium text-slate-300"
-                  {...props}
-                />
+                <h4 class="text-xl sm:text-2xl text-slate-400" {...props} />
               ),
               blockquote: props => (
                 <blockquote

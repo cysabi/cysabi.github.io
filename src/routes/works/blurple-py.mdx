@@ -27,7 +27,7 @@ One of the main features of this library is the multi-step reply functions, thes
 
 I needed a system that could be designed in a way that made it easy for developers to use as a drop-in solution for standard use cases. I also wanted the system to be extensible, so it can support developers who need to implement their own custom functionality.
 
-#### Here's the system I came up with!
+#### here's the system I came up with!
 
 - There is a default abstract `Reply` class that contains hooks for each relevant part of the interaction, such as when the command is first initialized, or when a user's message hits the validation check.
   - In order to actually start the interaction, there's an awaitable method on the class called `result()` that intializes the interaction.
@@ -54,7 +54,7 @@ Luckily, the systems I built were flexible enough to make implementing toasts a 
 
 In fact, the total line count for [toast.py](https://github.com/cysabi/blurple.py/blob/main/blurple/ui/toast.py) is just **_60 lines of code!_**, including all documentation and whitespace! That's the difference designing a well thought out API makes.
 
-#### Here's how it works:
+#### here's how it works:
 
 - I first created a subclass of `ReactionAddBasic` called `ToastInteraction`.
   - Specialize the `on_reply_init()` method to add a dismiss reaction, and set the validation list to only validate the dismiss reaction.
