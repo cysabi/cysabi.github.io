@@ -156,12 +156,12 @@ const Overview = props => {
           {props.roles.map(role => (
             <TopicBadge class="py-1.5">{role}</TopicBadge>
           ))}
-          <div class="mt-4 p-2 text-lg w-full rounded-lg backdrop-blur bg-primary-500/10 border-primary-500/10 text-primary-100 border-2">
+          <div class="mt-4 p-2 text-lg w-full rounded-lg backdrop-blur bg-primary-600/20 border-primary-500/20 border-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="text-primary-300 inline-flex items-center justify-center align-sub translate-y-[1px] mr-2 w-5 h-5"
+              class="text-primary-400 inline-flex items-center justify-center align-sub translate-y-[1px] mr-2 w-5 h-5"
             >
               <path
                 fill-rule="evenodd"
@@ -169,7 +169,9 @@ const Overview = props => {
                 clip-rule="evenodd"
               />
             </svg>
-            <span>Click the eye to hide topics you're not interested in!</span>
+            <span class="text-primary-50">
+              Click the eye to hide topics you're not interested in!
+            </span>
           </div>
         </Section>
         <Section title="Tools & Technologies">
