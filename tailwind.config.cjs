@@ -85,9 +85,8 @@ module.exports = {
             "code::before": null,
             "code::after": null,
             code: {
+              fontWeight: "inherit",
               backgroundColor: "var(--tw-prose-pre-bg)",
-              fontSize: "87.5%",
-              fontWeight: "500",
               borderRadius: "3px",
               padding: "0.125em",
             },
