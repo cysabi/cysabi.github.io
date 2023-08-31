@@ -34,12 +34,10 @@ export const data = {
         accessibility.
       </>
     ),
-    roles: ["design"],
+    roles: ["game design"],
     tools: [["PaperMC", "Minecraft"], "Denizen"],
   },
 }
-
-# ideation
 
 One day, while watching gameplay of a minecraft content creator (fruitberries) creatively place blocks on the edges of the map to escape his opponent, **I realized just how expressive Minecraft's movement can be**.
 
@@ -60,7 +58,7 @@ However, I didn't want to follow the same footsteps that Fortnite had with build
 
 > I wanted a game that you know you'll enjoy when you're bored with your friends and you don't know what to play.
 
-## landing on a core concept for the game
+# the core concept
 
 There were a couple design goals that I had in mind when creating the concept for the game.
 
@@ -76,84 +74,100 @@ This concept was just simple enough for anyone to intuitive grasp the objective,
 
 ![Infinite blocks provide a lot of creativity for movement and outplays](/block-sumo_10.webm)
 
-<Topic design>
+<Topic {...{"game design": true}}>
 
-## design # a scoring system that encourages going for kills
+## game design # a scoring system that rewards aggression
 
-One of the biggest problems with limited lives in a free-for-all system is that it **prioritizes survival over getting kills**.
+I wanted a scoring system that rewarded players for going in for kills, without having too much risk if they happen to not succeed.
 
-> I wanted a system that rewarded players for going in for kills, without having too much risk if they happen to not succeed.
+One of the biggest problems with limited lives in a free-for-all system is that it **prioritizes survival over getting kills**, which made it not ideal for my vision of the game.
 
 At the same time, having no penalty would have the inverse effect by allowing players to kill themselves to escape giving kill credit.
 
-So I decided on a scoring system that is **`+2` for kills**, and **`-1` for deaths**.
+> I decided on a time-based system with infinite lives, \
+> where players get **`+2` points for kills**, and **`-1` points for deaths**.
 
-## design # player accessibility with item rubber-banding
-
-> Accessibility is important and does not need to come at the sacrifice of player expression.
-
-I wanted items to assist players with less direct mechanical skill to still be able to make an impact through the strategic use of items.
-
-![The further you are behind, the more powerful items you recieve!](/block-sumo_13.webm)
-
-**`Here's How:`** Inspired by Mario Kart, item rubber-banding keeps the game an enjoyable experience for players far behind. **There's always a sense of agency from utilizing your items strategically to make an impact on the game**.
-
-## design # preserving counterplay for all players
-
-Although I wanted the game to be easy to pick up and play with friends, I didn't want to take away from the skill expression of block placement.
-
-Even the most powerful items should have enough counterplay **for players at the top to use their better mechanics to outplay them**.
-
-![No matter what gets thrown your way, there's always room to clutch](/block-sumo_16.webm)
-
-**`Here's How:`** First place still has access to _(less powerful)_ defensive items. So a lot of fun comes from using better mechanics, while **being resourceful with the defensive items you do have** to find the right counterplay to any situation.
-
-## design # item combos without item stockpiles
+## game design # item combos without item stockpiles
 
 When it came to the mechanics of utilizing items, It was important to me that **players are able to experiment with using multiple items together to create synergistic combos**.
 
 At the same time, I didn't want players being able to stockpile infinite number items, and encourage them to use items before it's too late.
 
-**`Here's How:`** Players can hold up to 8 items at a time. If a player is already holding 8, they won't be able to recieve new items.
+> Players can hold up to 8 items at a time. If a player is already holding 8, they won't be able to recieve new items.
 
-## design # dropping items without causing a wealth gap
+</Topic>
 
-I wanted it to be important that players be able to target other players and if they succeed, to remove their items.
+# item rubber-banding
+
+Accessibility is important and does not need to come at the sacrifice of player expression!
+
+I wanted items to assist players with less direct mechanical skill to still be able to make an impact through the strategic use of items.
+This way **players far behind still have a real sense of agency and ability to make an impact**.
+
+> The further behind a player is, the more powerful items they recieve.
+
+![Use your items strategically to claw your way back up!](/block-sumo_13.webm)
+
+<Topic {...{"game design": true}}>
+
+## game design # preserving counterplay for players in the lead
+
+Although I wanted the game to be easy to pick up and play with friends, I didn't want to take away from the skill expression of block placement.
+
+Even the most powerful items should have enough counterplay **for players at the top to use their better mechanics to outplay them**.
+
+> Players in the lead still has access to less powerful defensive items to help defend against an assault.
+
+With a combination of better mechanics and **being resourceful with the items you do have**, players in the lead can find the right counterplay to any situation.
+
+![No matter what gets thrown your way, there's always room to clutch](/block-sumo_16.webm)
+
+## game design # dropping items on death without a wealth gap
+
+I wanted it to be important that players are able to target other players in an attempt to remove their items if they succeed in killing them.
 
 However, **I predicted that simply making all items drop on death would cause a snowball effect**. Where a player in the lead could maintain control and accumulate more items over time, while players behind, having just respawned and lost all their items, will be at a significant disadvantage when trying to come back.
 
-**`Here's How:`** I chose to make **the percentage of items you lose decrease the futher behind you are**. So a player in the lead would lose 100% of their items, while a player in last place only loses 12.5%.
+> The % of items you lose decreases the further you are behind. So a player in the lead would lose 100% of their items, while a player in last only loses 12.5%.
 
-## design # encouraging emergent vertical play
+</Topic>
 
-I wanted vertical movement as a staple of the game, where traversing up and down feels seamless and fluid. The game should play in a 3-dimensional space, not a 2-dimensional plane.
+# game atmosphere
 
-Items should **make it easier to traverse up and down**, approach people at higher elevations, and bridge that vertical gap.
+I want the game to have a **chaotic, party-like energy to the game's atmosphere** in a way that feels both **strategic and chaotic in equal proportions**.
 
-![Vertical mobility keeps movement feeling dynamic and expressive](/block-sumo_11.webm)
+While the main role of items is to provide accesibility, they have a lot of utility as a tool that I can use influence the atmosphere
 
-**`Here's How:`** I was able to fulfill that 3d combat space fantasy by **introducing a plethora of different quick-cast mobility items**. There are consumable double-jumps, levitation effects, and even one that automatically builds a bridge.
-
-## design # using items to influence the game's atmosphere
-
-While the main role of items is to provide accesibility, they have a lot of utility as a tool that I can use to **add a healthy amount of chaotic, party-like energy to the game's atmosphere** in a way that feels both **strategic and chaotic in equal proportions**.
+> By fine-tuning the exact frequency of items at every level, I have a lot of control over the atmosphere and the level of rubber-banding.
 
 ![An early draft of item spawn rates depending on points behind](/block-sumo_2.webp)
 
-**`Here's How:`** By being able to fine-tune the exact frequency of items at every level, I have a lot of control over the atmosphere and the level of rubber-banding.
+<Topic {...{"game design": true}}>
+
+## game design # encouraging emergent vertical mobility
+
+I wanted vertical movement as a staple of the game, where **traversing up and down feels seamless and fluid**. The game should play in a 3-dimensional space, not a 2-dimensional plane, and movement should feel dynamic and expressive.
+
+> I was able to fulfill that 3d combat space fantasy by introducing a plethora of different quick-cast vertical mobility items.
+
+![There are consumable double-jumps, levitation effects, and even one that automatically builds a bridge](/block-sumo_11.webm)
+
+</Topic>
 
 # iteration
 
-## design # rebalancing snowballs and player threat-ranges
+<Topic {...{"game design": true}}>
 
-Because of the abundance of snowballs that are given to first place _(as the "coin" / "green shell" of this game)_ it became an effective strategy for whoever was in 1st place to retreat constantly while kiting opponents away with an infinite supply of snowballs.
+## game design # rebalancing snowballs and player threat-ranges
 
-This was exacerbated because most of the high-power items required close range combat for them to get value. This was an intentional decision, because **I didn't want those behind to find an easy strategy of staying on the outskirts with high-power ranged weapons to catch up**.
+Because of the abundance of snowballs that are given to first place, it became an effective strategy for whoever was in 1st place to retreat constantly while kiting opponents away with an infinite supply of snowballs.
+
+This was exacerbated because most of the high-power items required close range combat for them to get value. _(This was an intentional decision, because I didn't want those behind to find an easy strategy of staying on the outskirts with high-power ranged weapons to catch up)_.
 
 - I couldn't simply lower the quantity of snowballs, as that would also affect those that weren't in first place.
 - I couldn't give too many powerful ranged options to those behind, as that would introduce camping.
 
-So I came up with a solution that required many different adjustments, all working together:
+**So I came up with a solution that required many different adjustments, all working together:**
 
 1. ### snowballs were seperated into 2 distinct items, one was 4-count, and one was 8-count.
 
@@ -165,7 +179,7 @@ So I came up with a solution that required many different adjustments, all worki
 
 3. ### players that are behind recieve the 8-count snowballs item, instead of snowballs being exclusive to those in the lead.
 
-   This change gave players behind the same access to range that players in the lead have, without feeling like snowballs just wasted one of their item drops, but also without being too powerful to encourage camping.
+   This change **gave players behind the same access to range that players in the lead have**, without feeling like snowballs just wasted one of their item drops, but also without being too powerful to encourage camping.
 
 4. ### introduce a new item, a short-ranged debuff bomb that blinds and slows victims.
 
@@ -177,7 +191,7 @@ So I came up with a solution that required many different adjustments, all worki
 
    Even with the debuff bomb and access to snowballs, players behind still don't have enough ways to make an impact when the player in 1st plays to constantly retreat to create as much distance as possible.
 
-   Because this item is more effective at longer ranges, it's a direct counter to long distance kiting. The longer and further you retreat, the larger the threat grows that someone has gotten the projectile.
+   **Because this item is more effective at longer ranges, it's a direct counter to long distance kiting**. The longer and further you retreat, the larger the threat grows that someone has gotten the projectile.
 
    > Ironically, an item like this actually discourages camping by forcing those in the lead to respect it's threat and think more strategically about the range they play at.
 
@@ -185,14 +199,11 @@ So I came up with a solution that required many different adjustments, all worki
 
    !["The Obliterator", a rocket-launcher that instantly kills anyone caught in it's blast radius](/block-sumo_15.webm)
 
-## design # designing maps
-
-It was important to first decide what goals the map should have. I wanted the map to provide opportunities for further skill expression through the deliberate placement of platform skips and wall-jump pillars (both of which use blocks).
-![Example of one of the first beta maps](/block-sumo_3.webp)
-
 </Topic>
 
 # impact
+
+## how do playtesters feel about the game?
 
 As of right now, this game is not publically avaliable to play, it's currently just a passion project to help me **learn game design and development for competitive multiplayer games**. I also just wanted to make a game that I could play with my friends at any time. Being able to do playtesting with my friends whenever we were bored always provided me with invaluable feedback and I'm really grateful for that.
 
