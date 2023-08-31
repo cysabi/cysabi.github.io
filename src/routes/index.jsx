@@ -87,7 +87,7 @@ const LandingScreen = () => {
                   transition={{
                     easing: spring({ mass: 0.1 }),
                   }}
-                  class="flex flex-col gap-6 rounded-2xl text-2xl text-slate-300"
+                  class="flex flex-col gap-6 rounded-2xl text-2xl text-slate-400"
                 >
                   <div>
                     hi, thanks for stopping by! ~ i have a huge passion for{" "}

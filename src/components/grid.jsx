@@ -80,9 +80,9 @@ const Grid = () => {
       </Motion.div>
       <Motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: pos().hide ? 0 : 0.25 }}
+        animate={{ opacity: pos().hide ? 0 : 0.2 }}
         transition={{ duration: 1 }}
-        class="fixed inset-0 blur-[96px] -z-10 flex overflow-hidden"
+        class="fixed inset-0 blur-3xl -z-10 flex overflow-hidden"
       >
         <Blob pos={pos} color={color() || "#7A73B8"} />
         <Blob pos={pos} color="#3b6ea2" main />

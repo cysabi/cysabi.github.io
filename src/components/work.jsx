@@ -340,6 +340,7 @@ const Img = props => {
           autoplay={props.title !== "controls"}
           loop={props.title !== "controls"}
           preload="metadata"
+          playsinline
         >
           <source src={props.src} alt={props.alt} type="video/webm" />
         </video>

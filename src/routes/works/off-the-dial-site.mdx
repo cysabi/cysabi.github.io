@@ -1,6 +1,6 @@
 export const data = {
-  layer: -1.5,
-  coords: [5, 8],
+  layer: 0,
+  coords: [8, 4],
   name: "off-the-dial-site",
   desc: "full-stack website that hosts tournament signups, player accounts, and a blog",
   tags: ["web", "site", "ux", "design"],
@@ -188,13 +188,29 @@ At first, the dropdown filter function was very primitive, but I discovered this
 
 # impact
 
-## player feedback and reception
+<Topic engineering>
 
-I surveyed a total of **28 respondents**, who shared their thoughts and perceptions about the website. Based on the provided responses, here's a summary of their feedback!
+## engineering # a brief history of the site, and how i've progressed
+
+As I mentioned, this website went through 5 total iterations. I rewrote it from scratch each time using new/updated technologies, and redesigning all the pages.
+
+> I want to share how the site has progressed with each iteration! Learning to build more ambitious features, and discovering new technologies with it.
+
+1. The first iteration was actually just a bunch of markdown files in a repo published with github pages. It was just a simple way to host the rules with a shareable link.
+2. The next iteration was static html with `Bootstrap` css. it looked like a baby's first website _(because it was)_, and probably used exclusively bootstrap cards everywhere.
+3. This is when `Gatsby` became a staple of the stack, and with the introduction of `Firebase`, I was finally able to learn how to implement **oauth2 login** and **tournament registration**. I also learned `Bulma` to replace `Bootstrap`!
+4. After getting the hang of Firebase and Gatsby, I was able to make a ton of improvements, such as the profile page with it's **registration status** and **timeline**, redesigning the **signup form**, and learning `Chakra` to replace `Bulma`.
+5. The penultimate version! For the most part, general layout remained the same, but I spent a lot of time rewriting cleaner code, and remaking more polished designs with the help of `Tailwind`. This is also when I implemented the **weapon selector component**.
+
+</Topic>
+
+## player feedback, reception, and lessons
+
+I surveyed a total of **31 respondents**, who shared their thoughts and perceptions about the website. Based on the provided responses, here's a summary of their feedback!
 
 1.  ### overall user experience with the website
 
-    > **`96.5%`** of players express satisfaction with the website, with **`28.6%`** of players also stating that it exceeded their expectations.
+    > **`96.8%`** of players expressed satisfaction with the website, with **`30%`** of them also stating that it exceeded their expectations.
 
     Only **`14.3%`** of respondents stated that they only use the website to sign up. **`73.5%`** of respondents stated that they use the website for more than registering and reading rules (such as reading blog posts, or using the timeline).
 
@@ -213,13 +229,11 @@ I surveyed a total of **28 respondents**, who shared their thoughts and percepti
 
 2.  ### first-time navigation and ease of finding information
 
-    The importance of a good first-time experience cannot be overstated. In this survey alone, **`53.6%`** of the players answered that this was their 1st or 2nd event.
+    The importance of a good first-time experience cannot be overstated. In this survey alone, **`65.2%`** of the players answered that this was their 1st or 2nd event.
 
-    Within those that identified as first/second-timers, **`42.9%`** immediately found navigating the site to be easy, while **`78.6%`** found that it made sense after finding the information once.
+    Within those that identified as first/second-timers, **`41.3%`** found navigating the site to be immediately easy, while **`78.3%`** found that it made sense after finding the information once.
 
-    > Overall, **`92.9%`** of players understood how to navigate the site by the second use.
-
-    Personally, I still think there's still room for improvement to make navigation more intuitive for first-time users, even if that discomfort quickly resolves itself.
+    > Overall, **`89.1%`** of players understood how to navigate the site by the second use.
 
     <Testimonials
       title="What did first/second-time players say about their experience?"
@@ -232,21 +246,8 @@ I surveyed a total of **28 respondents**, who shared their thoughts and percepti
       ]}
     />
 
-It's incredibly rewarding seeing the positive responses as a result of all the work I put into building the website,
-I've learned a lot about what it means to build a full-stack website, but there's still lots of room for improvement.
+It's incredibly rewarding seeing the positive sentiment regarding the website's design and user experience, especially how happy players were with the website's clean aesthetics, straightforward navigation, and ease of access to critical information.
 
-<Topic engineering>
+I've learned so much about building a full-stack website, but there is still plenty of room for improvement. Such making navigation more intuitive for first-time users with clearer sign-up confirmation indicators and enhanced visibility of tournament formats and schedules.
 
-## engineering # a brief history of the site, and how i've progressed
-
-As I mentioned, this website went through 5 total iterations. I rewrote it from scratch each time using new/updated technologies, and redesigning all the pages.
-
-> I'd like to share how the site has progressed as I learned more with each iteration, discovering new technologies and building better features.
-
-1. The first iteration was actually just a bunch of markdown files in a repo published with github pages. It was just a simple way to host the rules with a shareable link.
-2. The next iteration was static html with `Bootstrap` css. it looked like a baby's first website _(because it was)_, and probably used exclusively bootstrap cards everywhere.
-3. This is when `Gatsby` became a staple of the stack, and with the introduction of `Firebase`, I was finally able to learn how to implement **oauth2 login** and **tournament registration**. I also learned `Bulma` to replace `Bootstrap`!
-4. After getting the hang of Firebase and Gatsby, I was able to make a ton of improvements, such as the profile page with it's **registration status** and **timeline**, redesigning the **signup form**, and learning `Chakra` to replace `Bulma`.
-5. The penultimate version! For the most part, general layout remained the same, but I spent a lot of time rewriting cleaner code, and remaking more polished designs with the help of `Tailwind`. This is also when I implemented the **weapon selector component**.
-
-</Topic>
+If I were to remake the site, I would definitely be using this survey data to provide me with valuable guidance for enhancing the user experience even further.

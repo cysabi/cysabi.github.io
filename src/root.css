@@ -15,21 +15,12 @@
     @apply underline decoration-2 decoration-slate-500 hover:decoration-primary focus-visible:decoration-primary transition-colors;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply scroll-m-3;
-  }
-
   a {
     @apply link;
   }
 
   article {
-    @apply prose prose-lg sm:prose-xl prose-a:link prose-strong:font-bold;
+    @apply prose prose-lg sm:prose-xl prose-a:link prose-strong:font-bold prose-headings:scroll-m-3;
   }
 
   [type="text"],
