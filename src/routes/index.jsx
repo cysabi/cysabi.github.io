@@ -39,12 +39,27 @@ const LandingScreen = () => {
       <div class="flex flex-col flex-1">
         <div class="flex flex-col-reverse items-start gap-4 md:gap-0 md:flex-row md:justify-between md:items-center">
           <div>
-            <div class="text-4xl lg:text-5xl">hey, i'm cysabi</div>
-            <div class="text-slate-300 text-3xl lg:text-4xl">
+            <Motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ easing: spring({ damping: 20 }) }}
+              class="text-4xl lg:text-5xl"
+            >
+              hey, i'm cysabi
+            </Motion.div>
+            <Motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, easing: spring({ damping: 20 }) }}
+              class="text-slate-300 text-3xl lg:text-4xl"
+            >
               {subtitles[index()]}
-            </div>
+            </Motion.div>
             <div class="flex pt-12 gap-8 text-2xl flex-wrap">
-              <button
+              <Motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, easing: spring({ damping: 20 }) }}
                 class="inline link"
                 onClick={() =>
                   document
@@ -53,16 +68,29 @@ const LandingScreen = () => {
                 }
               >
                 works
-              </button>
-              <A
-                href={location.hash === "#contact" ? "/" : "#contact"}
-                noScroll
+              </Motion.button>
+              <Motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, easing: spring({ damping: 20 }) }}
               >
-                {location.hash === "#contact" ? "about" : "contact"}
-              </A>
+                <A
+                  href={location.hash === "#contact" ? "/" : "#contact"}
+                  noScroll
+                >
+                  {location.hash === "#contact" ? "about" : "contact"}
+                </A>
+              </Motion.span>
             </div>
           </div>
-          <button onClick={() => setIndex((index() + 1) % subtitles.length)}>
+          <Motion.button
+            initial={{ scale: 0.8, rotate: 6 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{
+              easing: spring({ mass: 0.6, damping: 5 }),
+            }}
+            onClick={() => setIndex((index() + 1) % subtitles.length)}
+          >
             <Motion.img
               onmouseenter={() => setHoverSlurk(true)}
               onmouseleave={() => setHoverSlurk(false)}
@@ -74,7 +102,7 @@ const LandingScreen = () => {
               src={slurk}
               class="h-28 md:h-32 lg:h-48 rounded"
             />
-          </button>
+          </Motion.button>
         </div>
         <div class="relative my-12 md:my-16 flex-1 max-h-full">
           <Presence>
@@ -89,7 +117,11 @@ const LandingScreen = () => {
                   }}
                   class="flex flex-col gap-6 rounded-2xl text-2xl text-slate-400"
                 >
-                  <div>
+                  <Motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, easing: spring({ damping: 20 }) }}
+                  >
                     hi, thanks for stopping by! ~ i have a huge passion for{" "}
                     <span class="font-medium text-slate-50">
                       learning the ways people think
@@ -99,8 +131,12 @@ const LandingScreen = () => {
                       think about how best to serve them
                     </span>
                     .
-                  </div>
-                  <div>
+                  </Motion.div>
+                  <Motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, easing: spring({ damping: 20 }) }}
+                  >
                     my roots stem from leading tournaments for competitive
                     Splatoon. one day i thought to myself,{" "}
                     <span class="font-medium text-slate-50">
@@ -108,23 +144,31 @@ const LandingScreen = () => {
                     </span>
                     . that one question has driven me to build everything from
                     discord bots, to websites, to broadcast graphics!
-                  </div>
-                  <div>
+                  </Motion.div>
+                  <Motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6, easing: spring({ damping: 20 }) }}
+                  >
                     to this day, i still carry that mantra to every project i
                     work on.{" "}
                     <span class="font-medium text-slate-50">
                       it's never the role i'm filling, but the people i'm
                       serving that excites me the most!
                     </span>
-                  </div>
-                  <div>
+                  </Motion.div>
+                  <Motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7, easing: spring({ damping: 20 }) }}
+                  >
                     i'm always open to new opportunities, no matter the medium!
                     so if you like what you see and want to work with me, don't
                     hesitate to{" "}
                     <A href="/#contact" class="font-medium text-slate-50">
                       reach out!
                     </A>
-                  </div>
+                  </Motion.div>
                 </Motion.div>
               }
             >
@@ -137,9 +181,39 @@ const LandingScreen = () => {
       </div>
       <div class="flex items-center gap-4">
         <div class="flex-1 h-0.5 bg-slate-50 rounded-full" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75"
+          />
+        </svg>
+
         <h2 class="font-medium text-xl" id="works">
-          selected works below
+          featured works
         </h2>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75"
+          />
+        </svg>
+
         <div class="flex-1 h-0.5 bg-slate-50 rounded-full" />
       </div>
     </div>
@@ -168,10 +242,20 @@ const Contact = () => {
         action="https://formsubmit.io/send/leptoflare@gmail.com"
         onsubmit={() => setDone(true)}
       >
-        <div class="text-2xl">
+        <Motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, easing: spring({ damping: 20 }) }}
+          class="text-2xl"
+        >
           like what you see? got something in mind? let's talk!
-        </div>
-        <div class="flex gap-4 flex-col md:flex-row">
+        </Motion.div>
+        <Motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, easing: spring({ damping: 20 }) }}
+          class="flex gap-4 flex-col md:flex-row"
+        >
           <input
             onchange={e => setTalk(e.currentTarget.value)}
             placeholder="what do you prefer to go by?"
@@ -189,16 +273,28 @@ const Contact = () => {
             required
             class="flex-1"
           />
-        </div>
-        <textarea
-          class="resize-none flex-1"
-          placeholder={`hey ${
-            talk() || "there"
-          }! what would you like to share with me?`}
-          name="comment"
-          required
-        ></textarea>
-        <div class="flex justify-start">
+        </Motion.div>
+        <Motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, easing: spring({ damping: 20 }) }}
+          class="h-full"
+        >
+          <textarea
+            class="resize-none flex-1 w-full h-full"
+            placeholder={`hey ${
+              talk() || "there"
+            }! what would you like to share with me?`}
+            name="comment"
+            required
+          ></textarea>
+        </Motion.div>
+        <Motion.div
+          class="flex justify-start"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, easing: spring({ damping: 20 }) }}
+        >
           {done() ? (
             <div class="text-xl font-medium">
               thanks for sharing! i'll get back to you as soon i can
@@ -212,7 +308,7 @@ const Contact = () => {
               send message
             </button>
           )}
-        </div>
+        </Motion.div>
         <input
           name="_formsubmit_id"
           type="text"
