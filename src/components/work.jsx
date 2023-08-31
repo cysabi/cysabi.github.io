@@ -55,7 +55,7 @@ const WorkTemplate = props => {
                 return (
                   <h3
                     {...props}
-                    class="inline-flex items-center gap-3 text-xl sm:text-2xl"
+                    class="flex items-center gap-3 text-xl sm:text-2xl"
                   >
                     {topic.length > 1 && (
                       <TopicBadge icon>{topic[0]}</TopicBadge>
@@ -274,12 +274,12 @@ const Sidebar = props => {
               (h.depth - 1) * 16 ? "text-base" : "text-lg"
             } ${
               activeHeading() === h.id
-                ? "text-slate-50 font-medium tracking-[-0.01em]"
+                ? "text-slate-50 font-semibold tracking-[-0.015em]"
                 : "text-slate-400"
             } ${
               hiddenTopics().includes(h.value.split(" # ").at(0))
                 ? "text-slate-600 pointer-events-none"
-                : "hover:text-slate-300"
+                : "hover:text-slate-200"
             }`}
             style={`padding-left: ${(h.depth - 1) * 16}px`}
           >

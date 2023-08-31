@@ -2,7 +2,7 @@ export const data = {
   layer: -1.5,
   coords: [5, 8],
   name: "block-sumo",
-  desc: "a highly skill-expressive minecraft minigame that doesn't sacrifice player accessibility",
+  desc: "a highly skill-expressive minecraft minigame that doesn't sacrifice learnability",
   tags: ["game", "design"],
   previews: ["/block-sumo_17.webp"],
   collage: {
@@ -28,16 +28,17 @@ export const data = {
   overview: {
     summary: (
       <>
-        Inspired by arena-style pick-up-and-play pvp games like Knockout City,
-        Friends vs Friends, and Mario Kart, I wanted to make a game with a near
-        infinite level of skill-expression, without sacrificing player
-        accessibility.
+        I wanted to make a game with a near infinite level of skill-expression,
+        without sacrificing learnability. I was inspired by Knockout City,
+        Friends vs Friends, and Mario Kart.
       </>
     ),
     roles: ["game design"],
     tools: [["PaperMC", "Minecraft"], "Denizen"],
   },
 }
+
+{/* todo: performance pls */}
 
 One day, while watching gameplay of a minecraft content creator (fruitberries) creatively place blocks on the edges of the map to escape his opponent, **I realized just how expressive Minecraft's movement can be**.
 
@@ -99,7 +100,10 @@ At the same time, I didn't want players being able to stockpile infinite number 
 
 # item rubber-banding
 
-Accessibility is important and does not need to come at the sacrifice of player expression!
+Item rubber-banding, otherwise known as catch-up mechanics, is defined as the mechanic that allows players that are less mechanically skilled to still have an impact on the game
+{/* todo: fix above */}
+
+Learnability is important and does not need to come at the sacrifice of player expression!
 
 I wanted items to assist players with less direct mechanical skill to still be able to make an impact through the strategic use of items.
 This way **players far behind still have a real sense of agency and ability to make an impact**.
@@ -136,7 +140,7 @@ However, **I predicted that simply making all items drop on death would cause a 
 
 I want the game to have a **chaotic, party-like energy to the game's atmosphere** in a way that feels both **strategic and chaotic in equal proportions**.
 
-While the main role of items is to provide accesibility, they have a lot of utility as a tool that I can use influence the atmosphere
+While the main role of items is to provide learnability, they have a lot of utility as a tool that I can use influence the atmosphere
 
 > By fine-tuning the exact frequency of items at every level, I have a lot of control over the atmosphere and the level of rubber-banding.
 
@@ -159,6 +163,8 @@ I wanted vertical movement as a staple of the game, where **traversing up and do
 <Topic {...{"game design": true}}>
 
 ## game design # rebalancing snowballs and player threat-ranges
+
+{/* todo: break up all the text here */}
 
 Because of the abundance of snowballs that are given to first place, it became an effective strategy for whoever was in 1st place to retreat constantly while kiting opponents away with an infinite supply of snowballs.
 
@@ -203,11 +209,11 @@ This was exacerbated because most of the high-power items required close range c
 
 # impact
 
+{/* todo: what i learned */}
+
 ## how do playtesters feel about the game?
 
-As of right now, this game is not publically avaliable to play, it's currently just a passion project to help me **learn game design and development for competitive multiplayer games**. I also just wanted to make a game that I could play with my friends at any time. Being able to do playtesting with my friends whenever we were bored always provided me with invaluable feedback and I'm really grateful for that.
-
-However, I do have something to share! In order to grab footage for this portfolio, I hosted another playtest with a different group of friends that have never played the game before, and here's what they had to say!
+This is currently a passion project to help me **learn game design and development for competitive multiplayer games**. In order to grab footage for this portfolio, I hosted a playtest with a group friends for the first time, and here's what they had to say!
 
 <Testimonials
   title="What are some players' first impressions of the game?"

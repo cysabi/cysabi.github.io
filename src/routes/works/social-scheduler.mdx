@@ -4,9 +4,6 @@ export const data = {
   name: "social-scheduler",
   desc: "a commissioned web-app for a busy person to schedule social events",
   tags: ["web", "app", "ux", "design"],
-  // links: {
-  //   github: "https://github.com/cysabi/social-scheduler",
-  // },
   previews: ["/social-scheduler_1.webp"],
   collage: {
     "/social-scheduler_4.webm": "An example user flow through the app",
@@ -17,9 +14,27 @@ export const data = {
     "/social-scheduler_3.webp":
       "Once an event has been booked, the modal turns into a confirmation window",
   },
+  overview: {
+    summary: (
+      <>
+        I was commissioned to build an application for a very busy client to
+        make scheduling social events easier.
+      </>
+    ),
+    roles: ["design", "engineering"],
+    tools: [
+      ["React.js", "Vite.js", "JavaScript"],
+      "Tailwind",
+      "Framer Motion",
+      "Figma",
+    ],
+    sources: {
+      github: "https://github.com/cysabi/social-scheduler",
+    },
+  },
 }
 
-## fancy css for the time selector
+## engineering # fancy css for the time selector
 
 The most techncially cool thing that I made was the time selector, there's a preview text that goes away as soon as you click inside the input, all of this without needing to pull any React state!
 
@@ -35,7 +50,7 @@ Here's what it looks like when I put a transparent red background on the after e
 
 ![](/social-scheduler_7.webm)
 
-## designing the modal event preview
+## design # designing the modal event preview
 
 Since the modal has a preview that shows the event details in a mock "event" block,
 I thought that the preview should persist after the event has been booked, but change state from being a preview of an event, to a successfully booked event.

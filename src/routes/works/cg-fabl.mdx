@@ -45,37 +45,6 @@ export const data = {
   },
 }
 
-{/* TODO: remove this */}
-
-- sub header
-  - long description
-    - situation of the project + main goal
-      - "my client approached me wanted to make it easier to schedule events"
-      - "one of the teams i'm on was planning a game show and needed broadcast graphics"
-      - "i set out to build a website that could stand as the source of truth for everything"
-      - I collaborated with a designer to build a set of broadcast graphics for a Splatoon Major Tournament. But unforeseen roadblocks and irl responsibilites meant learning how to manage crunch.
-- case study start
-  - any heading can be specified as a "topic heading"
-    - which gives it an icon to specify that it's for design, and allows anyone to hide it.
-  - ideation
-    - figuring out what the specific problems / goals are
-      - "my goal is to be given designs and build broadcast graphics"
-      - "however, the designer only started working on them with 5 days left so i had to work async"
-      - "then the design just left so i had to take over finishing the designs"
-      - "i also had to attend my sister's volleyball tournamen"
-    - what are the set of requirements to fulfill?
-    - it's important to prioritize
-  - iteration
-    - coming up with the priorities
-    - each priority is a section with it's own stuff
-    - chunks of things i made, show conflict and thought process.
-  - results
-    - what was my impact?
-    - how do users feel now?
-      - metrics
-    - what lessons did i learn?
-    - what would i have done differently if i were to do it again?
-
 # ideation
 
 This major tournament was a collaboration between 2 tournament organizations, and I was tasked with working with a designer to codeify the graphics that they will give me.
@@ -88,26 +57,24 @@ Just kidding, that's a lie. These weren't the early designs, these were the fina
 
 ## taking more responsibility with less time
 
-You see, there were unforeseen external factors that meant the designer wasn't able to finish polishing the final designs,
+You see, there were unforeseen external factors that meant the designer wasn't able to finish polishing the final designs, before the first week started.
 
 > so I offered to take over and see the designs over the finish line!
 
-However, we were working on a very short timeframe at this point, so the extra workload meant that **I would have to be very efficient if I wanted the graphics done on time**.
+However, we were working on a very short timeframe at this point, so the extra workload meant that **I would have to be very efficient if I wanted to finish graphics on time**.
 
 To top it all off, I also had see my sister's volleyball tournament that weekend!
 
-# iteration
-
 ## 5 days before the deadline
 
-The designer started working on the designs with about 5 days left before the event because of something irl. Thus, it was important to work asynchronously to maximize time.
+The designer started working on the designs with about 5 days before the event started. Thus, it was important to work asynchronously to maximize time.
 
 So while the designer was working on the designs live, **I was essentially writing the markup for the designs in real time**.
 I wasn't afraid about having to undo my work because Tailwind makes it really easy to build designs fast.
 
 ## 48 hours before the deadline
 
-This is the point that I took over the remainder of the designs, so I was now tasked with...
+This is the point that the designer had to halt, and I took over the remainder of the designs, so I was now tasked with...
 
 - **Completing the markup** for the designs.
 - **Polishing the designs** myself, so that it's professional enough to be shown on stream.
@@ -117,44 +84,70 @@ This is the point that I took over the remainder of the designs, so I was now ta
 
 Under these conditions, it was crucial prioritize what are 100% required tasks to be done, and what are the "nice-to-haves" left over.
 
-1. ## priority 1: rigging
+# iteration
 
-   Rigging was top priority, no matter what the designs look like, if they can't be controlled, we don't have an event to show. So that was the first thing that I worked on implementing.
+## engineering # priority 1: rigging
 
-   Although animations were not being worked on, **I made sure to bookmark the components that would need to be animated later** whenever I knew I would need it. That way I was able to save myself a couple of hours once it was time to actually put the animations in!
+<Topic engineering>
 
-1. ## priority 2: polish
+Rigging was top priority, no matter what the designs look like, if they can't be controlled, we don't have an event to show. So that was the first thing that I worked on implementing.
 
-   Once rigging was completed, and all of the bugs were ironed out, I knew next priority was polishing the designs, it made no sense to set up all of the layout transitions if the designs were to be restructured anyway! And to be honest, I just couldn't stop myself.
+Although animations were not being worked on, **I made sure to bookmark the components that would need to be animated later** whenever I knew I would need it. That way I was able to save myself a couple of hours once it was time to actually put the animations in!
 
-   This step was the one that took much longer than expected, as I ran into a lot of design issues and it took a lot of time to **figure out the hierarchy of information**.
+</Topic>
 
-   One of the biggest challenges in this step was implementing all of the parts that were not part of the original design specification. For example **the leaderboard, that pulls data from an API**, or how **the maplist should show completed games**.
+## design # priority 2: polish
 
-   ![Here's a before/after of the roster screen! This gif was probably the most complex thing I've made with ffmpeg.](/cg-fabl_6.gif)
+<Topic design>
 
-1. ## priority 3: layout transitions
+Once rigging was completed, and all of the bugs were ironed out, I knew next priority was polishing the designs, it made no sense to set up all of the layout transitions if the designs were to be restructured anyway! And to be honest, I just couldn't stop myself.
 
-   I think the design bit that I'm most proud of in this graphics bundle has to be the heading component!
+This step was the one that took much longer than expected, as I ran into a lot of design issues and it took a lot of time to **figure out the hierarchy of information**.
 
-   > The heading adapts to the content height by shifting up and down to ensure that the content below is evenly spaced
+One of the biggest challenges in this step was implementing all of the parts that were not part of the original design specification. For example **the leaderboard, that pulls data from an API**, or how **the maplist should show completed games**.
 
-   while the text inside the heading component fades to showcase whatever is relevant for the active page.
+![Here's a before/after of the roster screen! This gif was probably the most complex thing I've made with ffmpeg.](/cg-fabl_6.gif)
 
-   ![](/cg-fabl_4.webm)
+</Topic>
 
-1. ## priority 4: animations + treats!
+## design # priority 3: layout transitions
 
-   At this point, I probably had about 6 hours left before the tournament started, so I had to pick what animations were important enough to show, the ones that were most common to be noticed by the viewer. Everything else would be delegated to next week (this event ran over the course of 6 weeks).
+<Topic design>
 
-   The text fades on the heading component was among the first to implement, as well as the scoreboard and commentators panel on the game screen.
+I think the design bit that I'm most proud of in this graphics bundle has to be the heading component!
 
-   I ended up still working on all of the animations and stuff even as the event was going on, it must have been funny for spectators to watch the graphics get progressively better as the tournament went on.
+> The heading adapts to the content height by shifting up and down to ensure that the content below is evenly spaced
 
-   One of those examples are the **bouncy icons on the scoreboard**! They were actually not part of the original design specification, I just thought it would be really cool while finishing up all the rest of the animations! I think I made the right call.
+while the text inside the heading component fades to showcase whatever is relevant for the active page.
 
-   ![](/cg-fabl_5.webm)
+![](/cg-fabl_4.webm)
 
----
+</Topic>
+
+## design # priority 4: animations + treats!
+
+<Topic design>
+
+At this point, I probably had about 6 hours left before the tournament started, so I had to pick what animations were important enough to show, the ones that were most common to be noticed by the viewer. Everything else would be delegated to next week (this event ran over the course of 6 weeks).
+
+The text fades on the heading component was among the first to implement, as well as the scoreboard and commentators panel on the game screen.
+
+I ended up still working on all of the animations and stuff even as the event was going on, it must have been funny for spectators to watch the graphics get progressively better as the tournament went on.
+
+One of those examples are the **bouncy icons on the scoreboard**! They were actually not part of the original design specification, I just thought it would be really cool while finishing up all the rest of the animations! I think I made the right call.
+
+![](/cg-fabl_5.webm)
+
+</Topic>
+
+# impact
+
+{/* TODO: finish this */}
+
+At the end of the day, over the course of the 6-week long event `99` unique viewers watched the games, and it wa.
+
+Learning how to crunch and work with another designer to build broadcast graphics at a very fast pace was something.
+
+If i were to do it again, I defiintely would have decided to give mself more time to build out the graphics.
 
 Want to see the graphics in action? [See the show!](https://youtu.be/Kz5w3a8Z_tM?t=673)

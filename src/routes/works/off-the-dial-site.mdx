@@ -25,8 +25,8 @@ export const data = {
         <span>
           Building a website for Off the Dial, a tournament organization for
           Splatoon providing tournament opportunities to players without a team.
-          This quest would end up taking 5 iterations spanning across 5 years.
-          Here's last iteration's{" "}
+          This quest would end up taking 5 iterations spanning across 5 years,
+          here's last iteration's{" "}
           <a href="https://github.com/offthedial/site/pull/123">
             pull request{" "}
             <span class="text-slate-600">
@@ -98,7 +98,7 @@ After researching different web hosting methods, I settled on building a JAMstac
 
 - ### GatsbyJS
 
-  A free and open source static site generator, I chose Gatsby so I could use React to build out complex features for the website.
+  A free and open source static site generator, I chose Gatsby so I could use React to build out complex features for the website without server-side-rendering.
 
 - ### Github Pages
 
@@ -106,13 +106,13 @@ After researching different web hosting methods, I settled on building a JAMstac
 
 - ### Google Firebase
 
-  A BaaS with an illegally generous free tier, this let me have my cake and eat it too. I use firebase to support all dynamic functions, such as a custom OAuth2 login endpoint for discord oauth.
+  A BaaS with an illegally generous free tier, that lets me have my cake and eat it too. It serves all dynamic functions, such as the custom OAuth2 login endpoint with discord.
 
 </Topic>
 
 <Topic design>
 
-## design # better communicating tournament information
+## design # improving how info is communicated
 
 Previously, the schedule of the tournament was an adaptive card at the bottom of the tournament page, that showed either the dates of the season, or relative dates such as "3 days before tournament starts".
 
@@ -153,18 +153,37 @@ Now that schedule has been moved out of the tournament page, is there even a pur
 
 <Topic engineering>
 
+## engineering # a custom oauth2 client with firebase functions
+
+Firebase Auth does not support logging in with Discord, so I had to build a custom oauth2 client myself using Firebase Functions. This was done without the use of a dedicated server, and on a statically generated website.
+
+### architecture
+
+- In **Firebase Functions**, there are 2 endpoints: `redirect` and `token` that handle all sensitive cookie and token generation.
+- On the website, there is a route called [`/profile/login`](https://github.com/offthedial/site/blob/master/src/pages/profile/login.js) that calls these api endpoints using JavaScript's native `fetch` api!
+
+### user flow
+
+1. A player on the website goes to `/profile/login` to attempt to log in.
+1. The website redirects to the `redirect` API endpoint, which **creates the oauth state cookie**, and **redirects the client to the discord oauth URI**.
+1. Once the player authorizes the application on discord.com, they are redirected back to `/profile/login`. This time, with a `code` and `state` query parameter.
+1. The website, seeing these query parameters, will **fetch the `token` API endpoint with the `code` and `state` attached**.
+1. The `token` endpoint will **validate the oauth state cookie**, **create a custom Firebase Auth token**, and **upsert their player profile**.
+1. Once the fetch call has responded, the website will **sign in with the returned custom token**, and redirect the player to their profile!
+
+</Topic>
+
+<Topic engineering>
+
 ## engineering # extending a max-width container on one side
 
-Something else special about the idtga page is the dynamic size of the skateboarding octo!
-Unlike the max-width container below, the right side needs to extend to edge of the viewport. But the left side needs to remain consistent in padding to all of the other elements on the page.
+Unlike the max-width container below, the right side needs to extend to edge of the viewport while the left side needs to remain consistent in padding to all of the other elements on the page.
 
 ![](/off-the-dial-site_3.webm "controls")
 
-How do you do this? You can conceptualize the image into 2 halves, where the right half fills it's entire side of the viewport, while the left half is simply half of the max-width container.
+You can conceptualize the image into 2 halves, where the right half fills it's entire side of the viewport, while the left half is simply half of the max-width container.
 
 So if you divide the container width by 2 and add `50vw` (half of the viewport), all that's left is to align the container to the right!
-
-I used the `calc()` css function to do this! Here's the final rule:
 
 ```
 max-width: calc(36rem + 50vw)
@@ -248,6 +267,6 @@ I surveyed a total of **31 respondents**, who shared their thoughts and percepti
 
 It's incredibly rewarding seeing the positive sentiment regarding the website's design and user experience, especially how happy players were with the website's clean aesthetics, straightforward navigation, and ease of access to critical information.
 
-I've learned so much about building a full-stack website, but there is still plenty of room for improvement. Such as making navigation more intuitive for first-time users by enhancing visibility of tournament formats and schedules.
+I've learned so much about building a full-stack website, but there is still plenty of room for improvement. Such as making navigation more intuitive for first-time players by enhancing visibility of tournament formats and schedules.
 
 If I were to remake the site, I would definitely be using this survey data to provide me with valuable guidance for improving the user experience even further.
