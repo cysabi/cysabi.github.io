@@ -38,7 +38,7 @@ const WorkTemplate = props => {
         <div class="flex-1 h-1 bg-slate-500 rounded-full" />
       </div>
       <article class="flex flex-col-reverse lg:flex-row items-start gap-12 max-w-none">
-        <div class="min-w-0">
+        <div class="min-w-0 w-full">
           <div class="mb-12" />
           <props.default
             components={{
