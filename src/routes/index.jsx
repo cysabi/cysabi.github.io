@@ -437,7 +437,10 @@ const ProjectOrb = props => {
             />
           </Motion.div>
         </div>
-        <A href={"works/" + props.name}>
+        <A
+          href={"works/" + props.name}
+          class={props.soon && "cursor-default pointer-events-none opacity-50"}
+        >
           <Motion.div
             onmouseenter={() => {
               setHov(true)
