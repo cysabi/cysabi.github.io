@@ -32,22 +32,44 @@ export const data = {
 
 # an extensible system for multi-step commands
 
-![The reply system in action](/blurple-py_5.webm)
+![](/blurple-py_5.webm)
+
+<figcaption class="-mt-[1em]">
+```py
+@router.route(["reply", "message"])
+async def message(ctx):
+    await ctx.send("Enter a number.")
+    reply = await io.MessageReply(ctx, validate=r'^[0-9]{1,}$').result()
+    await ui.Alert(ui.Style.SUCCESS, "Valid Reply", reply.content).send(ctx)
+```
+</figcaption>
 
 One of the main features of this library is the multi-step reply functions, these make it really easy for developers to create back-and-forth interactions. I also needed it to support message validation as well!
 
+> I called it **The Reply System**
+
 I needed a system that could be designed in a way that made it easy for developers to use as a drop-in solution for standard use cases. I also wanted the system to be extensible, so it can support developers who need to implement their own custom functionality.
+
+![Documentation for extending the reply abstract class](/blurple-py_2.webp)
 
 <Topic engineering>
 
-## engineering # how the reply system works
+## engineering # how it works
 
-- There is a default abstract `Reply` class that contains hooks for each relevant part of the interaction, such as when the command is first initialized, or when a user's message hits the validation check.
-  - In order to actually start the interaction, there's an awaitable method on the class called `result()` that intializes the interaction.
-- Then, I implemented a `MessageReply` class that has sensible defaults for each of these events, it checks if the message author is valid, and it automatically deletes invalid responses.
-- I also implemented classes for different events, such as `ReactionAddBasic`
+The default abstract `Reply` class contains hooks for each relevant part of the interaction. Examples include `on_reply_init` for when the command is first initialized, and `on_reply_attempt` to handle resetting state after a reply attempt.
 
-## design # example user flow with the reply system
+- A `Reply` object stores all the data nessecary for the interaction, but initializing it does not start the interaction.
+- To actually start the interaction, the user must await the `result()` coroutine method.
+
+I specialized default subclasses for different use cases, including `MessageReply` and `ReactionAddReply`.
+
+- The `MessageReply` class checks if the message author matches up, as well as the channel ids. It also automatically deletes all reply attempts.
+- the `ReactionAddReply` class ensures that the message author matches up, as well as the response's message matches up with the reaction's message.
+
+</Topic>
+<Topic design>
+
+## design # user flows
 
 Users can use the built-in `MessageReply` inline with their code to wait for a reply within any normal command!
 
@@ -63,23 +85,142 @@ reply = await io.MessageReply(ctx, validate=['yes', 'no']).result()
 reply = await io.MessageReply(ctx, validate=(lambda r: r.content.startswith("ahem"))).result()
 ```
 
-Reactions work in a similar way, simply
+If users require modifying behavior for any reason, they can create their own `Reply` subclass and hook into the events to add custom behavior
 
-![Documentation for extending the reply abstract class](/blurple-py_2.webp)
+```py
+class DirectMessageReactionAddReply(ReactionAddBasic):
+    """A subclass for the ReactionAddReply that's safe to use in Direct Messages."""
+
+    async def on_reply_init(self, message: discord.Message):
+        await super().on_reply_init(message)
+        if self._iscontainer(self.validate):
+            for react in self.validate:
+                await self.message.add_reaction(react)
+
+    def reply_check(self, payload: discord.RawReactionActionEvent):
+        return payload.user_id == self.ctx.author.id and \
+               payload.message_id == self.message.id
+```
 
 </Topic>
 
-# showcasing the power of blurple
+# awaiting multiple replies simultaneously
 
-## extra features made easy
+What if the user wants to wait for **a reaction _or_ a reply**?
 
-Because the `Reply` object is decoupled from starting the interaction with `await reply.result()`, it gives us lot of flexibility to modify the behavior of Replies to do exactly what we want!
-
-For example, I built a function called [`result_between()`](https://github.com/cysabi/blurple.py/blob/main/blurple/io/reply.py#L152) that allows you to await multiple results at the same time, and then gets whichever one completes first, before cancelling the rest. This is only possible because of the afformentioned decoupling, as the function works by taking a list of `Reply` objects as it's arguments, before independently managing asyncio tasks on how each of the `.result()` methods are called!
+I built a function that allows you to await multiple results at the same time, and then gets whichever one completes first, before cancelling the rest!
 
 ![](/blurple-py_6.webm)
 
-## implementing toasts in discord
+<figcaption class="-mt-[1em]">
+
+```py
+@router.route(["reply", "multiple"])
+async def multiple(ctx):
+    message = await ctx.send("React or send a message")
+    reply, result = await io.Reply.result_between({
+        io.MessageReply(ctx),
+        io.ReactionAddReply(ctx, validate=['☑️','🔘'], message=message)
+    })
+    await ctx.send(embed=ui.Alert(ui.Style.SUCCESS, reply, io.Reply._get_reply_content(result)))
+```
+
+</figcaption>
+
+<Topic engineering>
+
+## engineering # how it works
+
+The function is a class method that takes in a list of `Reply` objects as it's arguments, and manages how each of the `.result()` methods are called independently with asyncio tasks!
+
+What makes this feature so special is how easy it was to implement due to the flexibility of the Reply system! Because the `Reply` object is decoupled from starting the interaction with `await reply.result()`, but still holds all of the nessecary information. It gives us lot of flexibility to modify the behavior of Replies to do exactly what we want!
+
+Here's the entire source code of the [`result_between()`](https://github.com/cysabi/blurple.py/blob/main/blurple/io/reply.py#L152) method:
+
+```py
+@classmethod
+async def result_between(cls, replies: t.Container[Reply]) -> t.Tuple[Reply, t.Any]:
+    # Timeouts are handled by the _wait_tasks function
+    timeouts = []
+
+    def parse_task(reply: Reply):
+        # Extract the timeout out of the reply object
+        timeouts.append(reply.timeout)
+        reply.timeout = None
+        # Create task!!
+        return asyncio.create_task(reply.result(), name=reply)
+
+    # Build task list
+    tasks = [parse_task(task) for task in replies]
+    # _wait_tasks is a low-level function that interfaces with asyncio
+    task, result = await cls._wait_tasks(tasks, timeout=min(timeouts))
+
+    # Get original reply object, or None if it's timed out
+    for obj in replies:
+        if task is None:
+            obj = None
+            break
+        if str(obj) == task.get_name():
+            break
+    # Run cleanup on cancelled replies
+    replies.remove(obj)
+    for cancelled in replies:
+        await cancelled._cleanup()
+
+    # Return original reply object and the result
+    return obj, result
+```
+
+<figcaption class="-mt-[1em]">
+  Want to see the source code for
+  [`_wait_tasks`](https://github.com/cysabi/blurple.py/blob/main/blurple/io/reply.py#L219)?
+</figcaption>
+
+</Topic>
+<Topic design>
+
+## design # user flows
+
+It's easy to convert an existing command into one that awaits 2 at the same time! Simply cut the `.result()` call on your `Reply` objects, pass a list of them into `result_between`, and await!
+
+Here's an example of an rsvp command by waiting for 2 different reaction events:
+
+```py
+rsvp_react = "📝"
+rsvp_list = []
+
+# Create RSVP message
+message = await ctx.send("React to RSVP!")
+await message.add_reaction(rsvp_react)
+
+# Create both reaction events
+add = io.ReactionAddBasic(message, validate=[rsvp_react])
+remove = io.ReactionRemoveBasic(message, validate=[rsvp_react])
+
+while True:
+    # Await both reply objects!
+    obj, result = await io.Reply.result_between({add, remove})
+    # result_between passes whichever obj succeeds, which is useful for checks like this
+    if obj is add:
+        rsvp_list.append(result.user_id)
+    elif obj is remove:
+        rsvp_list.remove(result.user_id)
+    else:  # obj is None (The reply timed out)
+        break
+
+# Reply wait complete
+await message.clear_reactions()
+await message.edit(
+  f"Here's the list of RSVPrs:\n{'\n'.join([f'> <@{user_id}>' for user_id in rsvp_list])}")
+```
+
+<figcaption class="-mt-[1em]">
+  This is contrived for example, and not a practical use.
+</figcaption>
+
+</Topic>
+
+# implementing toasts in discord
 
 I wanted the toast to automatically delete itself after a certain period of time, but also have a way to close the toast early. Toast behavior in discord sounds like a pretty complex task!
 
@@ -87,15 +228,44 @@ Well, the systems I built were flexible enough to make implementing toasts a bre
 
 ![](/blurple-py_4.webm)
 
+<figcaption class="-mt-[1em]">
+
+```py
+@router.route(["toast"])
+async def toast(ctx):
+    await ui.Toast(ui.Style.INFO, f"This is a toast!").send(ctx)
+```
+
+</figcaption>
+
 In fact, the total line count for [toast.py](https://github.com/cysabi/blurple.py/blob/main/blurple/ui/toast.py) is just **_60 lines of code!_**, including all documentation and whitespace! That's the difference designing a well thought out API makes.
 
 <Topic engineering>
 
-### engineering # how it works:
+## engineering # how it works
 
 - I first created a subclass of `ReactionAddBasic` called `ToastInteraction`.
+
   - Specialize the `on_reply_init()` method to add a dismiss reaction, and set the validation list to only validate the dismiss reaction.
   - Specialize the `on_reply_complete()` method to delete the message, this function runs on timeout as well, but has `None` as the reply variable.
+
+  ```py
+  class ToastInteraction(io.ReactionAddBasic):
+    """A custom toast interaction reply subclass."""
+
+    async def on_reply_init(self, message: discord.Message):
+        await super().on_reply_init(message)
+        self.dismiss = "\u2716\ufe0f"
+        self.validate = [self.dismiss]
+        await self.message.add_reaction(self.dismiss)
+
+    def reply_check(self, payload: discord.RawReactionActionEvent):
+        return super().reply_check(payload) and payload.user_id == self.ctx.author.id
+
+    async def on_reply_complete(self):
+        await self.message.delete()
+  ```
+
 - Then, I built a class called `Toast`. It inherits a `ui.Base` class that has one async method, `send()` which sends the component to a channel.
   - Specialize the `send()` method to create an asyncio task of `ToastInteraction(...).result()`, passing in the message, and a 5-second timeout duration (by default)
 
@@ -103,9 +273,9 @@ And that's it! That's all the code you need to build a toast component with blur
 
 </Topic>
 
-## a recursive router
+# a recursive router
 
-I never really liked the way discord.ext made you define commands. It forced you to put commands in cogs, and all the commands of a command group must be in the same class.
+Something you may have noticed in my code captions is the `router` decorator! I never really liked the way discord.ext made you define commands. It forced you to put commands in cogs, and all the commands of a command group must be in the same class.
 
 I had an idea to create a custom command router that allowed you to specify the command as a route, similar to web frameworks. And that's what I did! The way the router class works is by recursively searching for the relevant command group, or creating the nessecary command group(s) if they don't already exist.
 
