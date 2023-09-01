@@ -2,7 +2,7 @@ export const data = {
   layer: -4,
   coords: [6, 3],
   name: "blurple-py",
-  desc: "a python library for building user interfaces in discord",
+  desc: "a python library to make complex features with discord bots simple",
   tags: ["software", "design", "library"],
   previews: ["/blurple-py_1.webp"],
   collage: {
@@ -14,12 +14,14 @@ export const data = {
   overview: {
     summary: (
       <>
-        Designing, building, and publishing a python library to make complex
-        features with discord bots simple. Features include a multi-step
-        commands, a consistent design system, and automatic toasts.
+        One day, I realized a lot of complex features I implemented for a
+        different project could be useful to others, if the API design was
+        extracted, generalized, refactored, and published as a library. So
+        that's exactly what I did. Features include a multi-step commands, a
+        consistent design system, and automatic toasts.
       </>
     ),
-    roles: ["engineering"],
+    roles: ["design", "engineering"],
     tools: ["Discord.py", "Python"],
     sources: {
       docs: "https://cysabi.github.io/blurple.py",
@@ -27,10 +29,6 @@ export const data = {
     },
   },
 }
-
-{/* todo: talk more about designing the system in a # design # section */}
-
-While making my Off the Dial bot, there was a lot of complex features that I implemented. I realized that a lot of the code could be useful to others if it was extracted, generalized, refactored, and published as a library, so that's exactly what I did.
 
 # an extensible system for multi-step commands
 
@@ -49,6 +47,24 @@ I needed a system that could be designed in a way that made it easy for develope
 - Then, I implemented a `MessageReply` class that has sensible defaults for each of these events, it checks if the message author is valid, and it automatically deletes invalid responses.
 - I also implemented classes for different events, such as `ReactionAddBasic`
 
+## design # example user flow with the reply system
+
+Users can use the built-in `MessageReply` inline with their code to wait for a reply within any normal command!
+
+```py
+reply = await io.MessageReply(ctx).result()
+```
+
+To add validation to any reply object, simply include the `validate` parameter. It can take in a regex, list of responses, or function for more complex validations:
+
+```py
+reply = await io.MessageReply(ctx, validate=r'^[0-9]{1,}$').result()
+reply = await io.MessageReply(ctx, validate=['yes', 'no']).result()
+reply = await io.MessageReply(ctx, validate=(lambda r: r.content.startswith("ahem"))).result()
+```
+
+Reactions work in a similar way, simply
+
 ![Documentation for extending the reply abstract class](/blurple-py_2.webp)
 
 </Topic>
@@ -63,11 +79,11 @@ For example, I built a function called [`result_between()`](https://github.com/c
 
 ![](/blurple-py_6.webm)
 
-## creating toasts in discord
+## implementing toasts in discord
 
-A component that I wanted to implement in discord was toasts! Toast behavior in discord sounds like a pretty complex task! I wanted the toast to automatically delete itself after a certain period of time, but also have a way to close the toast early.
+I wanted the toast to automatically delete itself after a certain period of time, but also have a way to close the toast early. Toast behavior in discord sounds like a pretty complex task!
 
-Luckily, the systems I built were flexible enough to make implementing toasts a breeze!
+Well, the systems I built were flexible enough to make implementing toasts a breeze!
 
 ![](/blurple-py_4.webm)
 
@@ -81,10 +97,9 @@ In fact, the total line count for [toast.py](https://github.com/cysabi/blurple.p
   - Specialize the `on_reply_init()` method to add a dismiss reaction, and set the validation list to only validate the dismiss reaction.
   - Specialize the `on_reply_complete()` method to delete the message, this function runs on timeout as well, but has `None` as the reply variable.
 - Then, I built a class called `Toast`. It inherits a `ui.Base` class that has one async method, `send()` which sends the component to a channel.
-
   - Specialize the `send()` method to create an asyncio task of `ToastInteraction(...).result()`, passing in the message, and a 5-second timeout duration (by default)
 
-  And that's it! That's all the code needed to build a toast component with blurple.py
+And that's it! That's all the code you need to build a toast component with blurple.py.
 
 </Topic>
 
@@ -96,7 +111,7 @@ I had an idea to create a custom command router that allowed you to specify the 
 
 I'm really happy with how clean the user-facing API is, and how concise the router code is (less than [60 lines](https://github.com/cysabi/blurple.py/blob/main/blurple/ext/router.py))!
 
-```
+```py
 @router.route(["reply", "message"])
 async def command(ctx):
 ```
@@ -105,4 +120,6 @@ async def command(ctx):
 
 I didn't do any advertising, but somehow a couple people found the library and expressed their delight with how thoughtful the API design was! [One user](https://patchwork.systems) actually used it when building a discord bot for a server with 30k members! That felt pretty cool.
 
-This library might be the bit of python code that I'm most proud of, I put a ton of care into the code quality and api design, but I also used a ton of clever tricks to make my code more cleaner and more concise! These were just the highlights, I hope you found it cool!
+This library might be the bit of python code that I'm most proud of, I put a ton of care into the code quality and api design, and I used a ton of clever ways to make the code I wrote clean and concise! These were just the highlights, I hope you found it cool!
+
+If you're interested to read more about API design, one of the best blog posts I've ever read _(OF ALL TIME, not just related to api design)_ is [Stripe's payments APIs: The first 10 years](https://stripe.com/blog/payment-api-design) by **Michelle Bu**, an absolutely golden piece.
