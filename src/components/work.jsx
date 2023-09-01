@@ -21,9 +21,9 @@ const WorkTemplate = props => {
         <div class="text-4xl font-semibold font-mono">{props.data.name}</div>
         <div class="text-2xl">{props.data.desc}</div>
         <div class="flex gap-4 items-center">
-          <div class="flex gap-2 items-center">
+          <div class="flex gap-1.5 items-center rounded-full overflow-clip">
             {props.data.tags.map(tag => (
-              <div class="py-0.5 px-3 bg-primary/10 font-medium rounded-full text-primary backdrop-blur backdrop-brightness-125">
+              <div class="leading-none py-1.5 px-3 text-2xl font-medium bg-primary/10 rounded-md text-primary backdrop-blur backdrop-brightness-125">
                 {tag}
               </div>
             ))}

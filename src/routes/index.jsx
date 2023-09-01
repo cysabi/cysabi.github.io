@@ -488,23 +488,16 @@ const ProjectOrb = props => {
                   scale: hov() ? 0.75 : 1,
                   y: hov() ? (titleHeight() - size / 2) * scale - 12 : 0,
                 }}
-                class="flex flex-col gap-1 items-center text-center origin-top"
+                class="flex flex-col gap-2 items-center text-center origin-top"
               >
-                <div class="flex items-center justify-center gap-2 text-lg">
-                  {props.overview?.roles?.map(role => (
-                    <TopicBadge noeye iconClass="h-4 w-4">
-                      {role}
-                    </TopicBadge>
-                  ))}
-                </div>
-                <div class="font-mono text-4xl font-semibold">{props.name}</div>
-                <div class="flex items-center justify-center gap-1 text-lg">
+                <div class="flex items-center justify-center gap-1 rounded-full overflow-clip">
                   {props.tags?.slice(0, 2)?.map(tag => (
-                    <div class="leading-none py-1 px-2 font-light bg-primary/10 rounded-full text-primary backdrop-blur backdrop-brightness-125">
+                    <div class="leading-none py-1 px-2 text-2xl font-medium bg-primary/10 rounded-md text-primary backdrop-blur backdrop-brightness-125">
                       {tag}
                     </div>
                   ))}
                 </div>
+                <div class="font-mono text-4xl font-semibold">{props.name}</div>
               </Motion.div>
             </div>
             <div class="absolute inset-0 p-6 rounded-full flex flex-col items-center text-center justify-between text-2xl">
