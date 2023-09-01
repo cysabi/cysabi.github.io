@@ -9,6 +9,7 @@ export const data = {
     "/off-the-dial-site_14.webp": "Welcome to Off the Dial!",
     "/off-the-dial-site_11.webp":
       "Let's switch to dark mode for the screenshots from here",
+    "/off-the-dial-site_5.webm": "A multi-select autocomplete component",
     "/off-the-dial-site_7.webp":
       "The tournament page, shows all relevant season information",
     "/off-the-dial-site_12.webp":
@@ -21,22 +22,12 @@ export const data = {
   },
   overview: {
     summary: (
-      <>
-        <span>
-          Building a website for Off the Dial, a tournament organization for
-          Splatoon providing tournament opportunities to players without a team.
-          This quest would end up taking 5 iterations spanning across 5 years,
-          here's last iteration's{" "}
-          <a href="https://github.com/offthedial/site/pull/123">
-            pull request{" "}
-            <span class="text-slate-600">
-              (<span class="text-green-500">+35,265</span>{" "}
-              <span class="text-red-500">-22,311</span>)
-            </span>
-          </a>
-          !
-        </span>
-      </>
+      <span>
+        I built a website for Off the Dial, a tournament organization for
+        Splatoon making tournament experience accessible to players without a
+        team! The website hosts player signups, user accounts, and a blog for
+        TO's.
+      </span>
     ),
     roles: ["design", "engineering"],
     tools: [
@@ -191,35 +182,23 @@ max-width: calc(36rem + 50vw)
 
 </Topic>
 
-<Topic engineering>
-
-## engineering # building a multi-select autocomplete component
-
-![](/off-the-dial-site_5.webm)
-
-It's best to lean on external libraries when it comes to complex accessible components like this, but always remember to own your own styles. I decided on using [Headless UI](https://headlessui.com), but Radix and Reach UI are awesome alternatives.
-
-The state of the input, include the query and values are controlled by [`react-hook-form`](https://react-hook-form.com), which are passed on straight into the combobox component.
-
-At first, the dropdown filter function was very primitive, but I discovered this awesome library called [`match-sorter`](https://github.com/kentcdodds/match-sorter)! It perfectly fit this use case and provided an awesome fuzzy search experience.
-
-</Topic>
-
 # impact
 
 <Topic engineering>
 
 ## engineering # a brief history of the site, and how i've progressed
 
-As I mentioned, this website went through 5 total iterations. I rewrote it from scratch each time using new/updated technologies, and redesigning all the pages.
+This website went through a total of 5 iterations, spanning across 5 years. I rewrote it from scratch each time using new/updated technologies, and redesigned all the pages.
+
+Here's the last iteration's{" "}<a href="https://github.com/offthedial/site/pull/123">pull request{" "}<span class="text-slate-600">(<span class="text-green-500">+35,265</span>{" "}<span class="text-red-500">-22,311</span>)</span></a>!
 
 > I want to share how the site has progressed with each iteration! Learning to build more ambitious features, and discovering new technologies with it.
 
-1. The first iteration was actually just a bunch of markdown files in a repo published with github pages. It was just a simple way to host the rules with a shareable link.
-2. The next iteration was static html with `Bootstrap` css. it looked like a baby's first website _(because it was)_, and probably used exclusively bootstrap cards everywhere.
-3. This is when `Gatsby` became a staple of the stack, and with the introduction of `Firebase`, I was finally able to learn how to implement **oauth2 login** and **tournament registration**. I also learned `Bulma` to replace `Bootstrap`!
-4. After getting the hang of Firebase and Gatsby, I was able to make a ton of improvements, such as the profile page with it's **registration status** and **timeline**, redesigning the **signup form**, and learning `Chakra` to replace `Bulma`.
-5. The penultimate version! For the most part, general layout remained the same, but I spent a lot of time rewriting cleaner code, and remaking more polished designs with the help of `Tailwind`. This is also when I implemented the **weapon selector component**.
+1.  The first iteration was actually just a bunch of markdown files in a repo published with github pages. It was just a simple way to host the rules with a shareable link.
+2.  The next iteration was static html with `Bootstrap` css. it looked like a baby's first website _(because it was)_, and probably used exclusively bootstrap cards everywhere.
+3.  This is when `Gatsby` became a staple of the stack, and with the introduction of `Firebase`, I was finally able to learn how to implement **oauth2 login** and **tournament registration**. I also learned `Bulma` to replace `Bootstrap`!
+4.  After getting the hang of Firebase and Gatsby, I was able to make a ton of improvements, such as the profile page with it's **registration status** and **timeline**, redesigning the **signup form**, and learning `Chakra` to replace `Bulma`.
+5.  The penultimate version! For the most part, general layout remained the same, but I spent a lot of time rewriting cleaner code, and remaking more polished designs with the help of `Tailwind`. This is also when I implemented the **weapon selector component**.
 
 </Topic>
 

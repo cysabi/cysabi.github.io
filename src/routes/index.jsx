@@ -5,6 +5,7 @@ import { createMemo, createSignal, onMount } from "solid-js"
 import { useGrid } from "../components/grid"
 import slurk from "../static/slurk.png"
 import { works } from "./works/index"
+import { TopicBadge } from "../components/work"
 
 const Index = () => {
   const { setColor } = useGrid()
@@ -23,10 +24,10 @@ const LandingScreen = () => {
   const location = useLocation()
 
   const subtitles = [
-    "born to design, forced to develop",
-    "a software engineer that's capable of empathy",
     "thinking about people thinking",
     "a perfectionist for serving others",
+    "a software engineer that's capable of empathy",
+    "developing designs, designing developments",
     "focused on sporadic projects",
     "comp sci's biggest hater",
     "🧋❤️",
@@ -56,10 +57,48 @@ const LandingScreen = () => {
               {subtitles[index()]}
             </Motion.div>
             <div class="flex pt-12 gap-8 text-2xl flex-wrap">
-              <Motion.button
+              <Motion.a
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, easing: spring({ damping: 20 }) }}
+                href="https://github.com/cysabi"
+                class="flex items-end"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-7 w-7 transition-all text-slate-300 hover:text-primary hover:scale-110"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </Motion.a>
+              <Motion.a
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25, easing: spring({ damping: 20 }) }}
+                href="https://twitter.com/cysabi"
+                class="flex items-end"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-7 w-7 transition-all text-slate-300 hover:text-primary hover:scale-110"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                </svg>
+              </Motion.a>
+              <Motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.275, easing: spring({ damping: 20 }) }}
+                class="rounded-full h-1.5 w-1.5 my-auto bg-slate-500"
+              ></Motion.div>
+              <Motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, easing: spring({ damping: 20 }) }}
                 class="inline link"
                 onClick={() =>
                   document
@@ -72,7 +111,7 @@ const LandingScreen = () => {
               <Motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, easing: spring({ damping: 20 }) }}
+                transition={{ delay: 0.35, easing: spring({ damping: 20 }) }}
               >
                 <A
                   href={location.hash === "#contact" ? "/" : "#contact"}
@@ -126,7 +165,7 @@ const LandingScreen = () => {
                     <span class="font-medium text-slate-50">
                       learning the ways people think
                     </span>
-                    , and using that info to{" "}
+                    , and using that to{" "}
                     <span class="font-medium text-slate-50">
                       think about how best to serve them
                     </span>
@@ -140,31 +179,23 @@ const LandingScreen = () => {
                     my roots stem from leading tournaments for competitive
                     Splatoon. one day i thought to myself,{" "}
                     <span class="font-medium text-slate-50">
-                      "how can i make this experience nicer for players?"
+                      "how can i perfect this experience for everyone?"
                     </span>
                     . that one question has driven me to build everything from
-                    discord bots, to websites, to broadcast graphics!
-                  </Motion.div>
-                  <Motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, easing: spring({ damping: 20 }) }}
-                  >
-                    to this day, i still carry that mantra to every project i
-                    work on.{" "}
-                    <span class="font-medium text-slate-50">
-                      it's never the role i'm filling, but the people i'm
-                      serving that excites me the most!
-                    </span>
+                    discord bots, to websites, to broadcast graphics.
                   </Motion.div>
                   <Motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7, easing: spring({ damping: 20 }) }}
                   >
-                    i'm always open to new opportunities, no matter the medium!
-                    so if you like what you see and want to work with me, don't
-                    hesitate to{" "}
+                    <span class="font-medium text-slate-50">
+                      it's never the role i'm filling, but the people i'm
+                      serving that excites me the most!
+                    </span>{" "}
+                    so i'm always open to new opportunities, no matter the
+                    medium! if you like what you see and want to work with me,
+                    don't hesitate to{" "}
                     <A href="/#contact" class="font-medium text-slate-50">
                       reach out!
                     </A>
@@ -457,16 +488,23 @@ const ProjectOrb = props => {
                   scale: hov() ? 0.75 : 1,
                   y: hov() ? (titleHeight() - size / 2) * scale - 12 : 0,
                 }}
-                class="flex flex-col items-center text-center origin-top"
+                class="flex flex-col gap-1 items-center text-center origin-top"
               >
                 <div class="flex items-center justify-center gap-2 text-lg">
+                  {props.overview?.roles?.map(role => (
+                    <TopicBadge noeye iconClass="h-4 w-4">
+                      {role}
+                    </TopicBadge>
+                  ))}
+                </div>
+                <div class="font-mono text-4xl font-semibold">{props.name}</div>
+                <div class="flex items-center justify-center gap-1 text-lg">
                   {props.tags?.slice(0, 2)?.map(tag => (
-                    <div class="px-3 py-1 bg-primary/10 font-medium text-3xl rounded-full text-primary backdrop-blur backdrop-brightness-125">
+                    <div class="leading-none py-1 px-2 font-light bg-primary/10 rounded-full text-primary backdrop-blur backdrop-brightness-125">
                       {tag}
                     </div>
                   ))}
                 </div>
-                <div class="font-mono leading-tight text-4xl">{props.name}</div>
               </Motion.div>
             </div>
             <div class="absolute inset-0 p-6 rounded-full flex flex-col items-center text-center justify-between text-2xl">
