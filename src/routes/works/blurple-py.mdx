@@ -3,11 +3,7 @@ export const data = {
   coords: [6, 3],
   name: "blurple-py",
   desc: "a python library for building user interfaces in discord",
-  tags: ["software", "design", "library", "engineering"],
-  links: {
-    docs: "https://cysabi.github.io/blurple.py",
-    github: "https://github.com/cysabi/blurple.py",
-  },
+  tags: ["software", "design", "library"],
   previews: ["/blurple-py_1.webp"],
   collage: {
     "/blurple-py_7.webm":
@@ -15,11 +11,26 @@ export const data = {
     "/blurple-py_1.webp": "The documentation page for blurple.py",
     "/blurple-py_3.webp": "Different style options for alerts",
   },
+  overview: {
+    summary: (
+      <>
+        Designing, building, and publishing a python library to make complex
+        features with discord bots simple. Features include a multi-step
+        commands, a consistent design system, and automatic toasts.
+      </>
+    ),
+    roles: ["engineering"],
+    tools: ["Discord.py", "Python"],
+    sources: {
+      docs: "https://cysabi.github.io/blurple.py",
+      github: "https://github.com/cysabi/blurple.py",
+    },
+  },
 }
 
 While making my Off the Dial bot, there was a lot of complex features that I implemented. I realized that a lot of the code could be useful to others if it was extracted, generalized, refactored, and published as a library, so that's exactly what I did.
 
-## designing an extensible system for developers of multi-step commands
+# an extensible system for multi-step commands
 
 ![The reply system in action](/blurple-py_5.webm)
 
@@ -27,7 +38,9 @@ One of the main features of this library is the multi-step reply functions, thes
 
 I needed a system that could be designed in a way that made it easy for developers to use as a drop-in solution for standard use cases. I also wanted the system to be extensible, so it can support developers who need to implement their own custom functionality.
 
-#### here's the system I came up with!
+<Topic engineering>
+
+## engineering # how the reply system works
 
 - There is a default abstract `Reply` class that contains hooks for each relevant part of the interaction, such as when the command is first initialized, or when a user's message hits the validation check.
   - In order to actually start the interaction, there's an awaitable method on the class called `result()` that intializes the interaction.
@@ -36,7 +49,11 @@ I needed a system that could be designed in a way that made it easy for develope
 
 ![Documentation for extending the reply abstract class](/blurple-py_2.webp)
 
-### showcasing the power of blurple #1: extra features made easy
+</Topic>
+
+# showcasing the power of blurple
+
+## extra features made easy
 
 Because the `Reply` object is decoupled from starting the interaction with `await reply.result()`, it gives us lot of flexibility to modify the behavior of Replies to do exactly what we want!
 
@@ -44,7 +61,7 @@ For example, I built a function called [`result_between()`](https://github.com/c
 
 ![](/blurple-py_6.webm)
 
-### showcasing the power of blurple #2: creating toasts in discord
+## creating toasts in discord
 
 A component that I wanted to implement in discord was toasts! Toast behavior in discord sounds like a pretty complex task! I wanted the toast to automatically delete itself after a certain period of time, but also have a way to close the toast early.
 
@@ -54,7 +71,9 @@ Luckily, the systems I built were flexible enough to make implementing toasts a 
 
 In fact, the total line count for [toast.py](https://github.com/cysabi/blurple.py/blob/main/blurple/ui/toast.py) is just **_60 lines of code!_**, including all documentation and whitespace! That's the difference designing a well thought out API makes.
 
-#### here's how it works:
+<Topic engineering>
+
+### engineering # how it works:
 
 - I first created a subclass of `ReactionAddBasic` called `ToastInteraction`.
   - Specialize the `on_reply_init()` method to add a dismiss reaction, and set the validation list to only validate the dismiss reaction.
@@ -64,6 +83,8 @@ In fact, the total line count for [toast.py](https://github.com/cysabi/blurple.p
   - Specialize the `send()` method to create an asyncio task of `ToastInteraction(...).result()`, passing in the message, and a 5-second timeout duration (by default)
 
   And that's it! That's all the code needed to build a toast component with blurple.py
+
+</Topic>
 
 ## a recursive router
 
@@ -78,6 +99,8 @@ I'm really happy with how clean the user-facing API is, and how concise the rout
 async def command(ctx):
 ```
 
----
+# impact
+
+I didn't do any advertising, but somehow a couple people found the library and expressed their delight with how thoughtful the API design was! [One user](https://patchwork.systems) actually used it when building a discord bot for a server with 30k members! That felt pretty cool.
 
 This library might be the bit of python code that I'm most proud of, I put a ton of care into the code quality and api design, but I also used a ton of clever tricks to make my code more cleaner and more concise! These were just the highlights, I hope you found it cool!
