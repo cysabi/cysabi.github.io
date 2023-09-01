@@ -44,8 +44,8 @@ const WorkTemplate = props => {
             components={{
               h1: props => (
                 <h2
-                  {...props}
                   class="font-mono text-slate-500 uppercase text-xl sm:text-2xl tracking-wide font-semibold mt-[2em]"
+                  {...props}
                 >
                   # {props.children}
                 </h2>
@@ -54,8 +54,8 @@ const WorkTemplate = props => {
                 const topic = props.children.split(" # ")
                 return (
                   <h3
-                    {...props}
                     class="flex items-center gap-3 text-xl sm:text-2xl"
+                    {...props}
                   >
                     {topic.length > 1 && (
                       <TopicBadge icon>{topic[0]}</TopicBadge>
@@ -64,9 +64,20 @@ const WorkTemplate = props => {
                   </h3>
                 )
               },
-              h3: props => (
-                <h4 class="text-xl sm:text-2xl text-slate-400" {...props} />
-              ),
+              h3: props => {
+                const topic = props.children.split(" # ")
+                return (
+                  <h4
+                    class="flex items-center gap-3 text-xl sm:text-2xl text-slate-400"
+                    {...props}
+                  >
+                    {topic.length > 1 && (
+                      <TopicBadge icon>{topic[0]}</TopicBadge>
+                    )}
+                    {topic.length > 1 ? topic[1] : props.children}
+                  </h4>
+                )
+              },
               blockquote: props => (
                 <blockquote
                   class="text-xl sm:text-2xl not-italic font-normal text-slate-50"
