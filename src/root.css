@@ -1,4 +1,4 @@
-@import url("./static/hljs.css");
+@import url("/hljs.css");
 
 @tailwind base;
 @tailwind components;
