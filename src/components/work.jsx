@@ -153,7 +153,7 @@ const Overview = props => {
       </Section>
       <div class="flex flex-col md:flex-row justify-between gap-x-6">
         <Section title="Roles & Responsibilites">
-          {props.roles.map(role => (
+          {props.roles?.map(role => (
             <TopicBadge class="py-1.5">{role}</TopicBadge>
           ))}
           <div class="mt-4 p-2 text-lg w-full rounded-lg backdrop-blur bg-primary-600/20 border-primary-500/20 border-2">

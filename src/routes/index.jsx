@@ -24,10 +24,9 @@ const LandingScreen = () => {
   const location = useLocation()
 
   const subtitles = [
-    "thinking about people thinking",
     "a perfectionist for serving others",
+    "thinking about people thinking",
     "a software engineer that's capable of empathy",
-    "developing designs, designing developments",
     "focused on sporadic projects",
     "comp sci's biggest hater",
     "🧋❤️",
@@ -179,10 +178,11 @@ const LandingScreen = () => {
                     my roots stem from leading tournaments for competitive
                     Splatoon. one day i thought to myself,{" "}
                     <span class="font-medium text-slate-50">
-                      "how can i perfect this experience for everyone?"
+                      "what can i build to make this experience better?"
                     </span>
-                    . that one question has driven me to build everything from
-                    discord bots, to websites, to broadcast graphics.
+                    . that one question has driven me to design and build
+                    everything from discord bots, to websites, to broadcast
+                    graphics.
                   </Motion.div>
                   <Motion.div
                     initial={{ opacity: 0, y: 20 }}
