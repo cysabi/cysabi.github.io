@@ -121,11 +121,11 @@ const Collage = props => {
             class="rounded-md aspect-video object-cover object-top"
             src={sources[active()]}
           />
-          <div class="flex gap-1 max-h-28">
+          <div class="flex gap-1 max-h-28 justify-around">
             {sources.map((item, i) => (
               <button
                 onClick={() => setActive(i)}
-                class="flex flex-1 items-center justify-center rounded-md"
+                class="flex aspect-video items-center justify-center rounded-md"
               >
                 <Img
                   title="controls"
