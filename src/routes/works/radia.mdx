@@ -1,19 +1,34 @@
 export const data = {
   // layer: -2,
   // coords: [9, 8],
-  name: "blurple-py",
   name: "radia",
-  desc: "scaling up a tournament management tool to meet growing business requirements",
-  tags: ["software", "design"],
-  links: {
-    github: "https://github.com/IPLSplatoon/Radia",
-  },
+  desc: "tournament management program used to manage multiple large-scale tournaments simultaneously",
+  tags: ["software", "app"],
   previews: ["/radia_1.webp"],
+  // collage: {},
+  overview: {
+    summary: (
+      <>
+        I redesigned and rebuild a tournament management tool from the ground up
+        to give staff members a more delightful user experience, and meet
+        growing business requirements of an expanding tournament organization.
+        <br class="mb-[1.2rem]" />
+        Features include managing multiple tournaments simultaneously through an
+        agenda, pulling tournament data from the Google Calendar API.
+      </>
+    ),
+    roles: ["design", "engineering"],
+    tools: [["Discord.py", "Python"], "MongoDB", "REST"],
+    sources: {
+      github: "https://github.com/IPLSplatoon/Radia",
+    },
+  },
 }
 
 {/* todo: make case study */}
-
-Internal tool used to organize tournaments, manage signups and organize participants. Completely rewritten and redesigned from the ground up. Used Python, Discord.py, MongoDB, GraphQL, REST.
+When a single tournament operation wanted to expand into a full
+organization and start hosting multiple tournaments, their internal tool
+wasn't able to support that.
 
 queries from google calendar
 the purpose of this was because the legacy tool didn't support multiple tournaments

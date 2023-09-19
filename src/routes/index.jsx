@@ -24,9 +24,10 @@ const LandingScreen = () => {
   const location = useLocation()
 
   const subtitles = [
-    "a perfectionist for serving others",
-    "thinking about people thinking",
-    "a software engineer that's capable of empathy",
+    "perfectionist for serving others",
+    "thinker for how people think",
+    "software engineer capable of empathy",
+    "designer for interactive experiences",
     "focused on sporadic projects",
     "comp sci's biggest hater",
     "🧋❤️",
@@ -160,13 +161,14 @@ const LandingScreen = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, easing: spring({ damping: 20 }) }}
                   >
-                    hi, thanks for stopping by! ~ i have a huge passion for{" "}
+                    hi, thanks for stopping by! ~ i'm a multi-disciplinary
+                    autodidact that's passionate about{" "}
                     <span class="font-medium text-slate-50">
-                      learning the ways people think
+                      learning how people think
                     </span>
                     , and using that to{" "}
                     <span class="font-medium text-slate-50">
-                      think about how best to serve them
+                      craft interactive experiences that serve others
                     </span>
                     .
                   </Motion.div>
@@ -175,14 +177,14 @@ const LandingScreen = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5, easing: spring({ damping: 20 }) }}
                   >
-                    my roots stem from leading tournaments for competitive
-                    Splatoon. one day i thought to myself,{" "}
+                    my roots stem from the competitive splatoon community, with
+                    a goal in mind:{" "}
                     <span class="font-medium text-slate-50">
-                      "what can i build to make this experience better?"
+                      "how can i perfect the community experience for everyone?"
                     </span>
-                    . that one question has driven me to design and build
-                    everything from discord bots, to websites, to broadcast
-                    graphics.
+                    . that question has driven me to constantly learn new
+                    technical and design skills to address the community's
+                    evolving needs.
                   </Motion.div>
                   <Motion.div
                     initial={{ opacity: 0, y: 20 }}
