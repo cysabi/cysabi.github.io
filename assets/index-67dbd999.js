@@ -431,7 +431,7 @@ remove = io.ReactionRemoveBasic(message, validate=[rsvp_react])
 `,n(i,{engineering:!0,children:[n(e.h2,{id:"engineering--picking-a-tech-stack-that-costs-cents-per-month",children:"engineering # picking a tech stack that costs cents per month"}),n(e.p,{children:["Because Off the Dial is a grassroots tournament organization, it was imperative that I be as efficient with costs as possible. At the same time, ",n(e.strong,{children:"I didn't want to sacrifice being able to build all the features I wanted"}),"."]}),n(e.p,{children:"After researching different web hosting methods, I settled on building a JAMstack website with the following technologies:"}),n(e.ul,{children:[`
 `,n(e.li,{children:[`
 `,n(e.h3,{id:"gatsbyjs",children:"GatsbyJS"}),`
-`,n(e.p,{children:"A free and open source static site generator, I chose Gatsby so I could use React to build out complex features for the website without server-side-rendering."}),`
+`,n(e.p,{children:"A free and open source static site generator, I chose Gatsby so I could use React to build out complex features for the website that still outputted static html."}),`
 `]}),`
 `,n(e.li,{children:[`
 `,n(e.h3,{id:"github-pages",children:"Github Pages"}),`
