@@ -196,8 +196,8 @@ const LandingScreen = () => {
                     <span class="font-medium text-slate-50">
                       everything i've learned has come from serving real people
                     </span>
-                    , thus i bring an unapologetically user-centric perspective
-                    to solving problems.
+                    ; i bring an unapologetically user-centric perspective to
+                    solving problems.
                   </Motion.div>
                   <Motion.div
                     initial={{ opacity: 0, y: 20 }}
