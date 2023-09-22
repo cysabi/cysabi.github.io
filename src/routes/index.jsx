@@ -5,7 +5,6 @@ import { createMemo, createSignal, onMount } from "solid-js"
 import { useGrid } from "../components/grid"
 import slurk from "../static/slurk.png"
 import { works } from "./works/index"
-import { TopicBadge } from "../components/work"
 
 const Index = () => {
   const { setColor } = useGrid()
@@ -24,6 +23,7 @@ const LandingScreen = () => {
   const location = useLocation()
 
   const subtitles = [
+    "perfectionist for people's experiences",
     "perfectionist for serving others",
     "thinker for how people think",
     "software engineer capable of empathy",
@@ -154,7 +154,7 @@ const LandingScreen = () => {
                   transition={{
                     easing: spring({ mass: 0.1 }),
                   }}
-                  class="flex flex-col gap-6 rounded-2xl text-2xl text-slate-400"
+                  class="flex flex-col gap-4 rounded-2xl text-2xl text-slate-400"
                 >
                   <Motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -166,9 +166,9 @@ const LandingScreen = () => {
                     <span class="font-medium text-slate-50">
                       learning how people think
                     </span>
-                    , and using that to{" "}
+                    , and using that info{" "}
                     <span class="font-medium text-slate-50">
-                      craft interactive experiences that serve others
+                      to craft interactive experiences
                     </span>
                     .
                   </Motion.div>
@@ -177,14 +177,27 @@ const LandingScreen = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5, easing: spring({ damping: 20 }) }}
                   >
-                    my roots stem from the competitive splatoon community, with
-                    a goal in mind:{" "}
+                    my story started{" "}
                     <span class="font-medium text-slate-50">
-                      "how can i perfect the community experience for everyone?"
+                      with a quest to improve the tournament experience
+                    </span>{" "}
+                    in the competitive splatoon community, when i taught myself
+                    python to build a bot to streamline registration. since
+                    then, i've picked up many more skills to meet the
+                    community's evolving needs.
+                  </Motion.div>
+                  <Motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6, easing: spring({ damping: 20 }) }}
+                  >
+                    {" "}
+                    nothing i've built was for a grade in a class,{" "}
+                    <span class="font-medium text-slate-50">
+                      everything i've learned has come from serving real people
                     </span>
-                    . that question has driven me to constantly learn new
-                    technical and design skills to address the community's
-                    evolving needs.
+                    , thus i bring an unapologetically user-centric perspective
+                    to solving problems.
                   </Motion.div>
                   <Motion.div
                     initial={{ opacity: 0, y: 20 }}

@@ -55,21 +55,6 @@ I needed a system that could be designed in a way that made it easy for develope
 
 ![Documentation for extending the reply abstract class](/blurple-py_2.webp)
 
-<Topic engineering>
-
-## engineering # how it works
-
-The default abstract `Reply` class contains hooks for each relevant part of the interaction. Examples include `on_reply_init` for when the command is first initialized, and `on_reply_attempt` to handle resetting state after a reply attempt.
-
-- A `Reply` object stores all the data nessecary for the interaction, but initializing it does not start the interaction.
-- To actually start the interaction, the user must await the `result()` coroutine method.
-
-I specialized default subclasses for different use cases, including `MessageReply` and `ReactionAddReply`.
-
-- The `MessageReply` class checks if the message author matches up, as well as the channel ids. It also automatically deletes all reply attempts.
-- the `ReactionAddReply` class ensures that the message author matches up, as well as the response's message matches up with the reaction's message.
-
-</Topic>
 <Topic design>
 
 ## design # user flows
@@ -78,14 +63,6 @@ Users can use the built-in `MessageReply` inline with their code to wait for a r
 
 ```py
 reply = await io.MessageReply(ctx).result()
-```
-
-To add validation to any reply object, simply include the `validate` parameter. It can take in a regex, list of responses, or function for more complex validations:
-
-```py
-reply = await io.MessageReply(ctx, validate=r'^[0-9]{1,}$').result()
-reply = await io.MessageReply(ctx, validate=['yes', 'no']).result()
-reply = await io.MessageReply(ctx, validate=(lambda r: r.content.startswith("ahem"))).result()
 ```
 
 If users require modifying behavior for any reason, they can create their own `Reply` subclass and hook into the events to add custom behavior
@@ -106,6 +83,39 @@ class DirectMessageReactionAddReply(ReactionAddBasic):
 ```
 
 </Topic>
+<Topic engineering>
+
+## engineering # how it works
+
+The default abstract `Reply` class contains hooks for each relevant part of the interaction. Examples include `on_reply_init` for when the command is first initialized, and `on_reply_attempt` to handle resetting state after a reply attempt.
+
+- A `Reply` object stores all the data nessecary for the interaction, but initializing it does not start the interaction.
+- To actually start the interaction, the user must await the `result()` coroutine method.
+
+I specialized default subclasses for different use cases, including `MessageReply` and `ReactionAddReply`.
+
+- The `MessageReply` class checks if the message author matches up, as well as the channel ids. It also automatically deletes all reply attempts.
+- the `ReactionAddReply` class ensures that the message author matches up, as well as the response's message matches up with the reaction's message.
+
+</Topic>
+
+# validation and error handling
+
+{/* todo: fil this shit out this is so cool omg the recurison and validation system is not talked about like breh!!! */}
+
+## design # user flows
+
+To add validation to any reply object, simply include the `validate` parameter. It can take in a regex, list of valid responses, or function for more complex validations:
+
+```py
+reply = await io.MessageReply(ctx, validate=r'^[0-9]{1,}$').result()
+reply = await io.MessageReply(ctx, validate=['yes', 'no']).result()
+reply = await io.MessageReply(ctx, validate=(lambda r: r.content.startswith("umm"))).result()
+```
+
+## engineering # how it works
+
+{/* todo: recursion!! */}
 
 # awaiting multiple replies simultaneously
 
@@ -130,6 +140,48 @@ async def multiple(ctx):
 
 </figcaption>
 
+<Topic design>
+
+## design # user flows
+
+It's easy to convert an existing command into one that awaits 2 at the same time! Simply cut the `.result()` call on your `Reply` objects, pass a list of them into `result_between`, and await!
+
+Here's an example of an rsvp command by waiting for 2 different reaction events:
+
+```py
+rsvp_react = "📝"
+rsvp_list = []
+
+# Create RSVP message
+message = await ctx.send("React to RSVP!")
+await message.add_reaction(rsvp_react)
+
+# Create both reaction events
+add = io.ReactionAddBasic(message, validate=[rsvp_react])
+remove = io.ReactionRemoveBasic(message, validate=[rsvp_react])
+
+while True:
+    # Await both reply objects!
+    obj, result = await io.Reply.result_between({add, remove})
+    # result_between passes whichever obj succeeds, which is useful for checks like this
+    if obj is add:
+        rsvp_list.append(result.user_id)
+    elif obj is remove:
+        rsvp_list.remove(result.user_id)
+    else:  # obj is None (The reply timed out)
+        break
+
+# Reply wait complete
+await message.clear_reactions()
+await message.edit(
+  f"Here's the list of RSVPrs:\n{'\n'.join([f'> <@{user_id}>' for user_id in rsvp_list])}")
+```
+
+<figcaption class="-mt-[1em]">
+  This is contrived for example, and not a practical use.
+</figcaption>
+
+</Topic>
 <Topic engineering>
 
 ## engineering # how it works
@@ -177,48 +229,6 @@ async def result_between(cls, replies: t.Container[Reply]) -> t.Tuple[Reply, t.A
 <figcaption class="-mt-[1em]">
   Want to see the source code for
   [`_wait_tasks`](https://github.com/cysabi/blurple.py/blob/main/blurple/io/reply.py#L219)?
-</figcaption>
-
-</Topic>
-<Topic design>
-
-## design # user flows
-
-It's easy to convert an existing command into one that awaits 2 at the same time! Simply cut the `.result()` call on your `Reply` objects, pass a list of them into `result_between`, and await!
-
-Here's an example of an rsvp command by waiting for 2 different reaction events:
-
-```py
-rsvp_react = "📝"
-rsvp_list = []
-
-# Create RSVP message
-message = await ctx.send("React to RSVP!")
-await message.add_reaction(rsvp_react)
-
-# Create both reaction events
-add = io.ReactionAddBasic(message, validate=[rsvp_react])
-remove = io.ReactionRemoveBasic(message, validate=[rsvp_react])
-
-while True:
-    # Await both reply objects!
-    obj, result = await io.Reply.result_between({add, remove})
-    # result_between passes whichever obj succeeds, which is useful for checks like this
-    if obj is add:
-        rsvp_list.append(result.user_id)
-    elif obj is remove:
-        rsvp_list.remove(result.user_id)
-    else:  # obj is None (The reply timed out)
-        break
-
-# Reply wait complete
-await message.clear_reactions()
-await message.edit(
-  f"Here's the list of RSVPrs:\n{'\n'.join([f'> <@{user_id}>' for user_id in rsvp_list])}")
-```
-
-<figcaption class="-mt-[1em]">
-  This is contrived for example, and not a practical use.
 </figcaption>
 
 </Topic>
