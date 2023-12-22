@@ -24,11 +24,12 @@ const LandingScreen = () => {
 
   const subtitles = [
     "perfectionist for people's experiences",
-    "perfectionist for serving others",
     "thinker for how people think",
-    "software engineer capable of empathy",
+    "obsessed with serving others",
+    "software engineer that's capable of empathy",
     "designer for interactive experiences",
     "focused on sporadic projects",
+    "born to design, forced to develop",
     "comp sci's biggest hater",
     "🧋❤️",
   ]
@@ -36,7 +37,7 @@ const LandingScreen = () => {
   const [hoverSlurk, setHoverSlurk] = createSignal(false)
 
   return (
-    <div class="flex flex-col justify-between max-w-7xl min-h-screen mx-auto p-[min(10vw,128px)]">
+    <div class="flex flex-col justify-between min-h-screen mx-auto py-[8vw] px-[16vw]">
       <div class="flex flex-col flex-1">
         <div class="flex flex-col-reverse items-start gap-4 md:gap-0 md:flex-row md:justify-between md:items-center">
           <div>
@@ -166,9 +167,9 @@ const LandingScreen = () => {
                     <span class="font-medium text-slate-50">
                       learning how people think
                     </span>
-                    , and using that info{" "}
+                    , and using that info when{" "}
                     <span class="font-medium text-slate-50">
-                      to craft interactive experiences
+                      designing interactive experiences
                     </span>
                     .
                   </Motion.div>
@@ -177,13 +178,13 @@ const LandingScreen = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5, easing: spring({ damping: 20 }) }}
                   >
-                    my story started{" "}
+                    my story started when, in pursuit of improving the
+                    tournament experience,{" "}
                     <span class="font-medium text-slate-50">
-                      with a quest to improve the tournament experience
+                      i taught myself python and built a bot to streamline the
+                      registration process.
                     </span>{" "}
-                    in the competitive splatoon community, when i taught myself
-                    python to build a bot to streamline registration. since
-                    then, i've picked up many more skills to meet the
+                    since then, i've picked up many more skills to meet the
                     community's evolving needs.
                   </Motion.div>
                   <Motion.div
@@ -191,13 +192,12 @@ const LandingScreen = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6, easing: spring({ damping: 20 }) }}
                   >
-                    {" "}
-                    nothing i've built was for a grade in a class,{" "}
+                    nothing i've built was for a grade in a class;{" "}
                     <span class="font-medium text-slate-50">
-                      everything i've learned has come from serving real people
+                      everything i've learned has been in service of real people
                     </span>
-                    ; i bring an unapologetically user-centric perspective to
-                    solving problems.
+                    . i bring an unapologetically holistic and user-focused
+                    perspective to solving problems.
                   </Motion.div>
                   <Motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -208,9 +208,8 @@ const LandingScreen = () => {
                       it's never the role i'm filling, but the people i'm
                       serving that excites me the most!
                     </span>{" "}
-                    so i'm always open to new opportunities, no matter the
-                    medium! if you like what you see and want to work with me,
-                    don't hesitate to{" "}
+                    thus, i'm always open to new opportunities, no matter the
+                    medium! if you want to work with me, don't hesitate to{" "}
                     <A href="/#contact" class="font-medium text-slate-50">
                       reach out!
                     </A>
