@@ -24,12 +24,9 @@ const LandingScreen = () => {
 
   const subtitles = [
     "perfectionist for people's experiences",
-    "thinker for how people think",
-    "obsessed with serving others",
-    "software engineer that's capable of empathy",
-    "designer for interactive experiences",
-    "focused on sporadic projects",
-    "born to design, forced to develop",
+    "software engineer with a heart for empathy",
+    "designer by heart, coder by means",
+    "thinking about how we think",
     "comp sci's biggest hater",
     "🧋❤️",
   ]
@@ -163,41 +160,40 @@ const LandingScreen = () => {
                     transition={{ delay: 0.4, easing: spring({ damping: 20 }) }}
                   >
                     hi, thanks for stopping by! ~ i'm a multi-disciplinary
-                    autodidact that's passionate about{" "}
+                    autodidact that's obsessed with thinking about better ways
+                    to serve others through design and code.{" "}
                     <span class="font-medium text-slate-50">
-                      learning how people think
+                      i see code as a means of turning designs into a reality,
+                      nothing more.
                     </span>
-                    , and using that info when{" "}
-                    <span class="font-medium text-slate-50">
-                      designing interactive experiences
-                    </span>
-                    .
                   </Motion.div>
                   <Motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5, easing: spring({ damping: 20 }) }}
                   >
-                    my story started when, in pursuit of improving the
-                    tournament experience,{" "}
+                    my journey started when volunteering for a grassroots
+                    esports organization. aspiring to enhance the tournament
+                    experience,{" "}
                     <span class="font-medium text-slate-50">
                       i taught myself python and built a bot to streamline the
                       registration process.
                     </span>{" "}
-                    since then, i've picked up many more skills to meet the
-                    community's evolving needs.
+                    since then, i've taken on bigger and more ambitious
+                    projects, picking up the nessecary skills along the way.
                   </Motion.div>
                   <Motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6, easing: spring({ damping: 20 }) }}
                   >
-                    nothing i've built was for a grade in a class;{" "}
+                    nothing i've made was for a grade in a class; everything
+                    i've learned has been in service of real people.{" "}
                     <span class="font-medium text-slate-50">
-                      everything i've learned has been in service of real people
-                    </span>
-                    . i bring an unapologetically holistic and user-focused
-                    perspective to solving problems.
+                      i bring an unapologetically holistic and uniquely
+                      user-focused perspective
+                    </span>{" "}
+                    to solving problems.
                   </Motion.div>
                   <Motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -206,10 +202,10 @@ const LandingScreen = () => {
                   >
                     <span class="font-medium text-slate-50">
                       it's never the role i'm filling, but the people i'm
-                      serving that excites me the most!
+                      serving that excites me the most;
                     </span>{" "}
-                    thus, i'm always open to new opportunities, no matter the
-                    medium! if you want to work with me, don't hesitate to{" "}
+                    i'm always open to new opportunities, no matter the medium!
+                    if you'd like to chat, don't hesitate to{" "}
                     <A href="/#contact" class="font-medium text-slate-50">
                       reach out!
                     </A>

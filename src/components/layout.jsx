@@ -8,7 +8,7 @@ const Layout = () => {
     "hey there :)",
     "snooping around are we?",
     "don't worry, i don't mind",
-    "just remember to leave everything where you found it !",
+    "just remember to put everything back where you found it !",
   ].map(text => {
     console.log("%c" + text, "color: #8dadff; font-weight: 600;")
   })
@@ -43,7 +43,11 @@ const Layout = () => {
           <div class="flex items-center justify-between flex-wrap gap-12 w-full">
             <div class="text-slate-500 text-center">
               like what you see?{" "}
-              <A href="/#contact" class="text-slate-400 decoration-transparent">
+              <A
+                href="/#contact"
+                onClick={() => window.scrollTo(0, 0)}
+                class="text-slate-400 decoration-transparent"
+              >
                 contact me!
               </A>
             </div>
