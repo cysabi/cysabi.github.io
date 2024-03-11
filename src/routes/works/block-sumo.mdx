@@ -163,38 +163,23 @@ I wanted vertical movement as a staple of the game, where **traversing up and do
 
 <Topic {...{"game design": true}}>
 
-## game design # rebalancing snowballs and player threat-ranges
+## game design # solving the problem of player range inbalance
 
-{/* todo: break up all the text here */}
+Because of my use of **snowballs as the main "filler item" for those in the lead**, it became an effective strategy for whoever was in 1st place to retreat constantly while kiting opponents away with an infinite supply of snowballs.
 
-Because of the abundance of snowballs that are given to first place, it became an effective strategy for whoever was in 1st place to retreat constantly while kiting opponents away with an infinite supply of snowballs.
+This was exacerbated because **many of the high-power items required close range combat** for them to get value. _(This was an intentional decision, because I didn't want those behind to find an easy strategy of staying on the outskirts with high-power ranged weapons to catch up)_.
 
-This was exacerbated because most of the high-power items required close range combat for them to get value. _(This was an intentional decision, because I didn't want those behind to find an easy strategy of staying on the outskirts with high-power ranged weapons to catch up)_.
+I couldn't simply lower the global quantity of snowballs, as that would disproportionately affect those that weren't in first place who needed them more. But something needed to be done to curb the amount of snowballs that first place got.
 
-- I couldn't simply lower the quantity of snowballs, as that would also affect those that weren't in first place.
-- I couldn't give too many powerful ranged options to those behind, as that would introduce camping.
+**So my solution involved many additions and adjustments, all working together:**
 
-**So I came up with a solution that required many different adjustments, all working together:**
-
-1. ### snowballs were seperated into 2 distinct items, one was 4-count, and one was 8-count.
-
-   I liked this change because it remained consistent within the systems of the game, without introducing confusing new rules. And it gave me the flexibility I needed to balance the item(s).
-
-2. ### players in the lead mostly recieve 4-count snowballs, instead of the previous 8.
-
-   This change removed the spamming power for first place, so **players have to be more intentional about when they decide to use them**, but it keeps it's purpose as a "useful when used right" defensive tool.
-
-3. ### players that are behind recieve the 8-count snowballs item, instead of snowballs being exclusive to those in the lead.
-
-   This change **gave players behind the same access to range that players in the lead have**, without feeling like snowballs just wasted one of their item drops, but also without being too powerful to encourage camping.
-
-4. ### introduce a new item, a short-ranged debuff bomb that blinds and slows victims.
+1. ### introduce a new item: a short-ranged debuff bomb that blinds and slows victims.
 
    This item had enough range to impactfully increase the average threat-range of players that are behind. But **it's short range and effect still required engagement from it's user to get value**, which made it a really healthy addition to the game.
 
    ![A "Smoke Bomb", that applies a blind and slow effect. The blind lasts half as long as the slow](/block-sumo_14.webm)
 
-5. ### introduce a new item, a powerful, but rare, long-ranged projectile (that's more effective at further ranges).
+1. ### introduce a new item: a powerful, but rare, long-ranged projectile (that's more effective at further ranges).
 
    Even with the debuff bomb and access to snowballs, players behind still don't have enough ways to make an impact when the player in 1st plays to constantly retreat to create as much distance as possible.
 
@@ -205,6 +190,14 @@ This was exacerbated because most of the high-power items required close range c
    Players can't constantly try to maximize distance between others all the time, as the item's existence **introduces a sort-of "shot clock" to kiting and retreating**.
 
    !["The Obliterator", a rocket-launcher that instantly kills anyone caught in it's blast radius](/block-sumo_15.webm)
+
+1. ### split up the quantity of snowballs so that players in the lead mostly recieve 4-count, while players behind recieve 8-count.
+
+   Last but not least, the root of the problem itself. By splitting snowballs into two seperate items, I was able to keep this change consistent within the systems of the game, without introducing entirely new rules.
+
+   For those in the lead, this change removed the spamming power for first place, so **players in the lead have to be more intentional about when they decide to use them**, but it keeps it's purpose as a "useful when used right" defensive tool.
+
+   Providing 8-count snowballs to those behind **gave those players the same access to range that players in the lead have**, without feeling like snowballs just wasted one of their item drops with a meager 4.
 
 </Topic>
 
