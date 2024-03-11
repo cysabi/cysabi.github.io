@@ -172,15 +172,14 @@ const LandingScreen = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5, easing: spring({ damping: 20 }) }}
                   >
-                    my journey started when volunteering for a grassroots
-                    esports organization. aspiring to enhance the tournament
-                    experience,{" "}
+                    my journey started as a volunteer for a grassroots
+                    esports org. in pursuit of improving the tournament experience,{" "}
                     <span class="font-medium text-slate-50">
                       i taught myself python and built a bot to streamline the
                       registration process.
                     </span>{" "}
-                    since then, i've taken on bigger and more ambitious
-                    projects, picking up the nessecary skills along the way.
+                    since then, i've taken on increasingly ambitious
+                    projects, picking up the requisite skills along the way.
                   </Motion.div>
                   <Motion.div
                     initial={{ opacity: 0, y: 20 }}
