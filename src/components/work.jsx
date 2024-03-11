@@ -1,10 +1,12 @@
 import { A } from "@solidjs/router"
 import {
+  For,
   Match,
   Show,
   Switch,
   createMemo,
   createSignal,
+  mergeProps,
   onMount,
 } from "solid-js"
 import { useGrid } from "./grid"
@@ -330,44 +332,64 @@ const Img = props => {
       autoplayObserver.observe(ref)
     }
   })
+
+  console.log(props.src)
+
   const content = (
-    <Switch
-      fallback={
-        <img
-          class={`w-full rounded-md ${props.class}`}
-          src={props.src}
-          alt={props.alt}
-          loading="lazy"
-        />
-      }
-    >
-      <Match when={props.src.endsWith(".webm")}>
-        <video
-          ref={ref}
-          src={props.src}
-          class={`w-full rounded-md ${props.class}`}
-          controls={props.title === "controls"}
-          muted={props.title !== "controls"}
-          autoplay={props.title !== "controls"}
-          loop={props.title !== "controls"}
-          preload="metadata"
-          playsinline
-        >
-          <source src={props.src} alt={props.alt} type="video/webm" />
-        </video>
+    <Switch fallback={<ImgContent ref={ref} {...props} />}>
+      <Match when={props.src.split("%7C").length > 1}>
+        <div class="flex gap-4 -my-12">
+          <For each={props.src.split("%7C")}>
+            {src => {
+              console.log(src)
+              return <ImgContent ref={ref} {...props} src={src} />
+            }}
+          </For>
+        </div>
       </Match>
     </Switch>
   )
 
-  return props.alt?.length > 0 ? (
-    <figure>
-      {content}
-      <figcaption>{props.alt}</figcaption>
-    </figure>
-  ) : (
-    <>{content}</>
+  return (
+    <Switch fallback={content}>
+      <Match when={props.alt?.length > 0}>
+        <figure>
+          {content}
+          <figcaption>{props.alt}</figcaption>
+        </figure>
+      </Match>
+    </Switch>
   )
 }
+
+const ImgContent = props => (
+  <Switch
+    fallback={
+      <img
+        class={`w-full rounded-md ${props.class}`}
+        src={props.src}
+        alt={props.alt}
+        loading="lazy"
+      />
+    }
+  >
+    <Match when={props.src.endsWith(".webm")}>
+      <video
+        ref={props.ref}
+        src={props.src}
+        class={`w-full rounded-md ${props.class}`}
+        controls={props.title === "controls"}
+        muted={props.title !== "controls"}
+        autoplay={props.title !== "controls"}
+        loop={props.title !== "controls"}
+        preload="metadata"
+        playsinline
+      >
+        <source src={props.src} alt={props.alt} type="video/webm" />
+      </video>
+    </Match>
+  </Switch>
+)
 
 const Topic = props => {
   const { hiddenTopics } = useGrid()

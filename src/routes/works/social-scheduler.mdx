@@ -13,12 +13,13 @@ export const data = {
       "Clicking on a block opens up an event booking modal",
     "/social-scheduler_3.webp":
       "Once an event has been booked, the modal turns into a confirmation window",
+    "/social-scheduler_8.png":
+      "The private view, showing which blocks have already been booked, and by what events",
   },
-  soon: true,
   overview: {
     summary: (
       <>
-        I was commissioned to build a web-application for a very busy client to
+        I was commissioned to build a web-application for a very busy client to help them
         simplify scheduling social events.
         <br class="mb-[1.2rem]" />
         Features include 2-way scroll binding between the date selector and the
@@ -39,53 +40,82 @@ export const data = {
   },
 }
 
-{/* todo: make case study */}
-
-- case study
-  - ideation
-    - figuring out what the specific problems / goals are
-      - "pple had difficulty signing up and finding tourney info"
-    - what are the set of requirements to fulfill?
-      - what needs to be show on the website?
-      - what are my design goals for the game?
-    - what are users experiencing?
-      - include metrics
-  - iteration
-    - chunks of things i made, show conflict and thought process.
-  - results
-    - what was my impact?
-    - how do users feel now?
-      - metrics
-    - what lessons did i learn?
-    - what would i have done differently if i were to do it again?
-
 # ideation
 
-A client was struggling to schedule social events beacuse they are a busy person and always has to do a lot of things.
+I was approached by a very busy client who requsted a commissioned web application. They were struggling to keep track of scheduling social events and they wanted an easy self-hostable solution for it.
 
-In order to fix this
+The self-hostability of the solution is what made this project interesting. It must be static enough to work in a JAMstack architecture, while still having the functionality to query for events and automatically add them to your calendar.
+
+<Topic design>
+## design # initial design document
+
+We first started with a rough draft of some of the ideas that we wanted to include in the app, as well as a low fidelity mockup of the UI. We knew early on that the app should be a mobile-first experience.
+
+![Some excerpts from the initial document](/social-scheduler_10.png|/social-scheduler_9.png)
+
+</Topic>
+
+Here are the main points that we settled on:
+- Search filters to select for only certain blocks of time.
+- A date and block selector that are two-way linked.
+- Calendar events should automatically be published to the client's calendar.
+- A "Private" view that also shows which blocks of time have been booked already.
+- Open-source and self-hosted, so anyone can set up their own custom instance for free!
 
 # iteration
 
+<Topic engineering>
+
 ## engineering # fancy css for the time selector
 
-The most techncially cool thing that I made was the time selector, there's a preview text that goes away as soon as you click inside the input, all of this without needing to pull any React state!
+The most interesting thing that I build was this time selector! The feature includes some preview text that goes away as soon as you click inside the input, which also needed to account for whether the field has been touched or not.
 
 ![](/social-scheduler_6.webm)
 
-I did this using css after-elements, and the focus state selector, all the magic happens through this single tailwind class: `focus-within:after:hidden`. Everything else is for positioning!
+Sounds like you need some extra React state right? Wrong! I was able to pull this off entirely with css after-elements, with a bit of help from the focus-within state selector!
 
-```
-flex items-center flex-row-reverse text-slate-500 relative after:absolute focus-within:after:hidden after:inset-0 after:bg-slate-700 after:pointer-events-none after:my-2.5 after:ml-12 after:mr-3 after:content-[attr(data-content)]
+Here's a demonstrative version of my css:
+
+```scss
+{
+  position: relative;
+  background-color: var(--slate-700);
+
+  &:after {
+    position: absolute;
+    inset: 0px;
+    background-color: var(--slate-700);
+    pointer-events: none;
+    content: attr(data-content);
+
+    &:focus-within {
+      display: hidden;
+    }
+  }
+}
 ```
 
-Here's what it looks like when I put a transparent red background on the after element:
+Here's what it looks like when I change the background of the after element to a semi-transparent red:
 
 ![](/social-scheduler_7.webm)
+
+</Topic>
+
+<Topic design>
 
 ## design # designing the modal event preview
 
 Since the modal has a preview that shows the event details in a mock "event" block,
 I thought that the preview should persist after the event has been booked, but change state from being a preview of an event, to a successfully booked event.
 
+Even the icon changes!
+
 ![](/social-scheduler_5.webm)
+
+</Topic>
+
+# impact
+
+The project went live about one month after the initial pitch, and rather successfully! here's what they had to say:
+
+> <span class="text-xl lowercase italic">"its pretty good ngl"</span>
