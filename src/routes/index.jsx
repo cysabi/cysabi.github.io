@@ -160,11 +160,9 @@ const LandingScreen = () => {
                     transition={{ delay: 0.4, easing: spring({ damping: 20 }) }}
                   >
                     hi, thanks for stopping by! ~ i'm a multi-disciplinary
-                    autodidact that's obsessed with thinking about better ways
-                    to serve others through design and code.{" "}
+                    autodidact that's obsessed with{" "}
                     <span class="font-medium text-slate-50">
-                      i see code as a means of turning designs into a reality,
-                      nothing more.
+                      thinking about better ways to serve others through design and code.
                     </span>
                   </Motion.div>
                   <Motion.div
