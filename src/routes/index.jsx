@@ -24,9 +24,9 @@ const LandingScreen = () => {
 
   const subtitles = [
     "perfectionist for people's experiences",
-    "software engineer with a heart for empathy",
-    "designer by heart, coder by means",
+    "software engineer with empathy included",
     "thinking about how we think",
+    "designer by heart, coder by means",
     "comp sci's biggest hater",
     "🧋❤️",
   ]
