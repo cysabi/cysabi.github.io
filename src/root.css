@@ -6,9 +6,10 @@
 
 @layer base {
   @font-face {
-    font-family: "Karla";
-    src: url("/Karla-VariableFont_wght.ttf") format("truetype-variations"),
-      url("/Karla-Italic-VariableFont_wght.ttf") format("truetype-variations");
+    font-family: "Work Sans";
+    src: url("/WorkSans-VariableFont_wght.ttf") format("truetype-variations"),
+      url("/WorkSans-Italic-VariableFont_wght.ttf")
+        format("truetype-variations");
     font-weight: 100 700;
     font-style: normal, italic;
   }
