@@ -1,4 +1,4 @@
-import { Motion } from "@motionone/solid"
+import { Motion } from "solid-motionone"
 import { spring } from "motion"
 import {
   createContext,
@@ -12,13 +12,25 @@ import grid from "../static/grid.svg"
 const GridContext = createContext()
 
 export const GridProvider = props => {
-  const [color, setColor] = createSignal("#7A73B8")
-  const [pointer, setPointer] = createSignal("auto")
   const [pos, setPos] = createSignal({ hide: true })
+  const [color, setColor] = createSignal()
+  const [hovering, setHovering] = createSignal(false)
+  const [pointer, setPointer] = createSignal("auto")
   const [hiddenTopics, setHiddenTopics] = createSignal([])
-  onMount(() =>
+
+  onMount(() => {
     setPos({ x: window.innerWidth / 2, y: window.innerHeight / 2, hide: true })
-  )
+    setColor(false)
+  })
+
+  for (const msg of [
+    "hey there :)",
+    "snooping around are we?",
+    "don't worry, i don't mind",
+    "just remember to leave your shoes by the door !",
+  ]) {
+    console.log("%c" + msg, "color: #8dadff; font-weight: 600;")
+  }
 
   return (
     <GridContext.Provider
@@ -27,6 +39,8 @@ export const GridProvider = props => {
         setPos,
         color,
         setColor,
+        hovering,
+        setHovering,
         pointer,
         setPointer,
         hiddenTopics,
@@ -34,9 +48,27 @@ export const GridProvider = props => {
           hiddenTopics().includes(topic)
             ? setHiddenTopics(hiddenTopics().filter(t => t !== topic))
             : setHiddenTopics([...hiddenTopics(), topic]),
+        setHover: (hover = false) => {
+          if (hover !== false) {
+            setColor("#91e9cb")
+            setHovering(hover)
+          } else {
+            setColor("#7A73B8")
+            setHovering(false)
+          }
+        },
       }}
     >
-      {props.children}
+      <main
+        onmousemove={e => {
+          setPointer(getComputedStyle(e.target).cursor)
+          setPos({ x: e.clientX, y: e.clientY })
+        }}
+        class="min-h-screen text-slate-50 selection:bg-slate-50 selection:text-slate-950 overflow-x-clip underline-offset-4"
+      >
+        <Grid />
+        {props.children}
+      </main>
     </GridContext.Provider>
   )
 }
@@ -53,58 +85,58 @@ const Grid = () => {
       <Motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: pos().hide ? 0 : 1 }}
-        transition={{ duration: 1 }}
-        class="fixed inset-0 pointer-events-none flex items-start justify-start -z-10"
+        transition={{ duration: 1.5 }}
+        class="fixed inset-0 flex items-start justify-start pointer-events-none overflow-clip -z-10"
       >
+        <div
+          class="absolute opacity-[0.015] inset-0 bg-repeat bg-center"
+          style={`background-image: url('${grid}')`}
+        />
         <Motion.div
           animate={{
             x: pos().x - 16,
             y: pos().y - 16,
-            padding: "16px",
-            opacity: a() ? 0.4 : 0.4,
             backgroundColor: color() || "#7A73B8",
           }}
-          transition={{ easing: spring({ mass: 0.125 }) }}
-          class="absolute hidden sm:block row-start-1 col-start-1 rounded-full"
+          transition={
+            pos().hide ? { duration: 0 } : { easing: spring({ mass: 0.125 }) }
+          }
+          class="opacity-40 p-4 absolute hidden sm:block row-start-1 col-start-1 rounded-full"
         />
         <Motion.div
           animate={{
             x: pos().x - (a() ? 16 : 8),
             y: pos().y - (a() ? 16 : 8),
             padding: a() ? "16px" : "8px",
-            opacity: a() ? 0.4 : 0.4,
           }}
-          transition={{ easing: spring({ mass: 0.025 }) }}
-          class="absolute hidden sm:block row-start-1 col-start-1 rounded-full bg-primary"
+          transition={
+            pos().hide ? { duration: 0 } : { easing: spring({ mass: 0.025 }) }
+          }
+          class="opacity-40 absolute hidden sm:block row-start-1 col-start-1 rounded-full bg-primary"
         />
+        <Motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: pos().hide ? 0 : 1 }}
+          transition={{ duration: 1.5 }}
+          class="fixed inset-0 blur-3xl flex"
+        >
+          <Blob color={color() || "#aba2fd"} />
+          <Blob color="#3b6ea2" main />
+        </Motion.div>
       </Motion.div>
-      <Motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: pos().hide ? 0 : 0.2 }}
-        transition={{ duration: 1 }}
-        class="fixed inset-0 blur-3xl -z-10 flex overflow-hidden"
-      >
-        <Blob pos={pos} color={color() || "#7A73B8"} />
-        <Blob pos={pos} color="#3b6ea2" main />
-      </Motion.div>
-      <div
-        class="absolute opacity-[0.015] inset-0 -z-10 bg-repeat bg-center"
-        style={`background-image: url('${grid}')`}
-      />
     </>
   )
 }
 
 const Blob = props => {
   // given a color, return a div that randomly changes opacity, position, and size slightly
-  const [blob, setBlob] = createSignal({ x: 0, y: 0, opacity: 0.5 })
+  const { pos, hovering } = useGrid()
+  const [blob, setBlob] = createSignal({ x: 0, y: 0, opacity: 0.15 })
   setInterval(() => {
     setBlob({
       x: Math.random() * 150 - 75,
       y: Math.random() * 150 - 75,
-      opacity: props.main
-        ? Math.random() / (4 / 3) + 0.25
-        : Math.random() / 2 + 0.5,
+      opacity: pos().hide ? 0 : 0.16,
     })
   }, 750)
 
@@ -112,8 +144,8 @@ const Blob = props => {
     <Motion.div
       class="absolute"
       animate={{
-        x: props.pos().x,
-        y: props.pos().y,
+        x: pos().x,
+        y: pos().y,
       }}
       transition={{
         easing: spring({
@@ -124,13 +156,22 @@ const Blob = props => {
     >
       <div class="left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
         <Motion.div
+          initial={{ opacity: 0.15 }}
+          style={{
+            height: props.main ? "520px" : "618px",
+            width: props.main ? "520px" : "618px",
+          }}
           animate={{ ...blob() }}
-          transition={{ easing: spring({ mass: 10, stiffness: 10 }) }}
-          class="h-[640px] w-[640px] rounded-full"
+          transition={
+            pos().hide
+              ? { duration: 0 }
+              : { easing: spring({ mass: 10, stiffness: 10 }) }
+          }
+          class="rounded-full"
         >
           <Motion.div
             animate={{ backgroundColor: props.color }}
-            transition={{ duration: 0.7 }}
+            transition={pos().hide ? { duration: 0 } : { duration: 0.7 }}
             class="h-full w-full rounded-full"
           />
         </Motion.div>
@@ -139,4 +180,4 @@ const Blob = props => {
   )
 }
 
-export default Grid
+export default GridProvider

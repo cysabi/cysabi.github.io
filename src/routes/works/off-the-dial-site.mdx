@@ -3,7 +3,7 @@ export const data = {
   coords: [8, 4],
   name: "off-the-dial-site",
   desc: "full-stack website that hosts tournament signups, player accounts, and a blog",
-  tags: ["web", "site", "ui/ux"],
+  tags: ["website"],
   previews: ["/off-the-dial-site_1.webp"],
   collage: {
     "/off-the-dial-site_14.webp": "Welcome to Off the Dial!",
@@ -32,7 +32,7 @@ export const data = {
         to post updates.
       </span>
     ),
-    roles: ["design", "engineering"],
+    roles: ["design", "code"],
     tools: [
       ["GatsbyJS", "React.js", "JavaScript"],
       "MDX",
@@ -79,9 +79,9 @@ In order to complete this quest of building a source of truth, I asked myself: *
    The profile page displays information **as it relates to the player**. It displays player's registration status for the current season, and encourages them to register for the upcoming season. During the event, a timeline displays what the player's responsibility is for the currently active phase of the event.
 
 </Topic>
-<Topic engineering>
+<Topic code>
 
-## engineering # picking a tech stack that costs cents per month
+## code # picking a tech stack that costs cents per month
 
 Because Off the Dial is a grassroots tournament organization, it was imperative that I be as efficient with costs as possible. At the same time, **I didn't want to sacrifice being able to build all the features I wanted**.
 
@@ -97,9 +97,9 @@ After researching different web hosting methods, I settled on building a JAMstac
 
 - ### Google Firebase
 
-  A BaaS with an exorbitantly generous free tier, it serves all dynamic features, such as the database, authentication, and custom serverless functions.
+  A BaaS with a ludicrously generous free tier, it serves all dynamic features, such as the database, authentication, and custom serverless functions.
 
-This stack let me have my cake and eat it tool! With a bit of extra work, I could support [fully-functioning oauth2 accounts](#engineering--a-custom-oauth2-client-with-firebase-functions), a signup page that's connected to a database, and more! All without needing to pay more than a couple cents.
+This stack let me have my cake and eat it tool! With a bit of extra work, I could support [fully-functioning oauth2 accounts](#code--a-custom-oauth2-client-with-firebase-functions), a signup page that's connected to a database, and more! All without needing to pay more than a couple cents.
 
 </Topic>
 
@@ -140,17 +140,19 @@ Now that schedule has been moved out of the tournament page, is there even a pur
 
 </Topic>
 
-<Topic engineering>
+<Topic code>
 
-## engineering # a custom oauth2 client with firebase functions
+## code # a custom oauth2 client with firebase functions
 
 Firebase Auth does not support logging in with Discord, so I had to **build a custom oauth2 client myself using Firebase Functions**.
 
 ### user flow
+
 - There are 2 endpoints in firebase functions: `redirect` and `token` that handle all sensitive cookie and token generation.
 - On the static website, a route called [`/profile/login`](https://github.com/offthedial/site/blob/master/src/pages/profile/login.js) interfaces with these api endpoints, with the help of JavaScript's native `fetch` api. Handling any errors gracefully.
 
 ### architecture
+
 1. A player on the website goes to `/profile/login` to attempt to log in.
 1. The website redirects to the `redirect` firebase function endpoint, which saves a **generated oauth2 state cookie**, and **redirects the client to the discord oauth URI**.
 1. Once the player authorizes the application on discord.com, they are redirected back to `/profile/login`. This time, with a `code` and `state` query parameter.
@@ -160,9 +162,9 @@ Firebase Auth does not support logging in with Discord, so I had to **build a cu
 
 </Topic>
 
-<Topic engineering>
+<Topic code>
 
-## engineering # extending a max-width container on one side
+## code # extending a max-width container on one side
 
 Unlike the max-width container below, the right side needs to extend to edge of the viewport while the left side needs to remain consistent in padding to all of the other elements on the page.
 
@@ -180,9 +182,9 @@ max-width: calc(36rem + 50vw);
 
 # impact
 
-<Topic engineering>
+<Topic code>
 
-## engineering # a brief history of the site, and how i've progressed
+## code # a brief history of the site, and how i've progressed
 
 This website went through a total of 5 iterations, spanning across 5 years. I rewrote it from scratch each time using new/updated technologies, and redesigned all the pages.
 

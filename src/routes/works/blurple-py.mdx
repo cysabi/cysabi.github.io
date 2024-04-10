@@ -3,7 +3,7 @@ export const data = {
   coords: [6, 3],
   name: "blurple-py",
   desc: "open-source python library for building user experiences in discord",
-  tags: ["software", "design", "library"],
+  tags: ["library"],
   previews: ["/blurple-py_1.webp"],
   collage: {
     "/blurple-py_7.webm":
@@ -24,7 +24,7 @@ export const data = {
         help users move faster and communicate intent more effectively.
       </>
     ),
-    roles: ["design", "engineering"],
+    roles: ["design", "code"],
     tools: ["Discord.py", "Python", "Asyncio"],
     sources: {
       docs: "https://cysabi.github.io/blurple.py",
@@ -83,9 +83,9 @@ class DirectMessageReactionAddReply(ReactionAddBasic):
 ```
 
 </Topic>
-<Topic engineering>
+<Topic code>
 
-## engineering # how it works
+## code # how it works
 
 The default abstract `Reply` class contains hooks for each relevant part of the interaction. Examples include `on_reply_init` for when the command is first initialized, and `on_reply_attempt` to handle resetting state after a reply attempt.
 
@@ -113,7 +113,7 @@ reply = await io.MessageReply(ctx, validate=['yes', 'no']).result()
 reply = await io.MessageReply(ctx, validate=(lambda r: r.content.startswith("umm"))).result()
 ```
 
-## engineering # how it works
+## code # how it works
 
 # awaiting multiple replies simultaneously
 
@@ -180,9 +180,9 @@ await message.edit(
 </figcaption>
 
 </Topic>
-<Topic engineering>
+<Topic code>
 
-## engineering # how it works
+## code # how it works
 
 The function is a class method that takes in a list of `Reply` objects as it's arguments, and manages how each of the `.result()` methods are called independently with asyncio tasks!
 
@@ -251,9 +251,9 @@ async def toast(ctx):
 
 In fact, the total line count for [toast.py](https://github.com/cysabi/blurple.py/blob/main/blurple/ui/toast.py) is just **_60 lines of code!_**, including all documentation and whitespace! That's the difference designing a well thought out API makes.
 
-<Topic engineering>
+<Topic code>
 
-## engineering # how it works
+## code # how it works
 
 - I first created a subclass of `ReactionAddBasic` called `ToastInteraction`.
 

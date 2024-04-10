@@ -3,7 +3,7 @@ export const data = {
   coords: [3, 2],
   name: "social-scheduler",
   desc: "commissioned web-app for a busy person to schedule social events",
-  tags: ["web", "app", "ui/ux"],
+  tags: ["website", "app"],
   previews: ["/social-scheduler_1.webp"],
   collage: {
     "/social-scheduler_4.webm": "An example user flow through the app",
@@ -19,15 +19,15 @@ export const data = {
   overview: {
     summary: (
       <>
-        I was commissioned to build a web-application for a very busy client to help them
-        simplify scheduling social events.
+        I was commissioned to build a web-application for a very busy client to
+        help them simplify scheduling social events.
         <br class="mb-[1.2rem]" />
         Features include 2-way scroll binding between the date selector and the
         block selector, filters for specific block types, and a very cool
         booking modal.
       </>
     ),
-    roles: ["design", "engineering"],
+    roles: ["design", "code"],
     tools: [
       ["React.js", "Vite.js", "JavaScript"],
       "Tailwind",
@@ -56,6 +56,7 @@ We first started with a rough draft of some of the ideas that we wanted to inclu
 </Topic>
 
 Here are the main points that we settled on:
+
 - Search filters to select for only certain blocks of time.
 - A date and block selector that are two-way linked.
 - Calendar events should automatically be published to the client's calendar.
@@ -64,9 +65,9 @@ Here are the main points that we settled on:
 
 # iteration
 
-<Topic engineering>
+<Topic code>
 
-## engineering # fancy css for the time selector
+## code # fancy css for the time selector
 
 The most interesting thing that I build was this time selector! The feature includes some preview text that goes away as soon as you click inside the input, which also needed to account for whether the field has been touched or not.
 
@@ -77,7 +78,7 @@ Sounds like you need some extra React state right? Wrong! I was able to pull thi
 Here's a demonstrative version of my css:
 
 ```scss
-{
+ {
   position: relative;
   background-color: var(--slate-700);
 

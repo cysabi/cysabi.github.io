@@ -84,20 +84,15 @@ module.exports = {
             "blockquote p:last-of-type::after": null,
             "code::before": null,
             "code::after": null,
-            code: {
-              fontWeight: "inherit",
-              backgroundColor: "var(--tw-prose-pre-bg)",
-              borderRadius: "3px",
-              padding: "0.125em",
-            },
           },
         },
       }),
     },
     fontFamily: {
-      sans: ['"Karla"', ...defaultTheme.fontFamily.sans],
+      display: ['"Rumiko Sans"', ...defaultTheme.fontFamily.sans],
+      sans: ['"Rumiko Clear"', ...defaultTheme.fontFamily.sans],
       mono: ['"IBM Plex Mono"', ...defaultTheme.fontFamily.mono],
     },
   },
-  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
+  plugins: [require("@tailwindcss/typography")],
 }

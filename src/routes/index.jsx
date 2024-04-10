@@ -1,546 +1,303 @@
-import { Motion, Presence } from "@motionone/solid"
-import { A, useLocation } from "@solidjs/router"
+import { Motion } from "solid-motionone"
 import { spring } from "motion"
-import { createMemo, createSignal, onMount } from "solid-js"
+import { Show, createMemo, createSignal, onMount } from "solid-js"
+import { A, useSearchParams } from "@solidjs/router"
 import { useGrid } from "../components/grid"
-import slurk from "../static/slurk.png"
 import { works } from "./works/index"
+import WorkTemplate, { Img, Sidebar, TopicBadge } from "../components/work"
 
 const Index = () => {
-  const { setColor } = useGrid()
+  const { setColor, hovering } = useGrid()
+
+  const subtitles = [
+    "empathy included !",
+    "designer by heart, coder by means",
+    "perfectionist for people's experiences",
+    "obsessed with serving others",
+    "thinking about how we think",
+    "🧋❤️",
+  ]
+  const tags = works
+    .flatMap(work => work.data.tags)
+    .reduce(function (p, c) {
+      p[c] = (p[c] || 0) + 1
+      return p
+    }, {})
+
+  const [index, setIndex] = createSignal(0)
+  const [params, setParams] = useSearchParams()
+  const work = createMemo(() => works.find(w => w.data.name === params.work))
+
   onMount(() => {
     setColor(false)
   })
   return (
-    <>
-      <LandingScreen />
-      <SelectedWorksScreen />
-    </>
-  )
-}
-
-const LandingScreen = () => {
-  const location = useLocation()
-
-  const subtitles = [
-    "perfectionist for people's experiences",
-    "software engineer with empathy included",
-    "thinking about how we think",
-    "designer by heart, coder by means",
-    "comp sci's biggest hater",
-    "🧋❤️",
-  ]
-  const [index, setIndex] = createSignal(0)
-  const [hoverSlurk, setHoverSlurk] = createSignal(false)
-
-  return (
-    <div class="flex flex-col justify-between min-h-screen mx-auto py-[8vw] px-[16vw]">
-      <div class="flex flex-col flex-1">
-        <div class="flex flex-col-reverse items-start gap-4 md:gap-0 md:flex-row md:justify-between md:items-center">
-          <div>
-            <Motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ easing: spring({ damping: 20 }) }}
-              class="text-4xl lg:text-5xl"
-            >
-              hey, i'm cysabi
-            </Motion.div>
-            <Motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, easing: spring({ damping: 20 }) }}
-              class="text-slate-300 text-3xl lg:text-4xl"
-            >
-              {subtitles[index()]}
-            </Motion.div>
-            <div class="flex pt-12 gap-8 text-2xl flex-wrap">
-              <Motion.a
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, easing: spring({ damping: 20 }) }}
-                href="https://github.com/cysabi"
-                class="flex items-end"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-7 w-7 transition-all text-slate-300 hover:text-primary hover:scale-110"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-              </Motion.a>
-              {/* <Motion.a
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.25, easing: spring({ damping: 20 }) }}
-                href="https://twitter.com/cysabi"
-                class="flex items-end"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-7 w-7 transition-all text-slate-300 hover:text-primary hover:scale-110"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-                </svg>
-              </Motion.a> */}
-              <Motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.275, easing: spring({ damping: 20 }) }}
-                class="rounded-full h-1.5 w-1.5 my-auto bg-slate-500"
-              ></Motion.div>
-              <Motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, easing: spring({ damping: 20 }) }}
-                class="inline link"
-                onClick={() =>
-                  document
-                    .getElementById("works")
-                    .scrollIntoView({ behavior: "smooth" })
+    <div class="flex flex-col lg:flex-row lg:p-16 lg:gap-16 items-stretch mx-auto">
+      <div class="shrink-0 max-w-md w-full">
+        <div class="lg:fixed h-[calc(100vh-8rem)] max-w-md w-full flex flex-col gap-8">
+          <div class="flex flex-col gap-2">
+            <div class="font-display text-5xl font-semibold">
+              <Show
+                when={work() || hovering()}
+                fallback={
+                  <button
+                    onClick={() => setIndex((index() + 1) % subtitles.length)}
+                  >
+                    cysabi
+                  </button>
                 }
               >
-                works
-              </Motion.button>
-              <Motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35, easing: spring({ damping: 20 }) }}
-              >
-                <A
-                  href={location.hash === "#contact" ? "/" : "#contact"}
-                  noScroll
-                >
-                  {location.hash === "#contact" ? "about" : "contact"}
-                </A>
-              </Motion.span>
+                <div class="font-mono text-4xl">
+                  {work()?.data?.name || hovering()?.name}
+                </div>
+              </Show>
             </div>
+            <span class="font-display text-2xl text-primary font-semibold italic">
+              <Show when={work() || hovering()} fallback={subtitles[index()]}>
+                <span class="font-sans text-xl text-slate-400 font-normal not-italic">
+                  {work()?.data?.desc || hovering()?.desc}
+                </span>
+              </Show>
+            </span>
           </div>
-          <Motion.button
-            initial={{ scale: 0.8, rotate: 6 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{
-              easing: spring({ mass: 0.6, damping: 5 }),
-            }}
-            onClick={() => setIndex((index() + 1) % subtitles.length)}
-          >
-            <Motion.img
-              onmouseenter={() => setHoverSlurk(true)}
-              onmouseleave={() => setHoverSlurk(false)}
-              animate={{
-                scale: hoverSlurk() ? 1.1 : 1,
-                rotate: hoverSlurk() ? 2 : 0,
-              }}
-              transition={{ easing: spring({ mass: 0.5, stiffness: 300 }) }}
-              src={slurk}
-              class="h-28 md:h-32 lg:h-48 rounded"
-            />
-          </Motion.button>
-        </div>
-        <div class="relative my-12 md:my-16 flex-1 max-h-full">
-          <Presence>
-            <Switch
-              fallback={
-                <Motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{
-                    easing: spring({ mass: 0.1 }),
-                  }}
-                  class="flex flex-col gap-4 rounded-2xl text-2xl text-slate-400"
-                >
-                  <Motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, easing: spring({ damping: 20 }) }}
-                  >
-                    hi, thanks for stopping by! ~ i'm a multi-disciplinary
-                    autodidact that's obsessed with{" "}
-                    <span class="font-medium text-slate-50">
-                      thinking about better ways to serve others through design and code.
-                    </span>
-                  </Motion.div>
-                  <Motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, easing: spring({ damping: 20 }) }}
-                  >
-                    my journey started as a volunteer for a grassroots
-                    esports org. in pursuit of improving the tournament experience,{" "}
-                    <span class="font-medium text-slate-50">
-                      i taught myself python and built a bot to streamline the
-                      registration process.
-                    </span>{" "}
-                    since then, i've taken on increasingly ambitious
-                    projects, picking up the requisite skills along the way.
-                  </Motion.div>
-                  <Motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, easing: spring({ damping: 20 }) }}
-                  >
-                    nothing i've made was for a grade in a class; everything
-                    i've learned has been in service of real people.{" "}
-                    <span class="font-medium text-slate-50">
-                      i bring an unapologetically holistic and uniquely
-                      user-focused perspective
-                    </span>{" "}
-                    to solving problems.
-                  </Motion.div>
-                  <Motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7, easing: spring({ damping: 20 }) }}
-                  >
-                    <span class="font-medium text-slate-50">
-                      it's never the role i'm filling, but the people i'm
-                      serving that excites me the most;
-                    </span>{" "}
-                    i'm always open to new opportunities, no matter the medium!
-                    if you'd like to chat, don't hesitate to{" "}
-                    <A href="/#contact" class="font-medium text-slate-50">
-                      reach out!
-                    </A>
-                  </Motion.div>
-                </Motion.div>
-              }
-            >
-              <Match when={location.hash === "#contact"}>
-                <Contact />
-              </Match>
-            </Switch>
-          </Presence>
-        </div>
-      </div>
-      <div class="flex items-center gap-4">
-        <div class="flex-1 h-0.5 bg-slate-50 rounded-full" />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75"
-          />
-        </svg>
-
-        <h2 class="font-medium text-xl" id="works">
-          featured works
-        </h2>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75"
-          />
-        </svg>
-
-        <div class="flex-1 h-0.5 bg-slate-50 rounded-full" />
-      </div>
-    </div>
-  )
-}
-
-const Contact = () => {
-  let formRef
-  const [talk, setTalk] = createSignal("")
-  const [done, setDone] = createSignal(false)
-  return (
-    <Motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{
-        easing: spring({ mass: 0.1 }),
-      }}
-      class="absolute inset-0 flex flex-col"
-    >
-      <form
-        ref={formRef}
-        class="flex flex-col gap-4 h-full text-slate-300"
-        target="dummyframe"
-        method="POST"
-        action="https://formsubmit.io/send/leptoflare@gmail.com"
-        onsubmit={() => setDone(true)}
-      >
-        <Motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, easing: spring({ damping: 20 }) }}
-          class="text-2xl"
-        >
-          like what you see? got something in mind? let's talk!
-        </Motion.div>
-        <Motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, easing: spring({ damping: 20 }) }}
-          class="flex gap-4 flex-col md:flex-row"
-        >
-          <input
-            onchange={e => setTalk(e.currentTarget.value)}
-            placeholder="what do you prefer to go by?"
-            name="name"
-            type="text"
-            autocomplete="off"
-            required
-            class="flex-1"
-          />
-          <input
-            placeholder="what's your email?"
-            name="email"
-            type="email"
-            autocomplete="off"
-            required
-            class="flex-1"
-          />
-        </Motion.div>
-        <Motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, easing: spring({ damping: 20 }) }}
-          class="h-full"
-        >
-          <textarea
-            class="resize-none flex-1 w-full h-full"
-            placeholder={`hey ${
-              talk() || "there"
-            }! what would you like to share with me?`}
-            name="comment"
-            required
-          ></textarea>
-        </Motion.div>
-        <Motion.div
-          class="flex justify-start"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, easing: spring({ damping: 20 }) }}
-        >
-          {done() ? (
-            <div class="text-xl font-medium">
-              thanks for sharing! i'll get back to you as soon i can
+          <Show when={!work()}>
+            <div class="flex text-slate-300 flex-col gap-4 leading-relaxed">
+              <Show
+                when={hovering()}
+                fallback={
+                  <>
+                    <p>
+                      hi there! i'm a self-taught polymath that's obsessed with
+                      designing experiences for people through code.
+                    </p>
+                    <p>
+                      i always have an unapologetically holistic perspective to
+                      the problems i set out to solve; code has been my
+                      preferred means of bringing those solutions to life.
+                    </p>
+                    <p>
+                      feel free to{" "}
+                      <a
+                        href="https://twitter.com/cysabi"
+                        class="font-medium text-slate-50"
+                      >
+                        reach out
+                      </a>
+                      ! i'm always open to new opportunities, no matter the
+                      medium.
+                    </p>
+                  </>
+                }
+              >
+                {hovering()?.overview?.summary}
+              </Show>
             </div>
-          ) : (
-            <button
-              class="text-xl font-medium link"
-              value="submit"
-              type="submit"
+          </Show>
+          <Show when={work()}>
+            <Sidebar toc={work().toc} />
+          </Show>
+          <div class="my-auto" />
+          <div>tags</div>
+          <div>roles</div>
+          <div class="h-0.5 bg-primary/10 backdrop-blur backdrop-brightness-110" />
+          <div class="flex gap-8 text-primary-200/60">
+            <a
+              href="https://github.com/cysabi"
+              class="bg-primary/5 hover:scale-105 hover:bg-primary/15 hover:text-primary-100 backdrop-blur backdrop-brightness-125 transition-all rounded flex items-center p-1.5"
             >
-              send message
-            </button>
-          )}
-        </Motion.div>
-        <input
-          name="_formsubmit_id"
-          type="text"
-          style="display:none"
-          autocomplete="off"
-        />
-      </form>
-      <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-    </Motion.div>
-  )
-}
-
-const SelectedWorksScreen = () => {
-  const [scrollY, setScrollY] = createSignal(0)
-  addEventListener("scroll", () => {
-    setScrollY(window.scrollY)
-  })
-
-  return (
-    <div class="flex h-[calc(100vh-19rem)] -mb-32 mx-auto max-w-[1728px]">
-      <div class="w-full h-full grid grid-cols-12 grid-rows-[repeat(12,minmax(0,1fr))]">
-        {works
-          .filter(work => work.data.layer !== undefined)
-          .map(work => (
-            <ProjectOrb {...work.data} scrollY={scrollY} />
-          ))}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+              </svg>
+            </a>
+            <a
+              href="https://twitter.com/cysabi"
+              class="bg-primary/5 hover:scale-105 hover:bg-primary/15 hover:text-primary-100 backdrop-blur backdrop-brightness-125 transition-all rounded flex items-center p-1.5"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+              </svg>
+            </a>
+            <A
+              href="/"
+              class="bg-primary/5 hover:scale-105 hover:bg-primary/15 hover:text-primary-100 backdrop-blur backdrop-brightness-125 transition-all rounded flex items-center px-3.5 no-underline font-medium ml-auto"
+            >
+              {work() ? "back home" : "show archives"}
+            </A>
+          </div>
+        </div>
+      </div>
+      <div class="grow min-w-0 flex justify-center">
+        <article
+          class={`min-w-0 max-w-4xl prose-figure:my-0 ${work() && "mr-auto"}`}
+        >
+          <Show
+            when={work()}
+            fallback={
+              <div class="grid gap-16 grid-cols-1 xl:grid-cols-2 not-prose">
+                {works.map(work => (
+                  <WorkPreview data={work.data} setParams={setParams} />
+                ))}
+              </div>
+            }
+          >
+            <div class="min-h-screen pb-32 flex flex-col justify-between">
+              <Show
+                when={work().data.collage}
+                fallback={
+                  <div class="backdrop-blur backdrop-brightness-125 rounded-2xl p-2 overflow-clip bg-primary/10">
+                    <img class="rounded-lg" src={work().data.previews[0]} />
+                  </div>
+                }
+              >
+                <Collage items={work().data.collage} />
+              </Show>
+              <div>{work()?.data?.overview?.summary}</div>
+            </div>
+            <div class="flex items-center gap-4 -mt-16 mb-16">
+              <div class="flex-1 h-1 bg-slate-500 rounded-full" />
+              <div class="font-medium text-2xl">case study</div>
+              <div class="flex-1 h-1 bg-slate-500 rounded-full" />
+            </div>
+            <WorkTemplate {...work()} />
+          </Show>
+        </article>
       </div>
     </div>
   )
 }
 
-const ProjectOrb = props => {
-  let ref,
-    titleRef,
-    top = 0,
-    size = 384
+const WorkPreview = props => {
   const angle = Math.random() * Math.PI * 2
   const imgOffset = {
-    x: Math.cos(angle) * size,
-    y: Math.sin(angle) * size,
+    x: Math.cos(angle) * 300,
+    y: Math.sin(angle) * 300,
   }
-  const scale = 1 + props.layer * 0.125
-
-  const { setColor } = useGrid()
-  const [titleHeight, setTitleHeight] = createSignal(0)
+  let ref
   const [lean, setLean] = createSignal({ img: imgOffset, orb: { x: 0, y: 0 } })
-  const [hov, setHov] = createSignal(false)
-
-  onMount(() => {
-    top = ref.getBoundingClientRect().top + window.scrollY
-    setTitleHeight(titleRef.getBoundingClientRect().height)
-  })
-
-  const y = createMemo(
-    () => (top / 2 - props.scrollY()) * (1.75 + props.layer * 0.5)
-  )
+  const [hov, setHov] = createSignal()
+  const { setHover } = useGrid()
 
   return (
-    <div
-      style={`
-        z-index: ${(20 + (hov() ? 1 : props.layer)) * 2};
-        grid-column-start: ${props.coords[0]};
-        grid-row-start: ${props.coords[1]};`}
+    <Motion.button
+      ref={ref}
+      onClick={() => {
+        setHover(false)
+        props.setParams({ work: props.data.name })
+        window.scrollTo(0, 0)
+      }}
+      onmouseenter={() => {
+        setHover(props.data)
+        setHov(true)
+      }}
+      onmouseleave={() => {
+        setHover(false)
+        setHov(false)
+        setLean({ img: imgOffset, orb: { x: 0, y: 0 } })
+      }}
+      onmousemove={e => {
+        const rect = ref.getBoundingClientRect()
+        const x = (e.clientX - (rect.x + rect.width / 2)) / rect.width
+        const y = (e.clientY - (rect.y + rect.height / 2)) / rect.height
+        setLean({
+          orb: {
+            x: Math.sqrt(Math.abs(x)) * Math.sign(x) * 2,
+            y: Math.sqrt(Math.abs(y)) * Math.sign(y) * 2,
+          },
+        })
+      }}
+      transition={{ easing: spring({ stiffness: 600, damping: 50 }) }}
+      animate={{
+        x: lean().orb.x * 12.5,
+        y: lean().orb.y * 12.5,
+        scale: hov() ? 1.05 : 1,
+      }}
+      class="relative backdrop-blur backdrop-brightness-125 rounded-2xl p-2 overflow-clip bg-primary/10"
     >
-      <div
-        ref={ref}
-        class="ml-[50%]"
-        style={`
-          transform: translate(-50%, ${y()}px) scale(${scale});
-          height: ${size}px;
-          width: ${size}px;
-        `}
+      <Motion.img
+        animate={{
+          opacity: hov() ? 0.1 : 1,
+          "--tw-blur": hov() ? "blur(4px)" : "blur(0px)",
+        }}
+        class="rounded-lg filter"
+        src={props.data.previews[0]}
+      />
+      <Motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: hov() ? 1 : 0 }}
+        class="absolute inset-0 flex flex-col p-4 gap-4 items-center justify-center"
       >
-        <div class="z-10 absolute h-full flex items-center justify-center pointer-events-none">
-          <Motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: hov() ? 1 : 0,
-              x: lean().img.x,
-              y: lean().img.y,
-            }}
-            transition={{
-              easing: spring({ mass: 0.3, stiffness: 25 }),
-            }}
-          >
-            <img
-              class="rounded"
-              style={`transform: rotate(${
-                (4 + Math.floor(Math.random() * 4)) *
-                Math.sign(Math.random() - 0.5)
-              }deg)`}
-              src={props.previews?.[0]}
-            />
-          </Motion.div>
+        <div class="flex items-center gap-2">
+          <div class="font-mono text-4xl font-semibold">{props.data.name}</div>
         </div>
-        <A href={"works/" + props.name}>
-          <Motion.div
-            onmouseenter={() => {
-              setHov(true)
-              setColor("#a6ffe0")
-            }}
-            onmouseleave={() => {
-              setLean({ img: imgOffset, orb: { x: 0, y: 0 } })
-              setHov(false)
-              setColor(false)
-            }}
-            onmousemove={e => {
-              const rect = ref.getBoundingClientRect()
-              const x = e.clientX - (rect.x + rect.width / 2)
-              const y = e.clientY - (rect.y + rect.height / 2)
-              setLean({
-                img: {
-                  x: x / 8 + imgOffset.x,
-                  y: y / 8 + imgOffset.y,
-                },
-                orb: {
-                  x: Math.sqrt(Math.abs(x)) * Math.sign(x) * 2,
-                  y: Math.sqrt(Math.abs(y)) * Math.sign(y) * 2,
-                },
-              })
-            }}
-            initial={{ borderColor: "rgb(71 85 105 / 0.5)" }}
-            animate={{
-              x: lean().orb.x,
-              y: lean().orb.y,
-              scale: hov() ? 1.2 : 1,
-              backgroundColor: hov()
-                ? "rgb(51 65 85 / 0.5)"
-                : "rgb(15 23 42 / 0.5)",
-              borderColor: hov()
-                ? "rgb(71 85 105 / 0.5)"
-                : "rgb(51 65 85 / 0.5)",
-            }}
-            transition={{
-              easing: spring({ stiffness: 500, damping: 50 }),
-            }}
-            class="rounded-full h-full w-full flex items-center justify-center backdrop-blur transition-none border-transparent"
-            style={`border-width: ${4 / scale}px`}
+        <div class="flex items-center gap-1">
+          has case!
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
           >
-            <div class="absolute inset-0 p-6 rounded-full flex items-center justify-center">
-              <Motion.div
-                ref={titleRef}
-                animate={{
-                  scale: hov() ? 0.75 : 1,
-                  y: hov() ? (titleHeight() - size / 2) * scale - 12 : 0,
-                }}
-                class="flex flex-col gap-2 items-center text-center origin-top"
-              >
-                <div class="flex items-center justify-center gap-1 rounded-full overflow-clip">
-                  {props.tags?.slice(0, 2)?.map(tag => (
-                    <div class="leading-none py-1 px-2 text-2xl font-medium bg-primary/10 rounded-md text-primary backdrop-blur backdrop-brightness-125">
-                      {tag}
-                    </div>
-                  ))}
-                </div>
-                <div class="font-mono text-4xl font-semibold">{props.name}</div>
-              </Motion.div>
-            </div>
-            <div class="absolute inset-0 p-6 rounded-full flex flex-col items-center text-center justify-between text-2xl">
-              <div style={{ height: `${titleHeight()}px` }} />
-              <Motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: hov() ? 1 : 0 }}
-              >
-                {props.desc}
-              </Motion.div>
-              <Motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: hov() ? 1 : 0 }}
-                class="flex items-center gap-1"
-              >
-                view case
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                  />
-                </svg>
-              </Motion.div>
-            </div>
-          </Motion.div>
-        </A>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+            />
+          </svg>
+        </div>
+      </Motion.div>
+    </Motion.button>
+  )
+}
+
+const Collage = props => {
+  const [active, setActive] = createSignal(0)
+
+  const sources = Object.keys(props.items)
+  const captions = Object.values(props.items)
+
+  return (
+    <figure>
+      <div class="not-prose flex flex-col gap-1 overflow-clip bg-slate-600/50 border-4 border-transparent rounded-2xl backdrop-blur backdrop-brightness-125">
+        <Img
+          title="controls"
+          class="rounded-md aspect-video object-cover object-top"
+          src={sources[active()]}
+        />
+        <div class="flex gap-1 max-h-28 h-full justify-around">
+          {sources.map((item, i) => (
+            <button
+              onClick={() => setActive(i)}
+              class="flex flex-1 items-center justify-center rounded-md"
+            >
+              <Img
+                title="controls"
+                class={`pointer-events-none rounded-md object-cover object-center h-full ${
+                  i === 0 && "rounded-bl-xl"
+                } ${i === sources.length - 1 && "rounded-br-xl"} ${
+                  sources[active()] === item
+                    ? "outline outline-2 -outline-offset-2 outline-primary"
+                    : ""
+                }`}
+                src={item}
+              />
+            </button>
+          ))}
+        </div>
       </div>
-    </div>
+      <figcaption class="my-2">{captions[active()]}</figcaption>
+    </figure>
   )
 }
 
