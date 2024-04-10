@@ -3,8 +3,8 @@ import { spring } from "motion"
 import { Show, createMemo, createSignal, onMount } from "solid-js"
 import { A, useSearchParams } from "@solidjs/router"
 import { useGrid } from "../components/grid"
-import { works } from "./works/index"
-import WorkTemplate, { Img, Sidebar, TopicBadge } from "../components/work"
+import WorkTemplate, { Img, Sidebar } from "../components/work"
+import works from "./works/index"
 
 const Index = () => {
   const { setColor, hovering } = useGrid()
