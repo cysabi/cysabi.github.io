@@ -1,159 +1,83 @@
 import { A } from "@solidjs/router"
-import {
-  For,
-  Match,
-  Show,
-  Switch,
-  createMemo,
-  createSignal,
-  onMount,
-} from "solid-js"
-import { useGrid } from "./grid"
+import { For, Match, Show, Switch, createSignal, onMount } from "solid-js"
+import { useGrid } from "./layout"
 
-const WorkTemplate = props => {
-  return (
-    <props.default
-      components={{
-        h1: props => (
-          <h2
-            class="font-mono text-slate-500 uppercase text-2xl tracking-wide font-semibold mt-[2em]"
-            {...props}
-          >
-            # {props.children}
-          </h2>
-        ),
-        h2: props => {
-          const topic = props.children.split(" # ")
-          return (
-            <h3
-              class="font-display flex items-center gap-3 text-2xl"
-              {...props}
-            >
-              {topic.length > 1 && <TopicBadge icon>{topic[0]}</TopicBadge>}
-              {topic.length > 1 ? topic[1] : props.children}
-            </h3>
-          )
-        },
-        h3: props => {
-          const topic = props.children.split(" # ")
-          return (
-            <h4
-              class="font-display flex items-center gap-3 text-2xl text-slate-300"
-              {...props}
-            >
-              {topic.length > 1 && <TopicBadge icon>{topic[0]}</TopicBadge>}
-              {topic.length > 1 ? topic[1] : props.children}
-            </h4>
-          )
-        },
-        blockquote: props => (
-          <blockquote
-            class="text-2xl not-italic font-normal text-slate-50"
-            {...props}
-          />
-        ),
-        img: Img,
-        em: props => (
-          <em
-            class={props.children?.startsWith("(") ? "text-slate-400" : ""}
-            {...props}
-          />
-        ),
-        a: A,
-        strong: props => <strong class="font-bold" {...props} />,
-        pre: props => <pre class="backdrop-blur bg-slate-950/50" {...props} />,
-        code: props => (
-          <code
-            class="backdrop-blur font-normal bg-slate-950/50 rounded-sm p-[0.125em]"
-            {...props}
-          />
-        ),
-        Img,
-        Topic,
-        Testimonials,
-      }}
-    />
-  )
-}
-
-export const Sidebar = props => {
-  // build table of contents
-  const toc = props.toc.flatMap(h => {
-    if (h.children) {
-      return [h, ...h.children].filter(h => h.depth < 3)
-    } else {
-      return h
-    }
-  })
-
-  // watch heading active state
-  const { hiddenTopics } = useGrid()
-  const [active, setActive] = createSignal({})
-  const activeHeading = createMemo(() => {
-    const entries = Object.entries(active()).filter(([k, v]) => v)
-    if (entries.length > 0) {
-      return entries.at(-1)?.[0]
-    } else {
-      return props.toc[0]?.id
-    }
-  })
-  const headingObserver = new IntersectionObserver(
-    entries =>
-      entries.forEach(entry =>
-        setActive({
-          ...active(),
-          [entry.target.id]:
-            entry.isIntersecting || entry.boundingClientRect.y < 0
-              ? entry
-              : false,
-        })
+const WorkTemplate = props => (
+  <props.default
+    components={{
+      h1: props => (
+        <h2
+          class="font-mono text-slate-500 uppercase text-2xl tracking-wide font-semibold mt-[2em]"
+          {...props}
+        >
+          # {props.children}
+        </h2>
       ),
-    { rootMargin: "0px 0px -50% 0px" }
-  )
-  onMount(() =>
-    toc.forEach(h => headingObserver.observe(document.getElementById(h.id)))
-  )
-
-  const Section = props => (
-    <div class="flex flex-col gap-5">
-      <h2 class="text-xl uppercase tracking-wider font-semibold text-primary">
-        {props.title}
-      </h2>
-      <div class="flex flex-col gap-2">{props.children}</div>
-      {props.extra}
-    </div>
-  )
-
-  return (
-    <div class="flex flex-col gap-12 pt-12 w-full">
-      <Section title="Table of Contents">
-        {toc.map(h => (
-          <button
-            onclick={() =>
-              document
-                .getElementById(h.id)
-                .scrollIntoView({ behavior: "smooth" })
-            }
-            class={`text-left no-underline leading-tight ${
-              (h.depth - 1) * 16 ? "text-base" : "text-lg"
-            } ${
-              activeHeading() === h.id
-                ? "text-slate-50 font-semibold tracking-[-0.015em]"
-                : "text-slate-400"
-            } ${
-              hiddenTopics().includes(h.value.split(" # ").at(0))
-                ? "text-slate-600 pointer-events-none"
-                : "hover:text-slate-200"
-            }`}
-            style={`padding-left: ${(h.depth - 1) * 16}px`}
+      h2: props => {
+        const topic = props.children.split(" # ")
+        return (
+          <h3 class="font-display flex items-center gap-3 text-2xl" {...props}>
+            {topic.length > 1 && (
+              <div
+                class={`p-2 backdrop-blur backdrop-brightness-125 flex items-center gap-2 text-2xl rounded-lg ${
+                  topics[topic[0]].class
+                }`}
+              >
+                {topics[topic[0]].icon}
+              </div>
+            )}
+            {topic.length > 1 ? topic[1] : props.children}
+          </h3>
+        )
+      },
+      h3: props => {
+        const topic = props.children.split(" # ")
+        return (
+          <h4
+            class="font-display flex items-center gap-3 text-2xl text-slate-300"
+            {...props}
           >
-            <span class="line-clamp-2">{h.value.split(" # ").at(-1)}</span>
-          </button>
-        ))}
-      </Section>
-    </div>
-  )
-}
+            {topic.length > 1 && (
+              <div
+                class={`p-2 backdrop-blur backdrop-brightness-125 flex items-center gap-2 text-2xl rounded-lg ${
+                  topics[topic[0]].class
+                }`}
+              >
+                {topics[topic[0]].icon}
+              </div>
+            )}
+            {topic.length > 1 ? topic[1] : props.children}
+          </h4>
+        )
+      },
+      blockquote: props => (
+        <blockquote
+          class="text-2xl not-italic font-normal text-slate-50"
+          {...props}
+        />
+      ),
+      img: Img,
+      em: props => (
+        <em
+          class={props.children?.startsWith("(") ? "text-slate-400" : ""}
+          {...props}
+        />
+      ),
+      a: A,
+      strong: props => <strong class="font-bold" {...props} />,
+      pre: props => <pre class="backdrop-blur bg-slate-950/50" {...props} />,
+      code: props => (
+        <code
+          class="backdrop-blur font-normal bg-slate-950/50 rounded-sm p-[0.125em]"
+          {...props}
+        />
+      ),
+      Img,
+      Topic,
+      Testimonials,
+    }}
+  />
+)
 
 const autoplayObserver = new IntersectionObserver(
   entries =>
@@ -238,6 +162,47 @@ const Topic = props => {
   )
 }
 
+export const topics = {
+  design: {
+    class: "bg-grid-purple-500/20 text-grid-purple-400",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
+        />
+      </svg>
+    ),
+  },
+  code: {
+    class: "bg-grid-teal-500/20 text-grid-teal-400",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
+        />
+      </svg>
+    ),
+  },
+}
+
 const Testimonials = props => {
   const [index, setIndex] = createSignal(0)
 
@@ -310,72 +275,43 @@ const Testimonials = props => {
   )
 }
 
-export const TopicBadge = props => {
-  const { hiddenTopics, toggleTopic } = useGrid()
-  const topicData = {
-    design: {
-      class: "bg-grid-purple-500/20 text-grid-purple-400",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class={`w-6 h-6 ${props.iconClass}`}
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
-          />
-        </svg>
-      ),
-    },
-    code: {
-      class: "bg-grid-teal-500/20 text-grid-teal-400",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class={`w-6 h-6 ${props.iconClass}`}
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
-          />
-        </svg>
-      ),
-    },
-  }
+export const Collage = props => {
+  const [active, setActive] = createSignal(0)
 
-  if (props.icon) {
-    return (
-      <div
-        class={`p-2 backdrop-blur backdrop-brightness-125 flex items-center gap-2 text-2xl rounded-lg ${
-          topicData[props.children].class
-        }`}
-      >
-        {topicData[props.children].icon}
-      </div>
-    )
-  }
+  const sources = Object.keys(props.items)
+  const captions = Object.values(props.items)
 
   return (
-    <div
-      class={`${
-        topicData[props.children].class
-      } backdrop-blur backdrop-brightness-125 flex items-center px-2 gap-2 font-semibold capitalize rounded-md ${
-        props.class
-      }`}
-    >
-      {topicData[props.children].icon}
-      {props.children}
-    </div>
+    <figure>
+      <div class="not-prose flex flex-col gap-1 overflow-clip bg-slate-600/50 border-4 border-transparent rounded-2xl backdrop-blur backdrop-brightness-125">
+        <Img
+          title="controls"
+          class="rounded-md aspect-video object-cover object-top"
+          src={sources[active()]}
+        />
+        <div class="flex gap-1 max-h-28 h-full justify-around">
+          {sources.map((item, i) => (
+            <button
+              onClick={() => setActive(i)}
+              class="flex flex-1 items-center justify-center rounded-md"
+            >
+              <Img
+                title="controls"
+                class={`pointer-events-none rounded-md object-cover object-center h-full ${
+                  i === 0 && "rounded-bl-xl"
+                } ${i === sources.length - 1 && "rounded-br-xl"} ${
+                  sources[active()] === item
+                    ? "outline outline-2 -outline-offset-2 outline-primary"
+                    : ""
+                }`}
+                src={item}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+      <figcaption class="my-2">{captions[active()]}</figcaption>
+    </figure>
   )
 }
 

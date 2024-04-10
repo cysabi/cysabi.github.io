@@ -2,40 +2,41 @@ import { Motion } from "solid-motionone"
 import { spring } from "motion"
 import { Show, createMemo, createSignal, onMount } from "solid-js"
 import { A, useSearchParams } from "@solidjs/router"
-import { useGrid } from "../components/grid"
-import WorkTemplate, { Img, Sidebar } from "../components/work"
+import { useGrid } from "../components/layout"
+import WorkTemplate, { Collage, topics } from "../components/work"
 import works from "./works/index"
+
+const subtitles = [
+  "empathy included !",
+  "designer by heart, coder by means",
+  "perfectionist for people's experiences",
+  "obsessed with serving others",
+  "thinking about how we think",
+  "🧋❤️",
+]
+const tagCount = works
+  .flatMap(work => work.data.tags)
+  .reduce((p, c) => {
+    p[c] = (p[c] || 0) + 1
+    return p
+  }, {})
+const tags = Object.keys(tagCount).sort((a, b) => tagCount[b] > tagCount[a])
 
 const Index = () => {
   const { setColor, hovering } = useGrid()
-
-  const subtitles = [
-    "empathy included !",
-    "designer by heart, coder by means",
-    "perfectionist for people's experiences",
-    "obsessed with serving others",
-    "thinking about how we think",
-    "🧋❤️",
-  ]
-  const tags = works
-    .flatMap(work => work.data.tags)
-    .reduce(function (p, c) {
-      p[c] = (p[c] || 0) + 1
-      return p
-    }, {})
-
   const [index, setIndex] = createSignal(0)
   const [params, setParams] = useSearchParams()
   const work = createMemo(() => works.find(w => w.data.name === params.work))
+  const filters = createMemo(() => new Set(params.tags?.split("-") || tags))
 
   onMount(() => {
     setColor(false)
   })
   return (
-    <div class="flex flex-col lg:flex-row lg:p-16 lg:gap-16 items-stretch mx-auto">
+    <div class="flex flex-col lg:flex-row lg:p-16 lg:gap-16 items-stretch mx-auto lowercase">
       <div class="shrink-0 max-w-md w-full">
         <div class="lg:fixed h-[calc(100vh-8rem)] max-w-md w-full flex flex-col gap-8">
-          <div class="flex flex-col gap-2">
+          <div class="flex flex-col gap-1">
             <div class="font-display text-5xl font-semibold">
               <Show
                 when={work() || hovering()}
@@ -59,6 +60,34 @@ const Index = () => {
                 </span>
               </Show>
             </span>
+            <div class="flex gap-4 pt-2 text-primary-200/60">
+              <a
+                href="https://github.com/cysabi"
+                class="bg-primary/5 hover:scale-105 hover:bg-primary/15 hover:text-primary-100 backdrop-blur backdrop-brightness-125 transition-all rounded flex items-center p-1.5"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+              <a
+                href="https://twitter.com/cysabi"
+                class="bg-primary/5 hover:scale-105 hover:bg-primary/15 hover:text-primary-100 backdrop-blur backdrop-brightness-125 transition-all rounded flex items-center p-1.5"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                </svg>
+              </a>
+            </div>
           </div>
           <Show when={!work()}>
             <div class="flex text-slate-300 flex-col gap-4 leading-relaxed">
@@ -93,46 +122,60 @@ const Index = () => {
               </Show>
             </div>
           </Show>
-          <Show when={work()}>
+          <div class="my-auto" />
+          <Show
+            when={work()}
+            fallback={
+              <div class="flex gap-2 flex-wrap items-center">
+                {tags.map(tag => (
+                  <button
+                    onClick={() => {
+                      let newFilters = new Set(params.tags?.split("-") || [])
+                      if (newFilters.has(tag)) {
+                        newFilters.delete(tag)
+                      } else {
+                        newFilters.add(tag)
+                      }
+                      setParams({
+                        tags:
+                          tags.length !== newFilters.size
+                            ? Array.from(newFilters).join("-")
+                            : null,
+                      })
+                    }}
+                    class={`transition-all rounded line-through leading-none decoration-2 decoration-transparent py-1 px-2 text-xl font-medium bg-primary/10 text-primary hover:scale-105 backdrop-blur backdrop-brightness-125 ${
+                      filters().has(tag) ||
+                      "bg-transparent text-slate-500 hover:text-slate-400 !decoration-slate-500 hover:!decoration-slate-400"
+                    } ${
+                      hovering() &&
+                      !hovering()?.tags?.includes(tag) &&
+                      "blur-[2px] opacity-50"
+                    }`}
+                  >
+                    <div class="-translate-y-[1px]">{tag}</div>
+                  </button>
+                ))}
+              </div>
+            }
+          >
             <Sidebar toc={work().toc} />
           </Show>
-          <div class="my-auto" />
-          <div>tags</div>
-          <div>roles</div>
-          <div class="h-0.5 bg-primary/10 backdrop-blur backdrop-brightness-110" />
-          <div class="flex gap-8 text-primary-200/60">
-            <a
-              href="https://github.com/cysabi"
-              class="bg-primary/5 hover:scale-105 hover:bg-primary/15 hover:text-primary-100 backdrop-blur backdrop-brightness-125 transition-all rounded flex items-center p-1.5"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="currentColor"
-                viewBox="0 0 24 24"
+          <div class="shrink-0 h-0.5 bg-primary/10 backdrop-blur backdrop-brightness-110" />
+          <div class="flex gap-4 text-primary-200/60">
+            {Object.entries(topics).map(([topic, stuff]) => (
+              <div
+                class={`px-2 gap-2 py-1.5 font-medium backdrop-blur backdrop-brightness-125 flex items-center rounded ${stuff.class}`}
               >
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-              </svg>
-            </a>
-            <a
-              href="https://twitter.com/cysabi"
-              class="bg-primary/5 hover:scale-105 hover:bg-primary/15 hover:text-primary-100 backdrop-blur backdrop-brightness-125 transition-all rounded flex items-center p-1.5"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-              </svg>
-            </a>
-            <A
-              href="/"
-              class="bg-primary/5 hover:scale-105 hover:bg-primary/15 hover:text-primary-100 backdrop-blur backdrop-brightness-125 transition-all rounded flex items-center px-3.5 no-underline font-medium ml-auto"
+                {stuff.icon}
+                {topic}
+              </div>
+            ))}
+            <button
+              onClick={() => setParams({ work: null })}
+              class="ml-auto bg-primary/5 hover:scale-105 hover:bg-primary/15 hover:text-primary-100 backdrop-blur backdrop-brightness-125 transition-all rounded flex items-center px-3.5 no-underline font-medium"
             >
               {work() ? "back home" : "show archives"}
-            </A>
+            </button>
           </div>
         </div>
       </div>
@@ -144,9 +187,15 @@ const Index = () => {
             when={work()}
             fallback={
               <div class="grid gap-16 grid-cols-1 xl:grid-cols-2 not-prose">
-                {works.map(work => (
-                  <WorkPreview data={work.data} setParams={setParams} />
-                ))}
+                <For
+                  each={works.filter(work =>
+                    work.data.tags.some(tag => filters().has(tag))
+                  )}
+                >
+                  {work => (
+                    <WorkPreview data={work.data} setParams={setParams} />
+                  )}
+                </For>
               </div>
             }
           >
@@ -261,44 +310,81 @@ const WorkPreview = props => {
   )
 }
 
-const Collage = props => {
-  const [active, setActive] = createSignal(0)
+const Sidebar = props => {
+  // build table of contents
+  const toc = props.toc.flatMap(h => {
+    if (h.children) {
+      return [h, ...h.children].filter(h => h.depth < 3)
+    } else {
+      return h
+    }
+  })
 
-  const sources = Object.keys(props.items)
-  const captions = Object.values(props.items)
+  // watch heading active state
+  const { hiddenTopics } = useGrid()
+  const [active, setActive] = createSignal({})
+  const activeHeading = createMemo(() => {
+    const entries = Object.entries(active()).filter(([k, v]) => v)
+    if (entries.length > 0) {
+      return entries.at(-1)?.[0]
+    } else {
+      return props.toc[0]?.id
+    }
+  })
+  const headingObserver = new IntersectionObserver(
+    entries =>
+      entries.forEach(entry =>
+        setActive({
+          ...active(),
+          [entry.target.id]:
+            entry.isIntersecting || entry.boundingClientRect.y < 0
+              ? entry
+              : false,
+        })
+      ),
+    { rootMargin: "0px 0px -50% 0px" }
+  )
+  onMount(() =>
+    toc.forEach(h => headingObserver.observe(document.getElementById(h.id)))
+  )
 
   return (
-    <figure>
-      <div class="not-prose flex flex-col gap-1 overflow-clip bg-slate-600/50 border-4 border-transparent rounded-2xl backdrop-blur backdrop-brightness-125">
-        <Img
-          title="controls"
-          class="rounded-md aspect-video object-cover object-top"
-          src={sources[active()]}
-        />
-        <div class="flex gap-1 max-h-28 h-full justify-around">
-          {sources.map((item, i) => (
-            <button
-              onClick={() => setActive(i)}
-              class="flex flex-1 items-center justify-center rounded-md"
-            >
-              <Img
-                title="controls"
-                class={`pointer-events-none rounded-md object-cover object-center h-full ${
-                  i === 0 && "rounded-bl-xl"
-                } ${i === sources.length - 1 && "rounded-br-xl"} ${
-                  sources[active()] === item
-                    ? "outline outline-2 -outline-offset-2 outline-primary"
-                    : ""
-                }`}
-                src={item}
-              />
-            </button>
-          ))}
-        </div>
-      </div>
-      <figcaption class="my-2">{captions[active()]}</figcaption>
-    </figure>
+    <div class="flex flex-col gap-12 pt-12 w-full">
+      <Section title="Table of Contents">
+        {toc.map(h => (
+          <button
+            onclick={() =>
+              document
+                .getElementById(h.id)
+                .scrollIntoView({ behavior: "smooth" })
+            }
+            class={`text-left no-underline leading-tight ${
+              (h.depth - 1) * 16 ? "text-base" : "text-lg"
+            } ${
+              activeHeading() === h.id
+                ? "text-slate-50 font-semibold tracking-[-0.015em]"
+                : "text-slate-400"
+            } ${
+              hiddenTopics().includes(h.value.split(" # ").at(0))
+                ? "text-slate-600 pointer-events-none"
+                : "hover:text-slate-200"
+            }`}
+            style={`padding-left: ${(h.depth - 1) * 16}px`}
+          >
+            <span class="line-clamp-2">{h.value.split(" # ").at(-1)}</span>
+          </button>
+        ))}
+      </Section>
+    </div>
   )
 }
+
+const Section = props => (
+  <div class="flex flex-col gap-5">
+    <h2 class="text-2xl font-semibold font-display">{props.title}</h2>
+    <div class="flex flex-col gap-2">{props.children}</div>
+    {props.extra}
+  </div>
+)
 
 export default Index
