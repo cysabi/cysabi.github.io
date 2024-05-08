@@ -27,9 +27,9 @@ export const GridProvider = props => {
     "hey there :)",
     "snooping around are we?",
     "don't worry, i don't mind",
-    "just remember to leave your shoes by the door !",
+    "just remember to leave your shoes at the door !",
   ]) {
-    console.log("%c" + msg, "color: #758cec; font-weight: 600;")
+    console.info("%c" + msg, "color: #758cec; font-weight: 600;")
   }
 
   return (

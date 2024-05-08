@@ -94,17 +94,12 @@ export const Img = props => {
     }
   })
 
-  console.log(props.src)
-
   const content = (
     <Switch fallback={<ImgContent ref={ref} {...props} />}>
       <Match when={props.src.split("%7C").length > 1}>
         <div class="flex gap-4 -my-12">
           <For each={props.src.split("%7C")}>
-            {src => {
-              console.log(src)
-              return <ImgContent ref={ref} {...props} src={src} />
-            }}
+            {src => <ImgContent ref={ref} {...props} src={src} />}
           </For>
         </div>
       </Match>

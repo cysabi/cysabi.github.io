@@ -292,6 +292,9 @@ const WorkPreview = props => {
 }
 
 const TableOfContents = props => {
+  if (!props.toc.length) {
+    return null
+  }
   // build table of contents
   const toc = props.toc.flatMap(h => {
     if (h.children) {
