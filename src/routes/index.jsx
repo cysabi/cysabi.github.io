@@ -1,9 +1,17 @@
 import { Motion } from "solid-motionone"
 import { spring } from "motion"
-import { For, Show, createMemo, createSignal, onMount } from "solid-js"
-import { A, useSearchParams } from "@solidjs/router"
+import {
+  For,
+  Match,
+  Show,
+  Switch,
+  createMemo,
+  createSignal,
+  onMount,
+} from "solid-js"
+import { useSearchParams } from "@solidjs/router"
 import { useGrid } from "../components/layout"
-import WorkTemplate, { Collage, topics } from "../components/work"
+import components, { Collage, topics } from "../components/work"
 import works from "./works/index"
 
 const tagCount = works
@@ -89,8 +97,7 @@ const Index = () => {
             </Show>
           </div>
           <div class="flex flex-col gap-4 text-slate-300 leading-relaxed">
-            <Show
-              when={hovering() || work()}
+            <Switch
               fallback={
                 <>
                   <p>
@@ -122,8 +129,9 @@ const Index = () => {
                 </>
               }
             >
-              {work()?.data.desc || hovering()?.desc}
-            </Show>
+              <Match when={hovering()}>{hovering()?.desc}</Match>
+              <Match when={work()}>{work()?.data.desc}</Match>
+            </Switch>
           </div>
           <div class="my-auto" />
           <Show
@@ -210,7 +218,7 @@ const Index = () => {
             >
               <Collage items={work().data.collage} />
             </Show>
-            <WorkTemplate {...work()} />
+            {work().default({ components })}
           </Show>
         </article>
       </div>

@@ -1,83 +1,14 @@
 import { A } from "@solidjs/router"
-import { For, Match, Show, Switch, createSignal, onMount } from "solid-js"
+import {
+  For,
+  Match,
+  Show,
+  Switch,
+  createMemo,
+  createSignal,
+  onMount,
+} from "solid-js"
 import { useGrid } from "./layout"
-
-const WorkTemplate = props => (
-  <props.default
-    components={{
-      h1: props => (
-        <h2
-          class="font-mono text-slate-500 uppercase text-2xl tracking-wide font-semibold mt-[2em]"
-          {...props}
-        >
-          # {props.children}
-        </h2>
-      ),
-      h2: props => {
-        const topic = props.children.split(" # ")
-        return (
-          <h3 class="font-display flex items-center gap-3 text-2xl" {...props}>
-            {topic.length > 1 && (
-              <div
-                class={`p-2 backdrop-blur backdrop-brightness-125 flex items-center gap-2 text-2xl rounded-lg ${
-                  topics[topic[0]].class
-                }`}
-              >
-                {topics[topic[0]].icon()}
-              </div>
-            )}
-            {topic.length > 1 ? topic[1] : props.children}
-          </h3>
-        )
-      },
-      h3: props => {
-        const topic = props.children.split(" # ")
-        return (
-          <h4
-            class="font-display flex items-center gap-3 text-2xl text-slate-300"
-            {...props}
-          >
-            {topic.length > 1 && (
-              <div
-                class={`p-2 backdrop-blur backdrop-brightness-125 flex items-center gap-2 text-2xl rounded-lg ${
-                  topics[topic[0]].class
-                }`}
-              >
-                {topics[topic[0]].icon()}
-              </div>
-            )}
-            {topic.length > 1 ? topic[1] : props.children}
-          </h4>
-        )
-      },
-      blockquote: props => (
-        <blockquote
-          class="text-2xl not-italic font-normal text-slate-50"
-          {...props}
-        />
-      ),
-      img: Img,
-      em: props => (
-        <em
-          class={props.children?.startsWith("(") ? "text-slate-400" : ""}
-          {...props}
-        />
-      ),
-      a: A,
-      strong: props => <strong class="font-bold" {...props} />,
-      pre: props => <pre class="backdrop-blur bg-slate-950/50" {...props} />,
-      code: props => (
-        <code
-          class="backdrop-blur font-normal bg-slate-950/50 rounded-sm p-[0.125em]"
-          {...props}
-        />
-      ),
-      Img,
-      Topic,
-      Testimonials,
-    }}
-  />
-)
 
 const autoplayObserver = new IntersectionObserver(
   entries =>
@@ -273,8 +204,8 @@ const Testimonials = props => {
 export const Collage = props => {
   const [active, setActive] = createSignal(0)
 
-  const sources = Object.keys(props.items)
-  const captions = Object.values(props.items)
+  const sources = () => Object.keys(props.items)
+  const captions = () => Object.values(props.items)
 
   return (
     <figure>
@@ -282,10 +213,10 @@ export const Collage = props => {
         <Img
           title="controls"
           class="rounded-md aspect-video object-cover object-top"
-          src={sources[active()]}
+          src={sources()[active()]}
         />
         <div class="flex gap-1 max-h-28 h-full justify-around">
-          {sources.map((item, i) => (
+          {sources().map((item, i) => (
             <button
               onClick={() => setActive(i)}
               class="flex flex-1 items-center justify-center rounded-md"
@@ -294,8 +225,8 @@ export const Collage = props => {
                 title="controls"
                 class={`pointer-events-none rounded-md object-cover object-center h-full ${
                   i === 0 && "rounded-bl-xl"
-                } ${i === sources.length - 1 && "rounded-br-xl"} ${
-                  sources[active()] === item
+                } ${i === sources().length - 1 && "rounded-br-xl"} ${
+                  sources()[active()] === item
                     ? "outline outline-2 -outline-offset-2 outline-primary"
                     : ""
                 }`}
@@ -305,9 +236,82 @@ export const Collage = props => {
           ))}
         </div>
       </div>
-      <figcaption class="my-2">{captions[active()]}</figcaption>
+      <figcaption class="my-2">{captions()[active()]}</figcaption>
     </figure>
   )
 }
 
-export default WorkTemplate
+const components = {
+  h1: props => (
+    <h2
+      class="font-mono text-slate-500 uppercase text-2xl tracking-wide font-semibold mt-[2em]"
+      {...props}
+    >
+      # {props.children}
+    </h2>
+  ),
+  h2: props => {
+    const topic = props.children.split(" # ")
+    return (
+      <h3 class="font-display flex items-center gap-3 text-2xl" {...props}>
+        {topic.length > 1 && (
+          <div
+            class={`p-2 backdrop-blur backdrop-brightness-125 flex items-center gap-2 text-2xl rounded-lg ${
+              topics[topic[0]].class
+            }`}
+          >
+            {topics[topic[0]].icon()}
+          </div>
+        )}
+        {topic.length > 1 ? topic[1] : props.children}
+      </h3>
+    )
+  },
+  h3: props => {
+    const topic = props.children.split(" # ")
+    return (
+      <h4
+        class="font-display flex items-center gap-3 text-2xl text-slate-300"
+        {...props}
+      >
+        {topic.length > 1 && (
+          <div
+            class={`p-2 backdrop-blur backdrop-brightness-125 flex items-center gap-2 text-2xl rounded-lg ${
+              topics[topic[0]].class
+            }`}
+          >
+            {topics[topic[0]].icon()}
+          </div>
+        )}
+        {topic.length > 1 ? topic[1] : props.children}
+      </h4>
+    )
+  },
+  blockquote: props => (
+    <blockquote
+      class="text-2xl not-italic font-normal text-slate-50"
+      {...props}
+    />
+  ),
+  img: Img,
+  em: props => (
+    <em
+      class={props.children?.startsWith("(") ? "text-slate-400" : ""}
+      {...props}
+    />
+  ),
+  a: A,
+  strong: props => <strong class="font-bold" {...props} />,
+  pre: props => <pre class="backdrop-blur bg-slate-950/50" {...props} />,
+  code: props => (
+    <code
+      class="backdrop-blur font-normal bg-slate-950/50 rounded-sm p-[0.125em]"
+      {...props}
+    />
+  ),
+  Img,
+  Topic,
+  Testimonials,
+}
+
+export default components
