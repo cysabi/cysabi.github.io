@@ -1,8 +1,8 @@
 export const data = {
-  layer: -1.5,
-  coords: [5, 8],
   name: "block-sumo",
-  desc: "a highly skill-expressive minecraft minigame that doesn't sacrifice learnability",
+  subtitle:
+    "a highly skill-expressive minecraft minigame that doesn't sacrifice learnability",
+  tags: ["game"],
   previews: ["/block-sumo_17.webp"],
   collage: {
     "/block-sumo_0.webm": (
@@ -24,23 +24,23 @@ export const data = {
       "As players change the map geometry, gameplay evolves with it.",
     "/block-sumo_5.webp": "Blocks coat the entire map by the end of each game.",
   },
-  tags: ["game"],
-  overview: {
-    summary: (
-      <>
+  desc: (
+    <>
+      <p>
         Inspired by Knockout City, Friends vs Friends, Smash Bros, and Soul
         Fighter; I build a easy-to-learn, hard-to-master minecraft minigame with
         near infinite levels of skill-expression, all without sacrificing
         learnability.
-        <br class="mb-[1.2rem]" />
+      </p>
+      <p>
         Features include chaotic powerups with built-in comeback mechanics, maps
         that evolve emergently through player-directed gameplay, and a
         satisfying gui to manage game settings!
-      </>
-    ),
-    roles: ["design"],
-    tools: [["PaperMC", "Minecraft"], "Denizen"],
-  },
+      </p>
+    </>
+  ),
+  roles: ["design"],
+  tools: [["PaperMC", "Minecraft"], "Denizen"],
 }
 
 {/* todo: performance pls */}

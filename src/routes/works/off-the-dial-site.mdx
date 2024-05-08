@@ -1,8 +1,7 @@
 export const data = {
-  layer: 0,
-  coords: [8, 4],
   name: "off-the-dial-site",
-  desc: "full-stack website that hosts tournament signups, player accounts, and a blog",
+  subtitle:
+    "full-stack website that hosts tournament signups, player accounts, and a blog",
   tags: ["website"],
   previews: ["/off-the-dial-site_1.webp"],
   collage: {
@@ -20,30 +19,31 @@ export const data = {
       "The posts page, for tournament organizers to share anything they need",
     "/off-the-dial-site_8.webp": "An example post page",
   },
-  overview: {
-    summary: (
-      <span>
+  desc: (
+    <>
+      <p>
         I built a website for Off the Dial, a tournament organization for
         Splatoon making tournament experience accessible to players without a
         team!
-        <br class="mb-[1.2rem]" />
+      </p>
+      <p>
         Features include hosted player signups, custom oauth2 user accounts with
         Discord, and an embedded and easy-to-edit blog for tournament organizers
         to post updates.
-      </span>
-    ),
-    roles: ["design", "code"],
-    tools: [
-      ["GatsbyJS", "React.js", "JavaScript"],
-      "MDX",
-      "Tailwind",
-      "Firebase",
-      "Figma",
-    ],
-    sources: {
-      website: "https://otd.ink",
-      github: "https://github.com/offthedial/site",
-    },
+      </p>
+    </>
+  ),
+  roles: ["design", "code"],
+  tools: [
+    ["GatsbyJS", "React.js", "JavaScript"],
+    "MDX",
+    "Tailwind",
+    "Firebase",
+    "Figma",
+  ],
+  sources: {
+    website: "https://otd.ink",
+    repo: "https://github.com/offthedial/site",
   },
 }
 

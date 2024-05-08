@@ -1,8 +1,7 @@
 export const data = {
-  layer: -4,
-  coords: [6, 3],
   name: "blurple-py",
-  desc: "open-source python library for building user experiences in discord",
+  subtitle:
+    "open-source python library for building user experiences in discord",
   tags: ["library"],
   previews: ["/blurple-py_1.webp"],
   collage: {
@@ -11,25 +10,26 @@ export const data = {
     "/blurple-py_1.webp": "The documentation page for blurple.py",
     "/blurple-py_3.webp": "Different style options for alerts",
   },
-  overview: {
-    summary: (
-      <>
+  desc: (
+    <>
+      <p>
         After realizing that a lot of the complex features I build for a discord
         bot could be useful to others, I extracted, refactored, and published
         the code into an open-source library, redesigning the API to be more
         generalized.
-        <br class="mb-[1.2rem]" />
+      </p>
+      <p>
         Features include asnycio abstractions to allow for simplistic multi-step
         commands, and a consistent design system with pre-built ui components to
         help users move faster and communicate intent more effectively.
-      </>
-    ),
-    roles: ["design", "code"],
-    tools: ["Discord.py", "Python", "Asyncio"],
-    sources: {
-      docs: "https://cysabi.github.io/blurple.py",
-      github: "https://github.com/cysabi/blurple.py",
-    },
+      </p>
+    </>
+  ),
+  roles: ["design", "code"],
+  tools: ["Discord.py", "Python", "Asyncio"],
+  sources: {
+    docs: "https://cysabi.github.io/blurple.py",
+    repo: "https://github.com/cysabi/blurple.py",
   },
 }
 

@@ -1,28 +1,25 @@
 export const data = {
-  // layer: -2,
-  // coords: [9, 8],
+  archive: true,
   name: "radia",
-  desc: "tournament management program used to manage multiple large-scale tournaments simultaneously",
+  subtitle:
+    "tournament management program used to manage multiple large-scale tournaments simultaneously",
   tags: ["app"],
   previews: ["/radia_1.webp"],
-  archive: true,
   // collage: {},
-  overview: {
-    summary: (
-      <>
-        I redesigned and rebuild a tournament management tool from the ground up
-        to give staff members a more delightful user experience, and meet
-        growing business requirements of an expanding tournament organization.
-        <br class="mb-[1.2rem]" />
-        Features include managing multiple tournaments simultaneously through an
-        agenda, pulling tournament data from the Google Calendar API.
-      </>
-    ),
-    roles: ["design", "code"],
-    tools: [["Discord.py", "Python"], "MongoDB", "REST"],
-    sources: {
-      github: "https://github.com/IPLSplatoon/Radia",
-    },
+  desc: (
+    <>
+      I redesigned and rebuild a tournament management tool from the ground up
+      to give staff members a more delightful user experience, and meet growing
+      business requirements of an expanding tournament organization.
+      <br class="mb-[1.2rem]" />
+      Features include managing multiple tournaments simultaneously through an
+      agenda, pulling tournament data from the Google Calendar API.
+    </>
+  ),
+  roles: ["design", "code"],
+  tools: [["Discord.py", "Python"], "MongoDB", "REST"],
+  sources: {
+    repo: "https://github.com/IPLSplatoon/Radia",
   },
 }
 

@@ -1,6 +1,6 @@
 export const data = {
   name: "cq-overlays",
-  desc: "standardized broadcast graphics for splatoon tournaments",
+  subtitle: "standardized broadcast graphics for splatoon tournaments",
   tags: ["broadcast", "controls"],
   previews: ["/cq-overlays_1.webp"],
   collage: {
@@ -13,25 +13,26 @@ export const data = {
     "/cq-overlays_4.webm":
       "Support for uploading a json file with all of the tournament data you need",
   },
-  overview: {
-    summary: (
-      <>
+  desc: (
+    <>
+      <p>
         In order to simplify and standardize all of the overlays that I build
         for Splatoon events, I set up a github organization to host a
         standardized dashboard to control the overlays that can be shared across
         all graphics bundles.
-        <br class="mb-[1.2rem]" />
+      </p>
+      <p>
         Features include automatically tracked map winners, easy control of
         changing scores, team names, rosters, and stage lists.
-      </>
-    ),
-    roles: ["design", "code"],
-    tools: [["Vite.js", "JavaScript"], "React.js", "NodeCG", "Material UI"],
-    sources: {
-      website: "https://cysabi.github.io/cq-overlays",
-      "github (org)": "https://github.com/cq-overlays",
-      "github (dashboard)": "https://github.com/cq-overlays/dashboard",
-    },
+      </p>
+    </>
+  ),
+  roles: ["design", "code"],
+  tools: [["Vite.js", "JavaScript"], "React.js", "NodeCG", "Material UI"],
+  sources: {
+    website: "https://cysabi.github.io/cq-overlays",
+    "github (org)": "https://github.com/cq-overlays",
+    "github (dashboard)": "https://github.com/cq-overlays/dashboard",
   },
 }
 

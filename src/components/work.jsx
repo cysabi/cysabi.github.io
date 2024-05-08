@@ -23,7 +23,7 @@ const WorkTemplate = props => (
                   topics[topic[0]].class
                 }`}
               >
-                {topics[topic[0]].icon}
+                {topics[topic[0]].icon()}
               </div>
             )}
             {topic.length > 1 ? topic[1] : props.children}
@@ -43,7 +43,7 @@ const WorkTemplate = props => (
                   topics[topic[0]].class
                 }`}
               >
-                {topics[topic[0]].icon}
+                {topics[topic[0]].icon()}
               </div>
             )}
             {topic.length > 1 ? topic[1] : props.children}
@@ -165,7 +165,7 @@ const Topic = props => {
 export const topics = {
   design: {
     class: "bg-grid-purple-500/20 text-grid-purple-400",
-    icon: (
+    icon: () => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -184,7 +184,7 @@ export const topics = {
   },
   code: {
     class: "bg-grid-teal-500/20 text-grid-teal-400",
-    icon: (
+    icon: () => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

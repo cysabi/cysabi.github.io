@@ -1,8 +1,6 @@
 export const data = {
-  layer: -2.5,
-  coords: [10, 5],
   name: "cg-fabl",
-  desc: "stream overlays for a unique solo-registration major tournament",
+  subtitle: "stream overlays for a unique solo-registration major tournament",
   tags: ["broadcast", "graphics"],
   previews: ["/cg-fabl_1.webp"],
   collage: {
@@ -22,30 +20,31 @@ export const data = {
     "/cg-fabl_7.webp":
       "Dashboard for controlling the state of the 'showdown' scene",
   },
-  overview: {
-    summary: (
-      <>
+  desc: (
+    <>
+      <p>
         I collaborated with a designer to build a set of broadcast graphics for
         a Splatoon Major Tournament! But with an impossibly short timeframe, irl
         responsibilites, and unforeseen roadblocks, finishing on time proved to
         be a challenge.
-        <br class="mb-[1.2rem]" />
+      </p>
+      <p>
         Features include pulling live data from an API for it's leaderboard
         scene, and fluid and dynamic full layout-wide animations.
-      </>
-    ),
-    roles: ["design", "code"],
-    tools: [
-      ["Vite.js", "JavaScript"],
-      "React.js",
-      "NodeCG",
-      "Tailwind",
-      "Framer Motion",
-      "Figma",
-    ],
-    sources: {
-      github: "https://github.com/cq-overlays/cg-fabl",
-    },
+      </p>
+    </>
+  ),
+  roles: ["design", "code"],
+  tools: [
+    ["Vite.js", "JavaScript"],
+    "React.js",
+    "NodeCG",
+    "Tailwind",
+    "Framer Motion",
+    "Figma",
+  ],
+  sources: {
+    repo: "https://github.com/cq-overlays/cg-fabl",
   },
 }
 

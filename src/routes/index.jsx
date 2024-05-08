@@ -1,21 +1,11 @@
 import { Motion } from "solid-motionone"
 import { spring } from "motion"
-import { Show, createMemo, createSignal, onMount } from "solid-js"
+import { For, Show, createMemo, createSignal, onMount } from "solid-js"
 import { A, useSearchParams } from "@solidjs/router"
 import { useGrid } from "../components/layout"
 import WorkTemplate, { Collage, topics } from "../components/work"
 import works from "./works/index"
 
-const subtitles = [
-  "empathy included !",
-  <span>
-    <span class="text-[#faf378]">aro</span>{" "}
-    <span class="text-slate-300">ace</span>{" "}
-    <span class="text-[#b270e9]">any</span>
-  </span>,
-  <span class="text-lg">sorry in advance for missing that social cue</span>,
-  "🧋❤️",
-]
 const tagCount = works
   .flatMap(work => work.data.tags)
   .reduce((p, c) => {
@@ -35,82 +25,106 @@ const Index = () => {
     setColor(false)
   })
   return (
-    <div class="flex flex-col lg:flex-row lg:p-16 lg:gap-16 items-stretch mx-auto lowercase">
+    <div class="flex flex-col lg:flex-row lg:p-16 lg:gap-16 items-stretch mx-auto">
       <div class="shrink-0 max-w-md w-full">
         <div class="lg:fixed h-[calc(100vh-8rem)] max-w-md w-full flex flex-col gap-8">
           <div class="flex flex-col gap-1">
             <div class="font-display text-5xl font-semibold">
-              <Show
-                when={work() || hovering()}
-                fallback={
-                  <button
-                    onClick={() => setIndex((index() + 1) % subtitles.length)}
-                  >
-                    cysabi
-                  </button>
+              <button
+                class="text-left"
+                onClick={() =>
+                  work()
+                    ? setParams({ work: null })
+                    : setIndex((index() + 1) % subtitles.length)
                 }
               >
-                <div class="font-mono text-4xl">
-                  {work()?.data?.name || hovering()?.name}
+                <Show when={work()} fallback="cysabi">
+                  <div class="font-mono tracking-tight text-3xl">
+                    {work().data.name}
+                  </div>
+                  <div class="font-sans text-lg text-slate-400 font-medium">
+                    {work().data?.subtitle}
+                  </div>
+                </Show>
+              </button>
+            </div>
+            <Show
+              when={work()}
+              fallback={
+                <>
+                  <div class="font-display text-2xl text-primary font-semibold">
+                    {subtitles[index()]}
+                  </div>
+                  <div class="mt-4 flex gap-4 text-xl font-medium text-slate-400">
+                    <a
+                      href="https://github.com/cysabi"
+                      class="hover:text-primary-50"
+                    >
+                      github
+                    </a>
+                    <a
+                      href="https://twitter.com/cysabi"
+                      class="hover:text-primary-50"
+                    >
+                      twitter
+                    </a>
+                  </div>
+                </>
+              }
+            >
+              <Show when={work()?.data?.sources}>
+                <div class="flex gap-2 pb-2">
+                  <For each={Object.entries(work()?.data?.sources)}>
+                    {source => (
+                      <a
+                        href={source[1]}
+                        class="text-slate-300 hover:text-primary-50"
+                      >
+                        {source[0]}
+                      </a>
+                    )}
+                  </For>
                 </div>
               </Show>
-            </div>
-            <span class="font-display text-2xl text-primary font-semibold">
-              <Show when={work() || hovering()} fallback={subtitles[index()]}>
-                <span class="font-sans text-xl text-slate-400 font-normal">
-                  {work()?.data?.desc || hovering()?.desc}
-                </span>
-              </Show>
-            </span>
-            <Show when={!work() && !hovering()}>
-              <div class="mt-4 flex gap-4 text-xl font-medium text-slate-400">
-                <a
-                  href="https://github.com/cysabi"
-                  class="hover:text-primary-50"
-                >
-                  github
-                </a>
-                <a
-                  href="https://twitter.com/cysabi"
-                  class="hover:text-primary-50"
-                >
-                  twitter
-                </a>
-              </div>
             </Show>
           </div>
-          <Show when={!work()}>
-            <div class="flex flex-col gap-4 text-slate-300 leading-relaxed">
-              <Show
-                when={hovering()}
-                fallback={
-                  <>
-                    <p>
-                      hi there ~ i'm a self-taught designer + hacker with a huge
-                      obsession for serving people!
-                    </p>
-                    <p>
-                      in splatoon, i'm a day 1 kglues one-trick, and i always
-                      make sure to die with my special up!
-                    </p>
-                    <p>
-                      feel free to{" "}
-                      <a
-                        href="https://twitter.com/cysabi"
-                        class="font-medium text-slate-50"
-                      >
-                        reach out
-                      </a>
-                      ! i'm always open to new opportunities, no matter the
-                      medium
-                    </p>
-                  </>
-                }
-              >
-                {hovering()?.overview?.summary}
-              </Show>
-            </div>
-          </Show>
+          <div class="flex flex-col gap-4 text-slate-300 leading-relaxed">
+            <Show
+              when={hovering() || work()}
+              fallback={
+                <>
+                  <p>
+                    hi there ~ i'm a self-taught designer + hacker with a huge
+                    obsession for serving people!
+                  </p>
+                  <p>
+                    i love thinking about design, tinkering with new tools, and
+                    caring about people
+                  </p>
+                  <p>
+                    in esports, i'm a broadcast graphics engineer that pioneers
+                    using code to make your broadcasts easier and better
+                  </p>
+                  <p>
+                    in splatoon, i'm a day 1 kglues one-trick that always makes
+                    sure to die with my special up!
+                  </p>
+                  <p>
+                    feel free to{" "}
+                    <a
+                      href="https://twitter.com/cysabi"
+                      class="font-medium text-slate-50"
+                    >
+                      reach out
+                    </a>
+                    ! i'm always open to new opportunities, no matter the medium
+                  </p>
+                </>
+              }
+            >
+              {work()?.data.desc || hovering()?.desc}
+            </Show>
+          </div>
           <div class="my-auto" />
           <Show
             when={work()}
@@ -147,7 +161,7 @@ const Index = () => {
               </div>
             }
           >
-            <Sidebar toc={work().toc} />
+            <TableOfContents toc={work().toc} />
           </Show>
           <div class="shrink-0 h-0.5 bg-primary/10 backdrop-blur backdrop-brightness-110" />
           <div class="flex gap-4 text-primary-200/60">
@@ -155,7 +169,7 @@ const Index = () => {
               <div
                 class={`px-2 gap-2 py-1.5 font-medium backdrop-blur backdrop-brightness-125 flex items-center rounded ${stuff.class}`}
               >
-                {stuff.icon}
+                {stuff.icon()}
                 {topic}
               </div>
             ))}
@@ -168,10 +182,8 @@ const Index = () => {
           </div>
         </div>
       </div>
-      <div class="grow min-w-0 flex justify-center">
-        <article
-          class={`min-w-0 max-w-4xl prose-figure:my-0 ${work() && "mr-auto"}`}
-        >
+      <div class="grow flex justify-center">
+        <article>
           <Show
             when={work()}
             fallback={
@@ -188,24 +200,16 @@ const Index = () => {
               </div>
             }
           >
-            <div class="min-h-screen pb-32 flex flex-col justify-between">
-              <Show
-                when={work().data.collage}
-                fallback={
-                  <div class="backdrop-blur backdrop-brightness-125 rounded-2xl p-2 overflow-clip bg-primary/10">
-                    <img class="rounded-lg" src={work().data.previews[0]} />
-                  </div>
-                }
-              >
-                <Collage items={work().data.collage} />
-              </Show>
-              <div>{work()?.data?.overview?.summary}</div>
-            </div>
-            <div class="flex items-center gap-4 -mt-16 mb-16">
-              <div class="flex-1 h-1 bg-slate-500 rounded-full" />
-              <div class="font-medium text-2xl">case study</div>
-              <div class="flex-1 h-1 bg-slate-500 rounded-full" />
-            </div>
+            <Show
+              when={work().data.collage}
+              fallback={
+                <div class="backdrop-blur backdrop-brightness-125 rounded-2xl p-2 overflow-clip bg-primary/10">
+                  <img class="rounded-lg" src={work().data.previews[0]} />
+                </div>
+              }
+            >
+              <Collage items={work().data.collage} />
+            </Show>
             <WorkTemplate {...work()} />
           </Show>
         </article>
@@ -272,34 +276,22 @@ const WorkPreview = props => {
       <Motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: hov() ? 1 : 0 }}
-        class="absolute inset-0 flex flex-col p-4 gap-4 items-center justify-center"
+        class="absolute inset-0 flex flex-col p-8 gap-4 items-center justify-center"
       >
         <div class="flex items-center gap-2">
-          <div class="font-mono text-4xl font-semibold">{props.data.name}</div>
+          <div class="font-mono text-slate-50 text-3xl font-semibold tracking-tight">
+            {props.data.name}
+          </div>
         </div>
-        <div class="flex items-center gap-1">
-          has case!
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-            />
-          </svg>
-        </div>
+        <span class="font-sans leading-normal text-slate-300">
+          {props.data?.subtitle}
+        </span>
       </Motion.div>
     </Motion.button>
   )
 }
 
-const Sidebar = props => {
+const TableOfContents = props => {
   // build table of contents
   const toc = props.toc.flatMap(h => {
     if (h.children) {
@@ -338,42 +330,57 @@ const Sidebar = props => {
   )
 
   return (
-    <div class="flex flex-col gap-12 pt-12 w-full">
-      <Section title="Table of Contents">
-        {toc.map(h => (
-          <button
-            onclick={() =>
-              document
-                .getElementById(h.id)
-                .scrollIntoView({ behavior: "smooth" })
-            }
-            class={`text-left no-underline leading-tight ${
-              (h.depth - 1) * 16 ? "text-base" : "text-lg"
-            } ${
-              activeHeading() === h.id
-                ? "text-slate-50 font-semibold tracking-[-0.015em]"
-                : "text-slate-400"
-            } ${
-              hiddenTopics().includes(h.value.split(" # ").at(0))
-                ? "text-slate-600 pointer-events-none"
-                : "hover:text-slate-200"
-            }`}
-            style={`padding-left: ${(h.depth - 1) * 16}px`}
-          >
-            <span class="line-clamp-2">{h.value.split(" # ").at(-1)}</span>
-          </button>
-        ))}
-      </Section>
+    <div class="flex flex-col gap-2">
+      <div class="text-primary font-semibold text-base">table of contents</div>
+      <div class="flex items-stretch">
+        <div class="mx-2 w-0.5 bg-slate-600 rounded-full" />
+        <div class="gap-2 p-2 flex flex-col">
+          {toc.map(h => (
+            <button
+              onclick={() =>
+                document
+                  .getElementById(h.id)
+                  .scrollIntoView({ behavior: "smooth" })
+              }
+              class={`font-medium text-left no-underline leading-tight ${
+                (h.depth - 1) * 16 ? "text-base" : "text-lg"
+              } ${
+                activeHeading() === h.id
+                  ? "text-slate-50 font-semibold tracking-[-0.01em]"
+                  : "text-slate-400"
+              } ${
+                hiddenTopics().includes(h.value.split(" # ").at(0))
+                  ? "text-slate-600 pointer-events-none"
+                  : "hover:text-slate-300"
+              }`}
+              style={`padding-left: ${(h.depth - 1) * 16}px`}
+            >
+              <span class="line-clamp-2">{h.value.split(" # ").at(-1)}</span>
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
 
-const Section = props => (
-  <div class="flex flex-col gap-5">
-    <h2 class="text-2xl font-semibold font-display">{props.title}</h2>
-    <div class="flex flex-col gap-2">{props.children}</div>
-    {props.extra}
-  </div>
-)
+const subtitles = [
+  "empathy included !",
+  <>
+    <span class="transition-all delay-500 duration-500 hover:delay-0 hover:duration-0 hover:text-[#faf378]">
+      aro
+    </span>{" "}
+    <span class="transition-all delay-500 duration-500 hover:delay-0 hover:duration-0 hover:text-slate-200">
+      ace
+    </span>{" "}
+    <span class="transition-all delay-500 duration-500 hover:delay-0 hover:duration-0 hover:text-[#b270e9]">
+      any
+    </span>
+  </>,
+  <span class="lg:whitespace-nowrap">
+    sorry in advance for missing that social cue
+  </span>,
+  "🧋❤️",
+]
 
 export default Index

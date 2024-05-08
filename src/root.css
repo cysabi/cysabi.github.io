@@ -53,6 +53,6 @@
   }
 
   article {
-    @apply prose prose-lg prose-headings:scroll-m-3;
+    @apply prose prose-lg prose-headings:scroll-m-3 min-w-0 max-w-4xl prose-figure:my-0;
   }
 }
