@@ -1,7 +1,7 @@
 export const data = {
   name: "block-sumo",
   subtitle:
-    "a highly skill-expressive minecraft minigame that doesn't sacrifice learnability",
+    "a highly skill-expressive minecraft minigame that doesn't sacrifice being easy-to-learn",
   tags: ["game"],
   previews: ["/block-sumo_17.webp"],
   collage: {
@@ -29,8 +29,8 @@ export const data = {
       <p>
         inspired by knockout city, friends vs friends, smash bros, and soul
         fighter; i build a easy-to-learn, hard-to-master minecraft minigame with
-        near infinite levels of skill-expression, all without sacrificing
-        learnability.
+        near infinite levels of skill-expression, all without sacrificing being
+        easy-to-learn.
       </p>
       <p>
         features include chaotic powerups with built-in comeback mechanics, maps
@@ -64,7 +64,11 @@ However, I didn't want to follow the same footsteps that Fortnite had with build
 
 > I wanted a game that you know you'll enjoy when you're bored with your friends and you don't know what to play.
 
-# the core concept
+# ideation
+
+<Topic design>
+
+## design # the core concept
 
 There were a couple design goals that I had in mind when creating the concept for the game.
 
@@ -72,13 +76,35 @@ There were a couple design goals that I had in mind when creating the concept fo
 2. At the same time, anyone regardless of experience should be able to **pick up the game and find it instantly enjoyable** and fun.
 3. The fundamental mechanics of the game should have lots of **game mode flexibility**, it should be easy to support ffa's, 1v1s, teams, and asymmetric modes. No matter who you're hanging out with, there should always be a fitting gamemode to play together.
 
-> You spawn on a floating platform, and your goal is to knock other players off to score points. Items randomly spawn for all players, with more powerful items the further you are behind.
+I also want the game to have a **chaotic, party-like energy to the game's atmosphere** in a way that feels both **strategic and chaotic in equal proportions**. This all lead me to this main concept.
+
+> You spawn on a floating platform, and your goal is to knock other players off to score points. Items randomly spawn for all players, with more powerful items to help those who fall behind.
 >
 > The catch? **Each player has an infinite number of blocks in their offhand!**
 
 This concept was just simple enough for anyone to intuitive grasp the objective, so it was easy to pick up. It also had a lot of flexibility what game modes can be set! You can easily turn a 6-person free-for-all into 2 teams of 3, or 3 teams of 2.
 
 ![Infinite blocks provide a lot of creativity for movement and outplays](/block-sumo_10.webm)
+
+## design # rubber-banding items
+
+I wanted items to **assist players with less direct mechanical skill to be able to find success through the strategic use of items**, that way players far behind still have a sense of agency and ability to make an impact on the game.
+
+I also wanted to **force more mechanically skilled players to be more active to preserve their lead**, to make the game more engaging and active.
+
+> Players recieve more powerful items the further behind they are.
+
+![Use your items strategically to claw your way back up!](/block-sumo_13.webm)
+
+While the main role of items is to lower the skill floor, they also have a lot of utility as a tool that I can use to influence the atmosphere of the game!
+
+> By fine-tuning the exact frequency of items at every level, I have a lot of control over the atmosphere and the level of rubber-banding.
+
+![An early draft of item spawn rates depending on points behind](/block-sumo_2.webp)
+
+</Topic>
+
+# iteration
 
 <Topic design>
 
@@ -93,27 +119,21 @@ At the same time, having no penalty would have the inverse effect by allowing pl
 > I decided on a time-based system with infinite lives, \
 > where players get **`+2` points for kills**, and **`-1` points for deaths**.
 
-## design # item combos without item stockpiles
+## design # dropping items on death while avoiding a wealth gap
+
+I wanted it to be important that players are able to target other players in an attempt to remove their items if they succeed in killing them.
+
+However, **I predicted that simply making all items drop on death would cause a snowball effect**. Where a player in the lead could maintain control and accumulate more items over time, while players behind, having just respawned and lost all their items, will be at a significant disadvantage when trying to come back.
+
+> The % of items you lose decreases the further you are behind. So a player in the lead would lose 100% of their items, while a player in last only loses 12.5%.
+
+## design # item combos, but not item stockpiles
 
 When it came to the mechanics of utilizing items, It was important to me that **players are able to experiment with using multiple items together to create synergistic combos**.
 
 At the same time, I didn't want players being able to stockpile infinite number items, and encourage them to use items before it's too late.
 
 > Players can hold up to 8 items at a time. If a player is already holding 8, they won't be able to recieve new items.
-
-</Topic>
-
-# rubber-banding items
-
-I wanted items to **assist players with less direct mechanical skill to be able to find success through the strategic use of items**, that way players far behind still have a sense of agency and ability to make an impact on the game.
-
-I also wanted to **force more mechanically skilled players to be more active to preserve their lead**, to make the game more engaging and active.
-
-> Players recieve more powerful items the further behind they are.
-
-![Use your items strategically to claw your way back up!](/block-sumo_13.webm)
-
-<Topic design>
 
 ## design # preserving counterplay for players in the lead
 
@@ -127,28 +147,6 @@ With a combination of better mechanics and **being resourceful with the items yo
 
 ![No matter what gets thrown your way, there's always room to clutch](/block-sumo_16.webm)
 
-## design # dropping items on death without a wealth gap
-
-I wanted it to be important that players are able to target other players in an attempt to remove their items if they succeed in killing them.
-
-However, **I predicted that simply making all items drop on death would cause a snowball effect**. Where a player in the lead could maintain control and accumulate more items over time, while players behind, having just respawned and lost all their items, will be at a significant disadvantage when trying to come back.
-
-> The % of items you lose decreases the further you are behind. So a player in the lead would lose 100% of their items, while a player in last only loses 12.5%.
-
-</Topic>
-
-# game atmosphere
-
-I want the game to have a **chaotic, party-like energy to the game's atmosphere** in a way that feels both **strategic and chaotic in equal proportions**.
-
-While the main role of items is to provide learnability, they have a lot of utility as a tool that I can use influence the atmosphere
-
-> By fine-tuning the exact frequency of items at every level, I have a lot of control over the atmosphere and the level of rubber-banding.
-
-![An early draft of item spawn rates depending on points behind](/block-sumo_2.webp)
-
-<Topic design>
-
 ## design # encouraging emergent vertical mobility
 
 I wanted vertical movement as a staple of the game, where **traversing up and down feels seamless and fluid**. The game should play in a 3-dimensional space, not a 2-dimensional plane, and movement should feel dynamic and expressive.
@@ -159,11 +157,18 @@ I wanted vertical movement as a staple of the game, where **traversing up and do
 
 </Topic>
 
-# iteration
+# impact
+
+This game is a passion project to help me **learn game design and development for competitive multiplayer games**.
+In order to grab footage for this portfolio, I hosted many playtest sessions with my friends!
+
+It was a really fun experience, and it provided me with some really valuable feedback as well!
 
 <Topic design>
 
-## design # solving the problem of player range inbalance
+## design # addressing feedback: an inbalance of player ranges
+
+During one of the first playtests, one of the main points I heard was how it felt really difficult to find ways to approach or close the distance when you were mid-far behind. So I looked into this!
 
 Because of my use of **snowballs as the main "filler item" for those in the lead**, it became an effective strategy for whoever was in 1st place to retreat constantly while kiting opponents away with an infinite supply of snowballs.
 
@@ -199,13 +204,11 @@ I couldn't simply lower the global quantity of snowballs, as that would dispropo
 
    Providing 8-count snowballs to those behind **gave those players the same access to range that players in the lead have**, without feeling like snowballs just wasted one of their item drops with a meager 4.
 
+Through these changes, I was able to successfully resolve this issue! During my second official playtest, my friends felt a lot more flexible in how they wanted to play, even if they were behind!
+
 </Topic>
 
-# impact
-
 ## how do playtesters feel about the game?
-
-This game is a passion project to help me **learn game design and development for competitive multiplayer games**. In order to grab footage for this portfolio, I hosted a playtest with a group friends for the first time, and here's what they had to say!
 
 <Testimonials
   title="What are some players' first impressions of the game?"

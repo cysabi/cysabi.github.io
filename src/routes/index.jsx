@@ -102,19 +102,7 @@ const Index = () => {
                 <>
                   <p>
                     hi there ~ i'm a self-taught designer + hacker with a huge
-                    obsession for serving people!
-                  </p>
-                  <p>
-                    i love thinking about design, tinkering with new tools, and
-                    caring about people
-                  </p>
-                  <p>
-                    in esports, i'm a broadcast graphics engineer that pioneers
-                    using code to make your broadcasts easier and better
-                  </p>
-                  <p>
-                    in splatoon, i'm a day 1 kglues one-trick that always makes
-                    sure to die with my special up!
+                    obsession for serving people!!
                   </p>
                   <p>
                     feel free to{" "}
