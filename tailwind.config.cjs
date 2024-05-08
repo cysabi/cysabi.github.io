@@ -1,23 +1,21 @@
 const defaultTheme = require("tailwindcss/defaultTheme")
-
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#8dadff",
-          50: "#edf4ff",
-          100: "#deecff",
-          200: "#c4dbff",
-          300: "#a0c3ff",
-          400: "#8dadff",
-          500: "#5b7cf9",
-          600: "#3d54ee",
-          700: "#2f41d3",
-          800: "#2939aa",
-          900: "#293886",
-          950: "#181e4e",
+          50: "#fcf9ff",
+          100: "#e9e7ff",
+          200: "#c1c8fd",
+          300: "#99a6f3",
+          DEFAULT: "#7c8aeb",
+          400: "#7c8aeb",
+          500: "#5c66d2",
+          600: "#414aa6",
+          700: "#313b84",
+          800: "#262c62",
+          900: "#152041",
         },
         grid: {
           purple: {

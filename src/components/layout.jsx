@@ -29,7 +29,7 @@ export const GridProvider = props => {
     "don't worry, i don't mind",
     "just remember to leave your shoes by the door !",
   ]) {
-    console.log("%c" + msg, "color: #8dadff; font-weight: 600;")
+    console.log("%c" + msg, "color: #758cec; font-weight: 600;")
   }
 
   return (
@@ -130,13 +130,13 @@ const Grid = () => {
 
 const Blob = props => {
   // given a color, return a div that randomly changes opacity, position, and size slightly
-  const { pos, hovering } = useGrid()
-  const [blob, setBlob] = createSignal({ x: 0, y: 0, opacity: 0.15 })
+  const { pos } = useGrid()
+  const [blob, setBlob] = createSignal({ x: 0, y: 0, opacity: 0.1 })
   setInterval(() => {
     setBlob({
       x: Math.random() * 150 - 75,
       y: Math.random() * 150 - 75,
-      opacity: pos().hide ? 0 : 0.16,
+      opacity: pos().hide ? 0 : 0.1,
     })
   }, 750)
 
