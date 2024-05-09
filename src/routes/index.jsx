@@ -5,37 +5,67 @@ import {
   Match,
   Show,
   Switch,
+  createEffect,
   createMemo,
   createSignal,
   onMount,
 } from "solid-js"
 import { useSearchParams } from "@solidjs/router"
 import { useGrid } from "../components/layout"
-import components, { Collage, topics } from "../components/work"
-import works from "./works/index"
+import components, { Collage, topicsData } from "../components/work"
+import works from "./works"
 
-const tagCount = works
-  .flatMap(work => work.data.tags)
-  .reduce((p, c) => {
-    p[c] = (p[c] || 0) + 1
-    return p
-  }, {})
-const tags = Object.keys(tagCount).sort((a, b) => tagCount[b] > tagCount[a])
+const hi = () => (
+  <>
+    <p>
+      hi there ~ i'm a self-taught designer + hacker with a huge obsession for
+      serving people!!
+    </p>
+    <p>
+      feel free to{" "}
+      <a href="https://twitter.com/cysabi" class="font-medium text-slate-50">
+        reach out
+      </a>
+      ! i'm always open to new opportunities, no matter the medium
+    </p>
+  </>
+)
 
 const Index = () => {
   const { setColor, hovering } = useGrid()
   const [index, setIndex] = createSignal(0)
-  const [params, setParams] = useSearchParams()
-  const work = createMemo(() => works.find(w => w.data.name === params.work))
-  const filters = createMemo(() => new Set(params.tags?.split("-") || tags))
 
+  const [params, setParams] = useSearchParams()
+  const tags = () => new Set(params.tags?.split("-") || allTags)
+  const topics = () => new Set(params.topics?.split("-") || allTopics)
+
+  const toggleParam = (key, value) => {
+    let newParams = new Set(params[key]?.split("-") || [])
+    if (newParams.has(value)) {
+      newParams.delete(value)
+    } else {
+      newParams.add(value)
+    }
+    let all
+    if (key === "tags") {
+      all = allTags
+    } else if (key === "topics") {
+      all = allTopics
+    }
+    setParams({
+      [key]:
+        all.length !== newParams.size ? Array.from(newParams).join("-") : null,
+    })
+  }
+
+  const work = createMemo(() => works.find(w => w.data.name === params.work))
   onMount(() => {
     setColor(false)
   })
   return (
-    <div class="flex flex-col lg:flex-row lg:p-16 lg:gap-16 items-stretch mx-auto">
-      <div class="shrink-0 max-w-md w-full">
-        <div class="lg:fixed h-[calc(100vh-8rem)] max-w-md w-full flex flex-col gap-8">
+    <div class="flex flex-col p-4 gap-8 lg:flex-row lg:p-16 lg:gap-16 items-stretch mx-auto">
+      <div class="shrink-0 lg:max-w-[30vw] xl:max-w-md w-full">
+        <div class="lg:fixed lg:max-w-[30vw] lg:h-[calc(100vh-8rem)] xl:max-w-md w-full flex flex-col gap-8">
           <div class="flex flex-col gap-1">
             <div class="font-display text-5xl font-semibold">
               <button
@@ -97,53 +127,28 @@ const Index = () => {
             </Show>
           </div>
           <div class="flex flex-col gap-4 text-slate-300 leading-relaxed">
-            <Switch
-              fallback={
-                <>
-                  <p>
-                    hi there ~ i'm a self-taught designer + hacker with a huge
-                    obsession for serving people!!
-                  </p>
-                  <p>
-                    feel free to{" "}
-                    <a
-                      href="https://twitter.com/cysabi"
-                      class="font-medium text-slate-50"
-                    >
-                      reach out
-                    </a>
-                    ! i'm always open to new opportunities, no matter the medium
-                  </p>
-                </>
-              }
-            >
-              <Match when={hovering()}>{hovering()?.desc}</Match>
+            <Switch fallback={hi()}>
+              <Match when={hovering()}>
+                {
+                  <>
+                    <div class="lg:hidden flex flex-col gap-4">{hi()}</div>
+                    <div class="hidden lg:block">{hovering()?.desc}</div>
+                  </>
+                }
+              </Match>
               <Match when={work()}>{work()?.data.desc}</Match>
             </Switch>
           </div>
-          <div class="my-auto" />
+          <div class="hidden lg:block lg:my-auto" />
           <Show
             when={work()}
             fallback={
-              <div class="flex gap-2 flex-wrap items-center">
-                {tags.map(tag => (
+              <div class="hidden lg:flex gap-2 flex-wrap items-center">
+                {allTags.map(tag => (
                   <button
-                    onClick={() => {
-                      let newFilters = new Set(params.tags?.split("-") || [])
-                      if (newFilters.has(tag)) {
-                        newFilters.delete(tag)
-                      } else {
-                        newFilters.add(tag)
-                      }
-                      setParams({
-                        tags:
-                          tags.length !== newFilters.size
-                            ? Array.from(newFilters).join("-")
-                            : null,
-                      })
-                    }}
+                    onClick={() => toggleParam("tags", tag)}
                     class={`transition-all rounded line-through leading-none decoration-2 decoration-transparent py-1 px-2 text-xl font-medium bg-primary/10 text-primary hover:scale-105 backdrop-blur backdrop-brightness-125 ${
-                      filters().has(tag) ||
+                      tags().has(tag) ||
                       "bg-transparent text-slate-500 hover:text-slate-400 !decoration-slate-500 hover:!decoration-slate-400"
                     } ${
                       hovering() &&
@@ -157,23 +162,40 @@ const Index = () => {
               </div>
             }
           >
-            <TableOfContents toc={work().toc} />
+            <Show when={work().toc.length}>
+              <TableOfContents work={work} topics={topics} />
+            </Show>
           </Show>
           <div class="shrink-0 h-0.5 bg-primary/10 backdrop-blur backdrop-brightness-110" />
-          <div class="flex gap-4 text-primary-200/60">
-            {Object.entries(topics).map(([topic, stuff]) => (
-              <div
-                class={`px-2 gap-2 py-1.5 font-medium backdrop-blur backdrop-brightness-125 flex items-center rounded ${stuff.class}`}
+          <div class="hidden lg:flex gap-4 flex-wrap">
+            {Object.entries(topicsData).map(([key, val]) => (
+              <button
+                onClick={() => toggleParam("topics", key)}
+                class={`px-2 hover:scale-105 gap-2 py-1.5 font-medium backdrop-blur decoration-2 decoration-transparent backdrop-brightness-125 flex items-center rounded transition-all ${
+                  topics().has(key)
+                    ? val.class
+                    : "bg-primary/5 font-medium line-through text-slate-500 hover:text-slate-400 !decoration-slate-500 hover:!decoration-slate-400"
+                }`}
               >
-                {stuff.icon()}
-                {topic}
-              </div>
+                <div
+                  class={
+                    topics().has(key)
+                      ? "transition-colors"
+                      : "transition-colors text-slate-500/65"
+                  }
+                >
+                  {val.icon()}
+                </div>
+                {key}
+              </button>
             ))}
             <button
               onClick={() => setParams({ work: null })}
-              class="ml-auto bg-primary/5 hover:scale-105 hover:bg-primary/15 hover:text-primary-100 backdrop-blur backdrop-brightness-125 transition-all rounded flex items-center px-3.5 no-underline font-medium"
+              class="ml-auto bg-primary/15 hover:scale-105 hover:bg-primary/30 text-primary-200/80 hover:text-primary-100 backdrop-blur backdrop-brightness-125 transition-all rounded flex items-center px-3.5 no-underline font-medium"
             >
-              {work() ? "back home" : "show archives"}
+              <div class="min-h-9 flex items-center">
+                {work() ? "back home" : "show archives"}
+              </div>
             </button>
           </div>
         </div>
@@ -186,7 +208,7 @@ const Index = () => {
               <div class="grid gap-16 grid-cols-1 xl:grid-cols-2 not-prose">
                 <For
                   each={works.filter(work =>
-                    work.data.tags.some(tag => filters().has(tag))
+                    work.data.tags.some(tag => tags().has(tag))
                   )}
                 >
                   {work => (
@@ -288,27 +310,14 @@ const WorkPreview = props => {
 }
 
 const TableOfContents = props => {
-  if (!props.toc.length) {
-    return null
-  }
-  // build table of contents
-  const toc = props.toc.flatMap(h => {
-    if (h.children) {
-      return [h, ...h.children].filter(h => h.depth < 3)
-    } else {
-      return h
-    }
-  })
-
   // watch heading active state
-  const { hiddenTopics } = useGrid()
   const [active, setActive] = createSignal({})
   const activeHeading = createMemo(() => {
     const entries = Object.entries(active()).filter(([k, v]) => v)
     if (entries.length > 0) {
       return entries.at(-1)?.[0]
     } else {
-      return props.toc[0]?.id
+      return props.work().toc[0]?.id
     }
   })
   const headingObserver = new IntersectionObserver(
@@ -325,43 +334,65 @@ const TableOfContents = props => {
     { rootMargin: "0px 0px -50% 0px" }
   )
   onMount(() =>
-    toc.forEach(h => headingObserver.observe(document.getElementById(h.id)))
+    props
+      .work()
+      .toc.forEach(h => headingObserver.observe(document.getElementById(h.id)))
   )
+
+  createEffect(() => console.log(props.topics()))
+
+  const onClick = h =>
+    document.getElementById(h.id).scrollIntoView({ behavior: "smooth" })
+  const padding = h => (h.depth - 1) * 16
+  const header = h => h.value.split(" # ")
 
   return (
     <div class="flex flex-col gap-2">
       <div class="text-primary font-semibold text-base">table of contents</div>
       <div class="flex items-stretch">
-        <div class="mx-2 w-0.5 bg-slate-600 rounded-full" />
+        <div class="mx-2 w-0.5 bg-primary/50 rounded-full" />
         <div class="gap-2 p-2 flex flex-col">
-          {toc.map(h => (
-            <button
-              onclick={() =>
-                document
-                  .getElementById(h.id)
-                  .scrollIntoView({ behavior: "smooth" })
-              }
-              class={`font-medium text-left no-underline leading-tight ${
-                (h.depth - 1) * 16 ? "text-base" : "text-lg"
-              } ${
-                activeHeading() === h.id
-                  ? "text-slate-50 font-semibold tracking-[-0.01em]"
-                  : "text-slate-400"
-              } ${
-                hiddenTopics().includes(h.value.split(" # ").at(0))
-                  ? "text-slate-600 pointer-events-none"
-                  : "hover:text-slate-300"
-              }`}
-              style={`padding-left: ${(h.depth - 1) * 16}px`}
-            >
-              <span class="line-clamp-2">{h.value.split(" # ").at(-1)}</span>
-            </button>
-          ))}
+          {props
+            .work()
+            .toc.flatMap(h =>
+              h.children ? [h, ...h.children].filter(h => h.depth < 3) : h
+            )
+            .map(h => (
+              <button
+                onclick={() => onClick(h)}
+                class={`font-medium text-left no-underline leading-tight ${
+                  padding(h) ? "text-base" : "text-lg"
+                } ${
+                  activeHeading() === h.id
+                    ? "text-slate-50 font-semibold tracking-[-0.01em]"
+                    : "text-slate-400"
+                } ${
+                  header(h).length > 1 && !props.topics().has(header(h).at(0))
+                    ? "text-slate-600 pointer-events-none"
+                    : "hover:text-slate-300"
+                }`}
+                style={`padding-left: ${padding(h)}px`}
+              >
+                <span class="line-clamp-2">{header(h).at(-1)}</span>
+              </button>
+            ))}
         </div>
       </div>
     </div>
   )
 }
+
+const _countedTags = works
+  .flatMap(work => work.data.tags)
+  .reduce((p, c) => {
+    p[c] = (p[c] || 0) + 1
+    return p
+  }, {})
+const allTags = Object.keys(_countedTags).sort(
+  (a, b) => _countedTags[b] > _countedTags[a]
+)
+
+const allTopics = Object.keys(topicsData)
 
 const subtitles = [
   "empathy included !",

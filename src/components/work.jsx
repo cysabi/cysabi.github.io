@@ -4,11 +4,11 @@ import {
   Match,
   Show,
   Switch,
-  createMemo,
   createSignal,
+  createMemo,
   onMount,
 } from "solid-js"
-import { useGrid } from "./layout"
+import { useSearchParams } from "@solidjs/router"
 
 const autoplayObserver = new IntersectionObserver(
   entries =>
@@ -79,32 +79,35 @@ const ImgContent = props => (
 )
 
 const Topic = props => {
-  const { hiddenTopics } = useGrid()
+  const [params] = useSearchParams()
+  const when = createMemo(() => {
+    const topics = new Set(params.topics?.split("-") || Object.keys(topicsData))
+    return topics.has(Object.keys(props).at(0))
+  })
 
-  return (
-    <Show when={!hiddenTopics().includes(Object.keys(props).at(0))}>
-      {props.children}
-    </Show>
-  )
+  return <Show when={when()}>{props.children}</Show>
 }
 
-export const topics = {
+export const topicsData = {
   design: {
     class: "bg-grid-purple-500/20 text-grid-purple-400",
     icon: () => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        fill="none"
         viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        class="w-6 h-6"
+        class="h-6 w-6"
       >
-        <path
+        <g
+          fill="none"
+          stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
-        />
+          stroke-width="2"
+        >
+          <path d="M3 21v-4a4 4 0 1 1 4 4z" />
+          <path d="M21 3A16 16 0 0 0 8.2 13.2M21 3a16 16 0 0 1-10.2 12.8" />
+          <path d="M10.6 9a9 9 0 0 1 4.4 4.4" />
+        </g>
       </svg>
     ),
   },
@@ -113,16 +116,16 @@ export const topics = {
     icon: () => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        fill="none"
         viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        class="w-6 h-6"
+        class="h-6 w-6"
       >
         <path
+          fill="none"
+          stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
+          stroke-width="2"
+          d="m7 8l-4 4l4 4m10-8l4 4l-4 4M14 4l-4 16"
         />
       </svg>
     ),
@@ -257,10 +260,10 @@ const components = {
         {topic.length > 1 && (
           <div
             class={`p-2 backdrop-blur backdrop-brightness-125 flex items-center gap-2 text-2xl rounded-lg ${
-              topics[topic[0]].class
+              topicsData[topic[0]].class
             }`}
           >
-            {topics[topic[0]].icon()}
+            {topicsData[topic[0]].icon()}
           </div>
         )}
         {topic.length > 1 ? topic[1] : props.children}
@@ -277,10 +280,10 @@ const components = {
         {topic.length > 1 && (
           <div
             class={`p-2 backdrop-blur backdrop-brightness-125 flex items-center gap-2 text-2xl rounded-lg ${
-              topics[topic[0]].class
+              topicsData[topic[0]].class
             }`}
           >
-            {topics[topic[0]].icon()}
+            {topicsData[topic[0]].icon()}
           </div>
         )}
         {topic.length > 1 ? topic[1] : props.children}

@@ -16,7 +16,6 @@ export const GridProvider = props => {
   const [color, setColor] = createSignal()
   const [hovering, setHovering] = createSignal(false)
   const [pointer, setPointer] = createSignal("auto")
-  const [hiddenTopics, setHiddenTopics] = createSignal([])
 
   onMount(() => {
     setPos({ x: window.innerWidth / 2, y: window.innerHeight / 2, hide: true })
@@ -43,11 +42,6 @@ export const GridProvider = props => {
         setHovering,
         pointer,
         setPointer,
-        hiddenTopics,
-        toggleTopic: topic =>
-          hiddenTopics().includes(topic)
-            ? setHiddenTopics(hiddenTopics().filter(t => t !== topic))
-            : setHiddenTopics([...hiddenTopics(), topic]),
         setHover: (hover = false) => {
           if (hover !== false) {
             setColor("#91e9cb")
