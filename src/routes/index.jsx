@@ -38,7 +38,6 @@ const Index = () => {
   const [params, setParams] = useSearchParams()
   const tags = () => new Set(params.tags?.split("-") || allTags)
   const topics = () => new Set(params.topics?.split("-") || allTopics)
-
   const toggleParam = (key, value) => {
     let newParams = new Set(params[key]?.split("-") || [])
     if (newParams.has(value)) {
@@ -58,10 +57,17 @@ const Index = () => {
     })
   }
 
+  const filteredWorks = createMemo(() =>
+    works
+      .filter(work => work.data.tags.some(tag => tags().has(tag)))
+      .filter(work => !work.data.archive || params.archives)
+  )
+
   const work = createMemo(() => works.find(w => w.data.name === params.work))
   onMount(() => {
     setColor(false)
   })
+
   return (
     <div class="flex flex-col p-4 gap-8 lg:flex-row lg:p-16 lg:gap-16 items-stretch mx-auto">
       <div class="shrink-0 lg:max-w-[30vw] xl:max-w-md w-full">
@@ -204,11 +210,19 @@ const Index = () => {
               </button>
             ))}
             <button
-              onClick={() => setParams({ work: null })}
+              onClick={() =>
+                work()
+                  ? setParams({ work: null })
+                  : setParams({ archives: params.archives ? null : true })
+              }
               class="ml-auto bg-primary/15 hover:scale-105 hover:bg-primary/30 text-primary-200/80 hover:text-primary-100 backdrop-blur backdrop-brightness-125 transition-all rounded flex items-center px-3.5 no-underline font-medium"
             >
               <div class="min-h-9 flex items-center">
-                {work() ? "back home" : "show archives"}
+                {work() ? (
+                  "back home"
+                ) : (
+                  <>{params.archives ? "hide" : "show"} archives</>
+                )}
               </div>
             </button>
           </div>
@@ -220,11 +234,7 @@ const Index = () => {
             when={work()}
             fallback={
               <div class="grid gap-16 grid-cols-1 xl:grid-cols-2 not-prose">
-                <For
-                  each={works.filter(work =>
-                    work.data.tags.some(tag => tags().has(tag))
-                  )}
-                >
+                <For each={filteredWorks()}>
                   {work => (
                     <WorkPreview data={work.data} setParams={setParams} />
                   )}
