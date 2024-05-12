@@ -45,9 +45,11 @@ export const data = {
 
 {/* todo: performance pls */}
 
-One day, while watching gameplay of a minecraft content creator (fruitberries) creatively place blocks on the edges of the map to escape his opponent, **I realized just how expressive Minecraft's movement can be**.
+# ideation
 
-Placing blocks provides you with infinite possibilities for movement, allowing you to bend your environment to your will. In fact, it's not that different to Fortnite's build mode.
+One day, while watching gameplay of a minecraft content creator (fruitberries) creatively place blocks on the edges of the map to escape his opponent, I got inspired by how expressive Minecraft's movement was.
+
+Placing blocks provides you with **infinite possibilities for movement**, allowing you to bend your environment to your will. Not too much unlike Fortnite's build mode.
 
 <Img
   src="/block-sumo_1.webm"
@@ -63,8 +65,6 @@ This is when I decided on making a minecraft minigame, one that lets gameplay li
 However, I didn't want to follow the same footsteps that Fortnite had with build mode, where the skill floor grew to increasingly unreachable heights.
 
 > I wanted a game that you know you'll enjoy when you're bored with your friends and you don't know what to play.
-
-# ideation
 
 <Topic design>
 
@@ -119,6 +119,14 @@ At the same time, having no penalty would have the inverse effect by allowing pl
 > I decided on a time-based system with infinite lives, \
 > where players get **`+2` points for kills**, and **`-1` points for deaths**.
 
+## design # encouraging emergent vertical mobility
+
+I wanted vertical movement as a staple of the game, where **traversing up and down feels seamless and fluid**. The game should play in a 3-dimensional space, not a 2-dimensional plane, and movement should feel dynamic and expressive.
+
+> I was able to fulfill that 3d combat space fantasy by introducing a plethora of different quick-cast vertical mobility items.
+
+![There are consumable double-jumps, levitation effects, and even one that automatically builds a bridge](/block-sumo_11.webm)
+
 ## design # dropping items on death while avoiding a wealth gap
 
 I wanted it to be important that players are able to target other players in an attempt to remove their items if they succeed in killing them.
@@ -126,14 +134,6 @@ I wanted it to be important that players are able to target other players in an 
 However, **I predicted that simply making all items drop on death would cause a snowball effect**. Where a player in the lead could maintain control and accumulate more items over time, while players behind, having just respawned and lost all their items, will be at a significant disadvantage when trying to come back.
 
 > The % of items you lose decreases the further you are behind. So a player in the lead would lose 100% of their items, while a player in last only loses 12.5%.
-
-## design # item combos, but not item stockpiles
-
-When it came to the mechanics of utilizing items, It was important to me that **players are able to experiment with using multiple items together to create synergistic combos**.
-
-At the same time, I didn't want players being able to stockpile infinite number items, and encourage them to use items before it's too late.
-
-> Players can hold up to 8 items at a time. If a player is already holding 8, they won't be able to recieve new items.
 
 ## design # preserving counterplay for players in the lead
 
@@ -147,13 +147,13 @@ With a combination of better mechanics and **being resourceful with the items yo
 
 ![No matter what gets thrown your way, there's always room to clutch](/block-sumo_16.webm)
 
-## design # encouraging emergent vertical mobility
+## design # item combos, but not item stockpiles
 
-I wanted vertical movement as a staple of the game, where **traversing up and down feels seamless and fluid**. The game should play in a 3-dimensional space, not a 2-dimensional plane, and movement should feel dynamic and expressive.
+When it came to the mechanics of utilizing items, It was important to me that **players are able to experiment with using multiple items together to create synergistic combos**.
 
-> I was able to fulfill that 3d combat space fantasy by introducing a plethora of different quick-cast vertical mobility items.
+At the same time, I didn't want players being able to stockpile infinite number items, and encourage them to use items before it's too late.
 
-![There are consumable double-jumps, levitation effects, and even one that automatically builds a bridge](/block-sumo_11.webm)
+> Players can hold up to 8 items at a time. If a player is already holding 8, they won't be able to recieve new items.
 
 </Topic>
 

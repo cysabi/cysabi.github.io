@@ -86,59 +86,73 @@ const Index = () => {
                 </Show>
               </button>
             </div>
-            <Show
-              when={work()}
-              fallback={
-                <>
-                  <div class="font-display text-2xl text-primary font-semibold">
-                    {subtitles[index()]}
-                  </div>
-                  <div class="mt-4 flex gap-4 text-xl font-medium text-slate-400">
-                    <a
-                      href="https://github.com/cysabi"
-                      class="hover:text-primary-50"
-                    >
-                      github
-                    </a>
-                    <a
-                      href="https://twitter.com/cysabi"
-                      class="hover:text-primary-50"
-                    >
-                      twitter
-                    </a>
-                  </div>
-                </>
-              }
-            >
-              <Show when={work()?.data?.sources}>
-                <div class="flex gap-2 pb-2">
+            <Show when={!work()}>
+              <div class="font-display text-2xl text-primary font-semibold">
+                {subtitles[index()]}
+              </div>
+              <div class="mt-4 flex gap-4 text-xl font-medium text-slate-400">
+                <a
+                  href="https://github.com/cysabi"
+                  class="hover:text-primary-50"
+                >
+                  github
+                </a>
+                <a
+                  href="https://twitter.com/cysabi"
+                  class="hover:text-primary-50"
+                >
+                  twitter
+                </a>
+              </div>
+            </Show>
+          </div>
+          <Show when={work()} fallback={hovering()?.desc || hi()}>
+            <Show when={work()?.data?.sources}>
+              <div class="flex flex-col gap-2">
+                <div class="text-primary font-semibold">sources</div>
+                <div class="flex gap-4">
                   <For each={Object.entries(work()?.data?.sources)}>
                     {source => (
                       <a
                         href={source[1]}
-                        class="text-slate-300 hover:text-primary-50"
+                        class="text-slate-300 text-xl hover:text-primary-50"
                       >
                         {source[0]}
                       </a>
                     )}
                   </For>
                 </div>
-              </Show>
+              </div>
             </Show>
-          </div>
-          <div class="flex flex-col gap-4 text-slate-300 leading-relaxed">
-            <Switch fallback={hi()}>
-              <Match when={hovering()}>
-                {
-                  <>
-                    <div class="lg:hidden flex flex-col gap-4">{hi()}</div>
-                    <div class="hidden lg:block">{hovering()?.desc}</div>
-                  </>
-                }
-              </Match>
-              <Match when={work()}>{work()?.data.desc}</Match>
-            </Switch>
-          </div>
+            <Show when={work()?.data?.tools}>
+              <div class="flex flex-col gap-2">
+                <div class="text-primary font-semibold">tools</div>
+                <div class="flex gap-4">
+                  <For each={work()?.data?.tools}>
+                    {tool => (
+                      <div class="text-slate-300 border-2 hover:text-primary-50">
+                        {tool}
+                      </div>
+                    )}
+                  </For>
+                </div>
+              </div>
+            </Show>
+            <Show when={work()?.data?.tags}>
+              <div class="flex flex-col gap-2">
+                <div class="text-primary font-semibold">tags</div>
+                <div class="flex gap-4">
+                  <For each={work()?.data?.tags}>
+                    {tag => (
+                      <div class="text-slate-300 border-2 hover:text-primary-50">
+                        {tag}
+                      </div>
+                    )}
+                  </For>
+                </div>
+              </div>
+            </Show>
+          </Show>
           <div class="hidden lg:block lg:my-auto" />
           <Show
             when={work()}
@@ -228,6 +242,7 @@ const Index = () => {
             >
               <Collage items={work().data.collage} />
             </Show>
+            {work().data.desc}
             {work().default({ components })}
           </Show>
         </article>
