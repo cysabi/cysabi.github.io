@@ -2,9 +2,8 @@ import { Motion } from "solid-motionone"
 import { spring } from "motion"
 import {
   For,
-  Match,
   Show,
-  Switch,
+  children,
   createEffect,
   createMemo,
   createSignal,
@@ -75,113 +74,92 @@ const Index = () => {
     <div class="flex flex-col p-4 gap-8 lg:flex-row lg:p-16 lg:gap-16 items-stretch mx-auto">
       <div class="shrink-0 lg:max-w-[30vw] xl:max-w-md w-full">
         <div class="lg:fixed lg:max-w-[30vw] lg:h-[calc(100vh-8rem)] xl:max-w-md w-full flex flex-col gap-8">
-          <div class="flex flex-col gap-1">
-            <div class="font-display text-5xl font-semibold">
-              <button
-                class="flex flex-col gap-2 text-left"
-                onClick={() =>
-                  work()
-                    ? setParams({ work: null })
-                    : setIndex((index() + 1) % subtitles.length)
-                }
-              >
-                <Show when={work()} fallback="cysabi">
-                  <div class="font-mono tracking-tight text-3xl">
-                    {work().data.name}
-                  </div>
-                  <div class="flex gap-2 ml-[-3px]">
-                    <For each={work()?.data?.tags}>
-                      {tag => (
-                        <div class="rounded py-1 px-1.5 text-lg leading-none font-medium bg-primary/10 text-primary backdrop-blur backdrop-brightness-125">
-                          {tag}
-                        </div>
-                      )}
-                    </For>
-                  </div>
-                  <div class="font-sans -my-1 text-xl text-slate-400 font-medium">
-                    {work().data?.subtitle}
-                  </div>
-                  <Show when={work()?.data?.sources}>
-                    <div class="flex gap-4 font-medium">
-                      <For each={Object.entries(work()?.data?.sources)}>
-                        {source => (
-                          <a
-                            href={source[1]}
-                            class="text-slate-300 text-xl hover:text-primary-50"
-                          >
-                            {source[0]}
-                          </a>
-                        )}
-                      </For>
-                    </div>
-                  </Show>
-                </Show>
-              </button>
-            </div>
-            <Show when={!work()}>
-              <div class="font-display text-2xl text-primary font-semibold">
-                {subtitles[index()]}
-              </div>
-              <div class="mt-4 flex gap-4 text-xl font-medium text-slate-300">
-                <a
-                  href="https://github.com/cysabi"
-                  class="hover:text-primary-50"
-                >
-                  github
-                </a>
-                <a
-                  href="https://twitter.com/cysabi"
-                  class="hover:text-primary-50"
-                >
-                  twitter
-                </a>
-              </div>
-            </Show>
-          </div>
-          <div class="flex flex-col gap-4 text-slate-300 leading-relaxed">
-            <Show when={work()} fallback={hovering()?.desc || hi()}>
-              <Show when={work()?.data?.tools}>
-                <div class="flex flex-col gap-2">
-                  <div class="text-primary font-semibold">uses</div>
-                  <div class="flex flex-wrap gap-2">
-                    <For each={work()?.data?.tools}>
-                      {tool => (
-                        <div class="text-slate-400 bg-primary-400/10 rounded py-1 px-2 leading-none hover:text-primary-50">
-                          {tool}
-                        </div>
-                      )}
-                    </For>
-                  </div>
-                </div>
-              </Show>
-            </Show>
-          </div>
-          <div class="hidden lg:block lg:my-auto" />
           <Show
             when={work()}
             fallback={
-              <div class="hidden lg:flex gap-2 flex-wrap items-center">
-                {allTags.map(tag => (
+              <>
+                <div class="flex flex-col gap-1 font-display text-5xl font-semibold">
                   <button
-                    onClick={() => toggleParam("tags", tag)}
-                    class={`transition-all rounded line-through leading-none decoration-2 decoration-transparent py-1 px-2 text-xl font-medium bg-primary/10 text-primary hover:scale-105 backdrop-blur backdrop-brightness-125 ${
-                      tags().has(tag) ||
-                      "bg-transparent text-slate-500 hover:text-slate-400 !decoration-slate-500 hover:!decoration-slate-400"
-                    } ${
-                      hovering() &&
-                      !hovering()?.tags?.includes(tag) &&
-                      "blur-[2px] opacity-50"
-                    }`}
+                    class="flex flex-col gap-2 w-fit"
+                    onClick={() => setIndex((index() + 1) % subtitles.length)}
                   >
-                    <div class="-translate-y-[1px]">{tag}</div>
+                    cysabi
                   </button>
-                ))}
-              </div>
+                  <div class="text-2xl text-primary">{subtitles[index()]}</div>
+                  <div class="mt-4 flex gap-4 text-xl font-medium text-slate-300">
+                    <a
+                      href="https://github.com/cysabi"
+                      class="hover:text-primary-50"
+                    >
+                      github
+                    </a>
+                    <a
+                      href="https://twitter.com/cysabi"
+                      class="hover:text-primary-50"
+                    >
+                      twitter
+                    </a>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-4 text-slate-300 leading-relaxed">
+                  {hovering()?.desc || hi()}
+                </div>
+                <div class="hidden lg:block lg:my-auto" />
+                <div class="hidden lg:flex gap-2 flex-wrap items-center">
+                  {allTags.map(tag => (
+                    <button
+                      onClick={() => toggleParam("tags", tag)}
+                      class={`transition-all rounded line-through leading-none decoration-2 decoration-transparent py-1 px-2 text-xl font-medium bg-primary/10 text-primary hover:scale-105 backdrop-blur backdrop-brightness-125 ${
+                        tags().has(tag) ||
+                        "bg-transparent text-slate-500 hover:text-slate-400 !decoration-slate-500 hover:!decoration-slate-400"
+                      } ${
+                        hovering() &&
+                        !hovering()?.tags?.includes(tag) &&
+                        "blur-[2px] opacity-50"
+                      }`}
+                    >
+                      <div class="-translate-y-[1px]">{tag}</div>
+                    </button>
+                  ))}
+                </div>
+              </>
             }
           >
-            <Show when={work().toc.length}>
-              <TableOfContents work={work} topics={topics} />
-            </Show>
+            <div class="flex flex-col gap-2 font-display text-5xl font-semibold">
+              <div class="font-mono tracking-tight text-3xl">
+                {work().data.name}
+              </div>
+              <div class="flex flex-wrap gap-2 ml-[-3px] text-xl leading-none font-medium">
+                <For each={work()?.data?.tags}>
+                  {tag => (
+                    <div class="rounded py-1 px-1.5 bg-primary/10 text-primary backdrop-blur backdrop-brightness-125">
+                      {tag}
+                    </div>
+                  )}
+                </For>
+              </div>
+              <div class="font-sans text-xl text-slate-400 font-medium">
+                {work().data?.subtitle}
+              </div>
+              <div class="flex flex-col gap-1 text-slate-300 leading-relaxed">
+                <Show when={work()?.data?.sources}>
+                  <div class="flex gap-4 font-medium">
+                    <For each={Object.entries(work()?.data?.sources)}>
+                      {source => (
+                        <a
+                          href={source[1]}
+                          class="text-slate-300 text-xl hover:text-primary-50"
+                        >
+                          {source[0]}
+                        </a>
+                      )}
+                    </For>
+                  </div>
+                </Show>
+              </div>
+            </div>
+            <TableOfContents work={work} topics={topics} />
+            <div class="hidden lg:block lg:my-auto" />
           </Show>
           <div class="shrink-0 h-0.5 bg-primary/10 backdrop-blur backdrop-brightness-110" />
           <div class="hidden lg:flex gap-4 flex-wrap">
@@ -249,7 +227,6 @@ const Index = () => {
             >
               <Collage items={work().data.collage} />
             </Show>
-            {work().data.desc}
             {work().default({ components })}
           </Show>
         </article>
@@ -362,7 +339,6 @@ const TableOfContents = props => {
 
   const onClick = h =>
     document.getElementById(h.id).scrollIntoView({ behavior: "smooth" })
-  const padding = h => (h.depth - 1) * 16
   const header = h => h.value.split(" # ")
   const activeHeading = () =>
     Object.entries(active())
@@ -370,33 +346,68 @@ const TableOfContents = props => {
       .at(-1)?.[0]
 
   return (
-    <div class="flex flex-col gap-2">
-      <div class="text-primary font-semibold text-base">table of contents</div>
-      <div class="flex items-stretch">
-        <div class="mx-2 w-0.5 bg-primary/50 rounded-full" />
-        <div class="gap-2 p-2 flex flex-col">
-          {toc().map(h => (
-            <button
-              onclick={() => onClick(h)}
-              class={`text-left no-underline leading-tight ${
-                padding(h) ? "text-base" : "text-lg"
-              } ${
-                activeHeading() === h.id
-                  ? "text-slate-50 font-medium tracking-[-0.0095em]"
-                  : "text-slate-400"
-              } ${
-                header(h).length > 1 && !props.topics().has(header(h).at(0))
-                  ? "text-slate-600 pointer-events-none"
-                  : "hover:text-slate-300"
-              }`}
-              style={`padding-left: ${padding(h)}px`}
-            >
-              <span class="line-clamp-2">{header(h).at(-1)}</span>
-            </button>
-          ))}
+    <Show when={props.work().toc.length}>
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center gap-4">
+          {activeHeading() ? (
+            <>
+              <div class="text-slate-500 font-semibold text-base">summary</div>
+              <div class="border-t-2 border-dotted grow border-slate-600 mt-0.5" />
+              <div class="text-primary font-semibold text-base">
+                table of contents
+              </div>
+            </>
+          ) : (
+            <>
+              <div class="text-primary font-semibold text-base">summary</div>
+              <div class="border-t-2 border-dotted grow border-slate-600 mt-0.5" />
+              <div class="text-slate-500 font-semibold text-base">
+                table of contents
+              </div>
+            </>
+          )}
+        </div>
+        <div class="flex items-stretch">
+          <div class="flex flex-col items-end w-full -my-1">
+            {activeHeading() ? (
+              toc().map(h => (
+                <button
+                  onclick={() => onClick(h)}
+                  class={`no-underline py-1 leading-tight ${
+                    h.depth > 1
+                      ? "text-base pr-2 border-r-2 border-slate-700"
+                      : "text-lg"
+                  } ${
+                    activeHeading() === h.id
+                      ? "text-slate-50 font-medium tracking-[-0.0095em]"
+                      : "text-slate-400"
+                  } ${
+                    header(h).length > 1 && !props.topics().has(header(h).at(0))
+                      ? "text-slate-600 pointer-events-none"
+                      : "hover:text-slate-300"
+                  }`}
+                >
+                  <span class="line-clamp-2">{header(h).at(-1)}</span>
+                </button>
+              ))
+            ) : (
+              <div class="mt-1 flex flex-col gap-4 text-slate-300 leading-relaxed">
+                {props.work().data.desc}
+                <div class="flex items-baseline flex-wrap gap-2 pt-2 ml-[-3px] leading-none font-medium text-base">
+                  <For each={props.work()?.data?.tools}>
+                    {tool => (
+                      <div class="text-slate-400 backdrop-blur backdrop-brightness-125 rounded flex px-2 py-1">
+                        {tool}
+                      </div>
+                    )}
+                  </For>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </Show>
   )
 }
 
