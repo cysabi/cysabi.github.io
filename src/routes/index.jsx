@@ -23,7 +23,10 @@ const hi = () => (
     </p>
     <p>
       feel free to{" "}
-      <a href="https://twitter.com/cysabi" class="font-medium text-slate-50">
+      <a
+        href="https://twitter.com/messages/compose?recipient_id=1178483825950822401"
+        class="font-medium text-slate-50"
+      >
         reach out
       </a>
       ! i'm always open to new opportunities, no matter the medium
@@ -75,7 +78,7 @@ const Index = () => {
           <div class="flex flex-col gap-1">
             <div class="font-display text-5xl font-semibold">
               <button
-                class="text-left"
+                class="flex flex-col gap-2 text-left"
                 onClick={() =>
                   work()
                     ? setParams({ work: null })
@@ -86,9 +89,32 @@ const Index = () => {
                   <div class="font-mono tracking-tight text-3xl">
                     {work().data.name}
                   </div>
-                  <div class="font-sans text-lg text-slate-400 font-medium">
+                  <div class="flex gap-2 ml-[-3px]">
+                    <For each={work()?.data?.tags}>
+                      {tag => (
+                        <div class="rounded py-1 px-1.5 text-lg leading-none font-medium bg-primary/10 text-primary backdrop-blur backdrop-brightness-125">
+                          {tag}
+                        </div>
+                      )}
+                    </For>
+                  </div>
+                  <div class="font-sans -my-1 text-xl text-slate-400 font-medium">
                     {work().data?.subtitle}
                   </div>
+                  <Show when={work()?.data?.sources}>
+                    <div class="flex gap-4 font-medium">
+                      <For each={Object.entries(work()?.data?.sources)}>
+                        {source => (
+                          <a
+                            href={source[1]}
+                            class="text-slate-300 text-xl hover:text-primary-50"
+                          >
+                            {source[0]}
+                          </a>
+                        )}
+                      </For>
+                    </div>
+                  </Show>
                 </Show>
               </button>
             </div>
@@ -96,7 +122,7 @@ const Index = () => {
               <div class="font-display text-2xl text-primary font-semibold">
                 {subtitles[index()]}
               </div>
-              <div class="mt-4 flex gap-4 text-xl font-medium text-slate-400">
+              <div class="mt-4 flex gap-4 text-xl font-medium text-slate-300">
                 <a
                   href="https://github.com/cysabi"
                   class="hover:text-primary-50"
@@ -112,53 +138,24 @@ const Index = () => {
               </div>
             </Show>
           </div>
-          <Show when={work()} fallback={hovering()?.desc || hi()}>
-            <Show when={work()?.data?.sources}>
-              <div class="flex flex-col gap-2">
-                <div class="text-primary font-semibold">sources</div>
-                <div class="flex gap-4">
-                  <For each={Object.entries(work()?.data?.sources)}>
-                    {source => (
-                      <a
-                        href={source[1]}
-                        class="text-slate-300 text-xl hover:text-primary-50"
-                      >
-                        {source[0]}
-                      </a>
-                    )}
-                  </For>
+          <div class="flex flex-col gap-4 text-slate-300 leading-relaxed">
+            <Show when={work()} fallback={hovering()?.desc || hi()}>
+              <Show when={work()?.data?.tools}>
+                <div class="flex flex-col gap-2">
+                  <div class="text-primary font-semibold">uses</div>
+                  <div class="flex flex-wrap gap-2">
+                    <For each={work()?.data?.tools}>
+                      {tool => (
+                        <div class="text-slate-400 bg-primary-400/10 rounded py-1 px-2 leading-none hover:text-primary-50">
+                          {tool}
+                        </div>
+                      )}
+                    </For>
+                  </div>
                 </div>
-              </div>
+              </Show>
             </Show>
-            <Show when={work()?.data?.tools}>
-              <div class="flex flex-col gap-2">
-                <div class="text-primary font-semibold">tools</div>
-                <div class="flex gap-4">
-                  <For each={work()?.data?.tools}>
-                    {tool => (
-                      <div class="text-slate-300 border-2 hover:text-primary-50">
-                        {tool}
-                      </div>
-                    )}
-                  </For>
-                </div>
-              </div>
-            </Show>
-            <Show when={work()?.data?.tags}>
-              <div class="flex flex-col gap-2">
-                <div class="text-primary font-semibold">tags</div>
-                <div class="flex gap-4">
-                  <For each={work()?.data?.tags}>
-                    {tag => (
-                      <div class="text-slate-300 border-2 hover:text-primary-50">
-                        {tag}
-                      </div>
-                    )}
-                  </For>
-                </div>
-              </div>
-            </Show>
-          </Show>
+          </div>
           <div class="hidden lg:block lg:my-auto" />
           <Show
             when={work()}
@@ -337,14 +334,13 @@ const WorkPreview = props => {
 const TableOfContents = props => {
   // watch heading active state
   const [active, setActive] = createSignal({})
-  const activeHeading = createMemo(() => {
-    const entries = Object.entries(active()).filter(([k, v]) => v)
-    if (entries.length > 0) {
-      return entries.at(-1)?.[0]
-    } else {
-      return props.work().toc[0]?.id
-    }
-  })
+  const toc = createMemo(() =>
+    props
+      .work()
+      .toc.flatMap(h =>
+        h.children ? [h, ...h.children].filter(h => h.depth < 3) : h
+      )
+  )
   const headingObserver = new IntersectionObserver(
     entries =>
       entries.forEach(entry =>
@@ -359,9 +355,7 @@ const TableOfContents = props => {
     { rootMargin: "0px 0px -50% 0px" }
   )
   onMount(() =>
-    props
-      .work()
-      .toc.forEach(h => headingObserver.observe(document.getElementById(h.id)))
+    toc().forEach(h => headingObserver.observe(document.getElementById(h.id)))
   )
 
   createEffect(() => console.log(props.topics()))
@@ -370,6 +364,10 @@ const TableOfContents = props => {
     document.getElementById(h.id).scrollIntoView({ behavior: "smooth" })
   const padding = h => (h.depth - 1) * 16
   const header = h => h.value.split(" # ")
+  const activeHeading = () =>
+    Object.entries(active())
+      .filter(h => h[1])
+      .at(-1)?.[0]
 
   return (
     <div class="flex flex-col gap-2">
@@ -377,30 +375,25 @@ const TableOfContents = props => {
       <div class="flex items-stretch">
         <div class="mx-2 w-0.5 bg-primary/50 rounded-full" />
         <div class="gap-2 p-2 flex flex-col">
-          {props
-            .work()
-            .toc.flatMap(h =>
-              h.children ? [h, ...h.children].filter(h => h.depth < 3) : h
-            )
-            .map(h => (
-              <button
-                onclick={() => onClick(h)}
-                class={`font-medium text-left no-underline leading-tight ${
-                  padding(h) ? "text-base" : "text-lg"
-                } ${
-                  activeHeading() === h.id
-                    ? "text-slate-50 font-semibold tracking-[-0.01em]"
-                    : "text-slate-400"
-                } ${
-                  header(h).length > 1 && !props.topics().has(header(h).at(0))
-                    ? "text-slate-600 pointer-events-none"
-                    : "hover:text-slate-300"
-                }`}
-                style={`padding-left: ${padding(h)}px`}
-              >
-                <span class="line-clamp-2">{header(h).at(-1)}</span>
-              </button>
-            ))}
+          {toc().map(h => (
+            <button
+              onclick={() => onClick(h)}
+              class={`text-left no-underline leading-tight ${
+                padding(h) ? "text-base" : "text-lg"
+              } ${
+                activeHeading() === h.id
+                  ? "text-slate-50 font-medium tracking-[-0.0095em]"
+                  : "text-slate-400"
+              } ${
+                header(h).length > 1 && !props.topics().has(header(h).at(0))
+                  ? "text-slate-600 pointer-events-none"
+                  : "hover:text-slate-300"
+              }`}
+              style={`padding-left: ${padding(h)}px`}
+            >
+              <span class="line-clamp-2">{header(h).at(-1)}</span>
+            </button>
+          ))}
         </div>
       </div>
     </div>
