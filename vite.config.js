@@ -19,5 +19,16 @@ export default defineConfig({
       ],
       jsxImportSource: "solid-js/h",
     }),
+    // (() => {
+    //   return {
+    //     name: "ssg",
+    //     transformIndexHtml: async (html, ctx) => {
+    //       const { app } = await ctx.server.ssrLoadModule("/src/root.jsx")
+    //       return html
+    //         .replace("<!-- hydrate -->", generateHydrationScript())
+    //         .replace("<!-- app -->", app)
+    //     },
+    //   }
+    // })(),
   ],
 })
