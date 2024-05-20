@@ -16,22 +16,18 @@ import works from "./works"
 const hi = () => (
   <>
     <p>
-      hi there ~ i'm a self-taught designer + hacker that's obsessed with caring
-      for others!! i love thinking about people's experiences, and exploring new
-      ways to make them better!
+      hi there ~ i'm a self-taught designer + hacker that loves thinking about
+      experiences!! i'm always looking to explore better ways to care for
+      people, through tinkering with technology and making new things.
     </p>
     {/* <p>
-      i'm an advocate for making broadcast graphics with code, elevating them to
-      be more flexible and easier to control
-
-      i'm currently working on [bento], an empathy-included broadcast graphics framework
-      for web techlogies that aims to make broadcasts more flexible and easier to control
+      i'm an advocate for making broadcast graphics with code, which allows them
+      to be much more capable, flexible and easier to control!
+      currently, im exploring how to make esports broadcast graphics more flexible and easier to control through code!
     </p> */}
     <p>
-      i love discovering and tinkering with tech! im a marginalized gender
-      supporter, im a nerdy obsidian user. i like boba, fizzy boba especially in
-      splatoon, i'm a day-one kglues one-trick, and i always make sure to die
-      with my special up!
+      i like boba, fizzy boba especially. in splatoon, i'm a day-one kglues
+      one-trick, and i always make sure to die with my special up!
     </p>
     <p>
       feel free to{" "}
