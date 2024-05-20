@@ -26,9 +26,9 @@ const hi = () => (
     </p>
     <p>
       i'm a cultist for obsidian, i'm a passionate supporter for marginalized
-      genders in esports/gamedev/tech, and (most importantly) i love boba, fizzy
-      boba especially. in splatoon, i'm a day-one kglues one-trick, and i always
-      make sure to die with my special up!
+      genders in esports/gamedev/tech, and (most importantly), i love boba,
+      fizzy boba especially. in splatoon, i'm a day-one kglues one-trick, and i
+      always make sure to die with my special up!
     </p>
     <p>
       feel free to{" "}
