@@ -17,12 +17,12 @@ const hi = () => (
   <>
     <p>
       hi there ~ i'm a self-taught designer + hacker that's thinking about
-      experiences!! i love exploring better ways to care for people, through
-      tinkering with technology and making new things
+      experiences!! i love exploring better ways to care for people, tinkering
+      with technology and making new things
     </p>
     <p>
-      currently, im exploring the right way to code esports broadcast graphics.
-      which lets them be more capable, flexible, and easier to control
+      currently, im experimenting with coding esports broadcast graphics, which
+      lets them be more capable, flexible, and easier to control
     </p>
     <p>
       i'm a supporter for marginalized gender in esports/gamedev/tech, a diehard
