@@ -20,14 +20,15 @@ const hi = () => (
       experiences!! i'm always looking to explore better ways to care for
       people, through tinkering with technology and making new things.
     </p>
-    {/* <p>
-      i'm an advocate for making broadcast graphics with code, which allows them
-      to be much more capable, flexible and easier to control!
-      currently, im exploring how to make esports broadcast graphics more flexible and easier to control through code!
-    </p> */}
     <p>
-      i like boba, fizzy boba especially. in splatoon, i'm a day-one kglues
-      one-trick, and i always make sure to die with my special up!
+      currently, im exploring making esports broadcast graphics with code. which
+      allows them to be much more capable, flexible, and easier to control!
+    </p>
+    <p>
+      i'm a cultist for obsidian, i'm a passionate supporter for marginalized
+      genders in esports/gamedev/tech, and (most importantly) i love boba, fizzy
+      boba especially. in splatoon, i'm a day-one kglues one-trick, and i always
+      make sure to die with my special up!
     </p>
     <p>
       feel free to{" "}
