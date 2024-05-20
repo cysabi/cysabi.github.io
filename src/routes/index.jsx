@@ -383,68 +383,68 @@ const TableOfContents = props => {
       .at(-1)?.[0]
 
   return (
-    <Show when={props.work().toc.length}>
-      <div class="flex flex-col gap-2">
-        <div class="flex items-center gap-4">
-          {activeHeading() ? (
-            <>
-              <div class="text-slate-500 font-semibold text-base">summary</div>
-              <div class="border-t-2 border-dotted grow border-slate-600 mt-0.5" />
-              <div class="text-primary font-semibold text-base">
-                table of contents
-              </div>
-            </>
-          ) : (
-            <>
-              <div class="text-primary font-semibold text-base">summary</div>
-              <div class="border-t-2 border-dotted grow border-slate-600 mt-0.5" />
+    <div class="flex flex-col gap-2">
+      <div class="flex items-center gap-4">
+        {activeHeading() ? (
+          <>
+            <div class="text-slate-500 font-semibold text-base">summary</div>
+            <div class="border-t-2 border-dotted grow border-slate-600 mt-0.5" />
+            <div class="text-primary font-semibold text-base">
+              table of contents
+            </div>
+          </>
+        ) : (
+          <>
+            <div class="text-primary font-semibold text-base">summary</div>
+            <div class="border-t-2 border-dotted grow border-slate-600 mt-0.5" />
+            <Show when={props.work().toc.length}>
               <div class="text-slate-500 font-semibold text-base">
                 table of contents
               </div>
-            </>
+            </Show>
+          </>
+        )}
+      </div>
+      <div class="flex items-stretch">
+        <div class="flex flex-col items-end w-full -my-1">
+          {activeHeading() ? (
+            toc().map(h => (
+              <button
+                onclick={() => onClick(h)}
+                class={`no-underline py-1 leading-tight ${
+                  h.depth > 1
+                    ? "text-base pr-2.5 border-r-2 border-slate-700"
+                    : "text-lg"
+                } ${
+                  activeHeading() === h.id
+                    ? "text-slate-50 font-medium tracking-[-0.0095em]"
+                    : "text-slate-400"
+                } ${
+                  header(h).length > 1 && !props.topics().has(header(h).at(0))
+                    ? "text-slate-600 pointer-events-none"
+                    : "hover:text-slate-300"
+                }`}
+              >
+                <span class="line-clamp-2">{header(h).at(-1)}</span>
+              </button>
+            ))
+          ) : (
+            <div class="mt-1 flex flex-col gap-4 text-slate-300 leading-relaxed">
+              {props.work().data.desc}
+              <div class="flex items-baseline flex-wrap gap-2 pt-2 ml-[-3px] leading-none font-medium text-base">
+                <For each={props.work()?.data?.tools}>
+                  {tool => (
+                    <div class="text-slate-400 backdrop-blur backdrop-brightness-125 rounded flex px-2 py-1">
+                      {tool}
+                    </div>
+                  )}
+                </For>
+              </div>
+            </div>
           )}
         </div>
-        <div class="flex items-stretch">
-          <div class="flex flex-col items-end w-full -my-1">
-            {activeHeading() ? (
-              toc().map(h => (
-                <button
-                  onclick={() => onClick(h)}
-                  class={`no-underline py-1 leading-tight ${
-                    h.depth > 1
-                      ? "text-base pr-2.5 border-r-2 border-slate-700"
-                      : "text-lg"
-                  } ${
-                    activeHeading() === h.id
-                      ? "text-slate-50 font-medium tracking-[-0.0095em]"
-                      : "text-slate-400"
-                  } ${
-                    header(h).length > 1 && !props.topics().has(header(h).at(0))
-                      ? "text-slate-600 pointer-events-none"
-                      : "hover:text-slate-300"
-                  }`}
-                >
-                  <span class="line-clamp-2">{header(h).at(-1)}</span>
-                </button>
-              ))
-            ) : (
-              <div class="mt-1 flex flex-col gap-4 text-slate-300 leading-relaxed">
-                {props.work().data.desc}
-                <div class="flex items-baseline flex-wrap gap-2 pt-2 ml-[-3px] leading-none font-medium text-base">
-                  <For each={props.work()?.data?.tools}>
-                    {tool => (
-                      <div class="text-slate-400 backdrop-blur backdrop-brightness-125 rounded flex px-2 py-1">
-                        {tool}
-                      </div>
-                    )}
-                  </For>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
       </div>
-    </Show>
+    </div>
   )
 }
 
