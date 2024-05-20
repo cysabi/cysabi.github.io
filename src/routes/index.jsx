@@ -221,7 +221,7 @@ const Index = () => {
         </div>
       </div>
       <div class="grow flex justify-center">
-        <article>
+        <article class="w-full">
           <Show
             when={work()}
             fallback={
@@ -303,14 +303,16 @@ const WorkPreview = props => {
       }}
       class="relative backdrop-blur backdrop-brightness-125 rounded-2xl p-2 overflow-clip bg-primary/10"
     >
-      <Motion.img
-        animate={{
-          opacity: hov() ? 0.1 : 1,
-          "--tw-blur": hov() ? "blur(4px)" : "blur(0px)",
-        }}
-        class="rounded-lg filter"
-        src={props.data.previews[0]}
-      />
+      <div class="relative aspect-video overflow-clip rounded-lg">
+        <Motion.img
+          animate={{
+            opacity: hov() ? 0.1 : 1,
+            "--tw-blur": hov() ? "blur(4px)" : "blur(0px)",
+          }}
+          class="absolute filter rounded-lg"
+          src={props.data.previews[0]}
+        />
+      </div>
       <Motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: hov() ? 1 : 0 }}
