@@ -16,19 +16,19 @@ import works from "./works"
 const hi = () => (
   <>
     <p>
-      hi there ~ i'm a self-taught designer + hacker that loves thinking about
-      experiences!! i'm always looking to explore better ways to care for
-      people, through tinkering with technology and making new things.
+      hi there ~ i'm a self-taught designer + hacker that's thinking about
+      experiences!! i love exploring better ways to care for people, through
+      tinkering with technology and making new things
     </p>
     <p>
-      currently, im exploring making esports broadcast graphics with code. which
-      allows them to be much more capable, flexible, and easier to control!
+      currently, im exploring the right way to code esports broadcast graphics.
+      which lets them be more capable, flexible, and easier to control
     </p>
     <p>
-      i'm a cultist for obsidian, i'm a passionate supporter for marginalized
-      genders in esports/gamedev/tech, and (most importantly), i love boba,
-      fizzy boba especially. in splatoon, i'm a day-one kglues one-trick, and i
-      always make sure to die with my special up!
+      i'm a supporter for marginalized gender in esports/gamedev/tech, a diehard
+      obsidian cultist, and (most importantly), i love boba, fizzy boba
+      especially. in splatoon, i'm a day-one kglues one-trick, and i always make
+      sure to die with my special up
     </p>
     <p>
       feel free to{" "}
