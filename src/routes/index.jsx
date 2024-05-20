@@ -73,6 +73,7 @@ const Index = () => {
     works
       .filter(work => work.data.tags.some(tag => tags().has(tag)))
       .filter(work => !work.data.archive || params.archives)
+      .filter(work => work.data.roles.some(topic => topics().has(topic)))
   )
 
   const work = createMemo(() => works.find(w => w.data.name === params.work))
@@ -124,8 +125,9 @@ const Index = () => {
                         "bg-transparent text-slate-500 hover:text-slate-400 !decoration-slate-500 hover:!decoration-slate-400"
                       } ${
                         hovering() &&
-                        !hovering()?.tags?.includes(tag) &&
-                        "blur-[2px] opacity-50"
+                        (!hovering()?.tags?.includes(tag)
+                          ? "blur-[2px] opacity-50"
+                          : "!backdrop-brightness-150")
                       }`}
                     >
                       <div class="-translate-y-[1px]">{tag}</div>
@@ -180,6 +182,11 @@ const Index = () => {
                   topics().has(key)
                     ? val.class
                     : "bg-primary/5 font-medium line-through text-slate-500 hover:text-slate-400 !decoration-slate-500 hover:!decoration-slate-400"
+                } ${
+                  hovering() &&
+                  (!hovering()?.roles?.includes(key)
+                    ? "blur-[2px] opacity-50"
+                    : "!backdrop-brightness-150")
                 }`}
               >
                 <div
