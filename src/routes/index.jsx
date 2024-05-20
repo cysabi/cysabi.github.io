@@ -267,9 +267,13 @@ const WorkPreview = props => {
     <Motion.button
       ref={ref}
       onClick={() => {
-        setHover(false)
-        props.setParams({ work: props.data.name })
-        window.scrollTo(0, 0)
+        if (typeof props.data.archive === "string") {
+          location.href = props.data.archive
+        } else {
+          setHover(false)
+          props.setParams({ work: props.data.name })
+          window.scrollTo(0, 0)
+        }
       }}
       onmouseenter={() => {
         setHover(props.data)
@@ -312,10 +316,26 @@ const WorkPreview = props => {
         animate={{ opacity: hov() ? 1 : 0 }}
         class="absolute inset-0 flex flex-col p-8 gap-4 items-center justify-center"
       >
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1.5">
           <div class="font-mono text-slate-50 text-3xl font-semibold tracking-tight">
             {props.data.name}
           </div>
+          <Show when={typeof props.data.archive === "string"}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              class="w-6 h-6 mt-1"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6m-7 1l9-9m-5 0h5v5"
+              />
+            </svg>
+          </Show>
         </div>
         <span class="font-sans leading-normal text-slate-300">
           {props.data?.subtitle}
@@ -392,7 +412,7 @@ const TableOfContents = props => {
                   onclick={() => onClick(h)}
                   class={`no-underline py-1 leading-tight ${
                     h.depth > 1
-                      ? "text-base pr-2 border-r-2 border-slate-700"
+                      ? "text-base pr-2.5 border-r-2 border-slate-700"
                       : "text-lg"
                   } ${
                     activeHeading() === h.id

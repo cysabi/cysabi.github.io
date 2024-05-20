@@ -33,5 +33,4 @@ export default [work1, work2, work3, work4, work5, work6, work7, work8]
 <ProjectOrb wip={true} layer="2" coords={[5, 4]} name="cg-offthedial" />
   Stream overlays for tournaments hosted by Off the Dial. Solo project
   from design to development. Uses NodeCG, Preact, and Tailwind.
-
 */
