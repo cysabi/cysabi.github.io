@@ -20,7 +20,7 @@ const hi = () => (
       with tech to make new things, and thinking about how best to serve you
     </p>
     <p>
-      currently, im experimenting with esports broadcast graphics using code. im also an avid supporter for marginalized genders in esports, an obsidian cultist, and (most important) i like boba, fizzy boba especially. in splatoon, im a day-one kglues one-trick and i always make sure to die with my special up
+      currently, im experimenting with making esports broadcast graphics with code. im also an avid supporter for marginalized genders in esports, an obsidian cultist, and (most important) i like boba, fizzy boba especially. in splatoon, im a day-one kglues one-trick and i always make sure to die with my special up
     </p>
     <p>
       feel free to{" "}
