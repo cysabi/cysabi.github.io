@@ -16,19 +16,11 @@ import works from "./works"
 const hi = () => (
   <>
     <p>
-      hi there ~ i'm a self-taught designer + hacker that's thinking about
-      experiences!! i love exploring better ways to care for people, tinkering
-      with technology and making new things
+      hi there ~ i'm a self-taught designer + hacker that cares a little too much about people's experiences!! i love tinkering
+      with tech to make new things, and thinking about how best to serve you
     </p>
     <p>
-      currently, im experimenting with coding esports broadcast graphics, which
-      lets them be more capable, flexible, and easier to control
-    </p>
-    <p>
-      i'm a supporter for marginalized gender in esports/gamedev/tech, a diehard
-      obsidian cultist, and (most importantly), i love boba, fizzy boba
-      especially. in splatoon, i'm a day-one kglues one-trick, and i always make
-      sure to die with my special up
+      currently, im experimenting with esports broadcast graphics using code. im also an avid supporter for marginalized genders in esports, an obsidian cultist, and (most important) i like boba, fizzy boba especially. in splatoon, im a day-one kglues one-trick and i always make sure to die with my special up
     </p>
     <p>
       feel free to{" "}
@@ -36,9 +28,9 @@ const hi = () => (
         href="https://twitter.com/messages/compose?recipient_id=1178483825950822401"
         class="font-medium text-slate-50"
       >
-        reach out
+        say hi
       </a>
-      ! i'm always open to new opportunities, no matter the medium
+      ! im always open to new opportunities, no matter the medium
     </p>
   </>
 )
