@@ -16,11 +16,16 @@ import works from "./works"
 const hi = () => (
   <>
     <p>
-      hi there ~ i'm a self-taught designer + hacker that cares a little too much about people's experiences!! i love tinkering
-      with tech to make new things, and thinking about how best to serve you
+      hi there ~ i'm a self-taught designer + hacker that cares a little too
+      much about people's experiences!! i love tinkering with tech to make new
+      things, and thinking about how best to serve you
     </p>
     <p>
-      currently, im experimenting with making esports broadcast graphics with code. im a big supporter for marginalized genders in esports, an obsidian cultist, and (most important) i like boba, fizzy boba especially. in splatoon, im a day-one kglues one-trick and i always make sure to die with my special up
+      currently, im experimenting with making esports broadcast graphics with
+      code. im a big supporter for marginalized genders in esports, an obsidian
+      cultist, and (most important) i like boba, fizzy boba especially. in
+      splatoon, im a day-one kglues one-trick and i always make sure to die with
+      my special up
     </p>
     <p>
       feel free to{" "}
@@ -453,18 +458,25 @@ const allTags = Object.keys(_countedTags).sort(
 )
 
 const allTopics = Object.keys(topicsData)
-
+const egg =
+  "transition-all delay-500 duration-500 group-hover:delay-0 group-hover:duration-0"
 const subtitles = [
   "empathy included !",
   <>
-    <span class="transition-all delay-500 duration-500 hover:delay-0 hover:duration-0 hover:text-[#faf378]">
-      aro
+    <span class="group">
+      <span class={egg + " group-hover:text-[#00a82f]"}>a</span>
+      <span class={egg + " group-hover:text-[#9cd56c]"}>r</span>
+      <span class={egg + " group-hover:text-[#f7f7f7]"}>o</span>
     </span>{" "}
-    <span class="transition-all delay-500 duration-500 hover:delay-0 hover:duration-0 hover:text-slate-200">
-      ace
+    <span class="group">
+      <span class={egg + " group-hover:text-[#a6a6a6]"}>a</span>
+      <span class={egg + " group-hover:text-[#fffffe]"}>c</span>
+      <span class={egg + " group-hover:text-[#761b7a]"}>e</span>
     </span>{" "}
-    <span class="transition-all delay-500 duration-500 hover:delay-0 hover:duration-0 hover:text-[#b270e9]">
-      any
+    <span class="group">
+      <span class={egg + " group-hover:text-[#fff439]"}>a</span>
+      <span class={egg + " group-hover:text-[#ffffff]"}>n</span>
+      <span class={egg + " group-hover:text-[#9e5ed1]"}>y</span>
     </span>
   </>,
   <span class="lg:whitespace-nowrap">
