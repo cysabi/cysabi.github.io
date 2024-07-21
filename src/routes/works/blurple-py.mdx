@@ -33,7 +33,7 @@ export const data = {
   },
 }
 
-# an extensible system for multi-step commands
+## an extensible system for multi-step commands
 
 ![](/blurple-py_5.webm)
 
@@ -57,7 +57,7 @@ I needed a system that could be designed in a way that made it easy for develope
 
 <Topic design>
 
-## design # user flows
+### design # user flows
 
 Users can use the built-in `MessageReply` inline with their code to wait for a reply within any normal command!
 
@@ -85,7 +85,7 @@ class DirectMessageReactionAddReply(ReactionAddBasic):
 </Topic>
 <Topic code>
 
-## code # how it works
+### code # how it works
 
 The default abstract `Reply` class contains hooks for each relevant part of the interaction. Examples include `on_reply_init` for when the command is first initialized, and `on_reply_attempt` to handle resetting state after a reply attempt.
 
@@ -99,11 +99,11 @@ I specialized default subclasses for different use cases, including `MessageRepl
 
 </Topic>
 
-# validation and error handling
+## validation and error handling
 
 {/* todo: fil this shit out this is so cool omg the recurison and validation system is not talked about like breh!!! */}
 
-## design # user flows
+### design # user flows
 
 To add validation to any reply object, simply include the `validate` parameter. It can take in a regex, list of valid responses, or function for more complex validations:
 
@@ -113,9 +113,9 @@ reply = await io.MessageReply(ctx, validate=['yes', 'no']).result()
 reply = await io.MessageReply(ctx, validate=(lambda r: r.content.startswith("umm"))).result()
 ```
 
-## code # how it works
+### code # how it works
 
-# awaiting multiple replies simultaneously
+## awaiting multiple replies simultaneously
 
 What if the user wants to wait for **a reaction _or_ a reply**?
 
@@ -140,7 +140,7 @@ async def multiple(ctx):
 
 <Topic design>
 
-## design # user flows
+### design # user flows
 
 It's easy to convert an existing command into one that awaits 2 at the same time! Simply cut the `.result()` call on your `Reply` objects, pass a list of them into `result_between`, and await!
 
@@ -182,7 +182,7 @@ await message.edit(
 </Topic>
 <Topic code>
 
-## code # how it works
+### code # how it works
 
 The function is a class method that takes in a list of `Reply` objects as it's arguments, and manages how each of the `.result()` methods are called independently with asyncio tasks!
 
@@ -231,7 +231,7 @@ async def result_between(cls, replies: t.Container[Reply]) -> t.Tuple[Reply, t.A
 
 </Topic>
 
-# implementing toasts in discord
+## implementing toasts in discord
 
 I wanted the toast to automatically delete itself after a certain period of time, but also have a way to close the toast early. Toast behavior in discord sounds like a pretty complex task!
 
@@ -253,7 +253,7 @@ In fact, the total line count for [toast.py](https://github.com/cysabi/blurple.p
 
 <Topic code>
 
-## code # how it works
+### code # how it works
 
 - I first created a subclass of `ReactionAddBasic` called `ToastInteraction`.
 
@@ -284,7 +284,7 @@ And that's it! That's all the code you need to build a toast component with blur
 
 </Topic>
 
-# a recursive router
+## a recursive router
 
 Something you may have noticed in my code captions is the `router` decorator! I never really liked the way discord.ext made you define commands. It forced you to put commands in cogs, and all the commands of a command group must be in the same class.
 

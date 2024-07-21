@@ -313,7 +313,7 @@ const components = {
   pre: props => <pre class="backdrop-blur bg-slate-950/50" {...props} />,
   code: props => (
     <code
-      class="backdrop-blur font-normal bg-slate-950/50 rounded-sm p-[0.125em]"
+      class="backdrop-blur font-mono bg-slate-950/50 rounded-sm p-[0.125em]"
       {...props}
     />
   ),

@@ -6,6 +6,7 @@ import {
   createEffect,
   createMemo,
   createSignal,
+  onCleanup,
   onMount,
 } from "solid-js"
 import { useSearchParams } from "@solidjs/router"
@@ -354,32 +355,36 @@ const TableOfContents = props => {
         h.children ? [h, ...h.children].filter(h => h.depth < 3) : h
       )
   )
-  const headingObserver = new IntersectionObserver(
-    entries =>
-      entries.forEach(entry =>
-        setActive({
-          ...active(),
-          [entry.target.id]:
-            entry.isIntersecting || entry.boundingClientRect.y < 0
-              ? entry
-              : false,
-        })
-      ),
-    { rootMargin: "0px 0px -50% 0px" }
-  )
-  onMount(() =>
-    toc().forEach(h => headingObserver.observe(document.getElementById(h.id)))
-  )
 
-  createEffect(() => console.log(props.topics()))
+  createEffect(() => {
+    const headingObserver = new IntersectionObserver(
+      entries =>
+        entries.forEach(entry =>
+          setActive({
+            ...active(),
+            [entry.target.id]:
+              entry.isIntersecting || entry.boundingClientRect.y < 0
+                ? entry
+                : false,
+          })
+        ),
+      { rootMargin: "0px 0px -50% 0px" }
+    )
+    toc().forEach(h => headingObserver.observe(document.getElementById(h.id)))
+    onCleanup(() => {
+      headingObserver.disconnect()
+    })
+  })
 
   const onClick = h =>
     document.getElementById(h.id).scrollIntoView({ behavior: "smooth" })
   const header = h => h.value.split(" # ")
-  const activeHeading = () =>
-    Object.entries(active())
-      .filter(h => h[1])
-      .at(-1)?.[0]
+  const activeHeading = createMemo(
+    () =>
+      Object.entries(active())
+        .filter(h => h[1])
+        .at(-1)?.[0]
+  )
 
   return (
     <div class="flex flex-col gap-2">

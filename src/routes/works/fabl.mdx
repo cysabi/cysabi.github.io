@@ -1,7 +1,7 @@
 export const data = {
   name: "fabl",
   subtitle:
-    "stream overlays plus a website for a unique solo-registration major tournament",
+    "stream overlays and a website for a unique free-agent major tournament",
   tags: ["broadcast", "graphics", "website"],
   previews: ["/fabl_1.webp"],
   collage: {
@@ -9,31 +9,19 @@ export const data = {
       "here's the reel! showcasing everything this graphics bundle can do (break screen)",
     "/fabl_9.webp":
       "gameplay screen including the commentator card, the little icons have neat animations",
-    "/fabl_10.webp":
-      "rosters scene, shows weapon badges that tell you who plays what weapon",
-    "/fabl_8.webp": "'showdown' scene, a special ruleset used in the finals",
-    "/fabl_7.webp":
-      "dashboard for controlling the state of the 'showdown' scene",
     "/fabl_15.webp": "the website landing page for fabl.otd.ink",
     "/fabl_12.webp": "leaderboard as shown on the website",
-    "/fabl_13.webp":
-      "you can select a player on the leaderboard to view their point details",
     "/fabl_14.webm":
       "the broadcast graphics can pull the api from the website for it's own scene, supports pagination",
+    "/fabl_8.webp": "'showdown' scene, a special ruleset used in the finals",
   },
   desc: (
     <>
       <p>
-        i was tasked with building a set of broadcast graphics for a splatoon
-        major tournament 5 days before the event. it included a unique
-        "showdown" scene for finals day, with custom map states such as
-        pick/ban, and a leaderboard scene.
-      </p>
-      <p>
-        in addition to the overlays, i also created an external website with a
-        live data api to showcase a live updating interactive leaderboard 24/7!
-        this data api could then be accessed by my overlays to make my
-        leaderboard scene work!
+        i was tasked with building a website, and a set of broadcast graphics
+        for a splatoon major tournament. it includes a unique "showdown" scene
+        for finals day, with custom map states such as pick/ban, and a
+        leaderboard scene that connects to my website's data api.
       </p>
     </>
   ),
@@ -52,39 +40,27 @@ export const data = {
   },
 }
 
-# 48 hours remain
+# 48 hours before broadcast day
 
-Take a look at some of the early designs:
+![These are some early-stage rough draft designs,](/fabl_3.webp)
 
-![](/fabl_3.webp)
+**Just kidding!**, that's a lie. These weren't the early designs, they were the final designs that the designer left me with.
 
-**Just kidding!**, that's a lie. These weren't the early designs, these were the final designs that the designer left me with.
-
-Unfortunately, there were unforeseen external factors that meant the designer wasn't able to finish polishing the final designs, before the first week started.
+Unfortunately, there were unforeseen external factors that meant the designer wasn't able to finish polishing the final designs, 48 hours before the tournament.
 
 > So now I had to take over and ensure the designs reached the finish line
 
-Remember! All of this is happening **48 hours before broadcast day**, and I had to:
-
-- **Completing the markup** for the designs.
-- **Polishing the designs** myself, so that it's professional enough to be shown on stream.
-- **Designing my own animations and layout transitions**, and then implementing them.
-- **Rigging the graphics** up to the dashboard so it can be controlled.
-- _(Attending my sister's volleyball tournament! yep...)_
-
-One of the biggest challenges in this step was implementing all of the parts that were not part of the original design specification, such as how **the maplist should show completed games**.
+To make matters worse, I also had my own commitments during those times. _(attending my sister's volleyball tournament! yep...)_
 
 <Topic design>
 
-## design # improving the rosters scene
-
-I put a lot of thought into the layout and hierarchy of information, I wanted the placement of all the elements to make sense.
-
-In this case I felt like the commentator box had a lot of interest and pop going into it. I felt like the interest **should draw the eye to the heading with relevant broadcast information**, rather than to what commentators were currently speaking.
-
-Once I moved the logo to the top, the rest of the design just fell into place, I just needed to restructure the design to suit the new placement.
+## design # polishing the design
 
 ![a before / after of the rosters scene!](/fabl_11.webp|/fabl_6.webm)
+
+I felt like the commentator box had a lot of interest and pop going into it. I felt like the interest **should draw the eye to the heading with relevant broadcast information**, rather than to what commentators were currently speaking.
+
+Once I moved the logo to the top, the rest of the design just fell into place, I just needed to restructure the design to suit the new placement.
 
 ## design # fancy layout transitions
 
@@ -92,11 +68,69 @@ The heading adapts to the content height by shifting up and down to ensure that 
 
 ![](/fabl_4.webm)
 
-## design # animation treats on the in-game scene!
+## design # animation treats on the ingame scene!
 
 i made some **bouncy icons on the scoreboard**! They were actually not part of the original design specification, I just thought it would be really cool while finishing up all the rest of the animations! I think I made the right call.
 
 ![boing :D](/fabl_5.webm)
+
+</Topic>
+
+# website
+
+In addition to the overlays, I also created an external website with a live data api to showcase a live updating interactive leaderboard 24/7! This data api could then be accessed by my overlays to make my leaderboard scene work.
+
+I wanted to allow users to be able to click on players on the leaderboard to view more details, to add a bit of interactivity to the website.
+
+![selecting a player on the leaderboard shows you how their points were calculated](/fabl_7.webm)
+
+<Topic code>
+
+## code # creating the leaderboard api
+
+Since Off the Dial already has a backend powered by Firebase, I created a `fabl` endpoint that could be used to query and return a processed state of the entire leaderboard.
+
+It is made up of two main endpoints of **`standings`** and **`refresh`**.
+
+- The standings endpoint simply returns the currently stored leaderboard standings, or calls `refresh` if there are none.
+- The `refresh` endpoint is the interesting part. Rather than storing much scoring data directly, the refresh endpoint first hits the start.gg api to gather the standings of everyone in each of the qualifier tournament.
+
+Since Off the Dial asks for your start.gg user slug when you try to register, I can pull in the existing profile data from FABL signups and map each signup with their start.gg placements.
+
+```js
+const getData = async () => {
+  const pointData = await getPointData()
+
+  const leaderboard = []
+  for (const [slug, points] of Object.entries(pointData)) {
+    const snapshot = await db
+      .collection("users")
+      .where("profile.slug", "==", slug)
+      .limit(1)
+      .get()
+    const doc = snapshot.docs[0]
+    if (doc) {
+      const data = doc.data()
+
+      leaderboard.push({
+        id: doc.id,
+        points,
+        splashtag: data.profile.splashtag,
+        weapons: data.profile.weapons,
+      })
+    }
+  }
+
+  await handleOverrides(leaderboard)
+  await insertTotals(leaderboard)
+
+  return leaderboard
+    .filter(entrant => entrant.total > 0)
+    .sort((a, b) => b.total - a.total)
+}
+```
+
+Then, it's just a matter of flattening the results into a format that the website and overlays can understand and parse through fairly simply!
 
 </Topic>
 
