@@ -424,7 +424,7 @@ const TableOfContents = props => {
                     : "hover:text-slate-300"
                 }`}
               >
-                <span class="line-clamp-2">{header(h).at(-1)}</span>
+                <span class="line-clamp-2 text-right">{header(h).at(-1)}</span>
               </button>
             ))
           ) : (

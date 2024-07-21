@@ -1,13 +1,14 @@
 import * as work1 from "./off-the-dial-site.mdx"
-import * as work2 from "./cg-fabl.mdx"
+import * as work2 from "./fabl.mdx"
 import * as work3 from "./block-sumo.mdx"
-import * as work4 from "./blurple-py.mdx"
-import * as work5 from "./cq-overlays.mdx"
-import * as work6 from "./radia.mdx"
-import * as work7 from "./cg-pass-the-clam.mdx"
-import * as work8 from "./social-scheduler.mdx"
+import * as work4 from "./probots.mdx"
+import * as work5 from "./blurple-py.mdx"
+import * as work6 from "./cq-overlays.mdx"
+// import * as work7 from "./radia.mdx"
+import * as work8 from "./cg-pass-the-clam.mdx"
+import * as work9 from "./social-scheduler.mdx"
 
-export default [work1, work2, work3, work4, work5, work6, work7, work8]
+export default [work1, work2, work3, work4, work5, work6, work8, work9]
 
 /*
 
@@ -26,11 +27,4 @@ export default [work1, work2, work3, work4, work5, work6, work7, work8]
   Used Python, Discord.py, Firebase, GraphQL, REST.
 />
 
-<ProjectOrb wip={true} layer="2" coords={[5, 4]} name="fabl-website" />
-  Custom website to introduce the information and showcase the standings for FABL, a major tournament event.
-  gets api stuff from standings page
-
-<ProjectOrb wip={true} layer="2" coords={[5, 4]} name="cg-offthedial" />
-  Stream overlays for tournaments hosted by Off the Dial. Solo project
-  from design to development. Uses NodeCG, Preact, and Tailwind.
 */

@@ -28,7 +28,7 @@ export const Img = props => {
   const content = (
     <Switch fallback={<ImgContent ref={ref} {...props} />}>
       <Match when={props.src.split("%7C").length > 1}>
-        <div class="flex gap-4 -my-12">
+        <div class="flex gap-4 -my-8">
           <For each={props.src.split("%7C")}>
             {src => <ImgContent ref={ref} {...props} src={src} />}
           </For>
@@ -67,9 +67,8 @@ const ImgContent = props => (
         class={`w-full rounded-md ${props.class}`}
         controls={props.title === "controls"}
         muted={props.title !== "controls"}
-        autoplay={props.title !== "controls"}
         loop={props.title !== "controls"}
-        preload="metadata"
+        preload="auto"
         playsinline
       >
         <source src={props.src} alt={props.alt} type="video/webm" />
@@ -254,7 +253,10 @@ const components = {
     </h2>
   ),
   h2: props => {
-    const topic = props.children.split(" # ")
+    const topic =
+      typeof props.children === "string"
+        ? props.children.split(" # ")
+        : [props.children]
     return (
       <h3 class="font-display flex items-center gap-3 text-2xl" {...props}>
         {topic.length > 1 && (
@@ -271,7 +273,10 @@ const components = {
     )
   },
   h3: props => {
-    const topic = props.children.split(" # ")
+    const topic =
+      typeof props.children === "string"
+        ? props.children.split(" # ")
+        : [props.children]
     return (
       <h4
         class="font-display flex items-center gap-3 text-2xl text-slate-300"
