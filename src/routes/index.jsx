@@ -22,11 +22,10 @@ const hi = () => (
       things, and thinking about how best to serve you
     </p>
     <p>
-      currently, im experimenting with making esports broadcast graphics with
-      code. im a big supporter for marginalized genders in esports, an obsidian
-      cultist, and (most important) i like boba, fizzy boba especially. in
-      splatoon, im a day-one kglues one-trick and i always make sure to die with
-      my special up
+      currently, i'm exploring how to make esports broadcast graphics with code,
+      in the hopes of making that easier in the future! i like boba, fizzy boba
+      especially. in splatoon, im a day-one kglues one-trick and i always make
+      sure to die with my special up
     </p>
     <p>
       feel free to{" "}
@@ -484,9 +483,9 @@ const subtitles = [
       <span class={egg + " group-hover:text-[#9e5ed1]"}>y</span>
     </span>
   </>,
-  <span class="lg:whitespace-nowrap">
-    sorry in advance for missing that social cue
-  </span>,
+  "sorry in advance for missing that social cue",
+  "obsidian.md cultist",
+  "advocating marginalized genders in esports",
   "🧋❤️",
 ]
 
