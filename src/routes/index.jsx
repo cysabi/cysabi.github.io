@@ -396,7 +396,7 @@ const TableOfContents = props => {
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            summary
+            about
           </button>
         </div>
         <div class="border-t-2 border-dotted grow border-slate-600 mt-0.5" />
