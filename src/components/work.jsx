@@ -65,7 +65,7 @@ const ImgContent = props => (
         ref={props.ref}
         src={props.src}
         class={`w-full rounded-md ${props.class}`}
-        controls={props.title === "controls"}
+        controls={props.title === "controls" && !props.button}
         muted={props.title !== "controls"}
         loop={props.title !== "controls"}
         preload="auto"
@@ -209,6 +209,13 @@ export const Collage = props => {
   const sources = () => Object.keys(props.items)
   const captions = () => Object.values(props.items)
 
+  const clsRounded = i => {
+    let classes = "rounded-md"
+    if (i === 0) classes = classes + " " + "rounded-bl-xl"
+    if (i === sources().length - 1) classes = classes + " " + "rounded-br-xl"
+    return classes
+  }
+
   return (
     <figure>
       <div class="not-prose flex flex-col gap-1 overflow-clip bg-slate-600/50 border-4 border-transparent rounded-2xl backdrop-blur backdrop-brightness-125">
@@ -221,16 +228,36 @@ export const Collage = props => {
           {sources().map((item, i) => (
             <button
               onClick={() => setActive(i)}
-              class="flex flex-1 items-center justify-center rounded-md"
+              class="flex-1 rounded-md relative"
             >
+              <Show when={item.endsWith(".webm")}>
+                <div
+                  class={`absolute inset-0 flex items-center justify-center bg-slate-950/75 ${clsRounded(
+                    i
+                  )} ${sources()[active()] === item && "m-0.5"}`}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 24 24"
+                    class="h-8 w-8 text-primary-300"
+                  >
+                    <path
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                      d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75s-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12m14.024-.983a1.125 1.125 0 0 1 0 1.967l-5.603 3.112A1.125 1.125 0 0 1 9 15.113V8.887c0-.857.922-1.4 1.671-.983z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </Show>
               <Img
+                button
                 title="controls"
-                class={`pointer-events-none rounded-md object-cover object-center h-full ${
-                  i === 0 && "rounded-bl-xl"
-                } ${i === sources().length - 1 && "rounded-br-xl"} ${
-                  sources()[active()] === item
-                    ? "outline outline-2 -outline-offset-2 outline-primary"
-                    : ""
+                class={`object-cover object-center h-full ${clsRounded(i)} ${
+                  sources()[active()] === item &&
+                  "outline outline-2 -outline-offset-2 outline-primary"
                 }`}
                 src={item}
               />

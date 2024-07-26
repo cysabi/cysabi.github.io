@@ -388,25 +388,35 @@ const TableOfContents = props => {
   return (
     <div class="flex flex-col gap-2">
       <div class="flex items-center gap-4">
-        {activeHeading() ? (
-          <>
-            <div class="text-slate-500 font-semibold text-base">summary</div>
-            <div class="border-t-2 border-dotted grow border-slate-600 mt-0.5" />
-            <div class="text-primary font-semibold text-base">
-              table of contents
-            </div>
-          </>
-        ) : (
-          <>
-            <div class="text-primary font-semibold text-base">summary</div>
-            <div class="border-t-2 border-dotted grow border-slate-600 mt-0.5" />
-            <Show when={props.work().toc.length}>
-              <div class="text-slate-500 font-semibold text-base">
-                table of contents
-              </div>
-            </Show>
-          </>
-        )}
+        <div
+          class={`font-semibold text-base ${
+            activeHeading() ? "text-slate-500" : "text-primary"
+          }`}
+        >
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            summary
+          </button>
+        </div>
+        <div class="border-t-2 border-dotted grow border-slate-600 mt-0.5" />
+        <Show when={props.work().toc.length}>
+          <div
+            class={`font-semibold text-base ${
+              activeHeading() ? "text-primary" : "text-slate-500"
+            }`}
+          >
+            <button
+              onClick={() =>
+                document
+                  .getElementById(toc()[0]?.id)
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              case study
+            </button>
+          </div>
+        </Show>
       </div>
       <div class="flex items-stretch">
         <div class="flex flex-col items-end w-full -my-1">
