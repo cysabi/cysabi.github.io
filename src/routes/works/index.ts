@@ -4,11 +4,12 @@ import * as work3 from "./fabl.mdx"
 import * as work4 from "./block-sumo.mdx"
 import * as work5 from "./cq-overlays.mdx"
 import * as work6 from "./blurple-py.mdx"
+import * as work7 from "./cg-party-wheel.mdx"
 // import * as work7 from "./radia.mdx"
 import * as work8 from "./cg-pass-the-clam.mdx"
 import * as work9 from "./social-scheduler.mdx"
 
-export default [work1, work2, work3, work4, work5, work6, work8, work9]
+export default [work1, work2, work3, work4, work5, work6, work7, work8, work9]
 
 /*
 
