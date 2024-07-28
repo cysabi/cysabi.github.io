@@ -495,7 +495,7 @@ const subtitles = [
   </>,
   "sorry in advance for missing that social cue",
   "obsidian.md cultist",
-  "advocating marginalized genders in esports",
+  "supporting marginalized genders in esports",
   "🧋❤️",
 ]
 
