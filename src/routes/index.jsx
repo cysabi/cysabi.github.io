@@ -19,16 +19,16 @@ const hi = () => (
     <p>
       hi there ~ i'm a self-taught designer + hacker that cares a little too
       much about people's experiences!! i love tinkering with tech to make new
-      things, and thinking about how best to serve you
+      things, and thinking about how best to serve you!
     </p>
     <p>
       currently, i'm exploring how to make esports broadcast graphics with code,
-      in the hopes of making that easier in the future! i like boba, fizzy boba
-      especially. in splatoon, im a day-one kglues one-trick and i always make
-      sure to die with my special up
+      in the hopes of making that easier to do in the future. in splatoon, im a
+      day-one kglues one-trick trying to push the tent/glues/dynamo trio, and i
+      always make sure to die with my special up.
     </p>
     <p>
-      feel free to{" "}
+      please don't be afraid to{" "}
       <a
         href="https://twitter.com/messages/compose?recipient_id=1178483825950822401"
         class="font-medium text-slate-50"
