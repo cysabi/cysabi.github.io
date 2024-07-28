@@ -1,23 +1,20 @@
-import * as work1 from "./probots.mdx"
-import * as work2 from "./off-the-dial-site.mdx"
-import * as work3 from "./fabl.mdx"
-import * as work4 from "./block-sumo.mdx"
-import * as work5 from "./cq-overlays.mdx"
-import * as work6 from "./blurple-py.mdx"
-import * as work7 from "./cg-party-wheel.mdx"
-// import * as work7 from "./radia.mdx"
-import * as work8 from "./cg-pass-the-clam.mdx"
-import * as work9 from "./social-scheduler.mdx"
-
-export default [work1, work2, work3, work4, work5, work6, work7, work8, work9]
-
+import * as probots from "./probots.mdx"
+import * as fabl from "./fabl.mdx"
+import * as blockSumo from "./block-sumo.mdx"
+import * as offthedialSite from "./offthedial-site.mdx"
+import * as cqOverlays from "./cq-overlays.mdx"
+import * as cgPartyWheel from "./cg-party-wheel.mdx"
+import * as cgPassTheClam from "./cg-pass-the-clam.mdx"
+import * as cgZhobii from "./cg-zhobii.mdx"
+import * as blurplePy from "./blurple-py.mdx"
+import * as socialScheduler from "./social-scheduler.mdx"
+// import * as radia from "./radia.mdx"
 /*
-
 <ProjectOrb
   wip={true}
   layer="2"
   coords={[2, 1]}
-  name="off-the-dial-bot"
+  name="offthedial-bot"
   this is the origin story or blurple
   the team name generator was really cool :D
   talk about the CommandUI component
@@ -27,5 +24,17 @@ export default [work1, work2, work3, work4, work5, work6, work7, work8, work9]
   Features include managing the creation of tournaments, organizing signups, dropouts, and substitutes, creating maplists, building data to import into broadcast graphics.
   Used Python, Discord.py, Firebase, GraphQL, REST.
 />
-
 */
+
+export default [
+  probots,
+  fabl,
+  blockSumo,
+  offthedialSite,
+  cqOverlays,
+  cgPartyWheel,
+  cgPassTheClam,
+  cgZhobii,
+  blurplePy,
+  socialScheduler,
+]
