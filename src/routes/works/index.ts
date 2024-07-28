@@ -28,13 +28,13 @@ import * as socialScheduler from "./social-scheduler.mdx"
 
 export default [
   probots,
-  fabl,
   blockSumo,
-  offthedialSite,
-  cqOverlays,
+  fabl,
   cgPartyWheel,
-  cgPassTheClam,
   cgZhobii,
+  offthedialSite,
   blurplePy,
+  cqOverlays,
+  cgPassTheClam,
   socialScheduler,
 ]
