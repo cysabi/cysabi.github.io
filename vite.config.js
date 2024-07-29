@@ -1,10 +1,10 @@
-import { defineConfig } from "vite"
-import solid from "vite-plugin-solid"
-import mdx from "@mdx-js/rollup"
-import rehypeSlugs from "rehype-slug"
-import rehypeHighlight from "rehype-highlight"
-import rehypeToc from "@stefanprobst/rehype-extract-toc"
-import rehypeTocExport from "@stefanprobst/rehype-extract-toc/mdx"
+import { defineConfig } from "vite";
+import solid from "vite-plugin-solid";
+import mdx from "@mdx-js/rollup";
+import rehypeSlugs from "rehype-slug";
+import rehypeHighlight from "rehype-highlight";
+import rehypeToc from "@stefanprobst/rehype-extract-toc";
+import rehypeTocExport from "@stefanprobst/rehype-extract-toc/mdx";
 
 export default defineConfig({
   assetsInclude: ["src/static/*"],
@@ -31,4 +31,4 @@ export default defineConfig({
     //   }
     // })(),
   ],
-})
+});

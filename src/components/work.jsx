@@ -1,4 +1,4 @@
-import { A } from "@solidjs/router"
+import { A } from "@solidjs/router";
 import {
   For,
   Match,
@@ -7,35 +7,35 @@ import {
   createSignal,
   createMemo,
   onMount,
-} from "solid-js"
-import { useSearchParams } from "@solidjs/router"
+} from "solid-js";
+import { useSearchParams } from "@solidjs/router";
 
 const autoplayObserver = new IntersectionObserver(
-  entries =>
-    entries.forEach(entry =>
+  (entries) =>
+    entries.forEach((entry) =>
       entry.isIntersecting ? entry.target.play() : entry.target.pause()
     ),
   { threshold: 0.5 }
-)
-export const Img = props => {
-  let ref
+);
+export const Img = (props) => {
+  let ref;
   onMount(() => {
     if (ref && props.title !== "controls") {
-      autoplayObserver.observe(ref)
+      autoplayObserver.observe(ref);
     }
-  })
+  });
 
   const content = (
     <Switch fallback={<ImgContent ref={ref} {...props} />}>
       <Match when={props.src.split("%7C").length > 1}>
         <div class="flex gap-4 -my-8">
           <For each={props.src.split("%7C")}>
-            {src => <ImgContent ref={ref} {...props} src={src} />}
+            {(src) => <ImgContent ref={ref} {...props} src={src} />}
           </For>
         </div>
       </Match>
     </Switch>
-  )
+  );
 
   return (
     <Switch fallback={content}>
@@ -46,10 +46,10 @@ export const Img = props => {
         </figure>
       </Match>
     </Switch>
-  )
-}
+  );
+};
 
-const ImgContent = props => (
+const ImgContent = (props) => (
   <Switch
     fallback={
       <img
@@ -75,17 +75,19 @@ const ImgContent = props => (
       </video>
     </Match>
   </Switch>
-)
+);
 
-const Topic = props => {
-  const [params] = useSearchParams()
+const Topic = (props) => {
+  const [params] = useSearchParams();
   const when = createMemo(() => {
-    const topics = new Set(params.topics?.split("-") || Object.keys(topicsData))
-    return topics.has(Object.keys(props).at(0))
-  })
+    const topics = new Set(
+      params.topics?.split("-") || Object.keys(topicsData)
+    );
+    return topics.has(Object.keys(props).at(0));
+  });
 
-  return <Show when={when()}>{props.children}</Show>
-}
+  return <Show when={when()}>{props.children}</Show>;
+};
 
 export const topicsData = {
   design: {
@@ -129,10 +131,10 @@ export const topicsData = {
       </svg>
     ),
   },
-}
+};
 
-const Testimonials = props => {
-  const [index, setIndex] = createSignal(0)
+const Testimonials = (props) => {
+  const [index, setIndex] = createSignal(0);
 
   return (
     <div class="bg-slate-700 rounded-lg p-4 gap-4 flex flex-col">
@@ -200,21 +202,21 @@ const Testimonials = props => {
         "{props.stories[index()]}"
       </div>
     </div>
-  )
-}
+  );
+};
 
-export const Collage = props => {
-  const [active, setActive] = createSignal(0)
+export const Collage = (props) => {
+  const [active, setActive] = createSignal(0);
 
-  const sources = () => Object.keys(props.items)
-  const captions = () => Object.values(props.items)
+  const sources = () => Object.keys(props.items);
+  const captions = () => Object.values(props.items);
 
-  const clsRounded = i => {
-    let classes = "rounded-md"
-    if (i === 0) classes = classes + " " + "rounded-bl-xl"
-    if (i === sources().length - 1) classes = classes + " " + "rounded-br-xl"
-    return classes
-  }
+  const clsRounded = (i) => {
+    let classes = "rounded-md";
+    if (i === 0) classes = classes + " " + "rounded-bl-xl";
+    if (i === sources().length - 1) classes = classes + " " + "rounded-br-xl";
+    return classes;
+  };
 
   return (
     <figure>
@@ -267,11 +269,11 @@ export const Collage = props => {
       </div>
       <figcaption class="my-2">{captions()[active()]}</figcaption>
     </figure>
-  )
-}
+  );
+};
 
 const components = {
-  h1: props => (
+  h1: (props) => (
     <h2
       class="font-mono text-slate-500 uppercase text-2xl tracking-wide font-semibold mt-[2em]"
       {...props}
@@ -279,11 +281,11 @@ const components = {
       # {props.children}
     </h2>
   ),
-  h2: props => {
+  h2: (props) => {
     const topic =
       typeof props.children === "string"
         ? props.children.split(" # ")
-        : [props.children]
+        : [props.children];
     return (
       <h3 class="font-display flex items-center gap-3 text-2xl" {...props}>
         {topic.length > 1 && (
@@ -297,13 +299,13 @@ const components = {
         )}
         {topic.length > 1 ? topic[1] : props.children}
       </h3>
-    )
+    );
   },
-  h3: props => {
+  h3: (props) => {
     const topic =
       typeof props.children === "string"
         ? props.children.split(" # ")
-        : [props.children]
+        : [props.children];
     return (
       <h4
         class="font-display flex items-center gap-3 text-2xl text-slate-300"
@@ -320,25 +322,25 @@ const components = {
         )}
         {topic.length > 1 ? topic[1] : props.children}
       </h4>
-    )
+    );
   },
-  blockquote: props => (
+  blockquote: (props) => (
     <blockquote
       class="text-2xl not-italic font-normal text-slate-50"
       {...props}
     />
   ),
   img: Img,
-  em: props => (
+  em: (props) => (
     <em
       class={props.children?.startsWith("(") ? "text-slate-400" : ""}
       {...props}
     />
   ),
   a: A,
-  strong: props => <strong class="font-bold" {...props} />,
-  pre: props => <pre class="backdrop-blur bg-slate-950/50" {...props} />,
-  code: props => (
+  strong: (props) => <strong class="font-bold" {...props} />,
+  pre: (props) => <pre class="backdrop-blur bg-slate-950/50" {...props} />,
+  code: (props) => (
     <code
       class="backdrop-blur font-mono bg-slate-950/50 rounded-sm p-[0.125em]"
       {...props}
@@ -347,6 +349,6 @@ const components = {
   Img,
   Topic,
   Testimonials,
-}
+};
 
-export default components
+export default components;

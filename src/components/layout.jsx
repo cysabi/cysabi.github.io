@@ -1,26 +1,26 @@
-import { Motion } from "solid-motionone"
-import { spring } from "motion"
+import { Motion } from "solid-motionone";
+import { spring } from "motion";
 import {
   createContext,
   createMemo,
   createSignal,
   onMount,
   useContext,
-} from "solid-js"
-import grid from "../static/grid.svg"
+} from "solid-js";
+import grid from "../static/grid.svg";
 
-const GridContext = createContext()
+const GridContext = createContext();
 
-export const GridProvider = props => {
-  const [pos, setPos] = createSignal({ hide: true })
-  const [color, setColor] = createSignal()
-  const [hovering, setHovering] = createSignal(false)
-  const [pointer, setPointer] = createSignal("auto")
+export const GridProvider = (props) => {
+  const [pos, setPos] = createSignal({ hide: true });
+  const [color, setColor] = createSignal();
+  const [hovering, setHovering] = createSignal(false);
+  const [pointer, setPointer] = createSignal("auto");
 
   onMount(() => {
-    setPos({ x: window.innerWidth / 2, y: window.innerHeight / 2, hide: true })
-    setColor(false)
-  })
+    setPos({ x: window.innerWidth / 2, y: window.innerHeight / 2, hide: true });
+    setColor(false);
+  });
 
   for (const msg of [
     "hey there :)",
@@ -28,7 +28,7 @@ export const GridProvider = props => {
     "don't worry, i don't mind",
     "just remember to leave your shoes at the door !",
   ]) {
-    console.info("%c" + msg, "color: #758cec; font-weight: 600;")
+    console.info("%c" + msg, "color: #758cec; font-weight: 600;");
   }
 
   return (
@@ -44,19 +44,19 @@ export const GridProvider = props => {
         setPointer,
         setHover: (hover = false) => {
           if (hover !== false) {
-            setColor("#91e9cb")
-            setHovering(hover)
+            setColor("#91e9cb");
+            setHovering(hover);
           } else {
-            setColor("#7A73B8")
-            setHovering(false)
+            setColor("#7A73B8");
+            setHovering(false);
           }
         },
       }}
     >
       <main
-        onmousemove={e => {
-          setPointer(getComputedStyle(e.target).cursor)
-          setPos({ x: e.clientX, y: e.clientY })
+        onmousemove={(e) => {
+          setPointer(getComputedStyle(e.target).cursor);
+          setPos({ x: e.clientX, y: e.clientY });
         }}
         class="min-h-screen text-slate-50 selection:bg-slate-50 selection:text-slate-950 overflow-x-clip underline-offset-4"
       >
@@ -64,16 +64,16 @@ export const GridProvider = props => {
         {props.children}
       </main>
     </GridContext.Provider>
-  )
-}
+  );
+};
 
 export const useGrid = () => {
-  return useContext(GridContext)
-}
+  return useContext(GridContext);
+};
 
 const Grid = () => {
-  const { pos, color, pointer } = useGrid()
-  const a = createMemo(() => pointer() === "pointer")
+  const { pos, color, pointer } = useGrid();
+  const a = createMemo(() => pointer() === "pointer");
   return (
     <>
       <Motion.div
@@ -119,19 +119,19 @@ const Grid = () => {
         </Motion.div>
       </Motion.div>
     </>
-  )
-}
+  );
+};
 
-const Blob = props => {
-  const { pos } = useGrid()
-  const [blob, setBlob] = createSignal({ x: 0, y: 0, opacity: 0.1 })
+const Blob = (props) => {
+  const { pos } = useGrid();
+  const [blob, setBlob] = createSignal({ x: 0, y: 0, opacity: 0.1 });
   setInterval(() => {
     setBlob({
       x: Math.random() * 150 - 75,
       y: Math.random() * 150 - 75,
       opacity: pos().hide ? 0 : 0.1,
-    })
-  }, 750)
+    });
+  }, 750);
 
   return (
     <Motion.div
@@ -170,7 +170,7 @@ const Blob = props => {
         </Motion.div>
       </div>
     </Motion.div>
-  )
-}
+  );
+};
 
-export default GridProvider
+export default GridProvider;

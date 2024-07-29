@@ -1,8 +1,8 @@
-import { Route, Router } from "@solidjs/router"
-import { render, renderToString } from "solid-js/web"
-import Layout from "./components/layout"
-import Index from "./routes/index"
-import "./root.css"
+import { Route, Router } from "@solidjs/router";
+import { render, renderToString } from "solid-js/web";
+import Layout from "./components/layout";
+import Index from "./routes/index";
+import "./root.css";
 
 const App = () => (
   <Router>
@@ -15,10 +15,10 @@ const App = () => (
       )}
     />
   </Router>
-)
+);
 
 if (typeof window !== "undefined") {
-  render(App, document.getElementById("root"))
+  render(App, document.getElementById("root"));
 }
 
 // export const app = renderToString(App)

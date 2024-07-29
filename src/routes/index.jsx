@@ -1,5 +1,5 @@
-import { Motion } from "solid-motionone"
-import { spring } from "motion"
+import { Motion } from "solid-motionone";
+import { spring } from "motion";
 import {
   For,
   Show,
@@ -8,11 +8,11 @@ import {
   createSignal,
   onCleanup,
   onMount,
-} from "solid-js"
-import { useSearchParams } from "@solidjs/router"
-import { useGrid } from "../components/layout"
-import components, { Collage, topicsData } from "../components/work"
-import works from "./works"
+} from "solid-js";
+import { useSearchParams } from "@solidjs/router";
+import { useGrid } from "../components/layout";
+import components, { Collage, topicsData } from "../components/work";
+import works from "./works";
 
 const hi = () => (
   <>
@@ -38,45 +38,45 @@ const hi = () => (
       ! im always open to new opportunities, no matter the medium
     </p>
   </>
-)
+);
 
 const Index = () => {
-  const { setColor, hovering } = useGrid()
-  const [index, setIndex] = createSignal(0)
+  const { setColor, hovering } = useGrid();
+  const [index, setIndex] = createSignal(0);
 
-  const [params, setParams] = useSearchParams()
-  const tags = () => new Set(params.tags?.split("-") || allTags)
-  const topics = () => new Set(params.topics?.split("-") || allTopics)
+  const [params, setParams] = useSearchParams();
+  const tags = () => new Set(params.tags?.split("-") || allTags);
+  const topics = () => new Set(params.topics?.split("-") || allTopics);
   const toggleParam = (key, value) => {
-    let newParams = new Set(params[key]?.split("-") || [])
+    let newParams = new Set(params[key]?.split("-") || []);
     if (newParams.has(value)) {
-      newParams.delete(value)
+      newParams.delete(value);
     } else {
-      newParams.add(value)
+      newParams.add(value);
     }
-    let all
+    let all;
     if (key === "tags") {
-      all = allTags
+      all = allTags;
     } else if (key === "topics") {
-      all = allTopics
+      all = allTopics;
     }
     setParams({
       [key]:
         all.length !== newParams.size ? Array.from(newParams).join("-") : null,
-    })
-  }
+    });
+  };
 
   const filteredWorks = createMemo(() =>
     works
-      .filter(work => work.data.tags.some(tag => tags().has(tag)))
-      .filter(work => !work.data.archive || params.archives)
-      .filter(work => work.data.roles.some(topic => topics().has(topic)))
-  )
+      .filter((work) => work.data.tags.some((tag) => tags().has(tag)))
+      .filter((work) => !work.data.archive || params.archives)
+      .filter((work) => work.data.roles.some((topic) => topics().has(topic)))
+  );
 
-  const work = createMemo(() => works.find(w => w.data.name === params.work))
+  const work = createMemo(() => works.find((w) => w.data.name === params.work));
   onMount(() => {
-    setColor(false)
-  })
+    setColor(false);
+  });
 
   return (
     <div class="flex flex-col p-4 gap-8 lg:flex-row lg:p-16 lg:gap-16 items-stretch mx-auto">
@@ -114,7 +114,7 @@ const Index = () => {
                 </div>
                 <div class="hidden lg:block lg:my-auto" />
                 <div class="hidden lg:flex gap-2 flex-wrap items-center">
-                  {allTags.map(tag => (
+                  {allTags.map((tag) => (
                     <button
                       onClick={() => toggleParam("tags", tag)}
                       class={`transition-all rounded line-through leading-none decoration-2 decoration-transparent py-1 px-2 text-xl font-medium bg-primary/10 text-primary hover:scale-105 backdrop-blur backdrop-brightness-125 ${
@@ -140,7 +140,7 @@ const Index = () => {
               </div>
               <div class="flex flex-wrap gap-2 ml-[-3px] text-xl leading-none font-medium">
                 <For each={work()?.data?.tags}>
-                  {tag => (
+                  {(tag) => (
                     <div class="rounded py-1 px-1.5 bg-primary/10 text-primary backdrop-blur backdrop-brightness-125">
                       {tag}
                     </div>
@@ -154,7 +154,7 @@ const Index = () => {
                 <Show when={work()?.data?.sources}>
                   <div class="flex gap-4 font-medium">
                     <For each={Object.entries(work()?.data?.sources)}>
-                      {source => (
+                      {(source) => (
                         <a
                           href={source[1]}
                           class="text-slate-300 text-xl hover:text-primary-50"
@@ -224,7 +224,7 @@ const Index = () => {
             fallback={
               <div class="grid gap-16 grid-cols-1 xl:grid-cols-2 not-prose">
                 <For each={filteredWorks()}>
-                  {work => (
+                  {(work) => (
                     <WorkPreview data={work.data} setParams={setParams} />
                   )}
                 </For>
@@ -246,51 +246,51 @@ const Index = () => {
         </article>
       </div>
     </div>
-  )
-}
+  );
+};
 
-const WorkPreview = props => {
-  const angle = Math.random() * Math.PI * 2
+const WorkPreview = (props) => {
+  const angle = Math.random() * Math.PI * 2;
   const imgOffset = {
     x: Math.cos(angle) * 300,
     y: Math.sin(angle) * 300,
-  }
-  let ref
-  const [lean, setLean] = createSignal({ img: imgOffset, orb: { x: 0, y: 0 } })
-  const [hov, setHov] = createSignal()
-  const { setHover } = useGrid()
+  };
+  let ref;
+  const [lean, setLean] = createSignal({ img: imgOffset, orb: { x: 0, y: 0 } });
+  const [hov, setHov] = createSignal();
+  const { setHover } = useGrid();
 
   return (
     <Motion.button
       ref={ref}
       onClick={() => {
         if (typeof props.data.archive === "string") {
-          location.href = props.data.archive
+          location.href = props.data.archive;
         } else {
-          setHover(false)
-          props.setParams({ work: props.data.name })
-          window.scrollTo(0, 0)
+          setHover(false);
+          props.setParams({ work: props.data.name });
+          window.scrollTo(0, 0);
         }
       }}
       onmouseenter={() => {
-        setHover(props.data)
-        setHov(true)
+        setHover(props.data);
+        setHov(true);
       }}
       onmouseleave={() => {
-        setHover(false)
-        setHov(false)
-        setLean({ img: imgOffset, orb: { x: 0, y: 0 } })
+        setHover(false);
+        setHov(false);
+        setLean({ img: imgOffset, orb: { x: 0, y: 0 } });
       }}
-      onmousemove={e => {
-        const rect = ref.getBoundingClientRect()
-        const x = (e.clientX - (rect.x + rect.width / 2)) / rect.width
-        const y = (e.clientY - (rect.y + rect.height / 2)) / rect.height
+      onmousemove={(e) => {
+        const rect = ref.getBoundingClientRect();
+        const x = (e.clientX - (rect.x + rect.width / 2)) / rect.width;
+        const y = (e.clientY - (rect.y + rect.height / 2)) / rect.height;
         setLean({
           orb: {
             x: Math.sqrt(Math.abs(x)) * Math.sign(x) * 2,
             y: Math.sqrt(Math.abs(y)) * Math.sign(y) * 2,
           },
-        })
+        });
       }}
       transition={{ easing: spring({ stiffness: 600, damping: 50 }) }}
       animate={{
@@ -341,24 +341,24 @@ const WorkPreview = props => {
         </span>
       </Motion.div>
     </Motion.button>
-  )
-}
+  );
+};
 
-const TableOfContents = props => {
+const TableOfContents = (props) => {
   // watch heading active state
-  const [active, setActive] = createSignal({})
+  const [active, setActive] = createSignal({});
   const toc = createMemo(() =>
     props
       .work()
-      .toc.flatMap(h =>
-        h.children ? [h, ...h.children].filter(h => h.depth < 3) : h
+      .toc.flatMap((h) =>
+        h.children ? [h, ...h.children].filter((h) => h.depth < 3) : h
       )
-  )
+  );
 
   createEffect(() => {
     const headingObserver = new IntersectionObserver(
-      entries =>
-        entries.forEach(entry =>
+      (entries) =>
+        entries.forEach((entry) =>
           setActive({
             ...active(),
             [entry.target.id]:
@@ -368,22 +368,24 @@ const TableOfContents = props => {
           })
         ),
       { rootMargin: "0px 0px -50% 0px" }
-    )
-    toc().forEach(h => headingObserver.observe(document.getElementById(h.id)))
+    );
+    toc().forEach((h) =>
+      headingObserver.observe(document.getElementById(h.id))
+    );
     onCleanup(() => {
-      headingObserver.disconnect()
-    })
-  })
+      headingObserver.disconnect();
+    });
+  });
 
-  const onClick = h =>
-    document.getElementById(h.id).scrollIntoView({ behavior: "smooth" })
-  const header = h => h.value.split(" # ")
+  const onClick = (h) =>
+    document.getElementById(h.id).scrollIntoView({ behavior: "smooth" });
+  const header = (h) => h.value.split(" # ");
   const activeHeading = createMemo(
     () =>
       Object.entries(active())
-        .filter(h => h[1])
+        .filter((h) => h[1])
         .at(-1)?.[0]
-  )
+  );
 
   return (
     <div class="flex flex-col gap-2">
@@ -421,7 +423,7 @@ const TableOfContents = props => {
       <div class="flex items-stretch">
         <div class="flex flex-col items-end w-full -my-1">
           {activeHeading() ? (
-            toc().map(h => (
+            toc().map((h) => (
               <button
                 onclick={() => onClick(h)}
                 class={`no-underline py-1 leading-tight ${
@@ -446,7 +448,7 @@ const TableOfContents = props => {
               {props.work().data.desc}
               <div class="flex items-baseline flex-wrap gap-2 pt-2 ml-[-3px] leading-none font-medium text-base">
                 <For each={props.work()?.data?.tools}>
-                  {tool => (
+                  {(tool) => (
                     <div class="text-slate-400 backdrop-blur backdrop-brightness-125 rounded flex px-2 py-1">
                       {tool}
                     </div>
@@ -458,22 +460,22 @@ const TableOfContents = props => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const _countedTags = works
-  .flatMap(work => work.data.tags)
+  .flatMap((work) => work.data.tags)
   .reduce((p, c) => {
-    p[c] = (p[c] || 0) + 1
-    return p
-  }, {})
+    p[c] = (p[c] || 0) + 1;
+    return p;
+  }, {});
 const allTags = Object.keys(_countedTags).sort(
   (a, b) => _countedTags[b] > _countedTags[a]
-)
+);
 
-const allTopics = Object.keys(topicsData)
+const allTopics = Object.keys(topicsData);
 const egg =
-  "transition-all delay-500 duration-500 group-hover:delay-0 group-hover:duration-0"
+  "transition-all delay-500 duration-500 group-hover:delay-0 group-hover:duration-0";
 const subtitles = [
   "empathy included !",
   <>
@@ -497,6 +499,6 @@ const subtitles = [
   "obsidian.md cultist",
   "supporting marginalized genders in esports",
   "🧋❤️",
-]
+];
 
-export default Index
+export default Index;

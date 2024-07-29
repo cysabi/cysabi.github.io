@@ -28,11 +28,81 @@ export const data = {
   ),
   roles: ["code", "design"],
   tools: [
+    "gsap",
     "solid.js",
     "material ui",
     "react.js",
     "nodecg",
-    "node.js",
     "javascript",
   ],
-}
+};
+
+<Topic code>
+
+## code # i used a monad
+
+I read a blog post on [railway oriented programming](https://fsharpforfunandprofit.com/rop/) that shared some really informative insights on how to handle errors in a functional way, and I wanted to apply what I learned to the bot pull page!
+
+1. First, I set up the functional primitives that I planned to use:
+
+   ```ts
+   type Binded<I, D> = (input: Result<I>) => Promise<Result<D>>;
+   type Either<I, D> = (input: I) => Promise<Result<D>>;
+   type Result<D> = { data: D } | { error: string };
+
+   const _pass: <I, D>(fn: (input: I) => Promise<D>) => Binded<I, D> =
+     (fn) => async (input) => {
+       if ("error" in input) return input;
+       return { data: await fn(input.data) };
+     };
+
+   const _bind: <I, D>(fn: Either<I, D>) => Binded<I, D> =
+     (fn) => async (input) => {
+       if ("error" in input) {
+         return input;
+       } else {
+         return await fn(input.data);
+       }
+     };
+
+   const _trap: <I, D>(fn: (input: I) => Promise<D>) => Either<I, D> =
+     (fn) => async (input) => {
+       try {
+         return { data: await fn(input) };
+       } catch (error: any) {
+         return {
+           error:
+             !axios.isAxiosError(error) || !error.response
+               ? `${error?.message}`
+               : `HTTP Status ${error.response.status}: ${JSON.stringify(
+                   error.response.data
+                 )}`,
+         };
+       }
+     };
+   ```
+
+2. Then, I could create simple one-track functions, and just wrap them with `_trap` and `_bind` to handle errors and pass-through!
+
+   ```ts
+   const getBotAiaId = _bind(
+     _trap(async (bot: Bot) => {
+       const url = new URL(bot.aiarena_url);
+       const id = parseInt(url.pathname.slice(6));
+       if (isNaN(id)) throw Error("Invalid aiarena ID: " + bot.aiarena_url);
+       return id;
+     })
+   );
+   ```
+
+   The interesting part is that each bot had to be it's own subtrack, so the railway had two levels of depth! That is, one of the tracks included an array of sub-railways inside.
+
+   ```ts
+   const getAllBots = <T>(mapper: (res: PageObjectResponse) => Promise<T>) => {
+     return _pass((results: PageObjectResponse[]) => {
+       return Promise.all(results.map(mapper));
+     });
+   };
+   ```
+
+</Topic>

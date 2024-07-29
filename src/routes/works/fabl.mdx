@@ -43,7 +43,7 @@ export const data = {
     website: "https://fabl.otd.ink",
     repo: "https://github.com/cq-overlays/fabl",
   },
-}
+};
 
 # 48 hours before broadcast day
 
@@ -104,35 +104,35 @@ Since Off the Dial asks for your start.gg user slug when you try to register, I 
 
 ```js
 const getData = async () => {
-  const pointData = await getPointData()
+  const pointData = await getPointData();
 
-  const leaderboard = []
+  const leaderboard = [];
   for (const [slug, points] of Object.entries(pointData)) {
     const snapshot = await db
       .collection("users")
       .where("profile.slug", "==", slug)
       .limit(1)
-      .get()
-    const doc = snapshot.docs[0]
+      .get();
+    const doc = snapshot.docs[0];
     if (doc) {
-      const data = doc.data()
+      const data = doc.data();
 
       leaderboard.push({
         id: doc.id,
         points,
         splashtag: data.profile.splashtag,
         weapons: data.profile.weapons,
-      })
+      });
     }
   }
 
-  await handleOverrides(leaderboard)
-  await insertTotals(leaderboard)
+  await handleOverrides(leaderboard);
+  await insertTotals(leaderboard);
 
   return leaderboard
-    .filter(entrant => entrant.total > 0)
-    .sort((a, b) => b.total - a.total)
-}
+    .filter((entrant) => entrant.total > 0)
+    .sort((a, b) => b.total - a.total);
+};
 ```
 
 Then, it's just a matter of flattening the results into a format that the website and overlays can understand and parse through fairly simply!
