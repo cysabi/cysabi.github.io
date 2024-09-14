@@ -19,7 +19,7 @@ const hi = () => (
     <p>
       hi there ~ i'm a self-taught designer + hacker that cares a little too
       much about people's experiences!! i love tinkering with tech to make new
-      things, and thinking about how best to serve you!
+      things, and thinking about better ways to serve you!
     </p>
     <p>
       currently, i'm exploring how to make esports broadcast graphics with code,
