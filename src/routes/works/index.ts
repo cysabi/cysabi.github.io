@@ -1,7 +1,7 @@
 import * as probots from "./probots.mdx";
 import * as fabl from "./fabl.mdx";
 import * as blockSumo from "./block-sumo.mdx";
-import * as offthedialSite from "./offthedial-site.mdx";
+import * as offthedialSite from "./otd-ink.mdx";
 import * as cqOverlays from "./cq-overlays.mdx";
 import * as cgPartyWheel from "./cg-party-wheel.mdx";
 import * as cgPassTheClam from "./cg-pass-the-clam.mdx";
