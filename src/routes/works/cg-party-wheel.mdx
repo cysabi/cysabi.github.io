@@ -1,7 +1,9 @@
 export const data = {
+  archive: true,
   name: "cg-party-wheel",
-  subtitle: "a web-based spinner graphic for a gimmick randomizer tournament",
-  tags: ["broadcast", "graphics"],
+  subtitle:
+    "a configurable spinner overlay for a gimmick randomizer tournament",
+  tags: ["broadcast"],
   previews: ["/cg-party-wheel_1.webp"],
   collage: {
     "/cg-party-wheel_0.webm": "the wheel in action (with commentators!)",
@@ -16,18 +18,16 @@ export const data = {
   desc: (
     <>
       <p>
-        a friend wanted to have some interactive overlays for a splatoon 3
-        gimmick tournament based on randomly selected modifiers! so i made a
-        party wheel broadcast graphic that you can configure and spin!
+        i worked with a designer to code and rig a party wheel broadcast graphic
+        that you can spin with an interactive dashhboard! it's configurable from
+        a config.yaml file that lets you set each of the segments, including a
+        name, description, and weight!
       </p>
-      <p>
-        features include reading from a config.yaml file to set each of the
-        segments, you can configure the name, description, and even weight!
-      </p>
+      <p>i also had to learn the hell that is trig to make this</p>
     </>
   ),
-  roles: ["code", "design"],
-  tools: ["bento", "solid.js", "javascript"],
+  topics: ["code"],
+  tools: ["bento", "solid.js", "tailwind", "typescript"],
   sources: {
     repo: "https://github.com/cysabi/cg-party-wheel",
     stream: "https://www.youtube.com/watch?v=fD5T08UVvNY",

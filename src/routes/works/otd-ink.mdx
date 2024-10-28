@@ -1,7 +1,7 @@
 export const data = {
   name: "otd-ink",
   subtitle:
-    "full-stack website that hosts tournament signups, player accounts, and a blog",
+    "full-stack website hosting tournament signups, player accounts, and a blog",
   tags: ["website"],
   previews: ["/otd-ink_1.webp"],
   collage: {
@@ -22,25 +22,26 @@ export const data = {
   desc: (
     <>
       <p>
-        i built a website for off the dial, a tournament organization for
+        i built the website for off the dial, a tournament organization for
         splatoon making tournament experience accessible to players without a
         team!
       </p>
       <p>
-        features include hosted player signups, custom oauth2 user accounts with
-        discord, and an embedded and easy-to-edit blog for tournament organizers
-        to post updates.
+        everything from design to development end-to-end was handled by me,
+        including hosted player signups, custom oauth2 accounts with discord,
+        and an embedded and easy-to-edit blog for tournament organizers to post
+        updates.
       </p>
     </>
   ),
-  roles: ["design", "code"],
+  topics: ["design", "code"],
   tools: [
-    "gatsbyjs",
-    "react.js",
-    "javascript",
     "mdx",
     "tailwind",
     "firebase",
+    "gatsbyjs",
+    "react.js",
+    "javascript",
     "figma",
   ],
   sources: {
@@ -144,7 +145,7 @@ Now that schedule has been moved out of the tournament page, is there even a pur
 
 <Topic code>
 
-## code # a custom oauth2 client with firebase functions
+## code # a custom discord oauth2 client with firebase functions
 
 Firebase Auth does not support logging in with Discord, so I had to **build a custom oauth2 client myself using Firebase Functions**.
 

@@ -1,8 +1,7 @@
 export const data = {
-  archive: true,
   name: "social-scheduler",
   subtitle: "commissioned web-app for a busy person to schedule social events",
-  tags: ["website", "app"],
+  tags: ["website"],
   previews: ["/social-scheduler_1.webp"],
   collage: {
     "/social-scheduler_4.webm": "an example user flow through the app",
@@ -28,8 +27,8 @@ export const data = {
       </p>
     </>
   ),
-  roles: ["design", "code"],
-  tools: ["framer motion", "react.js", "tailwind", "javascript", "figma"],
+  topics: ["design", "code"],
+  tools: ["framer motion", "tailwind", "react.js", "javascript", "figma"],
   sources: {
     repo: "https://github.com/cysabi/social-scheduler",
   },
@@ -37,18 +36,13 @@ export const data = {
 
 # ideation
 
-I was approached by a very busy client who requsted a commissioned web application. They were struggling to keep track of scheduling social events and they wanted an easy self-hostable solution for it.
+I was approached by a very busy client who requsted a commissioned web application. They were struggling to keep track of scheduling social events and wanted an easy self-hostable solution for it.
 
-The self-hostability of the solution is what made this project interesting. It must be static enough to work in a JAMstack architecture, while still having the functionality to query for events and automatically add them to your calendar.
-
-<Topic design>
-## design # initial design document
+The self-hostability of the app is what made this project an interesting problem to solve. It had to be static enough to work in a JAMstack architecture, while still having the functionality to query for events and automatically add them to your calendar.
 
 We first started with a rough draft of some of the ideas that we wanted to include in the app, as well as a low fidelity mockup of the UI. We knew early on that the app should be a mobile-first experience.
 
-![Some excerpts from the initial document](/social-scheduler_10.webp|/social-scheduler_9.webp)
-
-</Topic>
+![the initial design document](/social-scheduler_10.webp|/social-scheduler_9.webp)
 
 Here are the main points that we settled on:
 
@@ -112,6 +106,4 @@ Even the icon changes!
 
 # impact
 
-The project went live about one month after the initial pitch, and rather successfully! here's what they had to say:
-
-> <span class="text-xl lowercase italic">"its pretty good ngl"</span>
+The project went live about one month after the initial pitch, and was recieved really well! Apparently the application is being used around twice per week to this day.

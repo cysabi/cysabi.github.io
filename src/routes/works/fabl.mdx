@@ -1,65 +1,74 @@
 export const data = {
   name: "fabl",
   subtitle:
-    "stream overlays and a website for a unique free-agent major tournament",
-  tags: ["broadcast", "graphics", "website"],
+    "stream overlays + website, for a unique free-agent major tournament",
+  tags: ["broadcast", "website"],
   previews: ["/fabl_1.webp"],
   collage: {
     "/fabl_2.webm":
       "here's the reel! showcasing everything this graphics bundle can do (break screen)",
-    "/fabl_9.webp":
-      "gameplay screen including the commentator card, the little icons have neat animations",
+    "/fabl_9.webp": "the ingame scene!",
+    "/fabl_4.webm":
+      "the heading adapts to the content height to ensure that the content is evenly spaced",
+    "/fabl_5.webm":
+      "animation treats on the ingame scene! these were actually not part of the original design specification",
     "/fabl_10.webp": "the website landing page for fabl.otd.ink",
-    "/fabl_12.webp": "leaderboard as shown on the website",
+    "/fabl_7.webm":
+      "the website leaderboard! selecting a player on the leaderboard shows you how their points were calculated",
     "/fabl_13.webm":
-      "the broadcast graphics can pull the api from the website for it's own scene, supports pagination",
+      "the broadcast graphics can pull from the leaderboard api as well!",
     "/fabl_8.webp": "'showdown' scene, a special ruleset used in the finals",
   },
   desc: (
     <>
       <p>
-        i was tasked with building a set of broadcast graphics for a splatoon
-        major tournament, as well as a website with a live updating leaderboard
-        to go alongside it!
+        i collaborated with a designer to build a set of broadcast graphics for
+        a splatoon major tournament, where i brought the designs to the finish
+        line, added motion, my own little treats, and coded it all up! there's a
+        unique "showdown" scene for finals day, with custom map states such as
+        pick/ban.
       </p>
       <p>
-        the broadcast includes a unique "showdown" scene for finals day, with
-        custom map states such as pick/ban, and a leaderboard scene that
-        connects to my website's data api. the website also includes an
-        interactive and live updating leaderboard.
+        i also built an external website with an interactive live updating
+        leaderboard! the website included a data api that could be accessed by
+        my overlays to show off the leaderboard stats on stream as it's own
+        scene.
       </p>
     </>
   ),
-  roles: ["design", "code"],
+  topics: ["design", "code"],
   tools: [
-    "framer motion",
-    "react.js",
     "nodecg",
+    "framer motion",
     "tailwind",
+    "react.js",
     "javascript",
     "figma",
   ],
   sources: {
     website: "https://fabl.otd.ink",
-    repo: "https://github.com/cq-overlays/fabl",
+    "repo (overlays)": "https://github.com/cq-overlays/cg-fabl",
+    "repo (website)": "https://github.com/cysabi/fabl-website",
   },
 };
 
-# 48 hours before broadcast day
+# ideation
+
+> ## 48 hours before broadcast day...
 
 ![These are some early-stage rough draft designs,](/fabl_3.webp)
 
 **Just kidding!**, that's a lie. These weren't the early designs, they were the final designs that the designer left me with.
 
-Unfortunately, there were unforeseen external factors that meant the designer wasn't able to finish polishing the final designs, 48 hours before the tournament.
-
-> So now I had to take over and ensure the designs reached the finish line
+Unfortunately, there were unforeseen external factors that meant the designer wasn't able to finish polishing the final designs, 48 hours before the tournament. **So I had to take over and ensure the designs reached the finish line**.
 
 To make matters worse, I also had my own commitments during those times. _(attending my sister's volleyball tournament! yep...)_
 
+# iteration
+
 <Topic design>
 
-## design # polishing the design
+## design # polishing the design for the broadcast graphics
 
 ![a before / after of the rosters scene!](/fabl_11.webp|/fabl_6.webm)
 
@@ -67,31 +76,11 @@ I felt like the commentator box had a lot of interest and pop going into it. I f
 
 Once I moved the logo to the top, the rest of the design just fell into place, I just needed to restructure the design to suit the new placement.
 
-## design # fancy layout transitions
-
-The heading adapts to the content height by shifting up and down to ensure that the content below is evenly spaced! While the text inside fades to showcase whatever is relevant for the active page.
-
-![](/fabl_4.webm)
-
-## design # animation treats on the ingame scene!
-
-i made some **bouncy icons on the scoreboard**! They were actually not part of the original design specification, I just thought it would be really cool while finishing up all the rest of the animations! I think I made the right call.
-
-![boing :D](/fabl_5.webm)
-
 </Topic>
-
-# website
-
-In addition to the overlays, I also created an external website with a live data api to showcase a live updating interactive leaderboard 24/7! This data api could then be accessed by my overlays to make my leaderboard scene work.
-
-I wanted to allow users to be able to click on players on the leaderboard to view more details, to add a bit of interactivity to the website.
-
-![selecting a player on the leaderboard shows you how their points were calculated](/fabl_7.webm)
 
 <Topic code>
 
-## code # creating the leaderboard api
+## code # the leaderboard api
 
 Since Off the Dial already has a backend powered by Firebase, I created a `fabl` endpoint that could be used to query and return a processed state of the entire leaderboard.
 

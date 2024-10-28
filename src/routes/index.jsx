@@ -17,25 +17,16 @@ import works from "./works";
 const hi = () => (
   <>
     <p>
-      hi there ~ i'm a self-taught designer + hacker that cares a little too
-      much about people's experiences!! i love tinkering with tech to make new
-      things, and thinking about better ways to serve you!
-    </p>
-    <p>
-      currently, i'm exploring how to make esports broadcast graphics with code,
-      in the hopes of making that easier to do in the future. in splatoon, im a
-      day-one kglues one-trick trying to push the tent/glues/dynamo trio, and i
-      always make sure to die with my special up.
+      hi there ~ i'm a self-taught designer/hacker that cares a little too much
+      about people's experiences!! i love tinkering with tech to make new
+      things, and exploring better ways to serve you
     </p>
     <p>
       please don't be afraid to{" "}
-      <a
-        href="https://twitter.com/messages/compose?recipient_id=1178483825950822401"
-        class="font-medium text-slate-50"
-      >
+      <a href="https://cysabi.bsky.social" class="font-medium text-slate-50">
         say hi
       </a>
-      ! im always open to new opportunities, no matter the medium
+      ! im always open to new opportunities, no matter the medium!
     </p>
   </>
 );
@@ -66,12 +57,20 @@ const Index = () => {
     });
   };
 
-  const filteredWorks = createMemo(() =>
-    works
-      .filter((work) => work.data.tags.some((tag) => tags().has(tag)))
+  const filteredWorks = createMemo(() => {
+    return works
+      .filter((work) =>
+        work.data.tags
+          ? work.data.tags.some((tag) => tags().has(tag))
+          : allTags.length === tags().size
+      )
       .filter((work) => !work.data.archive || params.archives)
-      .filter((work) => work.data.roles.some((topic) => topics().has(topic)))
-  );
+      .filter((work) =>
+        work.data.topics
+          ? work.data.topics.some((topic) => topics().has(topic))
+          : allTopics.length === topics().size
+      );
+  });
 
   const work = createMemo(() => works.find((w) => w.data.name === params.work));
   onMount(() => {
@@ -102,6 +101,12 @@ const Index = () => {
                       github
                     </a>
                     <a
+                      href="https://cysabi.bsky.social"
+                      class="hover:text-primary-50"
+                    >
+                      bsky
+                    </a>
+                    <a
                       href="https://twitter.com/cysabi"
                       class="hover:text-primary-50"
                     >
@@ -110,7 +115,14 @@ const Index = () => {
                   </div>
                 </div>
                 <div class="flex flex-col gap-4 text-slate-300 leading-relaxed">
-                  {hovering()?.desc || hi()}
+                  {hovering() ? (
+                    <div class="mt-1 flex flex-col gap-4 text-slate-300 leading-relaxed">
+                      {hovering()?.desc}
+                      <Tools tools={hovering().tools} />
+                    </div>
+                  ) : (
+                    hi()
+                  )}
                 </div>
                 <div class="hidden lg:block lg:my-auto" />
                 <div class="hidden lg:flex gap-2 flex-wrap items-center">
@@ -181,7 +193,7 @@ const Index = () => {
                     : "bg-primary/5 font-medium line-through text-slate-500 hover:text-slate-400 !decoration-slate-500 hover:!decoration-slate-400"
                 } ${
                   hovering() &&
-                  (!hovering()?.roles?.includes(key)
+                  (!hovering()?.topics?.includes(key)
                     ? "blur-[2px] opacity-50"
                     : "!backdrop-brightness-150")
                 }`}
@@ -298,7 +310,7 @@ const WorkPreview = (props) => {
         y: lean().orb.y * 12.5,
         scale: hov() ? 1.05 : 1,
       }}
-      class="relative backdrop-blur backdrop-brightness-125 rounded-2xl p-2 overflow-clip bg-primary/10"
+      class="relative backdrop-blur backdrop-brightness-125 rounded-2xl p-2 overflow-clip bg-primary/10 group"
     >
       <div class="relative aspect-video overflow-clip rounded-lg">
         <Motion.img
@@ -310,6 +322,28 @@ const WorkPreview = (props) => {
           src={props.data.previews[0]}
         />
       </div>
+      <Show when={props.data.archive}>
+        <div class="absolute inset-0 flex items-end justify-end p-3.5">
+          <Motion.div class="p-1.5 rounded-md bg-slate-700/75 text-slate-300 backdrop-blur backdrop-brightness-125 duration-300 group-hover:backdrop-blur-0 group-hover:backdrop-brightness-100 group-hover:bg-transparent">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-archive"
+            >
+              <rect width="20" height="5" x="2" y="3" rx="1" />
+              <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
+              <path d="M10 12h4" />
+            </svg>
+          </Motion.div>
+        </div>
+      </Show>
       <Motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: hov() ? 1 : 0 }}
@@ -415,7 +449,7 @@ const TableOfContents = (props) => {
                   ?.scrollIntoView({ behavior: "smooth" })
               }
             >
-              case study
+              devlog
             </button>
           </div>
         </Show>
@@ -429,10 +463,12 @@ const TableOfContents = (props) => {
                 class={`no-underline py-1 leading-tight ${
                   h.depth > 1
                     ? "text-base pr-2.5 border-r-2 border-slate-700"
-                    : "text-lg"
+                    : "text-base font-mono"
                 } ${
                   activeHeading() === h.id
-                    ? "text-slate-50 font-medium tracking-[-0.0095em]"
+                    ? `text-slate-50 font-medium ${
+                        h.depth > 1 && "tracking-[-0.0095em]"
+                      }`
                     : "text-slate-400"
                 } ${
                   header(h).length > 1 && !props.topics().has(header(h).at(0))
@@ -444,17 +480,9 @@ const TableOfContents = (props) => {
               </button>
             ))
           ) : (
-            <div class="mt-1 flex flex-col gap-4 text-slate-300 leading-relaxed">
+            <div class="flex flex-col mt-1 gap-4 text-slate-300 leading-relaxed">
               {props.work().data.desc}
-              <div class="flex items-baseline flex-wrap gap-2 pt-2 ml-[-3px] leading-none font-medium text-base">
-                <For each={props.work()?.data?.tools}>
-                  {(tool) => (
-                    <div class="text-slate-400 backdrop-blur backdrop-brightness-125 rounded flex px-2 py-1">
-                      {tool}
-                    </div>
-                  )}
-                </For>
-              </div>
+              <Tools tools={props.work().data.tools} />
             </div>
           )}
         </div>
@@ -463,7 +491,20 @@ const TableOfContents = (props) => {
   );
 };
 
+const Tools = (props) => (
+  <div class="flex items-baseline mt-2 flex-wrap gap-3 text-slate-300 font-mono leading-none font-medium text-base ml-[-2px]">
+    <For each={props.tools}>
+      {(tool) => (
+        <div class="backdrop-blur backdrop-brightness-125 rounded border-slate-600/50 border-2 flex px-2 py-1">
+          {tool}
+        </div>
+      )}
+    </For>
+  </div>
+);
+
 const _countedTags = works
+  .filter((work) => work.data.tags)
   .flatMap((work) => work.data.tags)
   .reduce((p, c) => {
     p[c] = (p[c] || 0) + 1;
@@ -496,8 +537,6 @@ const subtitles = [
     </span>
   </>,
   "sorry in advance for missing that social cue",
-  "obsidian.md cultist",
-  "supporting marginalized genders in esports",
   "🧋❤️",
 ];
 

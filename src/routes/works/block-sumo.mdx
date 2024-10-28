@@ -1,7 +1,7 @@
 export const data = {
   name: "block-sumo",
   subtitle:
-    "a highly skill-expressive minecraft minigame that doesn't sacrifice being easy-to-learn",
+    "easy-to-learn, hard-to-master minecraft minigame where you can change the battlefield",
   tags: ["game"],
   previews: ["/block-sumo_17.webp"],
   collage: {
@@ -15,10 +15,9 @@ export const data = {
       </>
     ),
     "/block-sumo_4.webp": "the default map, 'wuhu island'",
-    "/block-sumo_6.webp":
+    "/block-sumo_7.webp":
       "as the game progresses, more and more blocks get placed as a form of emergent gameplay.",
     "/block-sumo_12.webp": "the terminal ui to host and start games.",
-    "/block-sumo_7.webp": "gameplay of some classic free-for-all fun!",
     "/block-sumo_9.webp": "you can also play team battles!",
     "/block-sumo_8.webp":
       "as players change the map geometry, gameplay evolves with it.",
@@ -27,64 +26,46 @@ export const data = {
   desc: (
     <>
       <p>
-        inspired by knockout city, friends vs friends, smash bros, and soul
-        fighter; i build a easy-to-learn, hard-to-master minecraft minigame with
-        near infinite levels of skill-expression, all without sacrificing being
-        easy-to-learn.
+        i designed and developed a minecraft plugin to create a multiplayer pvp
+        minigame, where maps could evolve emergently through gameplay while
+        preserving new player accessibility with built-in comeback mechanics.
       </p>
       <p>
-        features include chaotic powerups with built-in comeback mechanics, maps
-        that evolve emergently through player-directed gameplay, and a
-        satisfying gui to manage game settings!
+        you spawn on a floating platform with your goal to knock others off to
+        score points. chaotic powerups randomly spawn for all players, with more
+        powerful ones for to those who fall behind. the catch? each player has
+        an infinite number of blocks in their offhand!
       </p>
     </>
   ),
-  roles: ["design"],
+  topics: ["design"],
   tools: ["papermc", "denizen"],
 };
 
-{/* todo: performance pls */}
-
 # ideation
 
-One day, while watching gameplay of a minecraft content creator (fruitberries) creatively place blocks on the edges of the map to escape his opponent, I got inspired by how expressive Minecraft's movement was.
+Minecraft's movement combined with placing blocks provides you with **infinite expressions for movement** by allowing you to bend your environment to your will.
 
-Placing blocks provides you with **infinite possibilities for movement**, allowing you to bend your environment to your will. Not too much unlike Fortnite's build mode.
-
-<Img
-  src="/block-sumo_1.webm"
-  alt={
-    <>
-      Youtube video by{" "}
-      <a href="https://www.youtube.com/watch?v=ovJrTqYD4e8">fruitberries</a>
-    </>
-  }
-/>
-
-This is when I decided on making a minecraft minigame, one that lets gameplay like this shine.
-However, I didn't want to follow the same footsteps that Fortnite had with build mode, where the skill floor grew to increasingly unreachable heights.
-
-> I wanted a game that you know you'll enjoy when you're bored with your friends and you don't know what to play.
-
-<Topic design>
-
-## design # the core concept
-
-There were a couple design goals that I had in mind when creating the concept for the game.
-
-1. The game should **highlight creative block placement** and allow players to access a near-infinite level of skill expression.
-2. At the same time, anyone regardless of experience should be able to **pick up the game and find it instantly enjoyable** and fun.
-3. The fundamental mechanics of the game should have lots of **game mode flexibility**, it should be easy to support ffa's, 1v1s, teams, and asymmetric modes. No matter who you're hanging out with, there should always be a fitting gamemode to play together.
-
-I also want the game to have a **chaotic, party-like energy to the game's atmosphere** in a way that feels both **strategic and chaotic in equal proportions**. This all lead me to this main concept.
-
-> You spawn on a floating platform, and your goal is to knock other players off to score points. Items randomly spawn for all players, with more powerful items to help those who fall behind.
->
-> The catch? **Each player has an infinite number of blocks in their offhand!**
-
-This concept was just simple enough for anyone to intuitive grasp the objective, so it was easy to pick up. It also had a lot of flexibility what game modes can be set! You can easily turn a 6-person free-for-all into 2 teams of 3, or 3 teams of 2.
+I was inspired to make a minecraft minigame that let this aspect shine, and give players a lot of creativity to solve problems.
 
 ![Infinite blocks provide a lot of creativity for movement and outplays](/block-sumo_10.webm)
+
+However, I wanted to avoid the pitfalls of Fortnite's build mode, where the skill floor grew to increasingly unreachable heights.
+Instead, I took inspiration from the new-player accessibility of Smash / Splatoon, and wanted to ensure less experienced players wouldn't be left feeling powerless against better players.
+
+There were a couple design goals that I had in mind when creating the concept for the game:
+
+1. The game should **highlight creative block placement** and allow players to access a near-infinite level of skill expression.
+2. Anyone, regardless of experience, should be able to **intuitively pick up the game and find it instantly enjoyable** and fun.
+3. The fundamental mechanics of the game should have a lot of **game mode flexibility**, it should be easy to support ffa's, 1v1s, teams, and asymmetric modes. No matter who you're hanging out with, there should always be a fitting gamemode to play together.
+
+I also want the game to have a **chaotic, party-like energy to the game's atmosphere** in a way that feels both **strategic and chaotic in equal proportions**.
+
+> In summary, I wanted to make a game that you know you'll enjoy when you're bored with your friends and you don't know what to play.
+
+# iteration
+
+<Topic design>
 
 ## design # rubber-banding items
 
@@ -101,12 +82,6 @@ While the main role of items is to lower the skill floor, they also have a lot o
 > By fine-tuning the exact frequency of items at every level, I have a lot of control over the atmosphere and the level of rubber-banding.
 
 ![An early draft of item spawn rates depending on points behind](/block-sumo_2.webp)
-
-</Topic>
-
-# iteration
-
-<Topic design>
 
 ## design # a scoring system that rewards aggression
 
