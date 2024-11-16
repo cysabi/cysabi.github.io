@@ -17,6 +17,7 @@ export default [
   probots,
   blurplePy,
   otdInk,
+  cgVicvillion,
   fabl,
   socialScheduler,
   cgZhobii,
