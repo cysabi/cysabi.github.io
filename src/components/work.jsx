@@ -221,11 +221,27 @@ export const Collage = (props) => {
   return (
     <figure>
       <div class="not-prose flex flex-col gap-1 overflow-clip bg-slate-600/50 border-4 border-transparent rounded-2xl backdrop-blur backdrop-brightness-125">
-        <Img
-          title="controls"
-          class="rounded-md aspect-video object-cover object-top"
-          src={sources()[active()]}
-        />
+        <Switch
+          fallback={
+            <img
+              class="w-full rounded-md aspect-video object-cover object-top"
+              src={sources()[active()]}
+            />
+          }
+        >
+          <Match when={sources()[active()].endsWith(".webm")}>
+            <video
+              src={sources()[active()]}
+              class="w-full rounded-md aspect-video object-cover object-top"
+              controls={true}
+              autoplay
+              preload="auto"
+              playsinline
+            >
+              <source src={sources()[active()]} type="video/webm" />
+            </video>
+          </Match>
+        </Switch>
         <div class="flex gap-1 max-h-28 h-full justify-around">
           {sources().map((item, i) => (
             <button
