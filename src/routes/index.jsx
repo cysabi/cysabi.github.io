@@ -23,7 +23,10 @@ const hi = () => (
     </p>
     <p>
       please don't be afraid to{" "}
-      <a href="https://cysabi.bsky.social" class="font-medium text-slate-50">
+      <a
+        href="https://bsky.app/profile/cysabi.github.io"
+        class="font-medium text-slate-50"
+      >
         say hi
       </a>
       ! im always open to new opportunities, no matter the medium!
@@ -101,16 +104,10 @@ const Index = () => {
                       github
                     </a>
                     <a
-                      href="https://cysabi.bsky.social"
+                      href="https://bsky.app/profile/cysabi.github.io"
                       class="hover:text-primary-50"
                     >
                       bsky
-                    </a>
-                    <a
-                      href="https://twitter.com/cysabi"
-                      class="hover:text-primary-50"
-                    >
-                      twitter
                     </a>
                   </div>
                 </div>
