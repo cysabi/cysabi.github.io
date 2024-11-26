@@ -233,8 +233,9 @@ export const Collage = (props) => {
             <video
               src={sources()[active()]}
               class="w-full rounded-md aspect-video object-cover object-top"
-              controls={true}
+              controls
               autoplay
+              muted
               preload="auto"
               playsinline
             >
