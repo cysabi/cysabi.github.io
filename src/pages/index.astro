@@ -1,0 +1,66 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<style>
+  main {
+    padding: 2ch;
+    font-family: "Sono";
+  }
+  main > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2ch;
+  }
+  main > div > div {
+    display: flex;
+    gap: 2ch;
+  }
+  .line-numbers {
+    color: var(--color-text-subtle);
+  }
+</style>
+
+<Layout>
+  <main>
+    <div>
+      <div style={{ backgroundColor: "#181825" }}>
+        <div
+          style={{
+            marginLeft: "1ch",
+            marginRight: "1ch",
+            paddingLeft: "1ch",
+            paddingRight: "1ch",
+            backgroundColor: "#8ba8fd",
+            color: "var(--color-bg)",
+            fontWeight: "600",
+          }}
+        >
+          about
+        </div>
+      </div>
+      <div>
+        <div class="line-numbers">
+          <div>0</div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div>8</div>
+          <div>9</div>
+        </div>
+        <div>
+          <p>cysabi [...] is a self-taught code artisan who...</p>
+          <p>loves creating things that people can create things with</p>
+          <p>is an alum of recurse center</p>
+          <p>a hacker and explorer</p>
+          <p>enjoys exploring the design of interactions and experiences</p>
+          <p>say hi</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
