@@ -1,49 +1,21 @@
 ---
 import StylesReset from "../components/StylesReset.astro";
+import Title from "../components/Title.tsx";
 const { head } = Astro.props;
 ---
 
 <StylesReset />
 
 <style is:global>
-  @font-face {
-    font-family: "Drafting*";
-    src: url("fonts/Drafting[wght].ttf") format("truetype-variations");
-    font-weight: 100 700;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: "Drafting*";
-    src: url("fonts/Drafting-Italic[wght].ttf") format("truetype-variations");
-    font-weight: 100 700;
-    font-style: italic;
-  }
-
-  @font-face {
-    font-family: "VG5000";
-    src: url("fonts/VG5000-Regular_web.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: "Sono";
-    src: url("fonts/Sono-VariableFont_MONO,wght.ttf")
-      format("truetype-variations");
-    font-weight: 200 800;
-    font-style: normal;
-  }
-
   :root {
-    --color-bg: #26273d;
+    --color-bg: #242534;
     --color-text-main: #ffffff;
     --color-text-subtle: #7679c9;
   }
   body {
     background-color: var(--color-bg);
     color: var(--color-text-main);
-    font-family: "Sono", monospace;
+    font-family: monospace;
   }
 </style>
 
@@ -53,7 +25,6 @@ const { head } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
-    <title>empathy included</title>
     {head}
   </head>
   <body>

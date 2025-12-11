@@ -1,66 +1,105 @@
 ---
+import { CycleText } from "../components/CycleText";
+import { HoverImage, Project } from "../components/HoverImage";
+import Title from "../components/Title";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<style>
+<style is:global>
   main {
-    padding: 2ch;
-    font-family: "Sono";
+    display: flex;
+    flex-direction: row;
+    padding: 4ch;
+    min-height: 100svh;
+    justify-content: space-between;
   }
-  main > div {
+
+  .about {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 33%;
+  }
+
+  a {
+    font-weight: 500;
+    color: #8ba8fd;
+    font-style: italic;
+    font-family: "Times New Roman";
+  }
+  .projects {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 2ch;
   }
-  main > div > div {
+  .project:hover {
+    font-family: serif;
+    font-style: italic;
+  }
+  .bar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #181825;
+    gap: 1ch;
+
+    > div {
+      padding-left: 1ch;
+      padding-right: 1ch;
+    }
+  }
+  .space {
     display: flex;
     gap: 2ch;
   }
   .line-numbers {
     color: var(--color-text-subtle);
+    opacity: 0.2;
   }
 </style>
 
 <Layout>
   <main>
-    <div>
-      <div style={{ backgroundColor: "#181825" }}>
-        <div
+    <div class="about">
+      <div>
+        <CycleText
+          client:only
+          texts={"cyrene zhang is a self-taught code artisan and an alum of".split(
+            ""
+          )}
+        />
+        <!-- <p>
+          <a>recurse center (wr)</a>
+        </p> -->
+        <p
           style={{
-            marginLeft: "1ch",
-            marginRight: "1ch",
-            paddingLeft: "1ch",
-            paddingRight: "1ch",
-            backgroundColor: "#8ba8fd",
-            color: "var(--color-bg)",
-            fontWeight: "600",
+            color: "hsl(from var(--color-text-subtle) h s l / 0.25);",
           }}
         >
-          about
-        </div>
+          &nbsp
+        </p>
+        <p>say hi</p>
+        <p>thinking about:</p>
+        <p>last updated: dec.12.2025</p>
       </div>
-      <div>
-        <div class="line-numbers">
-          <div>0</div>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-          <div>6</div>
-          <div>7</div>
-          <div>8</div>
-          <div>9</div>
+      <HoverImage client:load />
+    </div>
+    <div class="projects">
+      <h6 class="bar">
+        <div
+          style={{
+            backgroundColor: "#8ba8fd",
+            color: "var(--color-bg)",
+            fontWeight: "700",
+          }}
+        >
+          works [8]
         </div>
-        <div>
-          <p>cysabi [...] is a self-taught code artisan who...</p>
-          <p>loves creating things that people can create things with</p>
-          <p>is an alum of recurse center</p>
-          <p>a hacker and explorer</p>
-          <p>enjoys exploring the design of interactions and experiences</p>
-          <p>say hi</p>
-        </div>
-      </div>
+        <div>[_] [o] [x]</div>
+      </h6>
+      <Project name="block-sumo" client:load />
+      <Project name="off-the-dial" client:load />
+      <Project name="cg-vicvillion" client:load />
     </div>
   </main>
 </Layout>
