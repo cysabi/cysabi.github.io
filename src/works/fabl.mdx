@@ -1,0 +1,111 @@
+---
+name: "fabl"
+subtitle: "stream overlays + website, for a unique free-agent major tournament"
+date: "2023-03"
+preview: "/media/fabl_1.webp"
+tags:
+  - "broadcast"
+  - "site"
+tools:
+  - "nodecg"
+  - "framer motion"
+  - "tailwind"
+  - "react.js"
+  - "javascript"
+  - "figma"
+sources:
+  "website": "https://fabl.otd.ink"
+  "repo (overlays)": "https://github.com/cq-overlays/cg-fabl"
+  "repo (website)": "https://github.com/cysabi/fabl-website"
+collage:
+  - src: "/media/fabl_2.webm"
+    caption: "here's the reel! showcasing everything this graphics bundle can do (break screen)"
+  - src: "/media/fabl_9.webp"
+    caption: "the ingame scene!"
+  - src: "/media/fabl_4.webm"
+    caption: "the heading adapts to the content height to ensure that the content is evenly spaced"
+  - src: "/media/fabl_5.webm"
+    caption: "animation treats on the ingame scene! these were actually not part of the original design specification"
+  - src: "/media/fabl_10.webp"
+    caption: "the website landing page for fabl.otd.ink"
+  - src: "/media/fabl_7.webm"
+    caption: "the website leaderboard! selecting a player on the leaderboard shows you how their points were calculated"
+  - src: "/media/fabl_13.webm"
+    caption: "the broadcast graphics can pull from the leaderboard api as well!"
+  - src: "/media/fabl_8.webp"
+    caption: "'showdown' scene, a special ruleset used in the finals"
+desc:
+  - |
+    i collaborated with a designer to build a set of broadcast graphics for a splatoon major tournament, where i brought the designs to the finish line, added motion, my own little treats, and coded it all up! there's a unique "showdown" scene for finals day, with custom map states such as pick/ban.
+  - |
+    i also built an external website with an interactive live updating leaderboard! the website included a data api that could be accessed by my overlays to show off the leaderboard stats on stream as it's own scene.
+---
+
+## polishing the design
+
+I was originally working with a designer of these graphics, but they suddenly dropped out 48 hours before the broadcast was supposed to happen.
+
+![The designs they left me with](/media/fabl_3.webp)
+
+**So I had to take over and ensure the designs reached the finish line** on top of doing the implementation and animations.
+
+To make matters worse, I also had my own commitments during those times. _(attending my sister's volleyball tournament! yep...)_
+
+
+![a before / after of the rosters scene!](/media/fabl_11.webp|/media/fabl_6.webm)
+
+I felt like the commentator box had a lot of interest and pop going into it. I felt like the interest **should draw the eye to the heading with relevant broadcast information**, rather than to what commentators were currently speaking.
+
+Once I moved the logo to the top, the rest of the design just fell into place, I just needed to restructure the design to suit the new placement.
+
+## the leaderboard api
+
+Since Off the Dial already has a backend powered by Firebase, I created a `fabl` endpoint that could be used to query and return a processed state of the entire leaderboard.
+
+It is made up of two main endpoints of **`standings`** and **`refresh`**.
+
+- The standings endpoint simply returns the currently stored leaderboard standings, or calls `refresh` if there are none.
+- The `refresh` endpoint is the interesting part. Rather than storing much scoring data directly, the refresh endpoint first hits the start.gg api to gather the standings of everyone in each of the qualifier tournament.
+
+Since Off the Dial asks for your start.gg user slug when you try to register, I can pull in the existing profile data from FABL signups and map each signup with their start.gg placements.
+
+```js
+const getData = async () => {
+  const pointData = await getPointData();
+
+  const leaderboard = [];
+  for (const [slug, points] of Object.entries(pointData)) {
+    const snapshot = await db
+      .collection("users")
+      .where("profile.slug", "==", slug)
+      .limit(1)
+      .get();
+    const doc = snapshot.docs[0];
+    if (doc) {
+      const data = doc.data();
+
+      leaderboard.push({
+        id: doc.id,
+        points,
+        splashtag: data.profile.splashtag,
+        weapons: data.profile.weapons,
+      });
+    }
+  }
+
+  await handleOverrides(leaderboard);
+  await insertTotals(leaderboard);
+
+  return leaderboard
+    .filter((entrant) => entrant.total > 0)
+    .sort((a, b) => b.total - a.total);
+};
+```
+
+Then, it's just a matter of flattening the results into a format that the website and overlays can understand and parse through fairly simply!
+
+The event went over the course of 6 weeks, with a total streaming time of `17h 31m`, averaging about `40` viewers per stream!
+
+I ended up still working on all of the animations and stuff even as the event was going on, it must have been funny for the viewers to watch the graphics get progressively better as the tournament went on.
+
+Want to see the graphics in action? [See the show!](https://youtu.be/Kz5w3a8Z_tM?t=680)

@@ -1,0 +1,92 @@
+@font-face {
+  font-family: "LS-VG5000";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  descent-override: 25%;
+  src: url("/LS-VG5000-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "LS-VG5000";
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  descent-override: 25%;
+  src: url("/LS-VG5000-LightShifted.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "LS-VG5000";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  descent-override: 25%;
+  src: url("/LS-VG5000-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "LS-VG5000";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  descent-override: 25%;
+  src: url("/LS-VG5000-RegularShifted.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "LS-VG5000";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  descent-override: 25%;
+  src: url("/LS-VG5000-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "LS-VG5000";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  descent-override: 25%;
+  src: url("/LS-VG5000-BoldShifted.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "VG5000";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  descent-override: 20%;
+  src:
+    url("/VG5000-Regular_web.woff2") format("woff2"),
+    url("/VG5000-Regular_web.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Junicode";
+  font-style: normal;
+  font-weight: 300 700;
+  font-stretch: 75% 125%;
+  font-display: swap;
+  src: url("/JunicodeVF-Roman.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Junicode";
+  font-style: italic;
+  font-weight: 300 700;
+  font-stretch: 75% 125%;
+  font-display: swap;
+  src: url("/JunicodeVF-Italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Departure Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url("/DepartureMono-Regular.woff2") format("woff2"),
+    url("/DepartureMono-Regular.woff") format("woff");
+}

@@ -1,0 +1,40 @@
+---
+import ScrollPlay from "./ScrollPlay.astro";
+
+interface Props {
+  src: string;
+  alt?: string;
+  title?: string;
+}
+
+const { src, alt, title } = Astro.props;
+
+const controls = title === "controls";
+const sources = src.split("%7C");
+const slotted = Astro.slots.has("default");
+---
+
+<figure>
+  <div style="display: flex; gap: 1ch">
+    {
+      sources.map((source) =>
+        source.endsWith(".webm") ? (
+          <ScrollPlay>
+            <video
+              src={source}
+              style="width: 100%"
+              controls={controls}
+              muted={!controls}
+              loop={!controls}
+              preload="auto"
+              playsinline
+            />
+          </ScrollPlay>
+        ) : (
+          <img src={source} alt="" style="width: 100%" loading="lazy" />
+        )
+      )
+    }
+  </div>
+  {(slotted || alt) && <figcaption>{slotted ? <slot /> : alt}</figcaption>}
+</figure>

@@ -1,0 +1,51 @@
+---
+import { getCollection, render } from "astro:content";
+import { createMarkdownProcessor } from "@astrojs/markdown-remark";
+import Layout from "../../components/Layout.astro";
+import Collage from "../../components/mdx/Collage.tsx";
+import components from "../../components/mdx";
+import Figure from "../../components/mdx/Figure.astro";
+
+export async function getStaticPaths() {
+  const processor = await createMarkdownProcessor({});
+  const md = async (src: string) => (await processor.render(src)).code;
+
+  const works = await getCollection("works");
+  return Promise.all(
+    works.map(async (work) => ({
+      params: { slug: work.data.name },
+      props: {
+        work,
+        desc: await Promise.all(work.data.desc.map((para) => md(para))),
+        collage: await Promise.all(
+          work.data.collage.map(async (item) => ({
+            src: item.src,
+            caption: await md(item.caption),
+          }))
+        ),
+      },
+    }))
+  );
+}
+
+const { work, desc, collage } = Astro.props;
+const { Content } = await render(work);
+const data = work.data;
+---
+
+<Layout work={{ ...data, desc }}>
+  <Fragment slot="head">
+    <title>{data.name} ~ cysabi's place</title>
+    {data.subtitle && <meta name="description" content={data.subtitle} />}
+  </Fragment>
+  <article style="width: 100%; min-width: 0">
+    {
+      collage.length > 0 ? (
+        <Collage client:load items={collage} />
+      ) : (
+        data.preview && <Figure src={data.preview} />
+      )
+    }
+    <Content components={components} />
+  </article>
+</Layout>

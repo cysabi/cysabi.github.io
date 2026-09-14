@@ -1,0 +1,26 @@
+---
+import "../index.css";
+import About from "./About";
+import type { Work } from "./sharedState";
+
+const { work } = Astro.props as { work?: Work };
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/png" href="/fizzy.png" />
+    <title>cysabi's place</title>
+    <slot name="head" />
+  </head>
+  <body>
+    <main style="display: grid; grid-template-columns: 450px 7fr; padding: 4ch; gap: 4ch; min-height: 100svh;">
+      <About client:load work={work} />
+      <div style="max-width: 800px; width: 100%; margin-inline: auto;">
+        <slot />
+      </div>
+    </main>
+  </body>
+</html>

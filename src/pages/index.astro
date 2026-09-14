@@ -1,105 +1,18 @@
 ---
-import { CycleText } from "../components/CycleText";
-import { HoverImage, Project } from "../components/HoverImage";
-import Title from "../components/Title";
-import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import Layout from "../components/Layout.astro";
+import Works from "../components/Works";
+
+const works = (await getCollection("works"))
+  .sort(
+    (a, b) =>
+      Number(b.data.tags.includes("selected")) -
+        Number(a.data.tags.includes("selected")) ||
+      b.data.date.localeCompare(a.data.date)
+  )
+  .map((work) => work.data);
 ---
 
-<style is:global>
-  main {
-    display: flex;
-    flex-direction: row;
-    padding: 4ch;
-    min-height: 100svh;
-    justify-content: space-between;
-  }
-
-  .about {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 33%;
-  }
-
-  a {
-    font-weight: 500;
-    color: #8ba8fd;
-    font-style: italic;
-    font-family: "Times New Roman";
-  }
-  .projects {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 2ch;
-  }
-  .project:hover {
-    font-family: serif;
-    font-style: italic;
-  }
-  .bar {
-    display: flex;
-    justify-content: space-between;
-    background-color: #181825;
-    gap: 1ch;
-
-    > div {
-      padding-left: 1ch;
-      padding-right: 1ch;
-    }
-  }
-  .space {
-    display: flex;
-    gap: 2ch;
-  }
-  .line-numbers {
-    color: var(--color-text-subtle);
-    opacity: 0.2;
-  }
-</style>
-
 <Layout>
-  <main>
-    <div class="about">
-      <div>
-        <CycleText
-          client:only
-          texts={"cyrene zhang is a self-taught code artisan and an alum of".split(
-            ""
-          )}
-        />
-        <!-- <p>
-          <a>recurse center (wr)</a>
-        </p> -->
-        <p
-          style={{
-            color: "hsl(from var(--color-text-subtle) h s l / 0.25);",
-          }}
-        >
-          &nbsp
-        </p>
-        <p>say hi</p>
-        <p>thinking about:</p>
-        <p>last updated: dec.12.2025</p>
-      </div>
-      <HoverImage client:load />
-    </div>
-    <div class="projects">
-      <h6 class="bar">
-        <div
-          style={{
-            backgroundColor: "#8ba8fd",
-            color: "var(--color-bg)",
-            fontWeight: "700",
-          }}
-        >
-          works [8]
-        </div>
-        <div>[_] [o] [x]</div>
-      </h6>
-      <Project name="block-sumo" client:load />
-      <Project name="off-the-dial" client:load />
-      <Project name="cg-vicvillion" client:load />
-    </div>
-  </main>
+  <Works client:load works={works} />
 </Layout>

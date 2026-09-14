@@ -1,0 +1,32 @@
+<scroll-play style="display: contents"><slot /></scroll-play>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      }),
+    { threshold: 0.5 }
+  );
+
+  class ScrollPlay extends HTMLElement {
+    video: HTMLVideoElement | null = null;
+
+    connectedCallback() {
+      const video = this.querySelector("video");
+      if (!video || video.controls) return;
+      this.video = video;
+      observer.observe(video);
+    }
+
+    disconnectedCallback() {
+      if (this.video) observer.unobserve(this.video);
+    }
+  }
+
+  if (!customElements.get("scroll-play")) {
+    customElements.define("scroll-play", ScrollPlay);
+  }
+</script>
